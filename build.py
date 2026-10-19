@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "15"
+V = "16"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -40,12 +40,21 @@ def head(title, desc):
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/univ.css?v={V}">
 <link rel="stylesheet" href="assets/content.css?v={V}">
+<script>document.documentElement.classList.add("js");try{{if(sessionStorage.getItem("sc-intro"))document.documentElement.classList.add("no-intro")}}catch(e){{}}</script>
 <script src="assets/univ.js?v={V}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="intro" aria-hidden="true"><div class="gridfloor" aria-hidden="true"><i></i></div>
+  <div class="intro-c">
+    <svg class="intro-ring" viewBox="0 0 220 220"><circle cx="110" cy="110" r="104"/><circle class="r2" cx="110" cy="110" r="96"/></svg>
+    <img src="img/seal-256.webp" alt="" width="150" height="150">
+  </div>
+  <p class="intro-name"><span>St. Clare College</span><small>of Caloocan &middot; The School of Life Skills &middot; Est. 1985</small></p>
+  <span class="intro-bar"><i></i></span>
+</div>
 """
 
 def header(page):
@@ -75,7 +84,7 @@ def footer():
       <div>
         <div class="fb"><img src="img/seal-128.webp" srcset="img/seal-128.webp 1x, img/seal-256.webp 2x" alt="" width="54" height="54" loading="lazy"><b>St. Clare College<br>of Caloocan</b></div>
         <p>The School of Life Skills. {ADDRESS}.</p>
-        <div class="socials"><a href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}</a></div>
+        {socials()}
       </div>
       <div class="foot-cols">
         <div><h3>College</h3><ul><li><a href="about.html">About</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li></ul></div>
@@ -95,20 +104,24 @@ def page(name, title, desc, body):
         f.write(head(title, desc) + header(name) + body + footer())
     print("wrote", name)
 
+def socials():
+    return f'<div class="socials"><a class="soc fb" href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}<span>Facebook</span></a><a class="soc yt" href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}<span>YouTube</span></a></div>'
+
 def lines(t):
     """Split a headline on | into masked lines for the entrance animation."""
     return "".join(f'<span class="split-line"><span>{x}</span></span>' for x in t.split("|"))
 
 def sec(inner, cls="", id_=None):
     i = f' id="{id_}"' if id_ else ""
-    return f'<section class="sec {cls}"{i}><div class="wrap">{inner}</div></section>\n'
+    g = '<div class="gridfloor" aria-hidden="true"><i></i></div>' if "dark" in cls.split() else ""
+    return f'<section class="sec {cls}"{i}>{g}<div class="wrap">{inner}</div></section>\n'
 
 def shead(title, lede="", solo=False):
     return f'<div class="sec-head{" solo" if solo or not lede else ""} rv"><div><h2>{title}</h2></div>{f"<p class=\"lede\">{lede}</p>" if lede else ""}</div>'
 
 def ph(crumb, title, lede, photo=None, alt="", extra=""):
     pic = f'<div class="ph-img">{img(photo, alt, 1600, 900, lazy=False, sizes="(max-width: 900px) 0px, 40vw")}</div>' if photo else "<div></div>"
-    return f"""<section class="ph">
+    return f"""<section class="ph"><div class="gridfloor" aria-hidden="true"><i></i></div>
   <img class="seal-watermark" src="img/seal-512.webp" alt="" width="440" height="440" loading="lazy">
   <div class="wrap">
     <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><h1>{lines(title)}</h1><p class="lede">{lede}</p>{extra}</div>
@@ -118,7 +131,7 @@ def ph(crumb, title, lede, photo=None, alt="", extra=""):
 """
 
 def cta(title="Begin your journey at St. Clare", line="Basic Education, Senior High School and College, on campus or fully online."):
-    return f"""<section class="sec cta-band"><div class="wrap"><div class="cta on-dark rv"><div><h2>{title}</h2><p class="lede">{line}</p></div>
+    return f"""<section class="sec cta-band"><div class="gridfloor" aria-hidden="true"><i></i></div><div class="wrap"><div class="cta on-dark rv"><div><h2>{title}</h2><p class="lede">{line}</p></div>
   <div class="actions"><a class="btn gold" href="admissions.html"><span>How to enroll</span> {ARROW}</a><a class="btn ghost" href="contact.html"><span>Contact admissions</span></a></div></div></div></section>
 """
 

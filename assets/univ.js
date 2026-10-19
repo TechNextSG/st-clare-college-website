@@ -8,6 +8,13 @@
   var reduce = w.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine = w.matchMedia("(hover: hover) and (pointer: fine)").matches;
   root.classList.add("js");
+  /* ---------- intro: once per browser session; click to skip ---------- */
+  var intro = d.querySelector(".intro"), introOn = !!intro && !reduce && !root.classList.contains("no-intro");
+  if (introOn) {
+    try { sessionStorage.setItem("sc-intro", "1"); } catch (e) {}
+    intro.addEventListener("click", function () { intro.classList.add("skip"); });
+    intro.addEventListener("animationend", function (e) { if (e.target === intro) intro.remove(); });
+  }
   function $$(s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); }
 
   /* ---------- masthead ---------- */
@@ -122,7 +129,7 @@
     G.registerPlugin(ST);
     /* hero entrance: split lines rise, then lede/actions */
     var h = d.querySelector(".hero h1, .ph h1");
-    var tl = G.timeline({ defaults: { ease: "expo.out" } });
+    var tl = G.timeline({ defaults: { ease: "expo.out" }, delay: introOn && d.querySelector(".intro") ? (intro.classList.contains("skip") ? .3 : 2.75) : 0 });
     if (h) {
       var lines = $$(".split-line > span", h);
       if (lines.length) tl.from(lines, { yPercent: 110, duration: 1.2, stagger: .09 }, .15);
@@ -167,15 +174,32 @@
 
   /* ---------- lite YouTube ---------- */
   $$(".yt img").forEach(function (im) { function bad() { if (im.naturalWidth && im.naturalWidth <= 120) im.closest(".yt").classList.add("noimg"); } im.addEventListener("error", function () { im.closest(".yt").classList.add("noimg"); }); im.complete ? bad() : im.addEventListener("load", bad); });
+  function play(box, title) {
+    var f = d.createElement("iframe"), st = box.getAttribute("data-start");
+    f.src = "https://www.youtube-nocookie.com/embed/" + box.getAttribute("data-id") + "?autoplay=1&rel=0" + (st ? "&start=" + st : "");
+    f.title = title || "Video";
+    f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    f.allowFullscreen = true;
+    box.innerHTML = ""; box.appendChild(f);
+  }
   $$(".yt[data-id]").forEach(function (box) {
     var b = box.querySelector("button"); if (!b) return;
-    b.addEventListener("click", function () {
-      var f = d.createElement("iframe"), st = box.getAttribute("data-start");
-      f.src = "https://www.youtube-nocookie.com/embed/" + box.getAttribute("data-id") + "?autoplay=1&rel=0" + (st ? "&start=" + st : "");
-      f.title = b.getAttribute("aria-label") || "Video";
-      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      f.allowFullscreen = true;
-      box.innerHTML = ""; box.appendChild(f);
+    b.addEventListener("click", function () { play(box, b.getAttribute("aria-label")); });
+  });
+
+  /* ---------- theater playlist: a click loads that video on the stage and plays it ---------- */
+  $$(".theater").forEach(function (th) {
+    var box = th.querySelector(".stage .yt"), items = $$(".pl", th), n = items.length;
+    items.forEach(function (it, i) {
+      it.addEventListener("click", function () {
+        items.forEach(function (x) { var on = x === it; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+        th.querySelector(".idx").textContent = (i + 1 < 10 ? "0" : "") + (i + 1);
+        th.querySelector(".st-title").textContent = it.getAttribute("data-title");
+        th.querySelector(".st-when").innerHTML = it.getAttribute("data-when");
+        box.setAttribute("data-id", it.getAttribute("data-id")); box.classList.remove("noimg");
+        play(box, "Video: " + it.getAttribute("data-title"));
+        if (box.getBoundingClientRect().top < 60) box.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+      });
     });
   });
 

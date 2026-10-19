@@ -16,6 +16,18 @@ PROGRAM_TICKER = ["BS Hospitality Management", "BS Business Administration", "BS
                   "BSEd English", "BSEd Mathematics", "BS Tourism Management", "AB Political Science", "SHS: ABM", "SHS: HUMSS",
                   "SHS: Arts & Design", "SHS: TVL-ICT", "SHS: TVL-HE", "Nursery to Grade 10"]
 
+def theater(items, label):
+    """Stage + clickable playlist. items = [(title, video_id, when)]."""
+    import html as _h
+    items = [(t, v, _h.unescape(w)) for t, v, w in items]
+    t0, v0, w0 = items[0]
+    pl = "".join(f'<li><button type="button" class="pl{" on" if i == 0 else ""}" data-id="{v}" data-title="{esc(t)}" data-when="{esc(w)}" aria-pressed="{"true" if i == 0 else "false"}"><span class="n">{i + 1:02d}</span><span class="th"><img src="{"img/seal-256.webp" if v in P.NO_THUMB else f"https://i.ytimg.com/vi/{v}/mqdefault.jpg"}" alt="" loading="lazy" width="320" height="180"></span><span class="tx"><b>{esc(t)}</b><small>{esc(w)}</small></span></button></li>' for i, (t, v, w) in enumerate(items))
+    return f"""<div class="theater on-dark rv">
+  <div class="stage"><div class="frame">{yt(v0, t0)}</div>
+    <div class="stage-meta"><span class="now">Now showing &middot; <b class="idx">01</b> / {len(items):02d}</span><h3 class="st-title">{esc(t0)}</h3><p class="when st-when">{esc(w0)}</p></div></div>
+  <div class="playlist"><p class="pl-head"><b>{label}</b><span>{len(items)} videos</span></p><ol>{pl}</ol></div>
+</div>"""
+
 def ticker():
     items = "".join(f"<span>{esc(x)}</span>" for x in PROGRAM_TICKER)
     return f'<div class="ticker" aria-label="Programmes offered"><div class="track" aria-hidden="true">{items}{items}</div><p class="sr-only">{esc(", ".join(PROGRAM_TICKER))}</p><button class="tick-btn" type="button" aria-label="Pause programme ticker" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button></div>\n'
@@ -28,6 +40,8 @@ ICO = {
     "phone": '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
     "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
     "chat": '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+    "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "brief": '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
     "pin": '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
 }
 def ico(n): return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICO[n]}</svg>'
@@ -60,17 +74,13 @@ def build_home():
     <div class="actions"><a class="btn" href="admissions.html"><span>How to enroll</span> {ARROW}</a><a class="btn ghost" href="academics.html"><span>Explore programmes</span></a></div>
   </div></div>
   <div class="slide-ui"><p class="slide-cap"></p><div class="slide-ctrl"><button class="slide-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button><div class="dots">{dots}</div></div></div>
-  <span class="scroll-cue" aria-hidden="true"></span>
 </section>
 <nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
 <div style="height:clamp(48px,6vw,80px)"></div>
 """ + ticker() \
         + sec(shead("Academic programmes", "From a child's first school day to a bachelor's degree, every stage of learning happens at St. Clare.") + B.levels_html()) \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Proud moments, on video</h2></div><p class="lede">The Professional Mace, the Virtual Lab and the commencement of the Stars of 2024, from the St. Clare College channel.</p></div>
-<div class="feature-video on-dark">
-  <div class="vid rv">{yt("0RI2tMRZf8w", "St. Clare College Professional Mace")}<h3>The Eternal Flame of Professionalism</h3><p class="when">The Professional Mace &middot; September 23, 2023</p></div>
-  <div class="side">{vid_side("The Stars of 2024: 38th Commencement Exercises", "z_bUjTOihzA", "June 2024")}{vid_side("St. Clare College Virtual Lab", "Ncj3mlHUiok", "2021")}{vid_side("Welcome to St. Clare", "f4jWTiXrIOs", "2021")}</div>
-</div><p class="mt-l rv"><a class="more" href="vms.html">All 46 videos</a></p>""", "dark") \
+{theater([("The Eternal Flame of Professionalism", "0RI2tMRZf8w", "The Professional Mace &middot; September 23, 2023"), ("The Stars of 2024: 38th Commencement Exercises", "z_bUjTOihzA", "June 2024"), ("St. Clare College Virtual Lab", "Ncj3mlHUiok", "2021"), ("Welcome to St. Clare", "f4jWTiXrIOs", "2021"), ("St. Clare College Facilities 2021", "ENCCIBqdPMs", "State-of-the-art facilities")], "St. Clare College channel")}<p class="mt-l rv"><a class="more" href="vms.html">All 46 videos</a></p>""", "dark") \
         + sec(f"""<div class="split">
   <div class="rv"><h2>A college built for professional life</h2>
     <p class="lede mt">The first college in the country to use e-boards in all 95 classrooms, with computer laboratories, a library and learning resource center, and a Virtual Lab for mixed reality.</p>
@@ -99,7 +109,7 @@ def build_about():
             ("St. Clare College Facilities 2021", "ENCCIBqdPMs", "State-of-the-art facilities"), ("The leading edge in online education system", "S_SYZ1X5Thk", "2021"),
             ("Continuity of Learning", "jwzbf0naZyE", "No one gets left behind"), ("Our Future", "1_vsofl20fQ", "")]
     pal = "".join(f'<div class="{"lt" if len(r) > 3 else ""}" style="background:{r[0]}"><b>{r[1]}</b><span>{r[0]} &middot; {r[2]}</span></div>' for r in REDS)
-    body = f"""<section class="hero hero-about">
+    body = f"""<section class="hero hero-about"><div class="gridfloor" aria-hidden="true"><i></i></div>
   <div class="wrap grid">
     <div>{crumbs("About")}<h1>{lines("Transforming education,|building our future")}</h1>
       <p class="lede" style="margin-top:20px">St. Clare College of Caloocan is the School of Life Skills and a leading institution for professional development.</p>
@@ -136,7 +146,7 @@ def build_academics():
              ("shs", "shs-ict-virtual-lab", "Senior High School", "ABM, HUMSS, Arts & Design, TVL-ICT and TVL-HE"),
              ("basic", "basic-elementary", "Basic Education", "Nursery and Kindergarten, Elementary and Junior High School")]
     dh = "".join(f'<a class="panel-x" href="#{h}">{simg(s, "", "(max-width: 760px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" " if h == "tertiary" else "<img ")}<span class="in"><b>{t}</b><span>{d}</span><em>View programmes &rarr;</em></span></a>' for h, s, t, d in doors)
-    body = f"""<section class="hero hero-acad">
+    body = f"""<section class="hero hero-acad"><div class="gridfloor" aria-hidden="true"><i></i></div>
   <div class="wrap"><div class="head-copy">{crumbs("Academics")}<h1>{lines("Programmes for|every stage")}</h1>
     <p class="lede" style="margin-top:18px">Basic Education, Senior High School and eight college degrees, taught on campus, online or blended. Choose a level.</p></div>
     <div class="panels">{dh}</div></div>
@@ -209,14 +219,14 @@ def build_campus():
     mosaic = [("fac-virtual-lab-thronos", "Virtual Lab"), ("fac-library", "Library"), ("prog-bshm", "Hospitality kitchen"), ("fac-vr-headset", "Mixed reality"), ("basic-kinder", "Basic Education")]
     mz = "".join(f'<figure>{simg(s, c, "(max-width: 760px) 50vw, 25vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" " if s == mosaic[0][0] else "<img ")}<figcaption>{c}</figcaption></figure>' for s, c in mosaic)
     vids = [("St. Clare College Virtual Lab", "Ncj3mlHUiok", "2021"), ("St. Clare Online: Virtual Lab", "avbXu3J7PoI", "Predator Thronos & Mixed Reality by Acer"), ("St. Clare College Virtual Flag Ceremony", "QSRZvHk7TMA", "Every Monday, 7:00 AM")]
-    body = f"""<section class="hero hero-camp">
+    body = f"""<section class="hero hero-camp"><div class="gridfloor" aria-hidden="true"><i></i></div>
   <div class="wrap">{crumbs("Campus life")}<h1>{lines("Life at|St. Clare")}</h1>
     <p class="lede" style="margin-top:18px">E-boards in every classroom, a Virtual Lab, our own broadcast channels and a community that keeps learning online.</p>
     <div class="mosaic">{mz}</div></div>
 </section>
 """ + sec(shead("A week on campus", "From the Monday flag ceremony to the Virtual Studio.") + f'<div class="grid3">{dh}</div>', "", "week") \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Inside the Virtual Lab</h2></div><p class="lede">Visit St. Clare College and experience the immersive technology behind the Predator Thronos and the Mixed Reality facility by Acer.</p></div>
-<div class="feature-video on-dark"><div class="vid rv">{yt(vids[0][1], vids[0][0])}<h3>{vids[0][0]}</h3><p class="when">{vids[0][2]}</p></div><div class="side">{"".join(vid_side(t, v, w) for t, v, w in vids[1:])}</div></div>""", "dark", "virtual-lab") \
+{theater(vids, "Virtual Lab")}""", "dark", "virtual-lab") \
         + sec(shead("State-of-the-art facilities", "The library, the Virtual Lab and mixed-reality learning. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("virtual-lab-predator-units", "Predator units in the Virtual Lab"), ("shs-ict-virtual-lab", "TVL-ICT in the Virtual Lab")]), "", "facilities") \
         + sec(shead("Campus in pictures") + gallery(photos), "alt") \
         + sec(f'<div class="split"><figure class="photo rv-img">{B.img("campus-building.jpg", "St. Clare College campus building", 1600, 900)}<figcaption>The campus on Zabarte Road</figcaption></figure><div class="rv"><h2>Facilities at a glance</h2><ul class="checklist" style="columns:1;margin-top:18px"><li>E-boards in all 95 classrooms</li><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories with stacked servers</li><li>Library and enlistment area on the 3rd floor</li><li>Virtual Lab: Predator Thronos and Mixed Reality by Acer</li><li>St. Clare Virtual Studio</li></ul></div></div>') \
@@ -246,7 +256,7 @@ def build_news():
         if yr != last_year:
             items.append(f'<h2 class="year rv">{yr if yr != "2020" else "2020 and earlier"}</h2>'); last_year = yr
         items.append(f'<article class="item rv" id="n{i}"><div class="media">{media or '<div class="noimg" aria-hidden="true"></div>'}</div><div><span class="date">{esc(date)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p>{extra}</div></article>')
-    body = f"""<section class="hero hero-news">
+    body = f"""<section class="hero hero-news"><div class="gridfloor" aria-hidden="true"><i></i></div>
   <div class="wrap">{crumbs("News")}<p class="news-strip"><b>Latest</b>{esc(lead[1])} &middot; {esc(lead[0])}</p><h1>{lines("News and|announcements")}</h1>
     <div class="feature">
       <a class="lead-story" href="#n0"><span class="pic">{simg(lead[3], "", "(max-width: 900px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" ")}</span><span class="in"><span class="tag">Featured &middot; {esc(lead[0])}</span><b>{esc(lead[1])}</b><span style="color:var(--on-dark)">{esc(lead[2])}</span></span></a>
@@ -271,8 +281,8 @@ def build_contact():
 </section>
 """ + sec(f"""<div class="split" style="align-items:start">
   <div class="info rv"><h2>Visit, call or write</h2>
-    <dl class="mt-l"><div><dt>Campus</dt><dd>{ADDRESS}</dd></div><div><dt>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div><div><dt>Careers (Human Resource)</dt><dd><a href="mailto:stclarecollege.humanresource@gmail.com">stclarecollege.humanresource@gmail.com</a></dd></div></dl>
-    <div class="socials"><a href="{FB}" rel="noopener" aria-label="Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="YouTube">{YT_SVG}</a></div></div>
+    <dl class="mt-l contact-list"><div><dt><span class="ic">{ico("pin")}</span>Campus</dt><dd>{ADDRESS}</dd></div><div><dt><span class="ic">{ico("phone")}</span>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt><span class="ic">{ico("mail")}</span>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt><span class="ic">{ico("clock")}</span>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div><div><dt><span class="ic">{ico("brief")}</span>Careers (Human Resource)</dt><dd><a href="mailto:stclarecollege.humanresource@gmail.com">stclarecollege.humanresource@gmail.com</a></dd></div></dl>
+    <p class="follow">Follow St. Clare College</p>{B.socials()}</div>
   <form class="form rv" data-mailto="{EMAIL}">
     <h2 style="font-size:1.4rem;margin-bottom:18px">Send an inquiry</h2>
     <div class="fld-row"><div class="fld"><label for="f-name">Full name <em>(required)</em></label><input id="f-name" name="Name" autocomplete="name" required></div>
