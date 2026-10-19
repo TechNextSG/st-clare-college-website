@@ -1,3 +1,18 @@
+# DESIGN: St. Clare College, "Crimson University" (v5, 19 Oct 2026)
+
+Supersedes the navy "Collegiate" system below. Source of truth: assets/univ.css.
+
+- **Palette (red tonal scale):** maroon-950 #24040a (footer), 900 #3d0610 (hero ground), 800 #5c0a17 (dark bands), 700 #7a0c1e (primary), crimson-600 #a6192e (links), red-500 #c8102e (actions), rose-100 #f6e1e4 / rose-50 #fcf3f4 (tints), seal gold #e0ad1c (accent only), warm white #f8f5f5.
+- **Logo:** the ORIGINAL St. Clare College of Caloocan seal, restored HD (img/seal.svg: AI-upscaled original emblem + vector ring and lettering). Never redraw or recolour it.
+- **Type:** Plus Jakarta Sans 800 headings (tight tracking), Inter body. No eyebrows, no gradient text.
+- **Masthead:** transparent over every hero (gradient scrim), turns solid white on scroll, hides on scroll-down, returns on scroll-up.
+- **Heroes:** one per header page: Home slideshow (Ken Burns + progress dots), About split frames + seal + 1985 counter, Academics expanding level panels, Admissions photo + "Enrollment at a glance" card, Campus Life photo mosaic, News featured story + headlines, Contact photo + four action cards. Student-service pages use the compact crimson banner + sticky sub-nav.
+- **Buttons:** pill, fill-wipe on hover, sheen sweep, arrow slide, ripple on press, magnetic follow on fine pointers, scale .97 on active.
+- **Motion:** GSAP 3.12.5 + ScrollTrigger (cdnjs): masked line-rise headlines, batched section reveals, image clip-reveals, counters, hero parallax. IntersectionObserver fallback; prefers-reduced-motion shows everything static.
+- **Footer:** compact: brand + 3 short link columns + one bottom line.
+
+---
+
 ---
 name: St. Clare College of Caloocan
 description: Collegiate - a corporate college site in navy and white with a gold hairline accent, real campus photography and quiet motion.

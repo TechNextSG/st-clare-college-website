@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "12"
+V = "13"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -27,7 +27,7 @@ def head(title, desc):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0b2265">
+<meta name="theme-color" content="#7a0c1e">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <meta property="og:title" content="{esc(title)}">
@@ -38,10 +38,11 @@ def head(title, desc):
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/college.css?v={V}">
+<link rel="stylesheet" href="assets/univ.css?v={V}">
 <link rel="stylesheet" href="assets/content.css?v={V}">
-<script src="assets/college.js?v={V}" defer></script>
-<script src="assets/content.js?v={V}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="assets/univ.js?v={V}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -49,37 +50,40 @@ def head(title, desc):
 
 def header(page):
     links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == page else ""}>{t}</a>' for h, t in NAV if h not in ("index.html", "portals.html"))
-    return f"""<div class="util"><div class="wrap">
+    return f"""<div class="masthead">
+<div class="util"><div class="wrap">
   <div class="l"><a href="tel:{PHONE_TEL}">{PHONE}</a><a class="hide-sm" href="mailto:{EMAIL}">{EMAIL}</a></div>
-  <div class="r"><b class="hide-sm">Students &amp; faculty:</b><a href="portals.html">Student services</a><a href="lms.html">LMS</a><a href="pms.html">PMS</a><a class="hide-sm" href="downloads.html">Downloads</a><a class="hide-sm" href="calendar.html">Calendar</a></div>
+  <div class="r"><a href="portals.html">Student services</a><a href="lms.html">LMS</a><a href="pms.html">PMS</a><a class="hide-sm" href="vms.html">Videos</a><a class="hide-sm" href="downloads.html">Downloads</a><a class="hide-sm" href="calendar.html">Calendar</a></div>
 </div></div>
 <header class="head"><div class="wrap">
   <a class="brand" href="index.html" aria-label="St. Clare College of Caloocan, home">
-    <img src="img/seal.svg" alt="" width="56" height="56">
+    <img src="img/seal.svg" alt="" width="58" height="58">
     <span><b>St. Clare College</b><small>of Caloocan &middot; The School of Life Skills</small></span>
   </a>
-  <nav class="nav" id="nav" aria-label="Main">{links}<a class="btn" href="admissions.html">How to enroll</a></nav>
+  <nav class="nav" id="nav" aria-label="Main">{links}<a class="btn" href="admissions.html"><span>Apply now</span> {ARROW}</a></nav>
   <button class="menu-btn" aria-expanded="false" aria-controls="nav"><i aria-hidden="true"></i><span>Menu</span></button>
 </div></header>
+</div>
 <main id="main">
 """
 
 def footer():
-    portals = "".join(f'<li><a href="{p[3]}.html">{p[0]}: {p[1]}</a></li>' for p in PORTALS)
     return f"""</main>
-<footer class="foot on-navy">
+<footer class="foot">
   <div class="wrap">
-    <div class="foot-grid">
+    <div class="foot-top">
       <div>
-        <div class="fb"><img src="img/seal.svg" alt="" width="64" height="64"><b>St. Clare College<br>of Caloocan</b></div>
-        <p>The School of Life Skills. Serving Caloocan since 1985; online through St. Clare Online since 2020.</p>
+        <div class="fb"><img src="img/seal.svg" alt="" width="54" height="54" loading="lazy"><b>St. Clare College<br>of Caloocan</b></div>
+        <p>The School of Life Skills. {ADDRESS}.</p>
         <div class="socials"><a href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}</a></div>
       </div>
-      <div><h3>The college</h3><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li><li><a href="vms.html">Videos</a></li><li><a href="ims.html#hiring">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div><h3>St. Clare Online</h3><ul>{portals}<li><a href="downloads.html">Downloadable forms</a></li><li><a href="calendar.html">Calendar</a></li></ul></div>
-      <div><h3>Visit</h3><ul><li><a href="contact.html">{ADDRESS}</a></li><li><a href="tel:{PHONE_TEL}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li></ul><p class="mt">Office hours 9:00 AM - 5:00 PM</p></div>
+      <div class="foot-cols">
+        <div><h3>College</h3><ul><li><a href="about.html">About</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li></ul></div>
+        <div><h3>Students</h3><ul><li><a href="portals.html">Student services</a></li><li><a href="lms.html">LMS</a> &middot; <a href="pms.html">PMS</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="calendar.html">Calendar</a></li><li><a href="vms.html">Videos</a></li></ul></div>
+        <div><h3>Contact</h3><ul><li><a href="tel:{PHONE_TEL}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">Email admissions</a></li><li><a href="ims.html#hiring">Careers</a></li><li><a href="contact.html">Map &amp; hours</a></li></ul></div>
+      </div>
     </div>
-    <div class="foot-bottom"><span>&copy; <span data-year>2026</span> St. Clare College of Caloocan &middot; St. Clare Online Education System&reg;</span><a href="https://sdgs.un.org/goals/goal4" rel="noopener" style="color:inherit">UN SDG 4: Quality Education</a></div>
+    <div class="foot-bottom"><span>&copy; <span data-year>2026</span> St. Clare College of Caloocan &middot; St. Clare Online Education System&reg;</span><span>Office hours 9:00 AM - 5:00 PM</span></div>
   </div>
 </footer>
 </body>
@@ -91,6 +95,10 @@ def page(name, title, desc, body):
         f.write(head(title, desc) + header(name) + body + footer())
     print("wrote", name)
 
+def lines(t):
+    """Split a headline on | into masked lines for the entrance animation."""
+    return "".join(f'<span class="split-line"><span>{x}</span></span>' for x in t.split("|"))
+
 def sec(inner, cls="", id_=None):
     i = f' id="{id_}"' if id_ else ""
     return f'<section class="sec {cls}"{i}><div class="wrap">{inner}</div></section>\n'
@@ -100,18 +108,19 @@ def shead(title, lede="", solo=False):
 
 def ph(crumb, title, lede, photo=None, alt="", extra=""):
     pic = f'<div class="ph-img">{img(photo, alt, 1600, 900, lazy=False, sizes="(max-width: 900px) 0px, 40vw")}</div>' if photo else "<div></div>"
-    return f"""<section class="ph on-navy">
-  <img class="seal-watermark" src="img/seal.svg" alt="" width="420" height="420">
+    return f"""<section class="ph">
+  <img class="seal-watermark" src="img/seal.svg" alt="" width="440" height="440">
   <div class="wrap">
-    <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><span class="rule" aria-hidden="true"></span><h1>{title}</h1><p class="lede">{lede}</p>{extra}</div>
+    <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><h1>{lines(title)}</h1><p class="lede">{lede}</p>{extra}</div>
     {pic}
   </div>
 </section>
 """
 
 def cta(title="Begin your journey at St. Clare", line="Basic Education, Senior High School and College, on campus or fully online."):
-    return sec(f"""<div class="cta on-navy rv"><h2>{title}</h2><p class="lede">{line}</p>
-  <div class="actions"><a class="btn gold" href="admissions.html">How to enroll {ARROW}</a><a class="btn line" href="contact.html">Contact admissions</a></div></div>""", "navy")
+    return f"""<section class="sec cta-band"><div class="wrap"><div class="cta on-dark rv"><div><h2>{title}</h2><p class="lede">{line}</p></div>
+  <div class="actions"><a class="btn gold" href="admissions.html"><span>How to enroll</span> {ARROW}</a><a class="btn ghost" href="contact.html"><span>Contact admissions</span></a></div></div></div></section>
+"""
 
 def steps_html():
     items = "".join(f'<li class="rv" style="--d:{i}"><h3>{h}</h3><p class="where">Where: {w}</p><ul>{"".join(f"<li>{x}</li>" for x in its)}</ul></li>' for i, (h, w, its) in enumerate(STEPS))
@@ -130,9 +139,9 @@ def levels_html():
 </div>"""
 
 FACTS = """<dl class="facts">
-  <div><dt>1985</dt><dd>Founded 31 August in Caloocan City</dd></div>
-  <div><dt>95</dt><dd>Classrooms, every one with an e-board</dd></div>
-  <div><dt>38th</dt><dd>Commencement exercises, June 2024</dd></div>
+  <div><dt data-count="1985">1985</dt><dd>Founded 31 August in Caloocan City</dd></div>
+  <div><dt data-count="95">95</dt><dd>Classrooms, every one with an e-board</dd></div>
+  <div><dt data-count="38" data-suffix="th">38th</dt><dd>Commencement exercises, June 2024</dd></div>
   <div><dt>2</dt><dd>Learning modalities: full online or blended</dd></div>
 </dl>"""
 
@@ -319,5 +328,5 @@ def build_contact():
 
 
 if __name__ == "__main__":
-    import pages_full
-    pages_full.build_all()
+    import pages_v5
+    pages_v5.build_all()

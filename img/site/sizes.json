@@ -245,48 +245,128 @@
 "small": true
 },
 "slide-enrollment-open": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-college-programs": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-college-requirements": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-vision-mission": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-enrollment-procedure": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-basic-ed-requirements": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-basic-ed-uniform": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-shs-tracks": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
 "small": true
 },
 "slide-shs-requirements": {
-"w": 1600,
-"h": 900,
+"w": 1800,
+"h": 1013,
+"small": true
+},
+"fac-library": {
+"w": 1800,
+"h": 1200,
+"small": true
+},
+"fac-vr-headset": {
+"w": 1800,
+"h": 1013,
+"small": true
+},
+"fac-state-of-the-art": {
+"w": 1800,
+"h": 1275,
+"small": true
+},
+"fac-virtual-lab-thronos": {
+"w": 1800,
+"h": 1200,
+"small": true
+},
+"fac-virtual-lab-station": {
+"w": 1800,
+"h": 1200,
+"small": true
+},
+"slide-enrollment-2nd-sem": {
+"w": 1800,
+"h": 1013,
+"small": true
+},
+"slide-room-assignment": {
+"w": 1800,
+"h": 1013,
+"small": true
+},
+"slide-college-tuition-2023": {
+"w": 1800,
+"h": 1013,
+"small": true
+},
+"poster-enrollment-procedure-2022": {
+"w": 1800,
+"h": 1013,
+"small": true
+},
+"poster-enrollment-2022-2023": {
+"w": 1276,
+"h": 1800,
+"small": true
+},
+"sco-tertiary-contacts": {
+"w": 1687,
+"h": 1168,
+"small": true
+},
+"sco-basic-ed-enrollment-2022": {
+"w": 1687,
+"h": 1168,
+"small": true
+},
+"sco-basic-ed-programs": {
+"w": 1687,
+"h": 1168,
+"small": true
+},
+"sco-basic-ed-tuition": {
+"w": 1687,
+"h": 1168,
+"small": true
+},
+"sco-tertiary-enrollment-procedure": {
+"w": 1687,
+"h": 1168,
+"small": true
+},
+"poster-ai-technology": {
+"w": 1800,
+"h": 1013,
 "small": true
 }
 }

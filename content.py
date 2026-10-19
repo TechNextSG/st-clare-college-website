@@ -269,3 +269,16 @@ ENROLL_SLIDES = [("slide-enrollment-open", "SY 2023-2024 enrollment is now open"
                  ("slide-basic-ed-requirements", "Basic Education admission requirements"), ("slide-basic-ed-uniform", "Basic Education school uniform"),
                  ("slide-vision-mission", "Vision & mission")]
 FLIERS = [("flier-tertiary", "Tertiary programs"), ("flier-shs", "Senior High School"), ("flier-basic-ed", "Basic Education")]
+
+# ---------------- JS-loaded galleries found by rendering the original pages (19 Oct) ----------------
+FACILITIES = [("fac-library", "Library and Learning Resource Center"), ("fac-virtual-lab-thronos", "Virtual Lab: Predator Thronos stations"),
+              ("fac-virtual-lab-station", "Virtual Lab gaming and VR station"), ("fac-vr-headset", "VR headsets for mixed-reality learning"),
+              ("fac-state-of-the-art", "State of the Art Facilities: Transforming Education, Building our Future")]
+IMS_GALLERY = [("slide-enrollment-2nd-sem", "SY 2023-2024 enrollment, second semester"), ("slide-enrollment-procedure", "Enrollment procedure"),
+               ("slide-room-assignment", "Room assignment (enrollment)"), ("slide-college-tuition-2023", "College tuition fee, SY 2023-2024"),
+               ("slide-college-requirements", "College admission requirements"), ("slide-basic-ed-requirements", "Basic Education admission requirements"),
+               ("slide-shs-requirements", "Senior High School admission requirements"), ("poster-enrollment-procedure-2022", "Enrollment procedure, SY 2022-2023 2nd semester"),
+               ("poster-enrollment-2022-2023", "Enrollment going on, SY 2022-2023 2nd semester"), ("sco-tertiary-enrollment-procedure", "Tertiary enrollment procedure"),
+               ("sco-tertiary-contacts", "Tertiary contact us: program heads"), ("sco-basic-ed-enrollment-2022", "Basic Education enrollment, AY 2022-2023"),
+               ("sco-basic-ed-programs", "Basic Education program offerings"), ("sco-basic-ed-tuition", "Basic Education tuition fee (pandemic discount)")]
+NEWS_FULL.insert(5, ("2024", "The latest in AI technology", "St. Clare College brings you the latest in AI technology.", "poster-ai-technology", None))
