@@ -643,11 +643,11 @@ a.panel:hover::after { transform: translateX(4px) rotate(45deg); }
 .soc { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px 0 13px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.24); color: #fff; text-decoration: none; font-family: var(--f-head); font-weight: 700; font-size: .88rem; transition: background .3s, border-color .3s, color .3s, transform .35s var(--ease); }
 .soc svg { width: 20px; height: 20px; transition: color .3s; }
 .soc:hover { color: #fff; transform: translateY(-2px); }
-.soc.fb:hover { background: #1877f2; border-color: #1877f2; }
-.soc.yt:hover { background: #ff0000; border-color: #ff0000; }
+.soc-fb:hover { background: #1877f2; border-color: #1877f2; }
+.soc-yt:hover { background: #ff0000; border-color: #ff0000; }
 .info .soc { border-color: var(--line); color: var(--ink); background: #fff; }
-.info .soc.fb svg { color: #1877f2; }
-.info .soc.yt svg { color: #ff0000; }
+.info .soc-fb svg { color: #1877f2; }
+.info .soc-yt svg { color: #ff0000; }
 .info .soc:hover svg { color: #fff; }
 
 /* ======== intro ======== */

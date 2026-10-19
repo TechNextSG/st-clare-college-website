@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "17"
+V = "18"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -105,7 +105,7 @@ def page(name, title, desc, body):
     print("wrote", name)
 
 def socials():
-    return f'<div class="socials"><a class="soc fb" href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}<span>Facebook</span></a><a class="soc yt" href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}<span>YouTube</span></a></div>'
+    return f'<div class="socials"><a class="soc soc-fb" href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}<span>Facebook</span></a><a class="soc soc-yt" href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}<span>YouTube</span></a></div>'
 
 def lines(t):
     """Split a headline on | into masked lines for the entrance animation."""
