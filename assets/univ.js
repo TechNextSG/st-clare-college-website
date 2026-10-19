@@ -156,7 +156,7 @@
     if (heroArt.length) tl.from(heroArt, { y: 50, opacity: 0, scale: .96, duration: 1.2, stagger: .07 }, .4);
     var bits = $$(".h-stats > div, .yearline li, .h-contact .qa, .np-tabs a");
     if (bits.length) tl.from(bits, { y: 20, opacity: 0, duration: .8, stagger: .05 }, .7);
-    var stp = $$(".stp"); if (stp.length) tl.from(stp, { yPercent: 40, opacity: 0, duration: 1.2, stagger: .14 }, .55);
+    var stp = $$(".stp"); if (stp.length) tl.from(stp, { x: 60, opacity: 0, duration: 1.1, stagger: .12 }, .5);
     var bs = $$(".broadsheet > *"); if (bs.length) tl.from(bs, { y: 30, opacity: 0, duration: 1, stagger: .1 }, .55);
     var quick = $$(".quick li"); if (quick.length) tl.from(quick, { y: 30, opacity: 0, duration: .9, stagger: .07 }, .8);
     /* hero parallax */

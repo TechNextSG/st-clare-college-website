@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "28"
+V = "30"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -42,6 +42,7 @@ def head(title, desc):
 <link rel="stylesheet" href="assets/content.css?v={V}">
 <script>document.documentElement.classList.add("js");try{{if(sessionStorage.getItem("sc-intro"))document.documentElement.classList.add("no-intro")}}catch(e){{}}</script>
 <script src="assets/univ.js?v={V}" defer></script>
+<script src="assets/assistant.js?v={V}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -345,3 +346,5 @@ def build_contact():
 if __name__ == "__main__":
     import pages_v5
     pages_v5.build_all()
+    import assistant
+    assistant.build()
