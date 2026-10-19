@@ -10,6 +10,7 @@
   color-scheme: light;
   /* red tonal scale */
   --m950: #24040a;
+  --ebony: #141211;     /* ebony black: ticker band + footer */
   --m900: #3d0610;
   --m800: #5c0a17;
   --m700: #7a0c1e;     /* primary maroon */
@@ -211,7 +212,7 @@ html:not(.js) .menu-btn { display: none !important; }
 @media (max-width: 480px) { .quick a { padding: 18px 14px; gap: 10px; } .quick svg { width: 24px; height: 24px; } .quick small { display: none; } }
 
 /* programme ticker */
-.ticker { background: var(--m800); color: #fff; overflow: hidden; border-block: 1px solid rgba(255,255,255,.08); }
+.ticker { background: var(--ebony); color: #fff; overflow: hidden; border-block: 1px solid rgba(255,255,255,.08); }
 .ticker .track { display: flex; width: max-content; animation: tick 46s linear infinite; }
 .ticker:hover .track { animation-play-state: paused; }
 .ticker span { display: inline-flex; align-items: center; gap: 22px; padding: 16px 11px; font-family: var(--f-head); font-weight: 700; white-space: nowrap; }
@@ -525,7 +526,7 @@ a.panel:hover::after { transform: translateX(4px) rotate(45deg); }
 .socials { display: flex; gap: 10px; margin-top: 14px; }
 
 /* ---------- compact footer ---------- */
-.foot { background: var(--m950); color: var(--on-dark-2); font-size: .9rem; }
+.foot { background: var(--ebony); color: var(--on-dark-2); font-size: .9rem; }
 .foot-top { display: grid; grid-template-columns: 1.3fr 2fr; gap: 40px; padding-block: 44px 30px; }
 .foot .fb { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
 .foot .fb img { width: 54px; height: 54px; }
@@ -574,7 +575,11 @@ a.panel:hover::after { transform: translateX(4px) rotate(45deg); }
 .ticker.paused .track { animation-play-state: paused; }
 .tick-btn, .slide-pause { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.55); background: rgba(36,4,10,.6); color: #fff; cursor: pointer; transition: background .25s, color .25s; }
 .tick-btn:hover, .slide-pause:hover { background: var(--gold); color: var(--m950); border-color: var(--gold); }
-.tick-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 2; background: var(--m800); }
+.tick-btn { position: absolute; right: max(10px, calc((100% - var(--wrap)) / 2 - 54px)); top: 50%; transform: translateY(-50%); z-index: 3; background: var(--ebony); }
+/* text fades out before it reaches the pause button, and fades in on the left */
+.ticker::before, .ticker::after { content: ""; position: absolute; top: 0; bottom: 0; z-index: 2; pointer-events: none; }
+.ticker::before { left: 0; width: 80px; background: linear-gradient(90deg, var(--ebony), rgba(20,18,17,0)); }
+.ticker::after { right: 0; width: calc(max(10px, (100% - var(--wrap)) / 2 - 54px) + 150px); background: linear-gradient(270deg, var(--ebony) 0, var(--ebony) calc(100% - 96px), rgba(20,18,17,0)); }
 .tick-btn svg, .slide-pause svg { width: 14px; height: 14px; }
 .slide-ctrl { display: flex; align-items: center; gap: 10px; }
 .callout h2 { font-size: 1.3rem; margin-bottom: 10px; }
@@ -881,7 +886,7 @@ html:not(.js) .intro, .no-intro .intro { display: none; }
 .bs-heads .hn { font-family: var(--f-head); font-weight: 800; color: var(--gold); }
 .bs-heads b { display: block; font-family: var(--f-head); font-size: .94rem; line-height: 1.3; transition: color .2s; }
 .bs-heads small { color: var(--on-dark-2); font-size: .78rem; }
-.news-tick { background: var(--m800); }
+.news-tick { background: var(--ebony); }
 .news-tick span { font-weight: 600; font-size: .92rem; padding: 13px 11px; }
 @media (max-width: 960px) {
   .broadsheet { grid-template-columns: minmax(0, 1fr); }
