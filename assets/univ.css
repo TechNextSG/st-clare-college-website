@@ -1274,3 +1274,14 @@ html:not(.js) .tl-x li { opacity: 1; }
 .sec.alt .prog-row .noimg { background: rgba(255,255,255,.08); }
 .sec.alt .swipe-hint { color: var(--muted); }
 .sec.alt .jump a { background: rgba(255,255,255,.08); color: #fff; }
+/* phone chat button: solid, clear icon */
+@media (max-width: 700px) {
+  .sca-launch { width: 56px; height: 56px; padding: 0; justify-content: center; gap: 0; background: var(--r500); border: 2px solid rgba(255,255,255,.9); box-shadow: 0 10px 26px -8px rgba(0,0,0,.55), 0 0 0 4px rgba(200,16,46,.18); }
+  .sca-launch svg { width: 28px; height: 28px; }
+  .sca-launch .bub { fill: #fff; stroke: #fff; }
+  .sca-launch .dt { fill: var(--r500); opacity: 1; }
+  .sca-launch::after { content: ""; position: absolute; top: 4px; right: 4px; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); border: 2px solid #fff; }
+  .sca-launch { position: relative; }
+  body.scrolling .sca:not(.open) { opacity: 1; transform: translateY(90px); }
+}
+@media (max-width: 700px) { .sca-launch .dt { r: 1.35px; } }

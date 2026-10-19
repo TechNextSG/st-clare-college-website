@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "38"
+V = "39"
 
 def esc(s): return html.escape(s, quote=True)
 
