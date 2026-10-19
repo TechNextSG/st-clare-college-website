@@ -1298,3 +1298,11 @@ html:not(.js) .tl-x li { opacity: 1; }
 }
 @media (max-width: 380px) { .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .h-acad { overflow: hidden; } @media (max-width: 1000px) { .h-acad .stair { overflow: visible; } }
+/* phones: tilt never reveals photo edges */
+@media (max-width: 1000px) {
+  .hero-home .slide { transform: none; }
+  .hero-home .slide img { transform: scale(1.22); }
+  .hero-home.idle .slide.on img { animation: swaySm 14s ease-in-out infinite; }
+}
+@keyframes swaySm { 0%, 100% { transform: scale(1.22) rotateY(-1.5deg) translateX(-1%); } 50% { transform: scale(1.22) rotateY(1.5deg) translateX(1%); } }
+.hero-home .slides { overflow: hidden; }
