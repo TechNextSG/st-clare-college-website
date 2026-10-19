@@ -19,7 +19,7 @@
 .vgroup + .vgroup { margin-top: clamp(40px, 5vw, 64px); }
 .vgroup > h3 { font-size: 1.25rem; padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
 .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
-.jump a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--bg-2); color: var(--navy); font-weight: 600; font-size: .88rem; text-decoration: none; }
+.jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--bg-2); color: var(--navy); font-weight: 600; font-size: .88rem; text-decoration: none; }
 .jump a { transition: background .3s, color .3s, transform .3s var(--ease); }
 .jump a:hover { background: var(--navy); color: #fff; transform: translateY(-2px); }
 
@@ -28,7 +28,7 @@
 .gallery.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 800px) { .gallery, .gallery.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .gallery figure { margin: 0; }
-.gallery button, .media-btn { all: unset; display: block; cursor: zoom-in; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.gallery button, .media-btn { all: unset; display: block; width: 100%; box-sizing: border-box; cursor: zoom-in; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); background: #fff; }
 .gallery button:focus-visible, .media-btn:focus-visible { outline: 3px solid var(--navy-2); outline-offset: 3px; }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .5s var(--ease); }
 .gallery.contain img { object-fit: contain; }

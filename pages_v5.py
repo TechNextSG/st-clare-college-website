@@ -76,7 +76,7 @@ def build_home():
     <p class="lede mt">The first college in the country to use e-boards in all 95 classrooms, with computer laboratories, a library and learning resource center, and a Virtual Lab for mixed reality.</p>
     {B.FACTS}
     <p class="mt-l"><a class="more" href="campus-life.html">Tour the facilities</a></p></div>
-  <figure class="photo rv-img">{simg("fac-state-of-the-art", "State-of-the-art facilities at St. Clare College")}<figcaption>Transforming education, building our future</figcaption></figure>
+  <figure class="photo rv-img">{simg("prog-bscs-lab", "Computer laboratory at St. Clare College")}<figcaption>Computer laboratory: lessons on e-boards in all 95 classrooms</figcaption></figure>
 </div>""", "alt") \
         + sec(shead("College degrees", "Theory in class, mastery in the laboratory, kitchen and field.") + f'<div class="cards-photo">{progs}</div><p class="mt-l rv"><a class="more" href="academics.html">All eight degrees and SHS tracks</a></p>') \
         + sec(shead("How to enroll", "Bring your requirements in a long brown envelope and complete three steps on campus, or enroll online through the IMS.") + steps_html() + f'<div class="actions mt-l rv"><a class="btn" href="admissions.html#requirements"><span>See the requirements</span> {ARROW}</a><a class="btn line" href="downloads.html"><span>Download the registration form</span></a></div>', "alt") \
@@ -117,7 +117,7 @@ def build_about():
 </div>""") \
         + sec(shead("Leadership") + f'<div class="leaders">{leaders}</div>', "alt") \
         + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>The leading edge in online education</h2><p class="lede mt">Long before the COVID-19 crisis, St. Clare College prepared its ICT capability, so that it was ready to embrace the new normal in education while continuing to provide quality, affordable and sustainable development education.</p></div><ol class="timeline">{hist}</ol></div>') \
-        + sec(shead("State-of-the-art facilities", "Transforming education, building our future. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("prog-bscs-lab", "Computer laboratory")]), "alt", "facilities") \
+        + sec(shead("State-of-the-art facilities", "Transforming education, building our future. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("prog-bscs-lab", "Computer laboratory"), ("virtual-lab-predator-units", "Predator units in the Virtual Lab")]), "alt", "facilities") \
         + sec(shead("St. Clare in video", "Officials, facilities and the story of St. Clare Online.") + '<div class="vids">' + "".join(f'<div class="rv">{vcard(t, v, w)}</div>' for t, v, w in vids) + '</div><p class="mt-l rv"><a class="more" href="vms.html">Full video library</a></p>') \
         + sec(f"""<div class="split"><div class="rv"><h2>The seal and the St. Clare reds</h2><p class="lede mt">The original college seal, restored in high definition, leads a palette built on deep crimson and maroon, with the seal's gold as the accent.</p></div>
   <div class="rv" style="display:grid;place-items:center"><img src="img/seal.svg" alt="St. Clare College of Caloocan seal" width="300" height="300" loading="lazy" style="width:min(300px,70vw);filter:drop-shadow(0 18px 30px rgba(61,6,16,.25))"></div></div>
@@ -145,7 +145,7 @@ def build_academics():
         + sec(shead("College degrees", "Eight bachelor's degree programmes: BSHM, BSBA, BSCS, BEEd, BSEd-English, BSEd-Math, BSTM and AB Political Science.") + f'<div class="prog-rows">{ter}</div>', "", "tertiary") \
         + sec(shead("Senior High School", "Academic, Arts & Design and Technical-Vocational-Livelihood tracks.") + f'<div class="prog-rows">{shs}</div>', "alt", "shs") \
         + sec(shead("Basic Education", "Nursery to Grade 10.") + f'<div class="cards-photo">{bas}</div>', "", "basic") \
-        + sec(shead("Programme fliers", "Select a flier to enlarge it.") + gallery(FLIERS, "contain"), "alt") \
+        + sec(shead("Programme fliers", "Select a flier to enlarge it.") + gallery(list(FLIERS) + [("fac-state-of-the-art", "State of the Art Facilities: Transforming Education, Building our Future")], "contain four"), "alt") \
         + cta("Find the right programme", "Talk to admissions about the programme that fits your goals.")
     page("academics.html", "Academics | St. Clare College Programmes",
          "College degrees (BSHM, BSBA, BSCS, BEEd, BSEd, BSTM, AB PolSci), Senior High tracks (ABM, HUMSS, Arts & Design, TVL-ICT, TVL-HE) and Basic Education at St. Clare College.", body)
@@ -217,7 +217,7 @@ def build_campus():
 """ + sec(shead("A week on campus", "From the Monday flag ceremony to the Virtual Studio.") + f'<div class="grid3">{dh}</div>', "", "week") \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Inside the Virtual Lab</h2></div><p class="lede">Visit St. Clare College and experience the immersive technology behind the Predator Thronos and the Mixed Reality facility by Acer.</p></div>
 <div class="feature-video on-dark"><div class="vid rv">{yt(vids[0][1], vids[0][0])}<h3>{vids[0][0]}</h3><p class="when">{vids[0][2]}</p></div><div class="side">{"".join(vid_side(t, v, w) for t, v, w in vids[1:])}</div></div>""", "dark", "virtual-lab") \
-        + sec(shead("State-of-the-art facilities", "The library, the Virtual Lab and mixed-reality learning. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("virtual-lab-predator-units", "Predator units in the Virtual Lab")]), "", "facilities") \
+        + sec(shead("State-of-the-art facilities", "The library, the Virtual Lab and mixed-reality learning. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("virtual-lab-predator-units", "Predator units in the Virtual Lab"), ("shs-ict-virtual-lab", "TVL-ICT in the Virtual Lab")]), "", "facilities") \
         + sec(shead("Campus in pictures") + gallery(photos), "alt") \
         + sec(f'<div class="split"><figure class="photo rv-img">{B.img("campus-building.jpg", "St. Clare College campus building", 1600, 900)}<figcaption>The campus on Zabarte Road</figcaption></figure><div class="rv"><h2>Facilities at a glance</h2><ul class="checklist" style="columns:1;margin-top:18px"><li>E-boards in all 95 classrooms</li><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories with stacked servers</li><li>Library and enlistment area on the 3rd floor</li><li>Virtual Lab: Predator Thronos and Mixed Reality by Acer</li><li>St. Clare Virtual Studio</li></ul></div></div>') \
         + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>Digital citizenship</h2><p class="lede mt">Online learning comes with responsibilities. These policies guide life on St. Clare Online.</p></div>{docs(HANDBOOKS)}</div>', "alt", "digital-citizenship") \
@@ -247,7 +247,7 @@ def build_news():
             items.append(f'<h2 class="year rv">{yr if yr != "2020" else "2020 and earlier"}</h2>'); last_year = yr
         items.append(f'<article class="item rv" id="n{i}"><div class="media">{media or '<div class="noimg" aria-hidden="true"></div>'}</div><div><span class="date">{esc(date)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p>{extra}</div></article>')
     body = f"""<section class="hero hero-news">
-  <div class="wrap">{crumbs("News")}<h1>{lines("News and|announcements")}</h1>
+  <div class="wrap">{crumbs("News")}<p class="news-strip"><b>Latest</b>{esc(lead[1])} &middot; {esc(lead[0])}</p><h1>{lines("News and|announcements")}</h1>
     <div class="feature">
       <a class="lead-story" href="#n0"><span class="pic">{simg(lead[3], "", "(max-width: 900px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" ")}</span><span class="in"><span class="tag">Featured &middot; {esc(lead[0])}</span><b>{esc(lead[1])}</b><span style="color:var(--on-dark)">{esc(lead[2])}</span></span></a>
       <ul class="headlines">{heads}</ul>

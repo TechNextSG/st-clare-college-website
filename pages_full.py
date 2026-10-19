@@ -5,6 +5,7 @@ from build import esc, sec, shead, ph, cta, steps_html, checklist, page, OUT, AR
 from data import REQ, FORMS, PORTALS, EVENTS
 from content import *
 
+NO_THUMB = {"tbti8sIvU0c"}  # YouTube serves no thumbnail for this video (404 on every size)
 SIZES = json.load(open(os.path.join(OUT, "img", "site", "sizes.json")))
 
 def simg(slug, alt, sizes="(max-width: 900px) 100vw, 50vw", lazy=True):
@@ -20,6 +21,8 @@ def gallery(items, cls=""):
 
 def yt(vid, title, start=None):
     st = f' data-start="{start}"' if start else ""
+    if vid in NO_THUMB:
+        return f'<div class="yt noimg" data-id="{vid}"{st}><button type="button" aria-label="Play video: {esc(title)}"><img src="img/seal-256.webp" alt="" loading="lazy" width="480" height="360"></button></div>'
     return f'<div class="yt" data-id="{vid}"{st}><button type="button" aria-label="Play video: {esc(title)}"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"></button></div>'
 
 def vcard(title, vid, when=""):
