@@ -14,9 +14,18 @@ def crumbs(name): return f'<p class="crumbs"><a href="index.html">Home</a> / {na
 def vid_side(t, v, w=""):
     return f'<div class="vid">{yt(v, t)}<div><h3>{esc(t)}</h3>{f"<p class=\"when\">{esc(w)}</p>" if w else ""}</div></div>'
 
-PROGRAM_TICKER = ["BS Hospitality Management", "BS Business Administration", "BS Computer Science", "Bachelor of Elementary Education",
-                  "BSEd English", "BSEd Mathematics", "BS Tourism Management", "AB Political Science", "SHS: ABM", "SHS: HUMSS",
-                  "SHS: Arts & Design", "SHS: TVL-ICT", "SHS: TVL-HE", "Nursery to Grade 10"]
+PROGRAM_TICKER = [  # (tag, text, kind) kind: p = programme, f = fact
+    ("College", "BS Hospitality Management", "p"), ("College", "BS Business Administration", "p"), ("College", "BS Computer Science", "p"),
+    ("Since", "1985 in Caloocan City", "f"),
+    ("College", "Bachelor of Elementary Education", "p"), ("College", "BSEd English", "p"), ("College", "BSEd Mathematics", "p"),
+    ("Campus", "E-boards in all 95 classrooms", "f"),
+    ("College", "BS Tourism Management", "p"), ("College", "AB Political Science", "p"),
+    ("Learning", "Full online or blended", "f"),
+    ("SHS", "ABM", "p"), ("SHS", "HUMSS", "p"), ("SHS", "Arts & Design", "p"), ("SHS", "TVL-ICT", "p"), ("SHS", "TVL-HE", "p"),
+    ("Virtual Lab", "VR + AR = mixed reality", "f"),
+    ("Basic Ed", "Nursery to Grade 10", "p"),
+    ("Enroll", "(02) 8232-4483", "f"),
+]
 
 def theater(items, label):
     """Stage + clickable playlist. items = [(title, video_id, when)]."""
@@ -31,8 +40,9 @@ def theater(items, label):
 </div>"""
 
 def ticker():
-    items = "".join(f"<span>{esc(x)}</span>" for x in PROGRAM_TICKER)
-    return f'<div class="ticker" aria-label="Programmes offered"><div class="track" aria-hidden="true">{items}{items}</div><p class="sr-only">{esc(", ".join(PROGRAM_TICKER))}</p><button class="tick-btn" type="button" aria-label="Pause programme ticker" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button></div>\n'
+    items = "".join(f'<span class="tk{" fact" if k == "f" else ""}"><em>{esc(t)}</em>{esc(x)}</span>' for t, x, k in PROGRAM_TICKER)
+    plain = ", ".join(f"{t}: {x}" for t, x, _ in PROGRAM_TICKER)
+    return f'<div class="ticker" aria-label="Programmes and quick facts"><div class="track" aria-hidden="true">{items}{items}</div><p class="sr-only">{esc(plain)}</p><button class="tick-btn" type="button" aria-label="Pause programme ticker" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button></div>\n'
 
 ICO = {
     "book": '<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M8 7h7"/>',
@@ -149,7 +159,7 @@ REDS = [("#24040a", "Maroon 950", "Footer"), ("#3d0610", "Maroon 900", "Hero gro
         ("#a6192e", "Crimson 600", "Links, text"), ("#c8102e", "Red 500", "Actions"), ("#f6e1e4", "Rose 100", "Tints", True), ("#e0ad1c", "Seal gold", "Accent", True)]
 
 def build_about():
-    hist = "".join(f'<li class="rv"><span class="y">{y}</span><h3>{h}</h3><p>{p}</p></li>' for y, h, p in HISTORY)
+    hist = "".join(f'<li data-y="{esc(y)}" data-h="{esc(h)}"{" class=\"on\"" if k == 0 else ""}><span class="y">{y}</span><h3>{h}</h3><p>{p}</p></li>' for k, (y, h, p) in enumerate(HISTORY))
     leaders = "".join(f'<div class="rv"><b>{n}</b><span>{r}</span></div>' for n, r in LEADERS)
     partners = "".join(f'<figure>{simg(s, n, "120px")}<figcaption>{n}</figcaption></figure>' for s, n in PARTNERS)
     chans = "".join(f'<figure>{simg(s, n, "150px")}<figcaption>{n}</figcaption></figure>' for s, n in SCO_CHANNELS)
@@ -162,7 +172,15 @@ def build_about():
   <article class="rv" data-w="Mission"><h3>Mission</h3><p>To provide quality and excellent global education for the total development of a responsible, innovative, skillful and professional global workforce whose values and dignity are beyond par.</p></article>
 </div>""") \
         + sec(shead("Leadership") + f'<div class="leaders">{leaders}</div>', "alt") \
-        + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>The leading edge in online education</h2><p class="lede mt">Long before the COVID-19 crisis, St. Clare College prepared its ICT capability, so that it was ready to embrace the new normal in education while continuing to provide quality, affordable and sustainable development education.</p></div><ol class="timeline">{hist}</ol></div>', "", "history") \
+        + sec(f'''<div class="history">
+  <div class="hist-side">
+    <h2>The leading edge in online education</h2>
+    <p class="lede">Long before the COVID-19 crisis, St. Clare College prepared its ICT capability, so that it was ready to embrace the new normal in education while continuing to provide quality, affordable and sustainable development education.</p>
+    <div class="hist-now" aria-hidden="true"><span class="hist-year">{esc(HISTORY[0][0])}</span><span class="hist-cap">{esc(HISTORY[0][1])}</span><span class="hist-bar"><i></i></span></div>
+    <figure class="photo hist-photo">{simg("virtual-lab-predator-units", "Predator units in the St. Clare Virtual Lab", "(max-width: 900px) 100vw, 40vw")}<figcaption>The Virtual Lab: VR + AR = mixed reality</figcaption></figure>
+  </div>
+  <ol class="timeline tl-x">{hist}</ol>
+</div>''', "", "history") \
         + sec(shead("State-of-the-art facilities", "Transforming education, building our future. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("prog-bscs-lab", "Computer laboratory"), ("virtual-lab-predator-units", "Predator units in the Virtual Lab")]), "alt", "facilities") \
         + sec(shead("St. Clare in video", "Officials, facilities and the story of St. Clare Online.") + '<div class="vids">' + "".join(f'<div class="rv">{vcard(t, v, w)}</div>' for t, v, w in vids) + '</div><p class="mt-l rv"><a class="more" href="vms.html">Full video library</a></p>') \
         + sec(f"""<div class="split"><div class="rv"><h2>The seal and the St. Clare reds</h2><p class="lede mt">The original college seal, restored in high definition, leads a palette built on deep crimson and maroon, with the seal's gold as the accent.</p></div>

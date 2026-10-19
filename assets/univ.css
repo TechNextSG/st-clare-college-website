@@ -938,3 +938,43 @@ html:not(.js) .intro, .no-intro .intro { display: none; }
 .h-acad .lede { max-width: 66ch; }
 .stp-body { padding-right: 76px; }
 .stair-path { display: none; }
+
+/* ======== About: history with a pinned side panel and a scroll-progress timeline ======== */
+.history { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.hist-side { position: sticky; top: 110px; }
+.hist-side .lede { margin: 18px 0 0; }
+.hist-now { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: 6px 18px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); }
+.hist-year { font-family: var(--f-head); font-weight: 800; font-size: clamp(2.6rem, 5vw, 4rem); line-height: .9; color: var(--c600); letter-spacing: -.03em; transition: opacity .3s; }
+.hist-cap { font-family: var(--f-head); font-weight: 700; color: var(--ink); padding-bottom: 4px; transition: opacity .3s; }
+.hist-now.swap .hist-year, .hist-now.swap .hist-cap { opacity: 0; }
+.hist-bar { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: var(--rose100); overflow: hidden; margin-top: 10px; }
+.hist-bar i { display: block; height: 100%; width: 100%; background: var(--r500); transform: scaleX(var(--p, 0)); transform-origin: left; transition: transform .25s linear; }
+.hist-photo { margin-top: 28px; }
+.hist-photo img { aspect-ratio: 16 / 10; }
+.tl-x { position: relative; border-left: 0; padding-left: 0; }
+.tl-x::before, .tl-x::after { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; }
+.tl-x::before { background: var(--rose100); }
+.tl-x::after { background: var(--r500); transform: scaleY(var(--p, 0)); transform-origin: top; transition: transform .25s linear; }
+.tl-x li { position: relative; padding: 0 0 34px 44px; opacity: .45; transition: opacity .5s var(--ease); }
+.tl-x li:last-child { padding-bottom: 0; }
+.tl-x li.on, .tl-x li.past { opacity: 1; }
+.tl-x li::before { content: ""; position: absolute; left: 0; top: 4px; z-index: 1; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--rose100); box-shadow: none; transition: border-color .4s, background .4s, transform .5s var(--ease); }
+.tl-x li.past::before { border-color: var(--r500); background: var(--r500); }
+.tl-x li.on::before { border-color: var(--r500); background: var(--bg); transform: scale(1.35); box-shadow: 0 0 0 6px rgba(200,16,46,.12); }
+.tl-x .y { font-size: .95rem; }
+.tl-x h3 { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+html:not(.js) .tl-x li { opacity: 1; }
+@media (max-width: 900px) { .history { grid-template-columns: minmax(0, 1fr); } .hist-side { position: static; } .hist-photo { display: none; } .hist-now { display: none; } .tl-x li { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .tl-x li { opacity: 1; transition: none; } }
+
+/* ======== slimmer ribbons (all pages) with level tags + quick facts ======== */
+.ticker span { padding: 10px 9px; gap: 16px; font-size: .86rem; }
+.ticker span::after { width: 5px; height: 5px; }
+.ticker .track { animation-duration: 70s; }
+.ticker em { font-style: normal; margin-right: 8px; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(224,173,28,.55); color: var(--gold); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.ticker .tk.fact { color: var(--on-dark-2); font-weight: 600; }
+.ticker .tk.fact em { background: var(--gold); color: var(--ebony); border-color: var(--gold); }
+.news-tick span { padding: 10px 9px; font-size: .84rem; }
+.tick-btn { width: 32px; height: 32px; }
+.tick-btn::after { content: ""; position: absolute; inset: -6px; }
+.tick-btn svg { width: 11px; height: 11px; }

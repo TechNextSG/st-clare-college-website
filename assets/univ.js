@@ -192,6 +192,28 @@
   /* ---------- ticker pause ---------- */
   $$(".tick-btn").forEach(function (b) { b.addEventListener("click", function () { var t = b.closest(".ticker, .reel"), on = !t.classList.contains("paused"); t.classList.toggle("paused", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Play programme ticker" : "Pause programme ticker"); }); });
 
+  /* ---------- About history: active milestone follows the scroll; side panel shows its year ---------- */
+  $$(".history").forEach(function (h) {
+    var items = $$(".tl-x li", h), tl = h.querySelector(".tl-x"), now = h.querySelector(".hist-now"), yEl = h.querySelector(".hist-year"), cEl = h.querySelector(".hist-cap"), cur = -1, ticking = false;
+    if (!items.length) return;
+    function update() {
+      ticking = false;
+      var mid = w.innerHeight * .5, idx = 0;
+      items.forEach(function (li, i) { if (li.getBoundingClientRect().top < mid) idx = i; });
+      var r = tl.getBoundingClientRect(), p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+      tl.style.setProperty("--p", p.toFixed(3)); if (now) now.style.setProperty("--p", p.toFixed(3));
+      if (idx === cur) return;
+      cur = idx;
+      items.forEach(function (li, i) { li.classList.toggle("on", i === idx); li.classList.toggle("past", i < idx); });
+      if (now && yEl) {
+        now.classList.add("swap");
+        setTimeout(function () { yEl.textContent = items[idx].getAttribute("data-y"); cEl.textContent = items[idx].getAttribute("data-h"); now.classList.remove("swap"); }, reduce ? 0 : 180);
+      }
+    }
+    w.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    w.addEventListener("resize", update); update();
+  });
+
   /* ---------- contact icons draw in when the list comes into view ---------- */
   $$(".contact-list").forEach(function (l) {
     if (!("IntersectionObserver" in w)) { l.classList.add("live"); return; }
