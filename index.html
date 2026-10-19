@@ -15,11 +15,11 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/paper.css?v=7">
+<link rel="stylesheet" href="assets/paper.css?v=9">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/paper.js?v=7" defer></script>
+<script src="assets/paper.js?v=9" defer></script>
 </head>
 <body>
 <svg class="defs" aria-hidden="true" focusable="false"><filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
@@ -57,7 +57,7 @@
     <p class="lede">St. Clare College of Caloocan. Nursery to College on one campus, and the leading edge in online education.</p>
     <div class="actions"><a class="btn" href="admissions.html">How to enroll <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn b-white" href="#levels">Find your level</a></div>
   </div>
-  <img class="hero-seal" src="img/seal-400.webp" alt="St. Clare College of Caloocan seal" width="392" height="396">
+  <img class="hero-seal" src="img/seal-200.webp" srcset="img/seal-200.webp 200w, img/seal-400.webp 392w" sizes="118px" alt="St. Clare College of Caloocan seal" width="200" height="202">
   <div class="crowd" aria-hidden="true"><img class="peep" src="img/peeps/p1.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p2.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p3.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p4.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p5.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p6.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p7.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p8.svg" alt="" width="160" height="160"></div>
   <svg class="front" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="#7cc46a" d="M0 60 C200 20 420 70 640 40 S1060 10 1260 44 S1400 30 1440 36 V120 H0Z" style="filter:url(#rough) drop-shadow(0 -4px 6px rgba(0,0,0,.15))"/></svg>
 </section>
@@ -66,13 +66,13 @@
     <div class="picker" role="tablist" aria-label="Choose a school level"><button role="tab" id="lt-college" aria-controls="lp-college" aria-selected="true" data-v="college"><b>College</b><small>Eight degree programmes</small></button><button role="tab" id="lt-shs" aria-controls="lp-shs" aria-selected="false" tabindex="-1" data-v="shs"><b>Senior High</b><small>Five tracks</small></button><button role="tab" id="lt-basic" aria-controls="lp-basic" aria-selected="false" tabindex="-1" data-v="basic"><b>Basic Ed</b><small>Nursery to Grade 10</small></button></div><div class="deal" role="tabpanel" id="lp-college" aria-labelledby="lt-college">
   <div class="deal-grid">
     <ul class="rows"><li><span class="c">BSCS</span><span class="n">Bachelor of Science in Computer Science<small>College of Computing</small></span></li><li><span class="c">BSHM</span><span class="n">Bachelor of Science in Hospitality Management<small>Hospitality & Tourism</small></span></li><li><span class="c">BSTM</span><span class="n">Bachelor of Science in Tourism Management<small>Hospitality & Tourism</small></span></li><li><span class="c">BSBA</span><span class="n">Bachelor of Science in Business Administration<small>Business</small></span></li><li><span class="c">BEEd</span><span class="n">Bachelor of Elementary Education<small>Teacher Education</small></span></li><li><span class="c">BSEd-Eng</span><span class="n">Bachelor of Secondary Education, Major in English<small>Teacher Education</small></span></li><li><span class="c">BSEd-Math</span><span class="n">Bachelor of Secondary Education, Major in Math<small>Teacher Education</small></span></li><li><span class="c">AB PolSci</span><span class="n">Bachelor of Arts in Political Science<small>Social Sciences</small></span></li></ul>
-    <aside><div class="deal-figs"><img class="peep" src="img/peeps/p2.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p3.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p6.svg" alt="" width="160" height="160"></div>
+    <aside><div class="deal-figs"><img class="peep" src="img/peeps/p2.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p3.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p6.svg" alt="" width="160" height="160" loading="lazy"></div>
       <div class="actions mt"><a class="btn" href="admissions.html#freshmen">What to bring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="textlink" href="academics.html#tertiary">Programme details</a></div></aside>
   </div>
 </div><div class="deal" role="tabpanel" id="lp-shs" aria-labelledby="lt-shs" hidden>
   <div class="deal-grid">
     <ul class="rows"><li><span class="c">ABM</span><span class="n">Accountancy, Business & Management<small>Academic track</small></span></li><li><span class="c">HUMSS</span><span class="n">Humanities & Social Sciences<small>Academic track</small></span></li><li><span class="c">A&D</span><span class="n">Arts & Design<small>Arts & Design track</small></span></li><li><span class="c">ICT</span><span class="n">TVL - Information & Communications Technology<small>Technical-Vocational-Livelihood: Computer Programming, Animation</small></span></li><li><span class="c">HE</span><span class="n">TVL - Home Economics<small>Technical-Vocational-Livelihood: Bread & Pastry Production, Food & Beverage Services, Housekeeping, Local Guiding Services, Travel Services</small></span></li></ul>
-    <aside><div class="deal-figs"><img class="peep" src="img/peeps/p4.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p9.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p13.svg" alt="" width="160" height="160"></div>
+    <aside><div class="deal-figs"><img class="peep" src="img/peeps/p4.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p9.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p13.svg" alt="" width="160" height="160" loading="lazy"></div>
       <div class="actions mt"><a class="btn" href="admissions.html#shs">What to bring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="textlink" href="academics.html#shs">Programme details</a></div></aside>
   </div>
 </div><div class="deal" role="tabpanel" id="lp-basic" aria-labelledby="lt-basic" hidden>
@@ -82,27 +82,13 @@
       <div class="actions mt"><a class="btn" href="admissions.html#basic">What to bring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="textlink" href="academics.html#basic">Programme details</a></div></aside>
   </div>
 </div></div></section>
-<section class="band b-white" id="steps"><div class="bg"></div><svg class="edge" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 46 L0 18.5 L0 18.5 L50 18.1 L129 23.9 L203 19.4 L291 28.6 L373 25.1 L415 23.2 L461 20.4 L549 14.1 L590 18.1 L658 2.2 L698 11.4 L779 14.3 L861 3.6 L914 19.0 L975 20.3 L1019 9.9 L1061 15.1 L1140 26.2 L1207 5.7 L1294 22.7 L1336 7.6 L1381 8.1 L1438 26.5 L1440 16.0 L1440 46 Z"/></svg><div class="wrap"><div class="head"><h2>Bring the brown envelope</h2><p class="lede">Every St. Clare enrollment starts with a long brown envelope and three stops on campus.</p></div>
-    <div class="route">
-      <div class="envelope">
-        <div class="env" role="img" aria-label="A long brown envelope holding the enrollment documents">
-          <div class="env-back"></div><div class="env-flap"></div>
-          <div class="env-docs"><div class="env-doc"><b>PSA birth certificate</b>Photocopy</div><div class="env-doc"><b>Form 138</b>Report card</div><div class="env-doc"><b>2x2 photos</b>2 pcs., recent</div></div>
-          <div class="env-front"><span class="hand">For: Enrollment Officer<br>St. Clare College</span></div>
-        </div>
-        <ul class="checklist"><li>Graduating SHS students: latest grading report card as reflected in the original F138 or report card</li><li>PSA or local civil registry birth certificate</li><li>2x2 ID photos, recent (2 pcs.)</li><li>Certificate of indigency (optional, for scholarship)</li><li>Photocopies of all the documents above</li></ul>
-        <p class="mt"><a class="textlink" href="admissions.html#requirements">Full checklist for every level</a></p>
-      </div>
-      <div class="steps"><article class="ticket cut c-white tilt-l">
-  <span class="where">Cashier</span><span class="no" aria-hidden="true">1</span>
-  <h3>Pay the matriculation fee</h3><ul><li>Proceed to the cashier and pay the matriculation fee (designated cashier only).</li><li>Get and keep your OFFICIAL RECEIPT.</li></ul>
-</article><article class="ticket cut c-white tilt-r">
-  <span class="where">Lobby</span><span class="no" aria-hidden="true">2</span>
-  <h3>Fill up the registration form</h3><ul><li>Go to the LOBBY and present your Official Receipt to the Enrollment Officer.</li><li>Fill up the REGISTRATION FORM.</li><li>Check that your SUBJECTS are listed on the registration form.</li></ul>
-</article><article class="ticket cut c-white tilt-l">
-  <span class="where">Library, 3rd floor</span><span class="no" aria-hidden="true">3</span>
-  <h3>Register online for your schedule</h3><ul><li>Proceed to the LIBRARY on the 3rd floor for ENLISTMENT at stclareonline.com/ims.</li><li>Your section and schedule are posted on the website and sent by email by your Program Head.</li></ul>
-</article><div class="after cut c-yellow tilt-r"><h3>What happens next</h3><p>Your Program Head posts your section and schedule on the website and emails them to you. Office hours are 9:00 AM to 5:00 PM; call ahead to confirm this school year's enrollment dates and fees.</p></div></div>
+<section class="band b-white" id="steps"><div class="bg"></div><svg class="edge" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 46 L0 18.5 L0 18.5 L50 18.1 L129 23.9 L203 19.4 L291 28.6 L373 25.1 L415 23.2 L461 20.4 L549 14.1 L590 18.1 L658 2.2 L698 11.4 L779 14.3 L861 3.6 L914 19.0 L975 20.3 L1019 9.9 L1061 15.1 L1140 26.2 L1207 5.7 L1294 22.7 L1336 7.6 L1381 8.1 L1438 26.5 L1440 16.0 L1440 46 Z"/></svg><div class="wrap"><div class="teaser">
+      <div class="env small" role="img" aria-label="A long brown envelope holding the enrollment documents"><div class="env-back"></div><div class="env-flap"></div>
+        <div class="env-docs"><div class="env-doc"><b>PSA birth certificate</b>Photocopy</div><div class="env-doc"><b>Form 138</b>Report card</div><div class="env-doc"><b>2x2 photos</b>2 pcs., recent</div></div>
+        <div class="env-front"><span class="hand">For: Enrollment Officer<br>St. Clare College</span></div></div>
+      <div><h2>Bring the brown envelope</h2><p class="lede mt">Every St. Clare enrollment is three stops on campus.</p>
+        <ol class="stops"><li class="stop cut c-white"><b>1</b><span>Pay the matriculation fee<small>Cashier</small></span></li><li class="stop cut c-yellow"><b>2</b><span>Fill up the registration form<small>Lobby</small></span></li><li class="stop cut c-blue"><b>3</b><span>Register online for your schedule<small>Library, 3rd floor</small></span></li></ol>
+        <div class="actions mt"><a class="btn b-ink" href="admissions.html#steps">See the full route <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="textlink" href="admissions.html#requirements">What to bring</a></div></div>
     </div></div></section>
 <section class="band b-kraft"><div class="bg"></div><svg class="edge" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 46 L0 8.8 L0 8.8 L50 13.8 L122 13.8 L171 25.1 L255 11.5 L316 18.6 L400 17.0 L475 12.6 L531 7.1 L574 8.3 L645 13.9 L725 20.8 L784 8.9 L846 3.7 L923 3.3 L998 1.0 L1075 7.8 L1119 2.9 L1193 7.0 L1262 11.3 L1343 26.9 L1394 20.5 L1440 16.0 L1440 46 Z"/></svg><div class="wrap"><div class="collage">
   <div>
@@ -133,7 +119,7 @@
 <section class="band b-sun closer"><div class="bg"></div><svg class="edge" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 46 L0 6.5 L0 6.5 L74 9.9 L156 23.2 L238 15.2 L296 19.7 L347 24.5 L391 27.0 L459 13.5 L547 13.1 L626 19.6 L687 5.5 L746 17.9 L797 10.5 L883 2.1 L933 2.9 L994 10.5 L1061 15.0 L1131 10.6 L1205 8.0 L1286 25.5 L1348 16.7 L1397 23.3 L1440 16.0 L1440 46 Z"/></svg><div class="wrap"><h2>Become a Clarean</h2>
     <p class="lede">Basic Education, Senior High School and College, on campus or fully online.</p>
     <div class="actions"><a class="btn b-ink" href="admissions.html">How to enroll <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn b-red" href="contact.html">Ask admissions</a></div>
-    <div class="crowd" aria-hidden="true"><img class="peep" src="img/peeps/p1.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p2.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p3.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p4.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p5.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p6.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p7.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p8.svg" alt="" width="160" height="160"><img class="peep" src="img/peeps/p9.svg" alt="" width="160" height="160"></div></div></section>
+    <div class="crowd" aria-hidden="true"><img class="peep" src="img/peeps/p1.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p2.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p3.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p4.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p5.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p6.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p7.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p8.svg" alt="" width="160" height="160" loading="lazy"><img class="peep" src="img/peeps/p9.svg" alt="" width="160" height="160" loading="lazy"></div></div></section>
 </main>
 <footer class="foot on-dark"><div class="bg"></div><svg class="edge" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 46 L0 19.1 L0 19.1 L84 18.2 L130 23.9 L210 26.2 L300 13.7 L368 21.1 L452 22.6 L524 0.9 L574 21.1 L623 11.2 L707 13.8 L771 13.1 L817 10.9 L895 12.5 L977 3.3 L1030 19.5 L1109 18.1 L1195 18.9 L1246 22.6 L1312 12.1 L1382 22.3 L1440 16.0 L1440 46 Z"/></svg>
   <div class="wrap">

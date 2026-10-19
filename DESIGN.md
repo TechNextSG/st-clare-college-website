@@ -1,48 +1,61 @@
 ---
 name: St. Clare College of Caloocan
-description: Campus Tarpaulin - flat gloss-vinyl fields, hardware and paper notices, hung on a spring.
+description: Paper Campus - layered construction paper, scissor-cut edges, paper grain and soft lift shadows; a pop-up diorama of the Caloocan campus.
 colors:
-  tarp-red: "#d7141a"
-  tarp-red-deep: "#a50f14"
+  scissor-red: "#d7141a"
+  scissor-red-deep: "#a50f14"
   sunflower: "#ffd400"
-  sunflower-hover: "#ffe347"
+  sunflower-soft: "#ffe880"
   seal-royal: "#0b2a8f"
-  seal-royal-deep: "#071d66"
-  ink: "#111111"
-  vinyl-white: "#ffffff"
-  wall-paper: "#eceef1"
+  sky-sheet: "#1f4fc4"
+  leaf: "#3d9a3a"
+  leaf-deep: "#2b7a2e"
+  leaf-soft: "#7cc46a"
   kraft: "#b98b55"
   kraft-deep: "#8e6638"
-  cork: "#c9a66b"
-  steel: "#9aa0a6"
-  muted-ink: "#45454b"
-  note-yellow: "#fff6b8"
-  note-pink: "#ffe1dc"
-  note-blue: "#dfe8ff"
-  flap-cell: "#1d1d1f"
+  kraft-pale: "#e8d3b0"
+  wood: "#8a5232"
+  ink: "#141414"
+  white-sheet: "#ffffff"
+  chalk-table: "#e4ecf6"
+  muted-ink: "#3f4250"
+  note-yellow: "#fff3a6"
+  note-pink: "#ffd9d3"
+  note-blue: "#d6e3ff"
+  dusk-navy: "#1c2340"
 typography:
   display:
-    fontFamily: "Big Shoulders, Shoulders Fallback, Arial Narrow, sans-serif"
-    fontSize: "clamp(3.4rem, 11vw, 9.5rem)"
-    fontWeight: 900
-    lineHeight: 0.86
-    letterSpacing: "-0.005em"
+    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
+    fontSize: "clamp(3rem, 8vw, 6.6rem)"
+    fontWeight: 800
+    lineHeight: 0.92
+    letterSpacing: "-0.02em"
+    fontVariation: "'wdth' 82"
   headline:
-    fontFamily: "Big Shoulders, Shoulders Fallback, Arial Narrow, sans-serif"
-    fontSize: "clamp(2.8rem, 7vw, 6rem)"
-    fontWeight: 900
-    lineHeight: 0.86
-    letterSpacing: "-0.005em"
+    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
+    fontSize: "clamp(2.4rem, 5.6vw, 4.6rem)"
+    fontWeight: 800
+    lineHeight: 0.92
+    letterSpacing: "-0.02em"
+    fontVariation: "'wdth' 82"
   title:
-    fontFamily: "Big Shoulders, Shoulders Fallback, Arial Narrow, sans-serif"
-    fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)"
-    fontWeight: 900
-    lineHeight: 0.95
+    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
+    fontSize: "clamp(1.4rem, 2.1vw, 1.9rem)"
+    fontWeight: 800
+    lineHeight: 1
+    letterSpacing: "-0.02em"
+    fontVariation: "'wdth' 82"
+  numeral:
+    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
+    fontSize: "clamp(3rem, 6vw, 5rem)"
+    fontWeight: 800
+    lineHeight: 0.8
+    fontVariation: "'wdth' 78"
   lede:
     fontFamily: "Figtree, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "clamp(1.1rem, 1.5vw, 1.32rem)"
+    fontSize: "clamp(1.08rem, 1.45vw, 1.28rem)"
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.55
   body:
     fontFamily: "Figtree, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "17px"
@@ -50,255 +63,248 @@ typography:
     lineHeight: 1.6
   label:
     fontFamily: "Figtree, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "0.74rem"
+    fontSize: "0.8rem"
     fontWeight: 800
-    letterSpacing: "0.08em"
+    letterSpacing: "0.06em"
   hand:
     fontFamily: "Kalam, Comic Sans MS, cursive"
-    fontSize: "1.15rem"
+    fontSize: "1.1rem"
     fontWeight: 700
     lineHeight: 1.1
 rounded:
-  none: "0px"
-  hardware: "2px"
-  flap: "3px"
-  ring: "50%"
+  cut: "3px"
+  tab-sheet: "8px"
+  tile: "10px"
+  folder-tab: "12px 12px 0 0"
+  pill: "999px"
 spacing:
   gutter: "clamp(16px, 4vw, 44px)"
-  wrap: "1280px"
-  section: "clamp(80px, 11vw, 150px)"
-  section-tight: "clamp(56px, 8vw, 100px)"
-  head-gap: "clamp(40px, 6vw, 80px)"
+  wrap: "1260px"
+  band: "clamp(80px, 10vw, 140px)"
+  sheet: "clamp(24px, 4vw, 50px)"
+  grid-gap: "clamp(18px, 3vw, 40px)"
+  section-gap: "clamp(30px, 6vw, 90px)"
 components:
-  tag-button:
+  button-primary:
     backgroundColor: "{colors.sunflower}"
     textColor: "{colors.ink}"
-    typography: "{typography.title}"
-    rounded: "{rounded.none}"
-    padding: "0 22px 0 40px"
-    height: "50px"
-  tag-button-hover:
-    backgroundColor: "{colors.sunflower-hover}"
-  tag-button-red:
-    backgroundColor: "{colors.tarp-red}"
-    textColor: "{colors.vinyl-white}"
-  tag-button-red-hover:
-    backgroundColor: "{colors.tarp-red-deep}"
-  tag-button-ink:
+    rounded: "{rounded.tab-sheet}"
+    padding: "0 24px"
+    height: "52px"
+  button-red:
+    backgroundColor: "{colors.scissor-red}"
+    textColor: "{colors.white-sheet}"
+    rounded: "{rounded.tab-sheet}"
+    padding: "0 24px"
+    height: "52px"
+  button-ink:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.sunflower}"
-  tarp-red:
-    backgroundColor: "{colors.tarp-red}"
-    textColor: "{colors.vinyl-white}"
-    rounded: "{rounded.none}"
-    padding: "clamp(46px, 6vw, 80px) clamp(24px, 5vw, 64px) clamp(40px, 5vw, 60px)"
-  note-card:
-    backgroundColor: "{colors.vinyl-white}"
+    rounded: "{rounded.tab-sheet}"
+    padding: "0 24px"
+    height: "52px"
+  button-white:
+    backgroundColor: "{colors.white-sheet}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "26px 24px 22px"
-  requirement-sheet:
-    backgroundColor: "{colors.kraft}"
+    rounded: "{rounded.tab-sheet}"
+    padding: "0 24px"
+    height: "52px"
+  button-small:
+    rounded: "{rounded.tab-sheet}"
+    padding: "0 16px"
+    height: "44px"
+  paper-sheet:
+    backgroundColor: "{colors.white-sheet}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "clamp(26px, 4vw, 50px)"
-  level-picker-tab:
-    backgroundColor: "{colors.vinyl-white}"
+    rounded: "{rounded.cut}"
+    padding: "{spacing.sheet}"
+  notice-note:
+    backgroundColor: "{colors.note-yellow}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "18px 22px"
-    height: "120px"
+    rounded: "{rounded.cut}"
+    padding: "30px 24px 22px"
+  folder-tab:
+    backgroundColor: "{colors.white-sheet}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.folder-tab}"
+    padding: "16px 24px 18px"
+    height: "64px"
+  folder-tab-selected:
+    backgroundColor: "{colors.scissor-red}"
+    textColor: "{colors.white-sheet}"
   form-field:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
+    typography: "{typography.body}"
+    rounded: "0"
     padding: "6px 0"
-    height: "40px"
+    height: "44px"
   form-field-focus:
     backgroundColor: "{colors.note-yellow}"
-  menu-button:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.sunflower}"
-    rounded: "{rounded.none}"
-    padding: "0 16px"
-    height: "48px"
+  chip:
+    backgroundColor: "{colors.white-sheet}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+    padding: "5px 12px"
 ---
 
 # Design System: St. Clare College of Caloocan
 
 ## Overview
 
-**Creative North Star: "The Campus Tarpaulin"**
+**Creative North Star: "The Paper Campus"**
 
-The site is the printed vinyl a Filipino family reads on a school facade, set with poster-house discipline. Every major surface is a flat sheet of gloss vinyl in one of four loud colours (tarp red, sunflower, seal royal, ink), hung from a steel pipe with zip-ties and punched with metal grommets. Admissions material shifts to the paper world of the same campus: a long brown kraft envelope, cork boards, coloured notice slips with push-pins, rubber stamps and torn queue tickets.
+The whole site is a construction-paper diorama of one Caloocan school. Every surface is a sheet of coloured paper that has been cut with scissors, laid on a pale chalk-blue table, and lifted a few millimetres off the sheet underneath it. Nothing is drawn with a stroke: shape comes from the cut edge, depth from a soft 12-16% lift shadow, and texture from a multiplied fractal-noise paper grain. The home hero is a pop-up book of the campus (sun, clouds, hills, building, trees, bunting) built from authored SVG layers that rise on load and drift at different speeds with scroll and pointer.
 
-Depth is physical, not atmospheric. Things overlap and hang; the only shadows are the soft offset-blur shadows a hung sheet or pinned slip actually casts. There are no colour gradients and no glows. Type shouts in a condensed 900-weight display face set huge and uppercase, while body copy stays plain, generous and readable in Figtree. A marker hand appears only where a person would have written something.
+The register is bright, hand-made and school-proud, not childish. Sheets are cut from five saturated school colours (scissor red, sunflower, seal royal, sky, leaf) plus kraft and white, with pastel sticky notes for secondary content. Real campus photos are mounted as taped prints; people appear as Open Peeps cut-out stickers (CC0) with a white die-cut border. Type is a compressed, heavy Bricolage Grotesque that reads like letters cut from card, against a calm Figtree body and a Kalam hand for captions written on the paper.
 
-Motion is the material obeying physics: tarps unfurl, sway on a spring that responds to scroll velocity and the pointer, notices drop onto pins, stamps thud, split-flap cells clatter, and the level picker re-deals its content. With reduced motion, everything stands still and fully visible.
+Motion is a pop-up book grammar: layers rise from their base with a back-out overshoot, sheets slap down with a slight rotation and settle to a resting tilt, the kraft envelope opens on scroll and documents slide out, bunting drops onto its line, and the crowd bobs while in view. All content is visible without JavaScript and with reduced motion.
 
 **Key Characteristics:**
-- Flat full-bleed colour fields; section backgrounds alternate red, sunflower, royal, ink, white vinyl and cork.
-- Hardware as ornament with a job: grommets, zip-ties, pipe, pins, cords, key-tag holes.
-- Square corners everywhere; only hardware is round.
-- Heavy ink rules (3-4px) as structure for boards, pickers, forms and the header.
-- Condensed uppercase display at poster scale; plain humanist body.
-- Spring-hung motion with a strict reduced-motion fallback.
+- Every coloured surface is a cut sheet: fill on a pseudo-element, roughened by the `#rough` SVG displacement filter, grain-multiplied, lifted by a soft drop shadow.
+- Sections are full-bleed paper bands whose top edge is a torn, scissor-cut SVG path in the band's own colour.
+- Sheets rest at small tilts (-1.5deg to +1.2deg); hover straightens or lifts them.
+- People are Open Peeps stickers, never stock photos of models.
+- Paper objects carry the story: masking tape, kraft envelope, numbered tickets, bunting flags, folder tabs, key tags, stamp marks.
 
 ## Colors
 
-Four printed vinyl inks at full saturation, a paper/kraft secondary world for admissions, and a cool wall grey that everything hangs against.
+Saturated construction-paper sheets on a pale chalk table, with ink for type and pastel notes for secondary content.
 
 ### Primary
-- **Tarp Red** (tarp-red): the signature field. Hero tarp, alternating section grounds, the open mobile menu, pins, file-type chips, menu underline, checklist ticks, the giant footer wordmark. White text on it.
-- **Deep Tarp Red** (tarp-red-deep): hover state of red tags and the inner shading of red pins only.
+- **Scissor Red** (scissor-red): the school's main sheet. Ribbon ticker, red bands, mobile menu sheet, selected College tab, course codes, ticket and timeline numerals, file-type tabs, social discs, checklist ticks, nav underline strip.
+- **Scissor Red Deep** (scissor-red-deep): small red text on light paper where Scissor Red is too bright (note meta lines, required-field marks, stamp marks on notes).
 
 ### Secondary
-- **Sunflower** (sunflower): the action and highlight colour. Primary ENROLL tag, flap-strip top rule, `.sun` highlight words on red/royal/ink, focus halo, selection, open-board plus marks. Ink text on it, never white.
-- **Sunflower Hover** (sunflower-hover): the tag-button hover fill only.
+- **Sunflower** (sunflower): the default call-to-action sheet (Enroll buttons); accent text on dark sheets (footer headings, ink-button labels, mace citation); FAQ and programme-board plus discs; the selected SHS tab; text selection.
+- **Sunflower Soft** (sunflower-soft): hover fill for download rows; sun rays in the diorama.
 
 ### Tertiary
-- **Seal Royal** (seal-royal): the school-seal blue. Hero photo ground, congratulations tarp, Basic Education level, big numerals on notice cards, DOC file chips. White text on it.
-- **Deep Seal Royal** (seal-royal-deep): photo scrim tint and royal pin shading.
+- **Seal Royal** (seal-royal): taken from the college seal. Vision sheet, royal bands, selected Basic Ed tab, the mobile hero copy card, document file tabs, big numerals on Basic Ed notes.
+- **Sky Sheet** (sky-sheet): the diorama sky behind the home hero and the default inner-page hero; the browser theme colour.
+- **Leaf / Leaf Deep / Leaf Soft** (leaf, leaf-deep, leaf-soft): diorama hills and trees (back hill deep, front hill leaf, foreground strip soft). Leaf Deep is the green inner-page hero.
 
 ### Neutral
-- **Ink** (ink): text, every structural rule and border, the footer, the flap strip, menu and FAQ buttons, ticket location labels.
-- **White Vinyl** (vinyl-white): white tarps, cards, tickets, boards, form sheets, the header bar.
-- **Wall Grey** (wall-paper): the page background and the "hole" inside every grommet and tag punch.
-- **Kraft** (kraft) / **Deep Kraft** (kraft-deep): the brown envelope, its flap, and requirement sheets.
-- **Cork** (cork): notice-wall section grounds.
-- **Steel** (steel) and the grommet greys (#d9dadc, #b4b7bb, #8d9095, pipe #c9ccd0): metal hardware only.
-- **Muted Ink** (muted-ink): secondary text such as sub-labels and form footnotes on light grounds.
-- **Notice tints** (note-yellow, note-pink, note-blue): paper slips on the notice wall and envelope documents; note-yellow is also the form-field focus fill.
-- **Flap Cell** (flap-cell): the split-flap character cells.
+- **White Sheet** (white-sheet): the default paper for cards, the deal panel, FAQ, file rows, the header bar.
+- **Chalk Table** (chalk-table): the page background, the table every sheet lies on; also the punched hole in key tags.
+- **Ink** (ink): body text, ink buttons, the footer sheet, bunting string, focus ring.
+- **Muted Ink** (muted-ink): secondary small print (`small` lines, form footnotes).
+- **Kraft / Kraft Deep** (kraft, kraft-deep): the enrollment envelope body and flap only.
+- **Kraft Pale** (kraft-pale): the light kraft band.
+- **Wood** (wood): tree trunks in the diorama.
+- **Dusk Navy** (dusk-navy): the dark inner-page hero variant.
+- **Note Yellow / Pink / Blue** (note-yellow, note-pink, note-blue): sticky-note sheets on the notice wall, envelope documents, the open programme-board row, the focused form field.
 
 ### Named Rules
-**The Flat Vinyl Rule.** Colour fields are flat. No colour gradients, no glows, no translucent glass. The only gradient functions allowed are drawing tools for physical marks: the envelope's diagonal crease hairlines and the ticket's perforated bottom edge.
+**The Sheet Not Swatch Rule.** A colour enters the page as a cut sheet of paper (grain-multiplied, roughened, lifted), never as a flat fill or a gradient. Gradients are not used for colour anywhere.
 
-**The Ink-On-Sunflower Rule.** Sunflower always carries ink text. White on sunflower is forbidden.
-
-**The Photo Scrim Rule.** Photos under a tarp take a single flat tint (royal at 38% on the home hero, ink at 35% on inner heroes), never a gradient fade.
+**The Paired Text Rule.** Each sheet colour carries a fixed text colour: red, royal, sky, leaf and ink sheets take white text (ink buttons take sunflower); sunflower, white, kraft and the pastel notes take ink.
 
 ## Typography
 
-**Display Font:** Big Shoulders, variable 600-900 (with a size-adjusted Arial Narrow fallback "Shoulders Fallback" so the swap does not reflow)
-**Body Font:** Figtree, 400-800 with italic
-**Hand Font:** Kalam 700
+**Display Font:** Bricolage Grotesque, self-hosted as "Bricolage" (weights 600-800, width 75-100%), with an Arial-based metric fallback
+**Body Font:** Figtree (400-800, roman and italic), with system-ui
+**Hand Font:** Kalam 700, with Comic Sans MS and cursive
 
-**Character:** A condensed, flat-sided poster grotesk shouting in uppercase, against a friendly, open humanist sans that does the reading. The marker hand is a person's annotation on printed material.
+**Character:** Bricolage at weight 800 and 78-85% width reads like heavy letters cut from card and stacked tight (line-height 0.8-0.92); Figtree is the calm, friendly reading voice; Kalam is the pen on the paper, kept for captions and the envelope address.
 
 ### Hierarchy
-- **Display** (900, clamp(3.4rem, 11vw, 9.5rem), 0.86): page h1 inside the hero tarp, split into masked lines. The home hero runs clamp(3.4rem, 8.2vw, 8.4rem); the closing "Enroll now" and footer wordmark go larger still (up to 15rem and 22rem).
-- **Headline** (900, clamp(2.8rem, 7vw, 6rem), 0.86): section h2, uppercase, balanced wrap.
-- **Title** (900, clamp(1.6rem, 2.4vw, 2.2rem), 0.95): card, ticket and banner h3. Display face also sets nav links (800, 1.22rem), tag buttons, picker labels, programme codes, big numerals and years.
-- **Lede** (400-600, clamp(1.1rem, 1.5vw, 1.32rem), 1.5): section intros, max 58ch (46ch in the hero).
-- **Body** (400, 17px, 1.6): all reading text; FAQ answers capped at 70ch, timeline copy at 62ch.
-- **Label** (800, 0.74-0.78rem, 0.08em, uppercase): form field labels and notice-card meta lines only.
-- **Hand** (Kalam 700, 1.1-2.4rem, 1.1): photo-print captions, the envelope addressee, short handwritten asides.
+- **Display** (800, clamp(3rem, 8vw, 6.6rem), 0.92, width 82%): page h1 in the hero. The closer h2 goes larger (clamp(3.6rem, 12vw, 10rem), 0.86).
+- **Headline** (800, clamp(2.4rem, 5.6vw, 4.6rem), 0.92): band h2, balanced wrap.
+- **Title** (800, clamp(1.4rem, 2.1vw, 1.9rem), 1): card and sheet h3; a larger step at clamp(2rem, 4vw, 3.2rem).
+- **Numeral** (800, width 78-80%, line-height 0.8-0.95): course codes, years, ticket numbers, key-tag letters, equation tiles; usually Scissor Red or Seal Royal on white.
+- **Lede** (400, 600 over the diorama; clamp(1.08rem, 1.45vw, 1.28rem), 1.55, max 56ch): the paragraph under a headline.
+- **Body** (400, 17px, 1.6): reading text; long answers cap at 62-68ch.
+- **Label** (800, 0.8rem, 0.06em, uppercase): form field labels and event "where" lines.
+- **Hand** (Kalam 700, about 1.1rem, 1.1): photo-print captions, envelope address.
 
 ### Named Rules
-**The Shout Rule.** Display type is always Big Shoulders 900, uppercase, line-height 0.8-0.95. Never set it in sentence case or at body weight.
+**The Cut Letters Rule.** Every heading, numeral, button label, tab label and brand mark uses Bricolage at 800 with a narrowed width (78-85%). Figtree never sets a heading.
 
-**The Marker Rule.** Kalam appears only where a hand would write: captions, addressees, one-line asides. Never a headline, never body, never a button.
+**The Pen Only Writes Rule.** Kalam appears only where a person would have written on the paper: captions under taped prints and the envelope front. Never a heading, never a button.
 
 ## Layout
 
-A single 1280px wrap (`min(1280px, 100% - 2 * gutter)`) with a fluid gutter of clamp(16px, 4vw, 44px). Sections are full-bleed colour bands with generous vertical rhythm, clamp(80px, 11vw, 150px), or clamp(56px, 8vw, 100px) for tight bands. Section heads use an asymmetric two-column grid (1.3fr / 0.9fr, headline left, lede right, bottom-aligned) that collapses to one column at 860px.
+A single centred column, `min(1260px, 100% - 2 * gutter)` with a fluid gutter of clamp(16px, 4vw, 44px). Pages are stacks of full-bleed paper bands with generous vertical padding (clamp(80px, 10vw, 140px)); each band's top edge overlaps the previous band by 44px through its cut-edge SVG.
 
-Content layouts are grids of hung or pinned objects: two-column splits (1fr/1fr, collapsing at 900px), an eight-flag bunting row (four per row under 900px), a five-up key-tag row (two at 1000px, one at 520px), a three-column masonry notice wall (`columns: 3 300px`), and the envelope-plus-tickets route (envelope sticky at top 150px on desktop). The header is sticky; at 1100px the nav becomes a full-screen red sheet that unrolls from the top. Body text never drops below 17px on phones, and the page never scrolls horizontally (`overflow-x: clip`).
+Inside bands, layout is asymmetric two-column grids: band heads at 1.25fr / 0.95fr (headline left, lede right, bottom-aligned), splits at 1fr / 1fr, the enrollment route at 0.9fr / 1.1fr with a sticky envelope, the collage at 1.05fr / 0.95fr with absolutely placed overlapping prints. Card groups use auto-fill or auto-fit grids (notice wall minmax(280px, 1fr), strands minmax(220px, 1fr)), five key tags across, eight bunting flags across. Notice walls are always CSS grid, never CSS columns, so tape never splits.
+
+Responsive: the desktop menu collapses at 1120px into a full-screen red sheet that opens as a circular clip from the menu button. Two-column grids stack at 860-900px; bunting goes from 8 to 4 across at 900px; key tags from 5 to 2 at 1000px and to 1 at 520px. On phones (760px and under) the hero becomes auto-height, the hero copy moves onto its own tilted royal sheet, and the crowd trims to five peeps.
 
 ## Elevation & Depth
 
-Depth comes from overlapping flat layers and the shadow a hung or pinned object would cast. Shadows are offset downward with negative spread, so they read as weight under a sheet, never as a halo around it. Surfaces lying flat on the page (boards, picker, rows, footer) have no shadow and are defined by ink rules instead.
+Depth is physical layering of paper: each sheet casts a soft, low-opacity shadow onto whatever lies below it, and the scissor filter gives the edge a slightly irregular silhouette. There are no hard offset shadows, glows or glass. Shadows use CSS `filter: drop-shadow` so they follow the rough cut silhouette, not `box-shadow`.
 
 ### Shadow Vocabulary
-- **Hang** (`box-shadow: 0 18px 24px -12px rgba(17,17,17,.45), 0 2px 3px rgba(17,17,17,.18)`): small hung objects at rest, such as tag buttons and key tags.
-- **Hang Large** (`box-shadow: 0 34px 44px -22px rgba(17,17,17,.55), 0 3px 6px rgba(17,17,17,.2)`): tarps, the envelope, requirement sheets, photo prints, the registration form, and hover state of key tags and notice cards.
-- **Paper** (`box-shadow: 0 10px 18px -10px rgba(17,17,17,.5), 0 1px 2px rgba(17,17,17,.2)`): paper slips, tickets and envelope documents.
-- **Cut-out drop** (`filter: drop-shadow(-14px 10px 18px rgba(0,0,0,.35))`): photo cut-outs of real Clareans and the printed seal stamp.
+- **Lift** (`drop-shadow(0 6px 8px rgba(20,20,20,.14)) drop-shadow(0 1px 1px rgba(20,20,20,.12))`): every standard sheet, button, tab and row.
+- **Lift Large** (`drop-shadow(0 14px 16px rgba(20,20,20,.16)) drop-shadow(0 2px 2px rgba(20,20,20,.12))`): hero-scale sheets (deal panel, ribbon, congratulations banner, mobile hero card).
+- **Edge Up** (`drop-shadow(0 -5px 6px rgba(20,20,20,.12))`): torn band edges, casting upward onto the band above.
+- **Diorama Layer** (`drop-shadow(0 6px 6px rgba(10,20,60,.22))`): each hero SVG layer, tinted toward the sky.
+- **Sticker** (`drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 6px 6px rgba(0,0,0,.25))`): Open Peeps cut-outs; a white die-cut border plus lift.
 
 ### Named Rules
-**The Hung Shadow Rule.** A shadow means something is hanging or pinned. Flat-on-the-page elements get an ink rule, not a shadow. No coloured shadows, no glows.
+**The Scissor Filter Rule.** Every paper silhouette goes through `url(#rough)` (feTurbulence fractalNoise, baseFrequency 0.035, 2 octaves, seed 7; feDisplacementMap scale 5), applied to the fill pseudo-element so the text on the sheet stays crisp.
+
+**The Soft Lift Rule.** Paper shadows stay at 12-25% opacity and are blurred. A sheet rests on the table; it never floats or casts a hard offset.
 
 ## Shapes
 
-Square-cut vinyl and paper: corner radius is 0 on every sheet, card, button, field and tab. Round forms belong only to hardware: grommets, pins, tag punch holes and key-tag holes (50%), plus 2-3px softening on zip-ties and split-flap cells. Silhouettes come from clip-path cuts that mimic die-cut print: the tag button's pointed left end with a punched hole, bunting pennants with a notched V, and the envelope's triangular flap. Structure is drawn with ink rules: 4px for frames (header, picker, board, form, map, factband), 3px for internal dividers, 1-2px or dashed for list rows and form underlines.
+Shapes are cut, not drawn. Sheets have nearly square corners (3px) that the rough filter makes irregular; buttons, rows and tabs are slightly rounder (8px); equation tiles and the deal panel 10px; folder tabs round only their top corners (12px 12px 0), and the deal sheet under them squares its top-left corner to join the selected tab. Silhouettes come from clip-path where paper would be cut: bunting pennants (a V notch), the envelope flap (a triangle) and the mobile menu (a circle reveal). Band tops are wavy torn paths generated per band from a seed. Full circles are kept for small discs (pause button, plus discs, social icons, tick bullets). Sheets carry small resting rotations; masking tape strips sit across top edges at -4deg / +5deg.
 
 ## Components
 
-### Tag Button (primary action)
-A die-cut hang tag. **Shape:** square with a pointed left end (`clip-path` 16px point) and a punched grommet hole at 16px. **Primary:** sunflower with ink text, Big Shoulders 900 1.35rem uppercase, min-height 50px, padding 0 22px 0 40px, Hang shadow. **Hover:** rotates -3deg and lifts 2px on the out-expo ease, fill goes to sunflower-hover. **Variants:** red (white text, hover deep red) and ink (sunflower text). **Hung tag:** the hero ENROLL tag hangs on a 3px ink cord below the tarp edge, 1.6rem, 60px tall, swaying at 2.2x the tarp's angle.
+### Buttons
+Paper tickets you can lift.
+- **Shape:** gently rounded cut sheet (8px), roughened, with the Lift shadow; min-height 52px (small 44px).
+- **Primary:** Sunflower sheet, Ink label in Bricolage 800 at 85% width, 1.2rem.
+- **Variants:** Scissor Red with a white label; Ink with a Sunflower label; White with an Ink label.
+- **Hover / Active:** hover lifts 3px and tilts -1.5deg over 0.4s on the expo-out curve; active presses to 0.98 scale. Focus is the global 3px Ink ring at 3px offset (Sunflower on dark sheets).
+- **Text link:** weight 800, underlined, 2px thickness, 0.2em offset.
 
-### Tarp (signature container)
-A flat vinyl sheet in red, sunflower, royal, ink or white variants, with four corner grommets (plus an optional centre grommet), zip-ties to the pipe above, and the Hang Large shadow. Transform origin is the top edge; JavaScript writes a `--sway` angle (rotation plus a slight counter-skew) from the spring simulation. Used for the hero, inner-page heroes, vision/mission banners and academic strand banners.
+### Chips
+- **Style:** white pill, Ink text at 0.84rem 700, 2px inset ink ring. Used only for programme specialisations on the programme board.
 
-### Grommets, Ties and Pipe
-Grommets are 18px steel rings (inset ring shadows) whose centre shows the wall grey. Ties are 4px ink straps with a 12px head, hanging 30px above the sheet. The pipe is a 10px steel bar across the hero top.
+### Cards / Containers
+- **Paper sheet:** any colour sheet, 3px corner, grain + scissor filter + Lift; padding clamp(24px, 4vw, 50px) for large sheets, 26-40px for cards.
+- **Notice note:** white or pastel sheet with masking tape on top, alternating rests of -1.2deg / 0.9deg / -0.5deg; linked notes straighten and rise 6px on hover. An optional photo bleeds to the sheet edge.
+- **Taped print:** white sheet with a 12px border and a 48px bottom lip holding a Kalam caption; photo at 4:3.
+- **Key tag:** tall sheet with a punched hole (chalk circle with an inset shadow) at the top, a giant Bricolage letter, and the link pinned to the bottom; tilts alternate and straighten on hover.
+- **Ticket:** a numbered enrollment step with a huge red numeral floated left and a small Ink tag with Sunflower text pinned at the top right naming the room.
 
-### Split-flap Strip
-An ink band with a 4px sunflower top rule. Fixed-width dark cells (18-30px wide, 30-46px tall, 3px radius, centre hairline) cycle programme names every 3.2s; each cell flips 2-7 random characters before landing. A live region announces each word; a 44px pause button sits at the end.
-
-### Level Picker (re-deal tabs)
-A three-cell ink-framed tablist: white cells with huge display labels. The selected cell fills by level (Basic = royal, SHS = sunflower, College = red). Selecting re-deals the panel: programme rows fly in from the right with a slight rotation, figures and notes pop up with a back ease. Arrow, Home and End keys move between tabs. Stacks vertically under 860px.
-
-### Envelope and Tickets (enrollment route)
-A kraft envelope (9:5) with a deep-kraft triangular flap and crease lines. On scroll the flap rotates open and three coloured documents slide out; checklist ticks pop in one by one. Beside it, white queue tickets carry a huge red step numeral, an ink-and-sunflower location label, the Paper shadow and a perforated bottom edge; they tear in from alternating sides.
-
-### Painted Sign Strip
-A white band with 4px ink rules where facts run as one giant uppercase sentence, words alternately red and royal, separated by sunflower stars. It scrubs sideways with scroll; with reduced motion it wraps instead.
-
-### Bunting Flags
-Pennants on a 3px ink line, cycling red, sunflower, royal (and a white logo flag), notched with clip-path. They drop on the line with an elastic bounce and then sway.
-
-### Congratulations Tarp
-A royal panel framed by grommets: commencement photo left, hand-lettered sunflower greeting and headline right.
-
-### Papercut Flame
-A flat layered SVG flame for the Professional Mace; each paper layer flickers with an independent yoyo scale and skew.
-
-### Note Cards, Pins and Rubber Stamps
-Paper slips (white, yellow, pink, blue) with the Paper shadow and a small authored tilt (`--r`), pinned by a 22px red, sunflower or royal push-pin. Linked cards straighten, lift 6px and scale 1.02 on hover with the Hang Large shadow. Optional meta line in red label type. Rubber stamps are a 3px current-colour border around display type, rotated -6deg, in red or royal.
-
-### Programme Board
-An ink-framed accordion of `details` rows: programme code in red display, title and sub-line in Figtree, a sunflower plus block that rotates 45deg when open. The open row inverts to ink with a sunflower code. Chips inside are 2px ink-outlined labels.
-
-### Requirement Sheets
-Kraft sheets with Hang Large shadow, selected by an ink-framed tab row (selected tab = ink with sunflower text), carrying a two-column checklist and a rubber stamp.
-
-### Key Tags (portals)
-Five hanging tags cycling red, sunflower, royal, ink and white, each with a steel key-hole at the top, a huge display system code, and a "go" link pinned to the bottom. They drop in with an elastic bounce and sway; hover deepens the shadow.
-
-### Inputs / Fields (registration form)
-The contact form is a printed registration sheet: white, 4px ink frame, Hang Large shadow, a header with the seal. Fields sit in ink-ruled cells with uppercase micro-labels; inputs are borderless with a 2px dashed underline. **Focus:** the underline turns solid red and the field fills note-yellow. Two columns, one under 680px.
+### Inputs / Fields
+- **Style:** no box; a 2px dashed ink underline at 40% on a registration-form sheet, 17px body text, min-height 44px. Labels are uppercase 0.8rem 800 with 0.06em tracking; required marks in Scissor Red Deep.
+- **Focus:** the underline turns solid Scissor Red and the field fills Note Yellow, like a highlighted line on a paper form.
 
 ### Navigation
-A sticky white bar with a 4px ink bottom rule, the seal and stacked display wordmark at left, display-face links (800, 1.22rem) with a red 4px underline that wipes in on hover and stays on the current page, and a sunflower ENROLL tag. At 1100px it becomes an ink MENU button; the menu unrolls as a full-screen red sheet (clip-path drop) with huge links and sunflower underlines; Escape closes it.
+- **Desktop:** a sticky white paper bar (roughened, soft downward shadow) with the seal and wordmark on the left, Figtree 700 links, and a 4px red strip that scales in from the left on hover and for the current page.
+- **Mobile (1120px and under):** a Menu sheet-button opens a full-screen Scissor Red sheet with Bricolage links at clamp(2.2rem, 10vw, 3.6rem) and Sunflower strips; focus is trapped, the page is inert, Esc closes.
 
-### Footer
-Ink ground, four columns (two at 900px, one at 540px), sunflower display headings, red square social buttons that flip to sunflower on hover, and a giant red uppercase wordmark that rises from below the fold on scroll.
+### Folder-Tab Level Picker
+Three paper folder tabs (College, Senior High, Basic Ed) sit 8px low and rise to 0 when selected, taking their level colour (Red, Sunflower, Royal). The panel below is a white sheet joined to the tabs. On switching, list rows deal in from the right with a 3deg rotation and the figures pop up. Full ARIA tabs with arrow, Home and End keys and hash deep links.
 
-### Motion Grammar
-- **Unfurl:** clip-path drops a sheet from its top edge (1.3s, out-expo), then gives the spring a nudge.
-- **Sway:** a damped spring per hung object (tarps stiffer and heavier than flags, keys and tags) fed by scroll velocity, pointer movement over the object and a slow breeze; clamped to plus or minus 7deg.
-- **Flap:** per-character split-flap flips in 70ms steps, staggered 28ms per cell.
-- **Pin-drop:** notices fall 60px onto their authored tilt with a bounce ease.
-- **Stamp:** scale from 1.8-2.2 with rotation, power4-in, then a tiny 1.06 thud.
-- **Re-deal:** tab panels' rows and figures fly back in on every selection.
-- **Reduced motion:** GSAP and Lenis do not start, so no pre-hidden states are applied; tarps, flags and keys are forced to `transform: none`; transitions and animations collapse to 0.01ms; the flap strip shows its first word statically and pauses; the sign strip wraps. Content is fully visible without JavaScript.
+### Enrollment Envelope
+A kraft envelope (back, front, triangular flap) that on scroll flips its flap open and slides three documents (white, yellow, blue) up and out at small angles, while the checklist beside it ticks item by item. The address is written in Kalam.
+
+### Paper Diorama Hero
+An inline SVG scene of layered paper (sun with rays, clouds, back hill, campus building, trees, bunting, front hill, foreground strip) where each layer carries a `data-depth` from 0.15 to 1. Layers rise in sequence on load and drift by depth x 14% on scroll and depth x 36px with the pointer. A row of Open Peeps stickers stands along the foreground and the college seal is slapped on at the top right. Inner pages use a shorter version (sun, clouds, two hills) on a Sky, Red, Royal, Leaf Deep or Dusk Navy sheet.
+
+### Bunting
+Eight pennant flags (clip-path V notch) on an ink string, alternating Sunflower, White, Royal and Red, fluttering 2.4deg on a 5s loop with staggered delay; they drop onto the line with an elastic ease.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** build every major surface as a flat vinyl field in tarp red, sunflower, seal royal, ink or white vinyl, with grommets and ties when it hangs.
-- **Do** make the primary action a sunflower Tag Button with ink text; use the red or ink variant only on grounds where sunflower would vanish.
-- **Do** give hung and pinned objects the Hang, Hang Large or Paper shadow, and give flat-lying structures a 3-4px ink rule instead.
-- **Do** set every headline in Big Shoulders 900 uppercase at line-height 0.8-0.95, and keep reading text in Figtree at 17px or larger.
-- **Do** move the admissions and notice world into kraft, cork and coloured paper slips with pins and rubber stamps.
-- **Do** register any new hanging element with the spring sway and give it a static reduced-motion state.
+- **Do** build every coloured surface as a cut sheet: fill on `::before`, `background: var(--grain), <colour>; background-blend-mode: multiply; filter: url(#rough) var(--lift)`.
+- **Do** start each band with its torn edge in the band's own colour, overlapping the band above by 44px.
+- **Do** give sheets a small resting tilt (within 1.5deg) through `--rest` so the reveal settles there.
+- **Do** keep text crisp: the scissor filter goes on the paper layer, never on the element that holds the text.
+- **Do** use Open Peeps cut-outs with the white Sticker border for people, and real campus photos as taped prints.
+- **Do** pair sheet colours with their fixed text colours (white on Red, Royal, Sky, Leaf, Ink; Ink on Sunflower, White, Kraft, notes).
+- **Do** keep everything readable with motion off: reveal targets start hidden only under `.js`, and reduced motion stops the ribbon, flutter and transitions.
 
 ### Don't:
-- **Don't** use colour gradients, glows, glassmorphism or coloured shadows; gradients are allowed only to draw creases and perforations.
-- **Don't** round the corners of sheets, cards, buttons or fields; only hardware is round.
-- **Don't** put white text on sunflower.
-- **Don't** use Kalam for headlines, body or buttons.
-- **Don't** hide content behind motion: every reveal must start visible when JavaScript or motion is off.
-- **Don't** introduce small uppercase kicker labels above headlines; the micro-label style is reserved for form fields and notice meta lines.
+- **Don't** draw outlines or strokes around paper sheets; edges come from the cut and the shadow. (The white die-cut border on sticker people is the one contour the world uses.)
+- **Don't** use gradients for colour, glass, glows or hard offset shadows.
+- **Don't** set a heading in Figtree or Kalam, or a caption in Bricolage.
+- **Don't** lay notice cards out with CSS columns; tape must not split across columns.
+- **Don't** rest a sheet at more than about 5deg (stickers, stamps and tape strips excepted).

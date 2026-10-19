@@ -88,7 +88,7 @@
   if (!motion) return;
 
   /* ---------- smooth scroll ---------- */
-  if (window.Lenis) {
+  if (window.Lenis && window.matchMedia("(pointer: fine)").matches) {
     var lenis = new window.Lenis({ lerp: .11 });
     lenis.on("scroll", ST.update);
     G.ticker.add(function (t) { lenis.raf(t * 1000); });
@@ -110,15 +110,13 @@
     var seal = has(".hero-seal", hero);
     if (seal) tl.from(seal, { scale: 2, rotation: -60, opacity: 0, duration: .6, ease: "power4.in" }, "-=.5");
     setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 4500); /* failsafe for throttled tabs */
-    /* scroll: far layers drift slower than near ones */
-    layers.forEach(function (l) {
-      var depth = parseFloat(l.getAttribute("data-depth")) || 0;
-      G.to(l, { yPercent: depth * 14, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-    });
-    /* pointer parallax, eased by quickTo (no layout reads) */
-    if (window.matchMedia("(pointer: fine)").matches && layers.length) {
-      var movers = layers.map(function (l) { var dp = parseFloat(l.getAttribute("data-depth")) || 0; return { x: G.quickTo(l, "x", { duration: .9, ease: "power3" }), dp: dp }; });
-      hero.addEventListener("pointermove", function (e) { var nx = e.clientX / window.innerWidth - .5; movers.forEach(function (m) { m.x(-nx * m.dp * 36); }); });
+    /* scroll + pointer parallax move whole composited elements (the svg, the crowd), never the filtered layers */
+    var scene = has(".scene", hero), crowdEl = has(".crowd", hero);
+    if (scene) G.to(scene, { yPercent: 8, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
+    if (crowdEl) G.to(crowdEl, { yPercent: -6, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
+    if (window.matchMedia("(pointer: fine)").matches && scene) {
+      var sx = G.quickTo(scene, "x", { duration: 1, ease: "power3" }), cx = crowdEl ? G.quickTo(crowdEl, "x", { duration: .8, ease: "power3" }) : null;
+      hero.addEventListener("pointermove", function (e) { var nx = e.clientX / window.innerWidth - .5; sx(-nx * 14); if (cx) cx(-nx * 30); });
     }
     /* crowd idles: gentle bobs, paused off-screen by ScrollTrigger toggle */
     if (peeps.length) {
@@ -129,7 +127,7 @@
 
   /* ---------- reveals ---------- */
   ST.batch("[data-pop]", { start: "top 88%", onEnter: function (els) {
-    G.to(els, { opacity: 1, y: 0, scale: 1, rotation: function (i, el) { return parseFloat(getComputedStyle(el).getPropertyValue("--rest")) || 0; }, duration: .9, ease: "back.out(1.5)", stagger: .08 });
+    G.to(els, { opacity: 1, y: 0, scale: 1, rotation: function (i, el) { return parseFloat(getComputedStyle(el).getPropertyValue("--rest")) || 0; }, duration: .9, ease: "back.out(1.5)", stagger: .08, onStart: function () { els.forEach(function (e) { e.style.willChange = "transform"; }); }, onComplete: function () { els.forEach(function (e) { e.style.willChange = ""; }); } });
   } });
   ST.batch("[data-rise]", { start: "top 90%", onEnter: function (els) {
     G.to(els, { opacity: 1, y: 0, duration: 1, ease: "expo.out", stagger: .06 });
@@ -141,11 +139,11 @@
   /* ---------- envelope opens, documents slide out, checklist ticks ---------- */
   var env = has(".env");
   if (env) {
-    var etl = G.timeline({ scrollTrigger: { trigger: ".route", start: "top 70%", end: "center 45%", scrub: .8 } });
+    var etl = G.timeline({ scrollTrigger: { trigger: env, start: "top 85%", end: "bottom 45%", scrub: .8 } });
     etl.fromTo(env.querySelector(".env-flap"), { rotationX: 0, transformPerspective: 800 }, { rotationX: 180, transformPerspective: 800, ease: "none", duration: .3 })
        .set(env.querySelector(".env-flap"), { zIndex: 1 })
-       .fromTo($$(".env-doc", env), { yPercent: 40 }, { yPercent: function (i) { return -22 - i * 10; }, rotation: function (i) { return [-4, 3, -1][i]; }, ease: "power2.out", stagger: .08, duration: .5 });
-    $$(".route .checklist li").forEach(function (li) {
+       .fromTo($$(".env-doc", env), { yPercent: 8 }, { yPercent: function (i) { return -22 - i * 10; }, rotation: function (i) { return [-4, 3, -1][i]; }, ease: "power2.out", stagger: .08, duration: .5 });
+    $$(".checklist li").forEach(function (li) {
       G.fromTo(li, { "--tick": 0 }, { "--tick": 1, duration: .35, ease: "back.out(3)", scrollTrigger: { trigger: li, start: "top 82%" } });
     });
   }
@@ -169,8 +167,9 @@
   });
 
   /* ---------- flame flicker ---------- */
-  $$(".flame path").forEach(function (p, i) {
-    G.to(p, { scaleY: G.utils.random(1.05, 1.12), scaleX: G.utils.random(.92, .97), duration: G.utils.random(.4, .65), ease: "sine.inOut", yoyo: true, repeat: -1, delay: i * .12 });
+  $$(".flame").forEach(function (fl) {
+    var tws = $$("path", fl).map(function (p, i) { return G.to(p, { scaleY: G.utils.random(1.05, 1.12), scaleX: G.utils.random(.92, .97), duration: G.utils.random(.4, .65), ease: "sine.inOut", yoyo: true, repeat: -1, delay: i * .12, paused: true }); });
+    ST.create({ trigger: fl, start: "top bottom", end: "bottom top", onToggle: function (s) { tws.forEach(function (t) { s.isActive ? t.play() : t.pause(); }); } });
   });
 
   /* ---------- closer crowd pops up ---------- */
