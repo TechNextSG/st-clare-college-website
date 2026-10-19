@@ -1,0 +1,1 @@
+People illustrations in this folder: Open Peeps by Pablo Stanley (CC0 1.0, openpeeps.com), generated via the DiceBear library (github.com/dicebear/dicebear) open-peeps style, 19 Oct 2026.
