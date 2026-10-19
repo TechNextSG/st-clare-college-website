@@ -16,10 +16,10 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/univ.css?v=18">
-<link rel="stylesheet" href="assets/content.css?v=18">
+<link rel="stylesheet" href="assets/univ.css?v=19">
+<link rel="stylesheet" href="assets/content.css?v=19">
 <script>document.documentElement.classList.add("js");try{if(sessionStorage.getItem("sc-intro"))document.documentElement.classList.add("no-intro")}catch(e){}</script>
-<script src="assets/univ.js?v=18" defer></script>
+<script src="assets/univ.js?v=19" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -48,15 +48,22 @@
 </div></header>
 </div>
 <main id="main">
-<section class="hero hero-adm">
+<section class="hero h-adm"><div class="gridfloor" aria-hidden="true"><i></i></div>
   <div class="bgimg"><img src="img/graduates.jpg" srcset="img/graduates-800.webp 800w, img/graduates.jpg 1230w" sizes="100vw" alt="" width="1230" height="640" fetchpriority="high"></div><div class="scrim"></div>
-  <div class="wrap grid">
-    <div><p class="crumbs"><a href="index.html">Home</a> / Admissions</p><h1><span class="split-line"><span>Become a</span></span><span class="split-line"><span>Clarean</span></span></h1>
-      <p class="lede" style="margin:20px 0 28px">Three steps on campus or online through the IMS, one long brown envelope of requirements, and you are part of St. Clare.</p>
-      <div class="actions"><a class="btn gold" href="#requirements"><span>See requirements</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="ims.html"><span>Enroll online (IMS)</span></a></div></div>
-    <aside class="apply-card" aria-label="Enrollment at a glance"><h2>Enrollment at a glance</h2><ol><li><span><b>Pay the matriculation fee</b><small>Cashier</small></span></li><li><span><b>Fill up the registration form</b><small>Lobby</small></span></li><li><span><b>Register online for your schedule</b><small>Library, 3rd floor</small></span></li></ol>
-      <a class="btn sm" href="#steps"><span>Full procedure</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <p class="fine">Dates and fees for this school year: call <a href="tel:+63282324483">(02) 8232-4483</a>.</p></aside>
+  <div class="wrap h-grid">
+    <div class="h-copy"><p class="crumbs"><a href="index.html">Home</a> / Admissions</p><h1><span class="split-line"><span>Become a</span></span><span class="split-line"><span><em>Clarean</em></span></span></h1>
+      <p class="lede">Three steps on campus or online through the IMS, one long brown envelope of requirements, and you are part of St. Clare.</p>
+      <div class="actions"><a class="btn gold" href="#requirements"><span>See requirements</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="ims.html"><span>Enroll online (IMS)</span></a></div>
+      <p class="note-line">Dates and fees for this school year: call <a href="tel:+63282324483">(02) 8232-4483</a></p></div>
+    <div class="pass-wrap h-art">
+      <article class="pass" aria-label="Enrollment at a glance">
+        <header><img src="img/seal-128.webp" alt="" width="44" height="44"><span><b>St. Clare College</b><small>Admission pass &middot; enrollment at a glance</small></span></header>
+        <ol><li><span class="sn">01</span><span><b>Pay the matriculation fee</b><small>Cashier</small></span><span class="box" aria-hidden="true"></span></li><li><span class="sn">02</span><span><b>Fill up the registration form</b><small>Lobby</small></span><span class="box" aria-hidden="true"></span></li><li><span class="sn">03</span><span><b>Register online for your schedule</b><small>Library, 3rd floor</small></span><span class="box" aria-hidden="true"></span></li></ol>
+        <div class="perf" aria-hidden="true"></div>
+        <footer><span><small>Bring</small><b>Photocopies in a long brown envelope</b></span><a class="btn sm" href="#steps"><span>Full procedure</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></footer>
+        <span class="code" aria-hidden="true"></span>
+      </article>
+    </div>
   </div>
 </section>
 <section class="sec alt" id="steps"><div class="wrap"><div class="sec-head rv"><div><h2>Enrollment procedure</h2></div><p class="lede">Proceed in order; each step happens at a specific place on campus.</p></div><ol class="steps"><li class="rv" style="--d:0"><h3>Pay the matriculation fee</h3><p class="where">Where: Cashier</p><ul><li>Proceed to the cashier and pay the matriculation fee (designated cashier only).</li><li>Get and keep your OFFICIAL RECEIPT.</li></ul></li><li class="rv" style="--d:1"><h3>Fill up the registration form</h3><p class="where">Where: Lobby</p><ul><li>Go to the LOBBY and present your Official Receipt to the Enrollment Officer.</li><li>Fill up the REGISTRATION FORM.</li><li>Check that your SUBJECTS are listed on the registration form.</li></ul></li><li class="rv" style="--d:2"><h3>Register online for your schedule</h3><p class="where">Where: Library, 3rd floor</p><ul><li>Proceed to the LIBRARY on the 3rd floor for ENLISTMENT at stclareonline.com/ims.</li><li>Your section and schedule are posted on the website and sent by email by your Program Head.</li></ul></li></ol><p class="next rv"><b>What happens next:</b> your Program Head posts your section and schedule on the website and emails them to you. Call (02) 8232-4483 to confirm this school year's enrollment dates and fees.</p></div></section>

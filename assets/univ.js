@@ -71,7 +71,7 @@
     dots.forEach(function (b, i) { b.addEventListener("click", function () { if (cap) cap.setAttribute("aria-live", "polite"); show(i); }); });
     var pb = d.querySelector(".slide-pause");
     if (pb) { if (paused) { pb.setAttribute("aria-pressed", "true"); pb.setAttribute("aria-label", "Play slideshow"); }
-      pb.addEventListener("click", function () { paused = !paused; pb.setAttribute("aria-pressed", paused); pb.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow"); d.querySelector(".hero-home").classList.toggle("paused", paused); show(cur); }); }
+      pb.addEventListener("click", function () { paused = !paused; pb.setAttribute("aria-pressed", paused); pb.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow"); d.querySelector(".hero").classList.toggle("paused", paused); show(cur); }); }
     show(0);
     d.addEventListener("visibilitychange", function () { if (d.hidden) clearTimeout(timer); else show(cur); });
   }
@@ -136,11 +136,15 @@
       else tl.from(h, { y: 40, opacity: 0, duration: 1.1 }, .15);
     }
     tl.from($$(".hero .crumbs, .hero .lede, .hero .actions, .hero .since, .ph .crumbs, .ph .lede, .ph .actions, .ph .note-line"), { y: 24, opacity: 0, duration: 1, stagger: .08 }, .45);
-    var heroArt = $$(".hero .frames figure, .hero .frames .badge, .panel-x, .mosaic figure, .apply-card, .feature > *, .headlines li, .qa, .ph .ph-img");
+    var heroArt = $$(".hero .h-art, .ph .ph-img");
     if (heroArt.length) tl.from(heroArt, { y: 50, opacity: 0, scale: .96, duration: 1.2, stagger: .07 }, .4);
+    var bits = $$(".h-stats > div, .yearline li, .h-contact .qa, .np-tabs a");
+    if (bits.length) tl.from(bits, { y: 20, opacity: 0, duration: .8, stagger: .05 }, .7);
+    var stp = $$(".stp"); if (stp.length) tl.from(stp, { yPercent: 40, opacity: 0, duration: 1.2, stagger: .14 }, .55);
+    var bs = $$(".broadsheet > *"); if (bs.length) tl.from(bs, { y: 30, opacity: 0, duration: 1, stagger: .1 }, .55);
     var quick = $$(".quick li"); if (quick.length) tl.from(quick, { y: 30, opacity: 0, duration: .9, stagger: .07 }, .8);
     /* hero parallax */
-    $$(".hero .bgimg img, .slides").forEach(function (el) {
+    $$(".hero .bgimg img").forEach(function (el) {
       G.to(el, { yPercent: 12, ease: "none", scrollTrigger: { trigger: el.closest(".hero"), start: "top top", end: "bottom top", scrub: true } });
     });
     /* section reveals, batched */
@@ -170,7 +174,14 @@
   setTimeout(function () { if (!w.gsap) showAll(); }, 7000); /* failsafe if the CDN is blocked */
 
   /* ---------- ticker pause ---------- */
-  $$(".tick-btn").forEach(function (b) { b.addEventListener("click", function () { var t = b.closest(".ticker"), on = !t.classList.contains("paused"); t.classList.toggle("paused", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Play programme ticker" : "Pause programme ticker"); }); });
+  $$(".tick-btn").forEach(function (b) { b.addEventListener("click", function () { var t = b.closest(".ticker, .reel"), on = !t.classList.contains("paused"); t.classList.toggle("paused", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Play programme ticker" : "Pause programme ticker"); }); });
+
+  /* ---------- admission pass: 3D tilt toward the pointer ---------- */
+  $$(".pass-wrap").forEach(function (wr) {
+    var card = wr.querySelector(".pass"); if (!card || !fine || reduce) return;
+    wr.addEventListener("pointermove", function (e) { var r = wr.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; card.style.transform = "rotate(-1deg) rotateY(" + (x * 14).toFixed(1) + "deg) rotateX(" + (-y * 10).toFixed(1) + "deg)"; });
+    wr.addEventListener("pointerleave", function () { card.style.transform = ""; });
+  });
 
   /* ---------- lite YouTube ---------- */
   $$(".yt img").forEach(function (im) { function bad() { if (im.naturalWidth && im.naturalWidth <= 120) im.closest(".yt").classList.add("noimg"); } im.addEventListener("error", function () { im.closest(".yt").classList.add("noimg"); }); im.complete ? bad() : im.addEventListener("load", bad); });

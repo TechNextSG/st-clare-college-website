@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "18"
+V = "19"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -119,10 +119,12 @@ def sec(inner, cls="", id_=None):
 def shead(title, lede="", solo=False):
     return f'<div class="sec-head{" solo" if solo or not lede else ""} rv"><div><h2>{title}</h2></div>{f"<p class=\"lede\">{lede}</p>" if lede else ""}</div>'
 
+PH_MARKS = {"LMS": "LMS", "CMS": "CMS", "IMS": "IMS", "PMS": "PMS", "VMS": "VMS", "Downloads": "DOCS", "Calendar": "CAL", "Student services": "SCO"}
+
 def ph(crumb, title, lede, photo=None, alt="", extra=""):
     pic = f'<div class="ph-img">{img(photo, alt, 1600, 900, lazy=False, sizes="(max-width: 900px) 0px, 40vw")}</div>' if photo else "<div></div>"
     return f"""<section class="ph"><div class="gridfloor" aria-hidden="true"><i></i></div>
-  <img class="seal-watermark" src="img/seal-512.webp" alt="" width="440" height="440" loading="lazy">
+  <span class="ph-mark" aria-hidden="true">{PH_MARKS.get(crumb, "")}</span>
   <div class="wrap">
     <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><h1>{lines(title)}</h1><p class="lede">{lede}</p>{extra}</div>
     {pic}

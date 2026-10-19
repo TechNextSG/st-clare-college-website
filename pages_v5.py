@@ -3,6 +3,7 @@
 import os, json
 import build as B
 import pages_full as P
+import heroes as H
 from build import esc, sec, shead, cta, steps_html, checklist, page, lines, ARROW, PHONE, PHONE_TEL, EMAIL, ADDRESS, FB, YT, FB_SVG, YT_SVG
 from pages_full import simg, zoom, gallery, yt, vcard, docs
 from data import REQ, STEPS
@@ -84,17 +85,7 @@ def build_home():
     for date, title, text, im, vid in NEWS_FULL[:3]:
         th = f'<div class="thumb">{simg(im, "", "(max-width: 900px) 100vw, 33vw")}</div>' if im else f'<div class="thumb"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"></div>'
         news.append(f'<a class="post rv" href="news.html">{th}<h3>{esc(title)}</h3><p>{esc(text[:150])}{"..." if len(text) > 150 else ""}</p><span class="date">{esc(date)}</span></a>')
-    body = f"""<section class="hero hero-home">
-  <div class="slides">{"".join(sl)}</div><div class="scrim"></div>
-  <div class="wrap"><div class="copy">
-    <h1>{lines("The School|of Life Skills")}</h1>
-    <p class="lede">St. Clare College of Caloocan educates learners from Nursery to College, on one campus in Caloocan City and online through St. Clare Online.</p>
-    <div class="actions"><a class="btn" href="admissions.html"><span>How to enroll</span> {ARROW}</a><a class="btn ghost" href="academics.html"><span>Explore programmes</span></a></div>
-  </div></div>
-  <div class="slide-ui"><p class="slide-cap"></p><div class="slide-ctrl"><button class="slide-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button><div class="dots">{dots}</div></div></div>
-</section>
-<nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
-<div style="height:clamp(48px,6vw,80px)"></div>
+    body = H.home(slides, hero_img, ico) + f"""<nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
 """ + ticker() \
         + sec(shead("Academic programmes", "From a child's first school day to a bachelor's degree, every stage of learning happens at St. Clare.") + B.levels_html()) \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Proud moments, on video</h2></div><p class="lede">The Professional Mace, the Virtual Lab and the commencement of the Stars of 2024, from the St. Clare College channel.</p></div>
@@ -127,24 +118,12 @@ def build_about():
             ("St. Clare College Facilities 2021", "ENCCIBqdPMs", "State-of-the-art facilities"), ("The leading edge in online education system", "S_SYZ1X5Thk", "2021"),
             ("Continuity of Learning", "jwzbf0naZyE", "No one gets left behind"), ("Our Future", "1_vsofl20fQ", "")]
     pal = "".join(f'<div class="{"lt" if len(r) > 3 else ""}" style="background:{r[0]}"><b>{r[1]}</b><span>{r[0]} &middot; {r[2]}</span></div>' for r in REDS)
-    body = f"""<section class="hero hero-about"><div class="gridfloor" aria-hidden="true"><i></i></div>
-  <div class="wrap grid">
-    <div>{crumbs("About")}<h1>{lines("Transforming education,|building our future")}</h1>
-      <p class="lede" style="margin-top:20px">St. Clare College of Caloocan is the School of Life Skills and a leading institution for professional development.</p>
-      <div class="since"><b data-count="1985">1985</b><span>Founded 31 August 1985 in Caloocan City, Metro Manila</span></div></div>
-    <div class="frames">
-      <figure class="f1">{B.img("campus-building.jpg", "St. Clare College building on Zabarte Road", 1600, 900, lazy=False, sizes="(max-width: 900px) 90vw, 45vw")}</figure>
-      <figure class="f2">{simg("fac-library", "The Library and Learning Resource Center", "(max-width: 900px) 60vw, 30vw", lazy=False)}</figure>
-      <div class="badge"><img src="img/seal.svg" alt="St. Clare College of Caloocan seal" width="112" height="112"></div>
-    </div>
-  </div>
-</section>
-""" + sec(shead("Vision and mission", "Quality, affordable and sustainable education for the total development of every Clarean.") + """<div class="vm2">
+    body = H.about() + sec(shead("Vision and mission", "Quality, affordable and sustainable education for the total development of every Clarean.") + """<div class="vm2">
   <article class="rv" data-w="Vision"><h3>Vision</h3><p>To become the leading institution for professional development and the first and foremost provider of quality, affordable and sustainable development education.</p></article>
   <article class="rv" data-w="Mission"><h3>Mission</h3><p>To provide quality and excellent global education for the total development of a responsible, innovative, skillful and professional global workforce whose values and dignity are beyond par.</p></article>
 </div>""") \
         + sec(shead("Leadership") + f'<div class="leaders">{leaders}</div>', "alt") \
-        + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>The leading edge in online education</h2><p class="lede mt">Long before the COVID-19 crisis, St. Clare College prepared its ICT capability, so that it was ready to embrace the new normal in education while continuing to provide quality, affordable and sustainable development education.</p></div><ol class="timeline">{hist}</ol></div>') \
+        + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>The leading edge in online education</h2><p class="lede mt">Long before the COVID-19 crisis, St. Clare College prepared its ICT capability, so that it was ready to embrace the new normal in education while continuing to provide quality, affordable and sustainable development education.</p></div><ol class="timeline">{hist}</ol></div>', "", "history") \
         + sec(shead("State-of-the-art facilities", "Transforming education, building our future. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("prog-bscs-lab", "Computer laboratory"), ("virtual-lab-predator-units", "Predator units in the Virtual Lab")]), "alt", "facilities") \
         + sec(shead("St. Clare in video", "Officials, facilities and the story of St. Clare Online.") + '<div class="vids">' + "".join(f'<div class="rv">{vcard(t, v, w)}</div>' for t, v, w in vids) + '</div><p class="mt-l rv"><a class="more" href="vms.html">Full video library</a></p>') \
         + sec(f"""<div class="split"><div class="rv"><h2>The seal and the St. Clare reds</h2><p class="lede mt">The original college seal, restored in high definition, leads a palette built on deep crimson and maroon, with the seal's gold as the accent.</p></div>
@@ -164,12 +143,7 @@ def build_academics():
              ("shs", "shs-ict-virtual-lab", "Senior High School", "ABM, HUMSS, Arts & Design, TVL-ICT and TVL-HE"),
              ("basic", "basic-elementary", "Basic Education", "Nursery and Kindergarten, Elementary and Junior High School")]
     dh = "".join(f'<a class="panel-x" href="#{h}">{simg(s, "", "(max-width: 760px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" " if h == "tertiary" else "<img ")}<span class="in"><b>{t}</b><span>{d}</span><em>View programmes &rarr;</em></span></a>' for h, s, t, d in doors)
-    body = f"""<section class="hero hero-acad"><div class="gridfloor" aria-hidden="true"><i></i></div>
-  <div class="wrap"><div class="head-copy">{crumbs("Academics")}<h1>{lines("Programmes for|every stage")}</h1>
-    <p class="lede" style="margin-top:18px">Basic Education, Senior High School and eight college degrees, taught on campus, online or blended. Choose a level.</p></div>
-    <div class="panels">{dh}</div></div>
-</section>
-""" + ticker() \
+    body = H.academics() + ticker() \
         + sec(shead("College degrees", "Eight bachelor's degree programmes: BSHM, BSBA, BSCS, BEEd, BSEd-English, BSEd-Math, BSTM and AB Political Science.") + f'<div class="prog-rows">{ter}</div>', "", "tertiary") \
         + sec(shead("Senior High School", "Academic, Arts & Design and Technical-Vocational-Livelihood tracks.") + f'<div class="prog-rows">{shs}</div>', "alt", "shs") \
         + sec(shead("Basic Education", "Nursery to Grade 10.") + f'<div class="cards-photo">{bas}</div>', "", "basic") \
@@ -197,18 +171,7 @@ def build_admissions():
     have = {s for s, _ in ENROLL_SLIDES}
     guide = list(ENROLL_SLIDES) + [(s, c) for s, c in IMS_GALLERY if s.startswith("slide-") and s not in have]
     steps_short = "".join(f'<li><span><b>{h}</b><small>{w}</small></span></li>' for h, w, _ in STEPS)
-    body = f"""<section class="hero hero-adm">
-  <div class="bgimg">{B.img("graduates.jpg", "", 1230, 640, lazy=False, sizes="100vw")}</div><div class="scrim"></div>
-  <div class="wrap grid">
-    <div>{crumbs("Admissions")}<h1>{lines("Become a|Clarean")}</h1>
-      <p class="lede" style="margin:20px 0 28px">Three steps on campus or online through the IMS, one long brown envelope of requirements, and you are part of St. Clare.</p>
-      <div class="actions"><a class="btn gold" href="#requirements"><span>See requirements</span> {ARROW}</a><a class="btn ghost" href="ims.html"><span>Enroll online (IMS)</span></a></div></div>
-    <aside class="apply-card" aria-label="Enrollment at a glance"><h2>Enrollment at a glance</h2><ol>{steps_short}</ol>
-      <a class="btn sm" href="#steps"><span>Full procedure</span> {ARROW}</a>
-      <p class="fine">Dates and fees for this school year: call <a href="tel:{PHONE_TEL}">{PHONE}</a>.</p></aside>
-  </div>
-</section>
-""" + sec(shead("Enrollment procedure", "Proceed in order; each step happens at a specific place on campus.") + steps_html(), "alt", "steps") \
+    body = H.admissions() + sec(shead("Enrollment procedure", "Proceed in order; each step happens at a specific place on campus.") + steps_html(), "alt", "steps") \
         + sec(shead("Admission requirements", "Select your level. All documents are considered property of the school once submitted for admission.") + f'<div class="tabs" role="tablist" aria-label="Requirement type">{"".join(tabs)}</div>{"".join(panels)}<p class="notebox">Place photocopies of all documents in a long brown envelope. College students can also check the <a href="{LMS["college_corner"][2][1][1]}" rel="noopener" target="_blank">admission requirements sheet</a> in the College Corner; Basic Education families can open the <a href="https://drive.google.com/file/d/1mVPzklhSi-ifSS8QPBUZc8ky0_UkCQiw/view?usp=sharing" rel="noopener" target="_blank">list of school requirements</a>.</p>', "", "requirements") \
         + sec(shead("Enrollment guide", "The official enrollment slides: procedure, requirements, programmes, room assignment and uniform. Fee slides are from the school year shown on each slide. Select a slide to enlarge it.") + gallery(guide, "contain"), "alt", "guide") \
         + sec(shead("Forms you will need") + docs(FORMS_DOCS[:2]) + '<p class="mt"><a class="more" href="downloads.html">All forms and memoranda</a></p>') \
@@ -237,12 +200,7 @@ def build_campus():
     mosaic = [("fac-virtual-lab-thronos", "Virtual Lab"), ("fac-library", "Library"), ("prog-bshm", "Hospitality kitchen"), ("fac-vr-headset", "Mixed reality"), ("basic-kinder", "Basic Education")]
     mz = "".join(f'<figure>{simg(s, c, "(max-width: 760px) 50vw, 25vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" " if s == mosaic[0][0] else "<img ")}<figcaption>{c}</figcaption></figure>' for s, c in mosaic)
     vids = [("St. Clare College Virtual Lab", "Ncj3mlHUiok", "2021"), ("St. Clare Online: Virtual Lab", "avbXu3J7PoI", "Predator Thronos & Mixed Reality by Acer"), ("St. Clare College Virtual Flag Ceremony", "QSRZvHk7TMA", "Every Monday, 7:00 AM")]
-    body = f"""<section class="hero hero-camp"><div class="gridfloor" aria-hidden="true"><i></i></div>
-  <div class="wrap">{crumbs("Campus life")}<h1>{lines("Life at|St. Clare")}</h1>
-    <p class="lede" style="margin-top:18px">E-boards in every classroom, a Virtual Lab, our own broadcast channels and a community that keeps learning online.</p>
-    <div class="mosaic">{mz}</div></div>
-</section>
-""" + sec(shead("A week on campus", "From the Monday flag ceremony to the Virtual Studio.") + f'<div class="grid3">{dh}</div>', "", "week") \
+    body = H.campus() + sec(shead("A week on campus", "From the Monday flag ceremony to the Virtual Studio.") + f'<div class="grid3">{dh}</div>', "", "week") \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Inside the Virtual Lab</h2></div><p class="lede">Visit St. Clare College and experience the immersive technology behind the Predator Thronos and the Mixed Reality facility by Acer.</p></div>
 {theater(vids, "Virtual Lab")}""", "dark", "virtual-lab") \
         + sec(shead("State-of-the-art facilities", "The library, the Virtual Lab and mixed-reality learning. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("virtual-lab-predator-units", "Predator units in the Virtual Lab"), ("shs-ict-virtual-lab", "TVL-ICT in the Virtual Lab")]), "", "facilities") \
@@ -272,16 +230,9 @@ def build_news():
         if "AI technology" in title: extra = '<p><a class="more" href="campus-life.html#virtual-lab">Inside the Virtual Lab</a></p>'
         yr = yr_of(date)
         if yr != last_year:
-            items.append(f'<h2 class="year rv">{yr if yr != "2020" else "2020 and earlier"}</h2>'); last_year = yr
+            items.append(f'<h2 class="year rv" id="y{yr}">{yr if yr != "2020" else "2020 and earlier"}</h2>'); last_year = yr
         items.append(f'<article class="item rv" id="n{i}"><div class="media">{media or '<div class="noimg" aria-hidden="true"></div>'}</div><div><span class="date">{esc(date)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p>{extra}</div></article>')
-    body = f"""<section class="hero hero-news"><div class="gridfloor" aria-hidden="true"><i></i></div>
-  <div class="wrap">{crumbs("News")}<p class="news-strip"><b>Latest</b>{esc(lead[1])} &middot; {esc(lead[0])}</p><h1>{lines("News and|announcements")}</h1>
-    <div class="feature">
-      <a class="lead-story" href="#n0"><span class="pic">{simg(lead[3], "", "(max-width: 900px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" ")}</span><span class="in"><span class="tag">Featured &middot; {esc(lead[0])}</span><b>{esc(lead[1])}</b><span style="color:var(--on-dark)">{esc(lead[2])}</span></span></a>
-      <ul class="headlines">{heads}</ul>
-    </div></div>
-</section>
-""" + sec(shead("All stories", "Milestones, scholarships, advisories and stories from the St. Clare community, newest first. Dated offers are shown for the record; call admissions for this year's.") + f'<div class="archive">{"".join(items)}</div>') + cta()
+    body = H.news(thumb) + sec(shead("All stories", "Milestones, scholarships, advisories and stories from the St. Clare community, newest first. Dated offers are shown for the record; call admissions for this year's.") + f'<div class="archive">{"".join(items)}</div>') + cta()
     page("news.html", "News | St. Clare College", "News and announcements from St. Clare College of Caloocan: enrollment, scholarships, UniFAST-TES, the Professional Mace, AI technology and more.", body)
 
 # ======================================================================= CONTACT
@@ -289,15 +240,7 @@ def build_contact():
     qa = [(f"tel:{PHONE_TEL}", "phone", "Call admissions", PHONE), (f"mailto:{EMAIL}", "mail", "Email", EMAIL),
           ("https://m.me/stclarecollege", "chat", "Messenger", "St. Clare College on Facebook"), ("#map", "pin", "Visit", "Zabarte Road, Caloocan City")]
     cards = "".join(f'<a class="qa" href="{h}"{" rel=\"noopener\"" if h.startswith("http") else ""}>{ico(i)}<span><b>{t}</b><small>{s}</small></span></a>' for h, i, t, s in qa)
-    body = f"""<section class="hero hero-contact">
-  <div class="bgimg">{simg("campus-sco-sign", "", "100vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" ")}</div><div class="scrim"></div>
-  <div class="wrap grid">
-    <div>{crumbs("Contact")}<h1>{lines("We'd love to|hear from you")}</h1>
-      <p class="lede" style="margin-top:20px">Questions about programmes, requirements, dates or fees? The admissions office is open 9:00 AM to 5:00 PM.</p></div>
-    <div class="cards4">{cards}</div>
-  </div>
-</section>
-""" + sec(f"""<div class="split" style="align-items:start">
+    body = H.contact(cards) + sec(f"""<div class="split" style="align-items:start">
   <div class="info rv"><h2>Visit, call or write</h2>
     <dl class="mt-l contact-list"><div><dt><span class="ic">{ico("pin")}</span>Campus</dt><dd>{ADDRESS}</dd></div><div><dt><span class="ic">{ico("phone")}</span>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt><span class="ic">{ico("mail")}</span>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt><span class="ic">{ico("clock")}</span>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div><div><dt><span class="ic">{ico("brief")}</span>Careers (Human Resource)</dt><dd><a href="mailto:stclarecollege.humanresource@gmail.com">stclarecollege.humanresource@gmail.com</a></dd></div></dl>
     <p class="follow">Follow St. Clare College</p>{B.socials()}</div>
