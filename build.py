@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "33"
+V = "35"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -89,7 +89,7 @@ def footer():
       </div>
       <div class="foot-cols">
         <div><h3>College</h3><ul><li><a href="about.html">About</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li></ul></div>
-        <div><h3>Students</h3><ul><li><a href="portals.html">Student services</a></li><li><a href="lms.html">LMS</a> &middot; <a href="pms.html">PMS</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="calendar.html">Calendar</a></li><li><a href="vms.html">Videos</a></li></ul></div>
+        <div><h3>Students</h3><ul><li><a href="portals.html">Student services</a></li><li><a href="lms.html">LMS</a></li><li><a href="pms.html">PMS</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="calendar.html">Calendar</a></li><li><a href="vms.html">Videos</a></li></ul></div>
         <div><h3>Contact</h3><ul><li><a href="tel:{PHONE_TEL}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">Email admissions</a></li><li><a href="ims.html#hiring">Careers</a></li><li><a href="contact.html">Map &amp; hours</a></li></ul></div>
       </div>
     </div>

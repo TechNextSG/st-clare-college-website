@@ -222,6 +222,17 @@
     setTimeout(function () { l.classList.add("live"); }, 4000); /* failsafe */
   });
 
+  /* ---------- phones: "Swipe" hint above card rows that scroll sideways; chat button hides while scrolling ---------- */
+  if (w.matchMedia("(max-width: 700px)").matches) {
+    $$(".cards-photo, .news, .vids, .levels, .grid3, .leaders, .steps, .gallery").forEach(function (row) {
+      if (row.children.length < 2 || row.scrollWidth <= row.clientWidth + 8 || (row.previousElementSibling && row.previousElementSibling.classList.contains("swipe-hint"))) return;
+      var h = d.createElement("p"); h.className = "swipe-hint"; h.setAttribute("aria-hidden", "true"); h.textContent = "Swipe to see more";
+      row.parentNode.insertBefore(h, row);
+    });
+  }
+  var scT;
+  w.addEventListener("scroll", function () { d.body.classList.add("scrolling"); clearTimeout(scT); scT = setTimeout(function () { d.body.classList.remove("scrolling"); }, 650); }, { passive: true });
+
   /* ---------- admission pass: 3D tilt toward the pointer ---------- */
   $$(".pass-wrap").forEach(function (wr) {
     var card = wr.querySelector(".pass"); if (!card || !fine || reduce) return;
