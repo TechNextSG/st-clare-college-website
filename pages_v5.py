@@ -115,7 +115,17 @@ def build_home():
     for date, title, text, im, vid in NEWS_FULL[:3]:
         th = f'<div class="thumb">{simg(im, "", "(max-width: 900px) 100vw, 33vw")}</div>' if im else f'<div class="thumb"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"></div>'
         news.append(f'<a class="post rv" href="news.html">{th}<h3>{esc(title)}</h3><p>{esc(text[:150])}{"..." if len(text) > 150 else ""}</p><span class="date">{esc(date)}</span></a>')
-    body = H.home(slides, hero_img, ico) + f"""<nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
+    body = f"""<section class="hero hero-home">
+  <div class="slides">{"".join(sl)}</div><div class="scrim"></div>
+  <div class="wrap"><div class="copy">
+    <h1>{lines("The School|of Life Skills")}</h1>
+    <p class="lede">St. Clare College of Caloocan educates learners from Nursery to College, on one campus in Caloocan City and online through St. Clare Online.</p>
+    <div class="actions"><a class="btn" href="admissions.html"><span>How to enroll</span> {ARROW}</a><a class="btn ghost" href="academics.html"><span>Explore programmes</span></a></div>
+  </div></div>
+  <div class="slide-ui"><p class="slide-cap"></p><div class="slide-ctrl"><button class="slide-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button><div class="dots">{dots}</div></div></div>
+</section>
+<nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
+<div style="height:clamp(48px,6vw,80px)"></div>
 """ + ticker() \
         + sec(shead("Academic programmes", "From a child's first school day to a bachelor's degree, every stage of learning happens at St. Clare.") + B.levels_html()) \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Proud moments, on video</h2></div><p class="lede">The Professional Mace, the Virtual Lab and the commencement of the Stars of 2024, from the St. Clare College channel.</p></div>
