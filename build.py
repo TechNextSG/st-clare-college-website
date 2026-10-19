@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "10"
+V = "11"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -94,25 +94,25 @@ def sec(inner, cls="", id_=None):
     return f'<section class="sec {cls}"{i}><div class="wrap">{inner}</div></section>\n'
 
 def shead(title, lede="", solo=False):
-    return f'<div class="sec-head{" solo" if solo or not lede else ""} rv"><div><span class="rule" aria-hidden="true"></span><h2>{title}</h2></div>{f"<p class=\"lede\">{lede}</p>" if lede else ""}</div>'
+    return f'<div class="sec-head{" solo" if solo or not lede else ""} rv"><div><h2>{title}</h2></div>{f"<p class=\"lede\">{lede}</p>" if lede else ""}</div>'
 
 def ph(crumb, title, lede, photo=None, alt="", extra=""):
     pic = f'<div class="ph-img">{img(photo, alt, 1600, 900, lazy=False, sizes="(max-width: 900px) 0px, 40vw")}</div>' if photo else "<div></div>"
     return f"""<section class="ph on-navy">
   <img class="seal-watermark" src="img/seal.svg" alt="" width="420" height="420">
   <div class="wrap">
-    <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><h1>{title}</h1><p class="lede">{lede}</p>{extra}</div>
+    <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><span class="rule" aria-hidden="true"></span><h1>{title}</h1><p class="lede">{lede}</p>{extra}</div>
     {pic}
   </div>
 </section>
 """
 
 def cta(title="Begin your journey at St. Clare", line="Basic Education, Senior High School and College, on campus or fully online."):
-    return sec(f"""<div class="cta on-navy rv"><span class="rule" aria-hidden="true"></span><h2>{title}</h2><p class="lede">{line}</p>
+    return sec(f"""<div class="cta on-navy rv"><h2>{title}</h2><p class="lede">{line}</p>
   <div class="actions"><a class="btn gold" href="admissions.html">How to enroll {ARROW}</a><a class="btn line" href="contact.html">Contact admissions</a></div></div>""", "navy")
 
 def steps_html():
-    items = "".join(f'<li class="rv" style="--d:{i}"><span class="where">{w}</span><h3>{h}</h3><ul>{"".join(f"<li>{x}</li>" for x in its)}</ul></li>' for i, (h, w, its) in enumerate(STEPS))
+    items = "".join(f'<li class="rv" style="--d:{i}"><h3>{h}</h3><p class="where">Where: {w}</p><ul>{"".join(f"<li>{x}</li>" for x in its)}</ul></li>' for i, (h, w, its) in enumerate(STEPS))
     return f'<ol class="steps">{items}</ol><p class="next rv"><b>What happens next:</b> your Program Head posts your section and schedule on the website and emails them to you. Call {PHONE} to confirm this school year\'s enrollment dates and fees.</p>'
 
 def checklist(items): return '<ul class="checklist">' + "".join(f"<li>{esc(x)}</li>" for x in items) + "</ul>"
@@ -135,15 +135,15 @@ FACTS = """<dl class="facts">
 </dl>"""
 
 VM = """<div class="grid2">
-  <div class="panel rv"><span class="rule" aria-hidden="true"></span><h3>Vision</h3><p>To become the leading institution for professional development and the first and foremost provider of quality, affordable and sustainable development education.</p></div>
-  <div class="panel rv" style="--d:1"><span class="rule" aria-hidden="true"></span><h3>Mission</h3><p>To provide quality and excellent global education for the total development of a responsible, innovative, skillful and professional global workforce whose values and dignity are beyond par.</p></div>
+  <div class="panel rv"><h3>Vision</h3><p>To become the leading institution for professional development and the first and foremost provider of quality, affordable and sustainable development education.</p></div>
+  <div class="panel rv" style="--d:1"><h3>Mission</h3><p>To provide quality and excellent global education for the total development of a responsible, innovative, skillful and professional global workforce whose values and dignity are beyond par.</p></div>
 </div>"""
 
 def news_cards(items):
     out = []
     for i, (date, cat, h, p, im, gen, link) in enumerate(items):
-        th = img(im, "", 1230, 640) if im else f'<span class="mono">{esc(("Mace" if gen == "mace" else gen))}</span>'
-        out.append(f'<a class="post rv" style="--d:{i % 3}" href="{link}" rel="noopener"><div class="thumb">{th}</div><span class="meta">{cat} &middot; {date}</span><h3>{h}</h3><p>{p}</p></a>')
+        th = f'<div class="thumb">{img(im, "", 1230, 640)}</div>' if im else ""
+        out.append(f'<a class="post rv{"" if im else " text"}" style="--d:{i % 3}" href="{link}" rel="noopener">{th}<h3>{h}</h3><p>{p}</p><span class="date">{date} &middot; {cat}</span></a>')
     return f'<div class="news">{"".join(out)}</div>'
 
 # ---------------------------------------------------------------- pages
@@ -151,10 +151,10 @@ def build_home():
     quick = [("academics.html", "book", "Programmes", "College, SHS, Basic Ed"), ("admissions.html#steps", "steps", "How to enroll", "Three steps on campus"),
              ("admissions.html#requirements", "list", "Requirements", "What to bring"), ("portals.html", "key", "Student portals", "LMS, IMS, PMS and more")]
     q = "".join(f'<li><a href="{h}">{icon(i)}<span><b>{t}</b><small>{s}</small></span></a></li>' for h, i, t, s in quick)
-    body = f"""<section class="hero">
+    body = f"""<section class="hero on-navy">
   <div class="hero-img">{img("campus-building.jpg", "", 1600, 900, lazy=False, sizes="100vw")}</div>
   <div class="wrap"><div class="hero-card">
-    <h1>The School of Life Skills</h1>
+    <span class="rule" aria-hidden="true"></span><h1>The School of Life Skills</h1>
     <p class="lede">St. Clare College of Caloocan educates learners from Nursery to College, on one campus in Caloocan City and online through St. Clare Online.</p>
     <div class="actions"><a class="btn" href="admissions.html">How to enroll {ARROW}</a><a class="btn line" href="academics.html">Explore programmes</a></div>
   </div></div>
@@ -162,7 +162,7 @@ def build_home():
 <nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
 """ + sec(shead("Academic programmes", "From a child's first school day to a bachelor's degree, every stage of learning happens at St. Clare.") + levels_html()) \
         + sec(f"""<div class="split">
-  <div class="rv"><span class="rule" aria-hidden="true"></span><h2>A college built for professional life</h2>
+  <div class="rv"><h2>A college built for professional life</h2>
     <p class="lede mt">St. Clare aims to be the leading institution for professional development, with lessons on e-boards, laboratories for hands-on practice and a Virtual Lab for mixed reality.</p>
     {FACTS}
     <p class="mt-l"><a class="more" href="about.html">About St. Clare</a></p></div>
@@ -170,7 +170,7 @@ def build_home():
 </div>""", "alt") \
         + sec(shead("How to enroll", "Bring your requirements in a long brown envelope and complete three steps on campus.") + steps_html() + '<div class="actions mt-l rv"><a class="btn" href="admissions.html#requirements">See the requirements</a><a class="btn line" href="admissions.html">Admissions</a></div>') \
         + sec(f"""<div class="split rev">
-  <div class="rv"><span class="rule" aria-hidden="true"></span><h2>Learning that continues online</h2>
+  <div class="rv"><h2>Learning that continues online</h2>
     <p class="lede mt">St. Clare Online connects learning, the e-Library, enrollment and broadcasting in one platform, so students can study fully online or blended.</p>
     <ul class="checklist" style="columns:1;margin-top:18px"><li>LMS for schedules, materials and progress</li><li>e-Library powered by ProQuest</li><li>Virtual flag ceremony every Monday, 7:00 AM</li></ul>
     <p class="mt"><a class="more" href="portals.html">St. Clare Online portals</a></p></div>
@@ -195,10 +195,10 @@ def build_about():
     fac = ["E-boards in all 95 classrooms", "Air-conditioned classrooms and restrooms", "Virtual Lab with Acer Mixed Reality", "Computer laboratories", "Library and Learning Resource Center, 3rd floor", "St. Clare Virtual Studio"]
     body = ph("About", "Transforming education, building our future", "St. Clare College of Caloocan is the School of Life Skills and a leading institution for professional development, serving Caloocan since 1985.", "campus-building.jpg", "St. Clare College building on Zabarte Road") \
         + sec(shead("Vision and mission", "Quality, affordable and sustainable education for the total development of every Clarean.") + VM) \
-        + sec(f"""<div class="split"><div class="rv"><span class="rule" aria-hidden="true"></span><h2>Our campus</h2><ul class="checklist" style="columns:1;margin-top:18px">{"".join(f"<li>{x}</li>" for x in fac)}</ul></div>
+        + sec(f"""<div class="split"><div class="rv"><h2>Our campus</h2><ul class="checklist" style="columns:1;margin-top:18px">{"".join(f"<li>{x}</li>" for x in fac)}</ul></div>
   <figure class="photo rv" style="--d:1">{img("virtual-lab-predator.jpg", "The St. Clare Virtual Lab", 1600, 1066)}<figcaption>Virtual Lab, opened 2021</figcaption></figure></div>""", "alt") \
-        + sec(f'<div class="split" style="align-items:start"><div class="rv"><span class="rule" aria-hidden="true"></span><h2>Milestones</h2><p class="lede mt">Four decades of firsts for Caloocan.</p></div><ol class="timeline">{tlh}</ol></div>') \
-        + sec(f"""<div class="split"><div class="rv"><span class="rule" aria-hidden="true"></span><h2>No one gets left behind</h2></div>
+        + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>Milestones</h2><p class="lede mt">Four decades of firsts for Caloocan.</p></div><ol class="timeline">{tlh}</ol></div>') \
+        + sec(f"""<div class="split"><div class="rv"><h2>No one gets left behind</h2></div>
   <div class="rv"><p class="lede">When colleges around the world moved to online and open distance learning, St. Clare's own platform made sure its students could continue and finish their education.</p><a class="more" href="portals.html">St. Clare Online portals</a></div></div>""", "alt") \
         + cta("Visit the campus", "Zabarte Road, Caloocan City. Office hours 9:00 AM to 5:00 PM.")
     page("about.html", "About St. Clare College | Vision, Mission & History",
@@ -239,13 +239,13 @@ def build_admissions():
         + sec(shead("Enrollment procedure", "Proceed in order; each step happens at a specific place on campus.") + steps_html(), "alt", "steps") \
         + sec(shead("Admission requirements", "Select your level. All documents are considered property of the school once submitted for admission.") + f'<div class="tabs" role="tablist" aria-label="Requirement type">{"".join(tabs)}</div>{"".join(panels)}<p class="notebox">Place photocopies of all documents in a long brown envelope.</p>', "", "requirements") \
         + sec(shead("Learning modality", "Personalized learning pathways: choose the modality that fits your life.") + """<div class="grid2">
-  <div class="panel rv"><span class="rule" aria-hidden="true"></span><h3>Full online</h3><p>Learn from anywhere through St. Clare Online: LMS classes, the e-Library and virtual broadcasts.</p></div>
-  <div class="panel rv" style="--d:1"><span class="rule" aria-hidden="true"></span><h3>Blended</h3><p>Combine online learning with on-campus days in air-conditioned classrooms with e-boards, laboratories and the Virtual Lab.</p></div></div>""", "alt", "modality") \
+  <div class="panel rv"><h3>Full online</h3><p>Learn from anywhere through St. Clare Online: LMS classes, the e-Library and virtual broadcasts.</p></div>
+  <div class="panel rv" style="--d:1"><h3>Blended</h3><p>Combine online learning with on-campus days in air-conditioned classrooms with e-boards, laboratories and the Virtual Lab.</p></div></div>""", "alt", "modality") \
         + sec(shead("Scholarships and financial aid", "“An investment in knowledge pays the best interest.” Benjamin Franklin") + f"""<div class="grid3">
   <div class="panel rv"><span class="dated">SY 2024-2025</span><h3>President's Scholarship</h3><p>Offered to the St. Clare SHS Class of 2024 with zero down payment. Ask admissions about this year's scholarships.</p></div>
   <div class="panel rv" style="--d:1"><h3>UniFAST-TES</h3><p>Tertiary Education Subsidy grantees verify their status and disbursement schedule on the PMS.</p><p class="mt"><a class="more" href="{SRC}/pms" rel="noopener">Go to PMS</a></p></div>
   <div class="panel rv" style="--d:2"><h3>Certificate of indigency</h3><p>Optional. Submit it with your requirements to be considered for scholarship.</p></div></div>""", "", "scholarships") \
-        + sec(f'<div class="split" style="align-items:start"><div class="rv"><span class="rule" aria-hidden="true"></span><h2>Forms</h2><p class="lede mt" style="margin-bottom:22px">Institutional forms, guidelines and memoranda on St. Clare Online.</p><ul class="files">{forms}</ul></div><div class="rv" style="--d:1"><span class="rule" aria-hidden="true"></span><h2>Frequently asked questions</h2><div class="faq mt-l">{faqs}</div></div></div>', "alt") \
+        + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>Forms</h2><p class="lede mt" style="margin-bottom:22px">Institutional forms, guidelines and memoranda on St. Clare Online.</p><ul class="files">{forms}</ul></div><div class="rv" style="--d:1"><h2>Frequently asked questions</h2><div class="faq mt-l">{faqs}</div></div></div>', "alt") \
         + cta("Ready to enroll?", "Take the first step towards a brighter tomorrow.")
     page("admissions.html", "Admissions | Enroll at St. Clare College",
          "How to enroll at St. Clare College: three steps on campus, requirements for college freshmen, transferees, Basic Education and SHS, scholarships, forms and FAQ.", body)
@@ -263,9 +263,9 @@ def build_campus():
     hb = "".join(f'<li><a href="{SRC}/cms" rel="noopener"><span class="ext">PDF</span><span><b>{h}</b><small>Handbooks and manuals</small></span><span class="arr" aria-hidden="true">&darr;</span></a></li>' for h in HANDBOOKS)
     body = ph("Campus life", "Life at St. Clare", "E-boards in every classroom, a Virtual Lab, our own broadcast channels and a community that keeps learning online.", "virtual-lab-predator.jpg", "The St. Clare Virtual Lab") \
         + sec(shead("A week on campus", "From the Monday flag ceremony to the Virtual Studio.") + f'<div class="grid3">{dh}</div>', "", "virtual-lab") \
-        + sec(f'<div class="split"><figure class="photo rv">{img("campus-building.jpg", "St. Clare College campus building", 1600, 900)}<figcaption>The campus on Zabarte Road</figcaption></figure><div class="rv" style="--d:1"><span class="rule" aria-hidden="true"></span><h2>Facilities</h2><ul class="checklist" style="columns:1;margin-top:18px"><li>E-boards in all 95 classrooms</li><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories for programming and networking</li><li>Library and enlistment area on the 3rd floor</li><li>St. Clare Virtual Studio</li></ul></div></div>', "alt") \
+        + sec(f'<div class="split"><figure class="photo rv">{img("campus-building.jpg", "St. Clare College campus building", 1600, 900)}<figcaption>The campus on Zabarte Road</figcaption></figure><div class="rv" style="--d:1"><h2>Facilities</h2><ul class="checklist" style="columns:1;margin-top:18px"><li>E-boards in all 95 classrooms</li><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories for programming and networking</li><li>Library and enlistment area on the 3rd floor</li><li>St. Clare Virtual Studio</li></ul></div></div>', "alt") \
         + sec(shead("Calendar", f'Key dates for students, parents and faculty. <a href="{SRC}/calendar" rel="noopener">Full calendar</a>') + f'<ul class="events">{ev}</ul>') \
-        + sec(f'<div class="split" style="align-items:start"><div class="rv"><span class="rule" aria-hidden="true"></span><h2>Digital citizenship</h2><p class="lede mt">Online learning comes with responsibilities. These policies guide life on St. Clare Online.</p></div><ul class="files">{hb}</ul></div>', "alt", "digital-citizenship") \
+        + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>Digital citizenship</h2><p class="lede mt">Online learning comes with responsibilities. These policies guide life on St. Clare Online.</p></div><ul class="files">{hb}</ul></div>', "alt", "digital-citizenship") \
         + cta("See the campus", "Visit Zabarte Road, Caloocan City, 9:00 AM to 5:00 PM.")
     page("campus-life.html", "Campus Life | St. Clare College",
          "Campus life at St. Clare College: the Virtual Lab, e-board classrooms, SCO Online channels, facilities, calendar and digital citizenship.", body)
@@ -297,7 +297,7 @@ def build_news():
 def build_contact():
     body = ph("Contact", "Contact the college", "Questions about programmes, requirements, dates or fees? The admissions office is open 9:00 AM to 5:00 PM.") \
         + sec(f"""<div class="split" style="align-items:start">
-  <div class="info rv"><span class="rule" aria-hidden="true"></span><h2>Visit, call or write</h2>
+  <div class="info rv"><h2>Visit, call or write</h2>
     <dl class="mt-l"><div><dt>Campus</dt><dd>{ADDRESS}</dd></div><div><dt>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt>Messenger</dt><dd><a href="https://m.me/stclarecollege" rel="noopener">St. Clare College on Facebook</a></dd></div><div><dt>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div></dl>
     <div class="socials"><a href="{FB}" rel="noopener" aria-label="Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="YouTube">{YT_SVG}</a></div></div>
   <form class="form rv" style="--d:1" data-mailto="{EMAIL}">

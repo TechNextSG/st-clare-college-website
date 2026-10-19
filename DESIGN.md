@@ -1,310 +1,326 @@
 ---
 name: St. Clare College of Caloocan
-description: Paper Campus - layered construction paper, scissor-cut edges, paper grain and soft lift shadows; a pop-up diorama of the Caloocan campus.
+description: Collegiate - a corporate college site in navy and white with a gold hairline accent, real campus photography and quiet motion.
 colors:
-  scissor-red: "#d7141a"
-  scissor-red-deep: "#a50f14"
-  sunflower: "#ffd400"
-  sunflower-soft: "#ffe880"
-  seal-royal: "#0b2a8f"
-  sky-sheet: "#1f4fc4"
-  leaf: "#3d9a3a"
-  leaf-deep: "#2b7a2e"
-  leaf-soft: "#7cc46a"
-  kraft: "#b98b55"
-  kraft-deep: "#8e6638"
-  kraft-pale: "#e8d3b0"
-  wood: "#8a5232"
-  ink: "#141414"
-  white-sheet: "#ffffff"
-  chalk-table: "#e4ecf6"
-  muted-ink: "#3f4250"
-  note-yellow: "#fff3a6"
-  note-pink: "#ffd9d3"
-  note-blue: "#d6e3ff"
-  dusk-navy: "#1c2340"
+  navy: "#0b2265"
+  navy-2: "#13308a"
+  navy-3: "#061642"
+  gold: "#e2b417"
+  gold-hover: "#f0c62a"
+  gold-soft: "#fbf3d5"
+  gold-line: "#efdfa0"
+  gold-ink: "#7a5d00"
+  ink: "#0f172a"
+  text: "#1f2937"
+  muted: "#566074"
+  line: "#e2e6ee"
+  bg: "#ffffff"
+  bg-2: "#f4f6fa"
+  on-navy: "#e8ecf8"
+  on-navy-muted: "#b9c3e3"
 typography:
   display:
-    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
-    fontSize: "clamp(3rem, 8vw, 6.6rem)"
+    fontFamily: "Plus Jakarta Sans, Jakarta Fallback, system-ui, sans-serif"
+    fontSize: "clamp(2.3rem, 4.8vw, 3.9rem)"
     fontWeight: 800
-    lineHeight: 0.92
+    lineHeight: 1.06
     letterSpacing: "-0.02em"
-    fontVariation: "'wdth' 82"
   headline:
-    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
-    fontSize: "clamp(2.4rem, 5.6vw, 4.6rem)"
+    fontFamily: "Plus Jakarta Sans, Jakarta Fallback, system-ui, sans-serif"
+    fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
     fontWeight: 800
-    lineHeight: 0.92
+    lineHeight: 1.12
     letterSpacing: "-0.02em"
-    fontVariation: "'wdth' 82"
   title:
-    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
-    fontSize: "clamp(1.4rem, 2.1vw, 1.9rem)"
-    fontWeight: 800
-    lineHeight: 1
-    letterSpacing: "-0.02em"
-    fontVariation: "'wdth' 82"
-  numeral:
-    fontFamily: "Bricolage, Bricolage Fallback, system-ui, sans-serif"
-    fontSize: "clamp(3rem, 6vw, 5rem)"
-    fontWeight: 800
-    lineHeight: 0.8
-    fontVariation: "'wdth' 78"
-  lede:
-    fontFamily: "Figtree, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "clamp(1.08rem, 1.45vw, 1.28rem)"
-    fontWeight: 400
-    lineHeight: 1.55
-  body:
-    fontFamily: "Figtree, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "17px"
-    fontWeight: 400
-    lineHeight: 1.6
-  label:
-    fontFamily: "Figtree, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "0.8rem"
-    fontWeight: 800
-    letterSpacing: "0.06em"
-  hand:
-    fontFamily: "Kalam, Comic Sans MS, cursive"
-    fontSize: "1.1rem"
+    fontFamily: "Plus Jakarta Sans, Jakarta Fallback, system-ui, sans-serif"
+    fontSize: "clamp(1.12rem, 1.5vw, 1.3rem)"
     fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "-0.02em"
+  numeral:
+    fontFamily: "Plus Jakarta Sans, Jakarta Fallback, system-ui, sans-serif"
+    fontSize: "1.7rem"
+    fontWeight: 800
     lineHeight: 1.1
+  lede:
+    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "clamp(1.06rem, 1.3vw, 1.2rem)"
+    fontWeight: 400
+    lineHeight: 1.65
+  body:
+    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "1.0625rem"
+    fontWeight: 400
+    lineHeight: 1.65
+  ui:
+    fontFamily: "Plus Jakarta Sans, Jakarta Fallback, system-ui, sans-serif"
+    fontSize: "0.98rem"
+    fontWeight: 700
+    lineHeight: 1.2
+  label:
+    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "0.78rem"
+    fontWeight: 700
+    letterSpacing: "0.06em"
 rounded:
-  cut: "3px"
-  tab-sheet: "8px"
-  tile: "10px"
-  folder-tab: "12px 12px 0 0"
+  hairline: "3px"
+  sm: "6px"
+  md: "8px"
+  lg: "10px"
+  xl: "12px"
+  2xl: "16px"
   pill: "999px"
 spacing:
-  gutter: "clamp(16px, 4vw, 44px)"
-  wrap: "1260px"
-  band: "clamp(80px, 10vw, 140px)"
-  sheet: "clamp(24px, 4vw, 50px)"
-  grid-gap: "clamp(18px, 3vw, 40px)"
-  section-gap: "clamp(30px, 6vw, 90px)"
+  xs: "8px"
+  sm: "12px"
+  md: "16px"
+  lg: "26px"
+  xl: "40px"
+  gutter: "clamp(16px, 4vw, 40px)"
+  section: "clamp(64px, 8vw, 112px)"
+  wrap: "1200px"
 components:
   button-primary:
-    backgroundColor: "{colors.sunflower}"
+    backgroundColor: "{colors.navy}"
+    textColor: "{colors.bg}"
+    typography: "{typography.ui}"
+    rounded: "{rounded.md}"
+    padding: "0 22px"
+    height: "48px"
+  button-primary-hover:
+    backgroundColor: "{colors.navy-2}"
+    textColor: "{colors.bg}"
+  button-gold:
+    backgroundColor: "{colors.gold}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.tab-sheet}"
-    padding: "0 24px"
-    height: "52px"
-  button-red:
-    backgroundColor: "{colors.scissor-red}"
-    textColor: "{colors.white-sheet}"
-    rounded: "{rounded.tab-sheet}"
-    padding: "0 24px"
-    height: "52px"
-  button-ink:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.sunflower}"
-    rounded: "{rounded.tab-sheet}"
-    padding: "0 24px"
-    height: "52px"
-  button-white:
-    backgroundColor: "{colors.white-sheet}"
+    typography: "{typography.ui}"
+    rounded: "{rounded.md}"
+    padding: "0 22px"
+    height: "48px"
+  button-gold-hover:
+    backgroundColor: "{colors.gold-hover}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.tab-sheet}"
-    padding: "0 24px"
-    height: "52px"
-  button-small:
-    rounded: "{rounded.tab-sheet}"
-    padding: "0 16px"
-    height: "44px"
-  paper-sheet:
-    backgroundColor: "{colors.white-sheet}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.cut}"
-    padding: "{spacing.sheet}"
-  notice-note:
-    backgroundColor: "{colors.note-yellow}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.cut}"
-    padding: "30px 24px 22px"
-  folder-tab:
-    backgroundColor: "{colors.white-sheet}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.folder-tab}"
-    padding: "16px 24px 18px"
-    height: "64px"
-  folder-tab-selected:
-    backgroundColor: "{colors.scissor-red}"
-    textColor: "{colors.white-sheet}"
-  form-field:
+  button-line:
     backgroundColor: "transparent"
+    textColor: "{colors.navy}"
+    typography: "{typography.ui}"
+    rounded: "{rounded.md}"
+    padding: "0 22px"
+    height: "48px"
+  button-line-hover:
+    backgroundColor: "{colors.navy}"
+    textColor: "{colors.bg}"
+  input:
+    backgroundColor: "{colors.bg}"
     textColor: "{colors.ink}"
     typography: "{typography.body}"
-    rounded: "0"
-    padding: "6px 0"
-    height: "44px"
-  form-field-focus:
-    backgroundColor: "{colors.note-yellow}"
+    rounded: "{rounded.md}"
+    padding: "12px 14px"
+    height: "48px"
   chip:
-    backgroundColor: "{colors.white-sheet}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.bg-2}"
+    textColor: "{colors.navy}"
     rounded: "{rounded.pill}"
     padding: "5px 12px"
+  chip-dated:
+    backgroundColor: "{colors.gold-soft}"
+    textColor: "{colors.gold-ink}"
+    rounded: "{rounded.pill}"
+    padding: "3px 10px"
+  panel:
+    backgroundColor: "{colors.bg}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.2xl}"
+    padding: "26px"
+  hero-card:
+    backgroundColor: "{colors.bg}"
+    textColor: "{colors.navy}"
+    rounded: "{rounded.2xl}"
+    padding: "clamp(28px, 4vw, 48px)"
+  note-callout:
+    backgroundColor: "{colors.gold-soft}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.lg}"
+    padding: "18px 22px"
+  page-header:
+    backgroundColor: "{colors.navy}"
+    textColor: "{colors.bg}"
+    padding: "clamp(48px, 6vw, 84px) 0"
+  footer:
+    backgroundColor: "{colors.navy-3}"
+    textColor: "{colors.on-navy-muted}"
+    padding: "64px 0 44px"
 ---
 
 # Design System: St. Clare College of Caloocan
 
 ## Overview
 
-**Creative North Star: "The Paper Campus"**
+**Creative North Star: "The Registrar's Letterhead"**
 
-The whole site is a construction-paper diorama of one Caloocan school. Every surface is a sheet of coloured paper that has been cut with scissors, laid on a pale chalk-blue table, and lifted a few millimetres off the sheet underneath it. Nothing is drawn with a stroke: shape comes from the cut edge, depth from a soft 12-16% lift shadow, and texture from a multiplied fractal-noise paper grain. The home hero is a pop-up book of the campus (sun, clouds, hills, building, trees, bunting) built from authored SVG layers that rise on load and drift at different speeds with scroll and pointer.
+Collegiate is the visual language of an established Philippine college presenting itself to families: navy and white like an official letterhead, with gold used the way a seal uses foil, as a thin line and never a field. The tone is corporate-institutional (the user's reference points are Ateneo, De La Salle and Mapua): clean, legible, calm, and specific to St. Clare through its vector seal (`img/seal.svg`) and real campus photography (the building, commencement, the Virtual Lab). Nothing is playful, illustrated or childlike.
 
-The register is bright, hand-made and school-proud, not childish. Sheets are cut from five saturated school colours (scissor red, sunflower, seal royal, sky, leaf) plus kraft and white, with pastel sticky notes for secondary content. Real campus photos are mounted as taped prints; people appear as Open Peeps cut-out stickers (CC0) with a white die-cut border. Type is a compressed, heavy Bricolage Grotesque that reads like letters cut from card, against a calm Figtree body and a Kalam hand for captions written on the paper.
+Density is generous. Sections breathe on a white / cool-grey alternation, content sits in a 1200px column, and information is organised the way a prospectus is: programme lists with code + name, numbered enrollment steps, fact grids, accordions, file lists. Hierarchy comes from Plus Jakarta Sans at heavy weights in ink or navy against Inter body text in slate, not from colour or decoration.
 
-Motion is a pop-up book grammar: layers rise from their base with a back-out overshoot, sheets slap down with a slight rotation and settle to a resting tilt, the kraft envelope opens on scroll and documents slide out, bunting drops onto its line, and the crowd bobs while in view. All content is visible without JavaScript and with reduced motion.
+Motion is quiet: content rises 18px and fades in once as it enters the viewport, the hero photograph settles from 104% to 100% over six seconds, and hovers nudge by 1-3px. Content is fully visible without JavaScript and all motion collapses under reduced-motion.
 
 **Key Characteristics:**
-- Every coloured surface is a cut sheet: fill on a pseudo-element, roughened by the `#rough` SVG displacement filter, grain-multiplied, lifted by a soft drop shadow.
-- Sections are full-bleed paper bands whose top edge is a torn, scissor-cut SVG path in the band's own colour.
-- Sheets rest at small tilts (-1.5deg to +1.2deg); hover straightens or lifts them.
-- People are Open Peeps stickers, never stock photos of models.
-- Paper objects carry the story: masking tape, kraft envelope, numbered tickets, bunting flags, folder tabs, key tags, stamp marks.
+- Navy and white carry the page; gold appears as hairlines, underlines, dots and one CTA per navy band.
+- A 48 x 3px gold rule above every section heading is the system's signature mark.
+- Real photography in rounded frames with navy-tinted overlays; the seal as a 7%-opacity watermark on navy page headers.
+- Plus Jakarta Sans 700-800 for headings and UI, Inter 400-600 for reading.
+- Flat surfaces bordered by a cool hairline; soft ink-tinted shadows only on photos, the hero card, forms and hover states.
+- Quiet reveal motion on one easing curve, cubic-bezier(.2, .8, .2, 1).
 
 ## Colors
 
-Saturated construction-paper sheets on a pale chalk table, with ink for type and pastel notes for secondary content.
+A restrained institutional palette: deep academic navy and white, a cool grey ground, and a single warm gold accent used in thin measure.
 
 ### Primary
-- **Scissor Red** (scissor-red): the school's main sheet. Ribbon ticker, red bands, mobile menu sheet, selected College tab, course codes, ticket and timeline numerals, file-type tabs, social discs, checklist ticks, nav underline strip.
-- **Scissor Red Deep** (scissor-red-deep): small red text on light paper where Scissor Red is too bright (note meta lines, required-field marks, stamp marks on notes).
+- **Academic Navy** (navy): The institution colour. Primary buttons, the closing `sec navy` CTA band, inner page headers, heading text inside the hero card, programme codes, numerals, accordion and checklist marks, the theme-color meta.
+- **Bright Navy** (navy-2): The interactive navy. Links, button and nav hover, the 3px focus outline, input focus border, small uppercase labels, quick-access icons, card hover borders.
+- **Midnight Navy** (navy-3): The deepest ground. Utility bar, footer, hero backdrop, and (as `rgba(6, 22, 66, .35 / .82 / .88)`) every photo overlay and caption strip.
 
 ### Secondary
-- **Sunflower** (sunflower): the default call-to-action sheet (Enroll buttons); accent text on dark sheets (footer headings, ink-button labels, mace citation); FAQ and programme-board plus discs; the selected SHS tab; text selection.
-- **Sunflower Soft** (sunflower-soft): hover fill for download rows; sun rays in the diorama.
-
-### Tertiary
-- **Seal Royal** (seal-royal): taken from the college seal. Vision sheet, royal bands, selected Basic Ed tab, the mobile hero copy card, document file tabs, big numerals on Basic Ed notes.
-- **Sky Sheet** (sky-sheet): the diorama sky behind the home hero and the default inner-page hero; the browser theme colour.
-- **Leaf / Leaf Deep / Leaf Soft** (leaf, leaf-deep, leaf-soft): diorama hills and trees (back hill deep, front hill leaf, foreground strip soft). Leaf Deep is the green inner-page hero.
+- **Seal Gold** (gold): The accent. Section rules, active-nav and active-tab underlines, the hero card's 4px top edge, timeline dots, news-thumb monogram bars, focus outline and link hover on navy, the skip link, and the `btn gold` CTA.
+- **Bright Gold** (gold-hover): Hover state of the gold button only.
+- **Gold Wash** (gold-soft): Text selection, the "What happens next" callout ground, dated-offer pill ground.
+- **Gold Hairline** (gold-line): Border of the gold-wash callout.
+- **Old Gold Ink** (gold-ink): Text on the dated-offer pill (legible gold on Gold Wash).
 
 ### Neutral
-- **White Sheet** (white-sheet): the default paper for cards, the deal panel, FAQ, file rows, the header bar.
-- **Chalk Table** (chalk-table): the page background, the table every sheet lies on; also the punched hole in key tags.
-- **Ink** (ink): body text, ink buttons, the footer sheet, bunting string, focus ring.
-- **Muted Ink** (muted-ink): secondary small print (`small` lines, form footnotes).
-- **Kraft / Kraft Deep** (kraft, kraft-deep): the enrollment envelope body and flap only.
-- **Kraft Pale** (kraft-pale): the light kraft band.
-- **Wood** (wood): tree trunks in the diorama.
-- **Dusk Navy** (dusk-navy): the dark inner-page hero variant.
-- **Note Yellow / Pink / Blue** (note-yellow, note-pink, note-blue): sticky-note sheets on the notice wall, envelope documents, the open programme-board row, the focused form field.
+- **Ink** (ink): Headings, labels, form values, strong text.
+- **Slate Text** (text): Body copy.
+- **Muted Slate** (muted): Ledes, sub-lines, card body, captions, meta, inactive tabs.
+- **Cool Hairline** (line): Every border and divider: header bottom, list rows, card outlines, inputs, accordion rows, the timeline spine.
+- **White** (bg): Page ground, cards, header (at 97% opacity), hero card, form.
+- **Cool Grey** (bg-2): Alternate section ground (`sec alt`), chips, nav/list hover fill, file-type badges, notebox, photo placeholder.
+- **On-Navy** (on-navy): Body text, ledes and links on navy and midnight grounds.
+- **On-Navy Muted** (on-navy-muted): Secondary text on navy: utility bar, footer copy, breadcrumbs, note lines.
+- On-navy translucent whites are fixed tints, not tokens: `rgba(255,255,255,.55)` line-button border on navy, `.08` social-button ground, `.12` footer divider.
 
 ### Named Rules
-**The Sheet Not Swatch Rule.** A colour enters the page as a cut sheet of paper (grain-multiplied, roughened, lifted), never as a flat fill or a gradient. Gradients are not used for colour anywhere.
+**The Foil Rule.** Gold is a line, a dot or a single button, never a section ground or a large fill. If gold covers more than a CTA's worth of area on a screen, it has stopped being an accent.
 
-**The Paired Text Rule.** Each sheet colour carries a fixed text colour: red, royal, sky, leaf and ink sheets take white text (ink buttons take sunflower); sunflower, white, kraft and the pastel notes take ink.
+**The Two Navies Rule.** Academic Navy states the institution; Bright Navy means "you can act here". Keep links, hovers and focus on Bright Navy so interactivity reads consistently.
+
+**The Ground Alternation Rule.** Sections alternate white and Cool Grey, with one full navy band per page (the closing CTA). Navy is otherwise reserved for the page header, the utility bar and the footer.
 
 ## Typography
 
-**Display Font:** Bricolage Grotesque, self-hosted as "Bricolage" (weights 600-800, width 75-100%), with an Arial-based metric fallback
-**Body Font:** Figtree (400-800, roman and italic), with system-ui
-**Hand Font:** Kalam 700, with Comic Sans MS and cursive
+**Display Font:** Plus Jakarta Sans (self-hosted `fonts/jakarta.woff2`, weights 500-800, with a size-adjusted Arial fallback "Jakarta Fallback")
+**Body Font:** Inter (self-hosted `fonts/inter.woff2`, weights 400-700, with system-ui)
 
-**Character:** Bricolage at weight 800 and 78-85% width reads like heavy letters cut from card and stacked tight (line-height 0.8-0.92); Figtree is the calm, friendly reading voice; Kalam is the pen on the paper, kept for captions and the envelope address.
+**Character:** TechNext's pairing: a confident geometric grotesk at 700-800 for headings and every interactive label, over a neutral, highly legible Inter for reading. Tight negative tracking on headings, balanced wrapping, no italics, no serif.
 
 ### Hierarchy
-- **Display** (800, clamp(3rem, 8vw, 6.6rem), 0.92, width 82%): page h1 in the hero. The closer h2 goes larger (clamp(3.6rem, 12vw, 10rem), 0.86).
-- **Headline** (800, clamp(2.4rem, 5.6vw, 4.6rem), 0.92): band h2, balanced wrap.
-- **Title** (800, clamp(1.4rem, 2.1vw, 1.9rem), 1): card and sheet h3; a larger step at clamp(2rem, 4vw, 3.2rem).
-- **Numeral** (800, width 78-80%, line-height 0.8-0.95): course codes, years, ticket numbers, key-tag letters, equation tiles; usually Scissor Red or Seal Royal on white.
-- **Lede** (400, 600 over the diorama; clamp(1.08rem, 1.45vw, 1.28rem), 1.55, max 56ch): the paragraph under a headline.
-- **Body** (400, 17px, 1.6): reading text; long answers cap at 62-68ch.
-- **Label** (800, 0.8rem, 0.06em, uppercase): form field labels and event "where" lines.
-- **Hand** (Kalam 700, about 1.1rem, 1.1): photo-print captions, envelope address.
+- **Display** (800, clamp(2.3rem, 4.8vw, 3.9rem), 1.06): Page H1 only: hero card and inner page headers.
+- **Headline** (800, clamp(1.75rem, 3vw, 2.5rem), 1.12): Section H2s, always preceded by the gold rule. CTA headings cap at 22ch.
+- **Title** (700, clamp(1.12rem, 1.5vw, 1.3rem), 1.3): Card, step, post, portal and timeline titles. Programme column titles step up to 1.35rem.
+- **Numeral** (800, 1.7rem, 1.1, navy): Fact figures; the same face at 1.1-1.5rem for programme codes, years, event dates, track tags and portal acronyms.
+- **Lede** (400, clamp(1.06rem, 1.3vw, 1.2rem), muted, max 60ch): The one-sentence deck under H1/H2.
+- **Body** (400, 1.0625rem / 17px, 1.65): Reading text; FAQ answers and accordion bodies cap at 68ch, timeline text at 62ch. Card copy steps down to .92-.95rem.
+- **UI** (Plus Jakarta Sans 600-700, .9-1.02rem): Buttons (700, .98rem), nav links (600, .95rem), tabs, FAQ summaries, "more" links.
+- **Label** (Inter 700, .78-.8rem, letter-spacing .05-.06em, uppercase, Bright Navy or muted): Metadata only: post category and date, event weekday, contact field names, step location.
 
 ### Named Rules
-**The Cut Letters Rule.** Every heading, numeral, button label, tab label and brand mark uses Bricolage at 800 with a narrowed width (78-85%). Figtree never sets a heading.
+**The Heavy Head Rule.** Headings are always Plus Jakarta Sans at 700 or 800 in ink, navy or white; hierarchy comes from size and weight, never from colour washes or decoration.
 
-**The Pen Only Writes Rule.** Kalam appears only where a person would have written on the paper: captions under taped prints and the envelope front. Never a heading, never a button.
+**The Metadata-Only Caps Rule.** Uppercase tracked labels describe a fact about the item (date, category, place); they never introduce or tease a heading.
 
 ## Layout
 
-A single centred column, `min(1260px, 100% - 2 * gutter)` with a fluid gutter of clamp(16px, 4vw, 44px). Pages are stacks of full-bleed paper bands with generous vertical padding (clamp(80px, 10vw, 140px)); each band's top edge overlaps the previous band by 44px through its cut-edge SVG.
+Single centred column: `width: min(1200px, 100% - 2 * gutter)` with a fluid gutter of clamp(16px, 4vw, 40px). Sections pad clamp(64px, 8vw, 112px) top and bottom. A section opens with a section head: a two-column grid (heading left, lede right, bottom-aligned) that collapses to one column below 860px, or a single 760px column (`solo`).
 
-Inside bands, layout is asymmetric two-column grids: band heads at 1.25fr / 0.95fr (headline left, lede right, bottom-aligned), splits at 1fr / 1fr, the enrollment route at 0.9fr / 1.1fr with a sticky envelope, the collage at 1.05fr / 0.95fr with absolutely placed overlapping prints. Card groups use auto-fill or auto-fit grids (notice wall minmax(280px, 1fr), strands minmax(220px, 1fr)), five key tags across, eight bunting flags across. Notice walls are always CSS grid, never CSS columns, so tape never splits.
+Content grids are explicit and few: three-up (programme levels, steps, news, panels), two-up (split photo + text, facts, forms), four-up (quick-access bar). They step to two columns at 900px and one column at 600-640px. Gaps are fluid, clamp(16-20px, 2.4-3vw, 28-36px). The header is sticky at 80px under a 40px utility bar; below 1080px the nav becomes a full-screen white sheet with 1.3rem links. Touch targets are at least 44px everywhere (buttons 48px, small buttons 42px).
 
-Responsive: the desktop menu collapses at 1120px into a full-screen red sheet that opens as a circular clip from the menu button. Two-column grids stack at 860-900px; bunting goes from 8 to 4 across at 900px; key tags from 5 to 2 at 1000px and to 1 at 520px. On phones (760px and under) the hero becomes auto-height, the hero copy moves onto its own tilted royal sheet, and the crowd trims to five peeps.
+Rhythm: 8 / 12 / 16 / 26 / 40px for internal gaps and padding; 16px and 28px block-spacing utilities.
 
 ## Elevation & Depth
 
-Depth is physical layering of paper: each sheet casts a soft, low-opacity shadow onto whatever lies below it, and the scissor filter gives the edge a slightly irregular silhouette. There are no hard offset shadows, glows or glass. Shadows use CSS `filter: drop-shadow` so they follow the rough cut silhouette, not `box-shadow`.
+Flat by default and hairline-separated, with soft ink-tinted shadows (always `rgba(15, 23, 42, ...)`) reserved for photographic and floating surfaces.
 
 ### Shadow Vocabulary
-- **Lift** (`drop-shadow(0 6px 8px rgba(20,20,20,.14)) drop-shadow(0 1px 1px rgba(20,20,20,.12))`): every standard sheet, button, tab and row.
-- **Lift Large** (`drop-shadow(0 14px 16px rgba(20,20,20,.16)) drop-shadow(0 2px 2px rgba(20,20,20,.12))`): hero-scale sheets (deal panel, ribbon, congratulations banner, mobile hero card).
-- **Edge Up** (`drop-shadow(0 -5px 6px rgba(20,20,20,.12))`): torn band edges, casting upward onto the band above.
-- **Diorama Layer** (`drop-shadow(0 6px 6px rgba(10,20,60,.22))`): each hero SVG layer, tinted toward the sky.
-- **Sticker** (`drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 6px 6px rgba(0,0,0,.25))`): Open Peeps cut-outs; a white die-cut border plus lift.
+- **Soft** (`box-shadow: 0 1px 2px rgba(15,23,42,.06), 0 8px 24px -12px rgba(15,23,42,.18)`): Photos, the contact form, panels on Cool Grey sections, and card/portal hover.
+- **Lifted** (`box-shadow: 0 2px 4px rgba(15,23,42,.06), 0 24px 48px -24px rgba(15,23,42,.28)`): The hero card and page-header photo.
+- **Header scrolled** (`box-shadow: 0 6px 20px -12px rgba(15,23,42,.25)`): Appears on the sticky header after 10px of scroll.
+- **Focus glow** (`box-shadow: 0 0 0 4px rgba(19,48,138,.14)`): Input focus, with a Bright Navy border.
+- **Ground ring** (`box-shadow: 0 0 0 4-5px <section ground>`): Cuts step numbers and timeline dots out of the line they sit on.
 
 ### Named Rules
-**The Scissor Filter Rule.** Every paper silhouette goes through `url(#rough)` (feTurbulence fractalNoise, baseFrequency 0.035, 2 octaves, seed 7; feDisplacementMap scale 5), applied to the fill pseudo-element so the text on the sheet stays crisp.
-
-**The Soft Lift Rule.** Paper shadows stay at 12-25% opacity and are blurred. A sheet rests on the table; it never floats or casts a hard offset.
+**The Flat-At-Rest Rule.** Cards on white sit on a 1px Cool Hairline with no shadow; a shadow appears only for photographs, floating cards, or as a hover response (with a 2px lift).
 
 ## Shapes
 
-Shapes are cut, not drawn. Sheets have nearly square corners (3px) that the rough filter makes irregular; buttons, rows and tabs are slightly rounder (8px); equation tiles and the deal panel 10px; folder tabs round only their top corners (12px 12px 0), and the deal sheet under them squares its top-left corner to join the selected tab. Silhouettes come from clip-path where paper would be cut: bunting pennants (a V notch), the envelope flap (a triangle) and the mobile menu (a circle reveal). Band tops are wavy torn paths generated per band from a seed. Full circles are kept for small discs (pause button, plus discs, social icons, tick bullets). Sheets carry small resting rotations; masking tape strips sit across top edges at -4deg / +5deg.
+Gently rounded, never pill-shaped except for chips. The radius scale: 3px (focus outline; rule ends at 2px), 6px (nav link hover, file badges, skip link), 8px (buttons, inputs, menu button, social buttons), 10px (news thumbnails, callouts, notebox), 12px (portal acronym tiles), 16px (cards, photos, hero card, banner, form, map), 999px (chips and dated pills), and 50% circles (step numbers, timeline dots, checklist marks, accordion toggles).
+
+Borders are 1px Cool Hairline for containers and rows, 1.5px for interactive outlines (buttons, inputs, menu button, accordion toggle). Accent edges are gold or navy bars: the 48 x 3px section rule, a 4px gold top edge on the hero card, 3px navy top borders on programme columns, 2-3px gold underlines for current nav and selected tab. Photos are clipped to 16px and cropped with `object-fit: cover` at 4:3, 16:9 or 16:10. Under 700px the hero card goes square-cornered and full-bleed.
 
 ## Components
 
 ### Buttons
-Paper tickets you can lift.
-- **Shape:** gently rounded cut sheet (8px), roughened, with the Lift shadow; min-height 52px (small 44px).
-- **Primary:** Sunflower sheet, Ink label in Bricolage 800 at 85% width, 1.2rem.
-- **Variants:** Scissor Red with a white label; Ink with a Sunflower label; White with an Ink label.
-- **Hover / Active:** hover lifts 3px and tilts -1.5deg over 0.4s on the expo-out curve; active presses to 0.98 scale. Focus is the global 3px Ink ring at 3px offset (Sunflower on dark sheets).
-- **Text link:** weight 800, underlined, 2px thickness, 0.2em offset.
+Confident and plain: solid blocks in Plus Jakarta Sans 700.
+- **Shape:** gently rounded (8px), 48px tall, 22px side padding, 1.5px border; optional 18px trailing arrow icon.
+- **Primary:** Academic Navy with white text. Hover: Bright Navy, 1px lift, arrow nudges 3px right.
+- **Gold:** Seal Gold with ink text; the enrollment action on the navy CTA band. Hover: Bright Gold.
+- **Line:** transparent with navy text and navy border; hover fills navy. On navy grounds the border is 55% white and hover fills white with navy text.
+- **Small:** 42px tall, 16px padding, .9rem.
+- **More link:** Bright Navy UI text with a drawn chevron that nudges 3px on hover; gold on navy.
 
 ### Chips
-- **Style:** white pill, Ink text at 0.84rem 700, 2px inset ink ring. Used only for programme specialisations on the programme board.
+- **Style:** Cool Grey ground, navy text, .8rem 600, pill radius, 5px 12px. Used for course outcomes in the programme accordion.
+- **Dated pill:** Gold Wash ground, Old Gold Ink text, .78rem 700; marks offers tied to a past school year.
 
 ### Cards / Containers
-- **Paper sheet:** any colour sheet, 3px corner, grain + scissor filter + Lift; padding clamp(24px, 4vw, 50px) for large sheets, 26-40px for cards.
-- **Notice note:** white or pastel sheet with masking tape on top, alternating rests of -1.2deg / 0.9deg / -0.5deg; linked notes straighten and rise 6px on hover. An optional photo bleeds to the sheet edge.
-- **Taped print:** white sheet with a 12px border and a 48px bottom lip holding a Kalam caption; photo at 4:3.
-- **Key tag:** tall sheet with a punched hole (chalk circle with an inset shadow) at the top, a giant Bricolage letter, and the link pinned to the bottom; tilts alternate and straighten on hover.
-- **Ticket:** a numbered enrollment step with a huge red numeral floated left and a small Ink tag with Sunflower text pinned at the top right naming the room.
+- **Panel:** white, 1px Cool Hairline, 16px radius, 26px padding; muted body at .95rem. On Cool Grey sections the border drops and the Soft shadow takes over. As a link: hover border Bright Navy, Soft shadow, 2px lift.
+- **Step card:** panel with a 40px navy numbered disc overlapping the top edge, a Bright Navy uppercase location label, and a muted bullet list.
+- **Hero card:** white, 16px radius, Lifted shadow, 4px gold top edge, max 680px, floated over the bottom of a full-bleed campus photograph tinted 35% Midnight Navy.
+- **Photo frame:** 16px radius, Soft shadow, 4:3 crop, slow 3% zoom on hover, optional caption strip in 82% Midnight Navy.
+- **Callout ("What happens next"):** Gold Wash ground, Gold Hairline border, 10px radius. **Notebox:** Cool Grey, 10px radius, muted text.
 
 ### Inputs / Fields
-- **Style:** no box; a 2px dashed ink underline at 40% on a registration-form sheet, 17px body text, min-height 44px. Labels are uppercase 0.8rem 800 with 0.06em tracking; required marks in Scissor Red Deep.
-- **Focus:** the underline turns solid Scissor Red and the field fills Note Yellow, like a highlighted line on a paper form.
+- **Style:** white, 1.5px Cool Hairline border, 8px radius, 48px min height (textarea 130px), 12px 14px padding, 1rem Inter in ink. Labels 600 .92rem ink above; optional hint in muted.
+- **Focus:** border Bright Navy plus the 4px Focus glow; no outline.
 
 ### Navigation
-- **Desktop:** a sticky white paper bar (roughened, soft downward shadow) with the seal and wordmark on the left, Figtree 700 links, and a 4px red strip that scales in from the left on hover and for the current page.
-- **Mobile (1120px and under):** a Menu sheet-button opens a full-screen Scissor Red sheet with Bricolage links at clamp(2.2rem, 10vw, 3.6rem) and Sunflower strips; focus is trapped, the page is inert, Esc closes.
+- **Utility bar:** Midnight Navy, 40px, .85rem on-navy links that turn gold on hover.
+- **Header:** sticky white (97%), 80px, hairline bottom; seal (56px) plus the college name in Plus Jakarta Sans 800 navy and a muted sub-line.
+- **Links:** Plus Jakarta Sans 600 .95rem ink, 10px 12px padding, 6px radius; hover Bright Navy on Cool Grey; current page navy with a 2px gold underline.
+- **Mobile (under 1080px):** a labelled Menu/Close button with an animated burger opens a full-screen white sheet; focus is trapped, the rest of the page is inert, Escape closes.
+- **Tabs:** Plus Jakarta Sans 700 muted; selected is navy with a 3px gold underline on the hairline; arrow-key, Home/End and URL-hash support.
 
-### Folder-Tab Level Picker
-Three paper folder tabs (College, Senior High, Basic Ed) sit 8px low and rise to 0 when selected, taking their level colour (Red, Sunflower, Royal). The panel below is a white sheet joined to the tabs. On switching, list rows deal in from the right with a 3deg rotation and the figures pop up. Full ARIA tabs with arrow, Home and End keys and hash deep links.
+### Lists and Disclosure
+- **Programme list / accordion:** rows on Cool Hairline dividers with a navy Plus Jakarta Sans code column and the name beside it; the accordion uses a 28px circular plus/minus toggle.
+- **Checklist:** navy 20px discs with a white tick, two columns on desktop.
+- **Files:** grid rows with a Cool Grey file-type badge, title and size, and a Bright Navy arrow; hover fills Cool Grey.
+- **FAQ:** Plus Jakarta Sans 700 summaries with a navy chevron that rotates open.
+- **Timeline:** 2px hairline spine, gold dots ringed in the section ground, navy year numerals.
+- **Events:** date / description / weekday grid on hairline rows.
 
-### Enrollment Envelope
-A kraft envelope (back, front, triangular flap) that on scroll flips its flap open and slides three documents (white, yellow, blue) up and out at small angles, while the checklist beside it ticks item by item. The address is written in Kalam.
+### Quick-Access Bar (signature)
+A four-cell white strip directly under the home hero, divided by hairlines: 30px Bright Navy line icon, a Plus Jakarta Sans 700 title and a muted sub-line. Hover fills Cool Grey. Two-by-two under 900px.
 
-### Paper Diorama Hero
-An inline SVG scene of layered paper (sun with rays, clouds, back hill, campus building, trees, bunting, front hill, foreground strip) where each layer carries a `data-depth` from 0.15 to 1. Layers rise in sequence on load and drift by depth x 14% on scroll and depth x 36px with the pointer. A row of Open Peeps stickers stands along the foreground and the college seal is slapped on at the top right. Inner pages use a shorter version (sun, clouds, two hills) on a Sky, Red, Royal, Leaf Deep or Dusk Navy sheet.
+### Page Header (signature)
+Inner pages open on Academic Navy: breadcrumbs, a white display H1, an on-navy lede, a rounded photograph with the Lifted shadow on the right (hidden under 900px), and the seal as a 420px, 7%-opacity watermark bleeding off the bottom-right corner.
 
-### Bunting
-Eight pennant flags (clip-path V notch) on an ink string, alternating Sunflower, White, Royal and Red, fluttering 2.4deg on a 5s loop with staggered delay; they drop onto the line with an elastic ease.
+### Portal Row
+White row card (16px radius, hairline) with an 84px navy acronym tile (12px radius, Plus Jakarta Sans 800 white), title and description, and a Bright Navy "go" link; hover Bright Navy border and Soft shadow.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** build every coloured surface as a cut sheet: fill on `::before`, `background: var(--grain), <colour>; background-blend-mode: multiply; filter: url(#rough) var(--lift)`.
-- **Do** start each band with its torn edge in the band's own colour, overlapping the band above by 44px.
-- **Do** give sheets a small resting tilt (within 1.5deg) through `--rest` so the reveal settles there.
-- **Do** keep text crisp: the scissor filter goes on the paper layer, never on the element that holds the text.
-- **Do** use Open Peeps cut-outs with the white Sticker border for people, and real campus photos as taped prints.
-- **Do** pair sheet colours with their fixed text colours (white on Red, Royal, Sky, Leaf, Ink; Ink on Sunflower, White, Kraft, notes).
-- **Do** keep everything readable with motion off: reveal targets start hidden only under `.js`, and reduced motion stops the ribbon, flutter and transitions.
+- **Do** open every section heading with the 48 x 3px gold rule and keep H2s in Plus Jakarta Sans 800 ink.
+- **Do** keep gold to hairlines, underlines, dots and the single gold CTA on a navy band (The Foil Rule).
+- **Do** use Bright Navy for every link, hover and focus state; on navy grounds switch focus and hover to gold.
+- **Do** use real St. Clare photography and the vector seal; tint photo overlays with Midnight Navy at .35 (hero), .82 (captions) or a .88-to-.15 gradient (banner).
+- **Do** separate content with 1px Cool Hairline rows and alternate white / Cool Grey section grounds.
+- **Do** animate with the single easing cubic-bezier(.2, .8, .2, 1): .2-.3s for state changes, .7s for reveals with 80ms stagger steps; keep content visible without JavaScript and static under reduced-motion.
+- **Do** keep touch targets at 44px or more and buttons at 48px.
 
 ### Don't:
-- **Don't** draw outlines or strokes around paper sheets; edges come from the cut and the shadow. (The white die-cut border on sticker people is the one contour the world uses.)
-- **Don't** use gradients for colour, glass, glows or hard offset shadows.
-- **Don't** set a heading in Figtree or Kalam, or a caption in Bricolage.
-- **Don't** lay notice cards out with CSS columns; tape must not split across columns.
-- **Don't** rest a sheet at more than about 5deg (stickers, stamps and tape strips excepted).
+- **Don't** fill sections, cards or large areas with gold, or set gold text on white.
+- **Don't** introduce playful, illustrated, cartoon or kindergarten-like devices; this is a corporate college, per the user's direction.
+- **Don't** use any typeface other than Plus Jakarta Sans and Inter, or set headings below 700.
+- **Don't** add hard, offset or coloured shadows; shadows are soft and tinted with ink.
+- **Don't** use uppercase tracked labels as kickers above headings; they are reserved for metadata.
+- **Don't** present a dated offer without the Gold Wash dated pill and its school year.
