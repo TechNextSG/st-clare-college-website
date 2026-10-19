@@ -1,0 +1,26 @@
+[
+ {
+  "file": "hero-01-campus-building",
+  "w": 1600,
+  "h": 900,
+  "caption": "St. Clare College, Zabarte Road, Caloocan City"
+ },
+ {
+  "file": "hero-02-virtual-lab",
+  "w": 1800,
+  "h": 1200,
+  "caption": "The Virtual Lab: Predator Thronos stations"
+ },
+ {
+  "file": "hero-03-graduates-2024",
+  "w": 1230,
+  "h": 640,
+  "caption": "The Stars of 2024: 38th Commencement Exercises"
+ },
+ {
+  "file": "hero-04-library",
+  "w": 1800,
+  "h": 1200,
+  "caption": "Library and Learning Resource Center"
+ }
+]

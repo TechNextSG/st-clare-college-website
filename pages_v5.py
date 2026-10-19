@@ -1,5 +1,6 @@
 # v5 "Crimson University": a designed hero per header page + context-specific sections.
 # Student-service pages (LMS, CMS, IMS, PMS, VMS, downloads, calendar, portals) come from pages_full with the crimson banner.
+import os, json
 import build as B
 import pages_full as P
 from build import esc, sec, shead, cta, steps_html, checklist, page, lines, ARROW, PHONE, PHONE_TEL, EMAIL, ADDRESS, FB, YT, FB_SVG, YT_SVG
@@ -46,15 +47,32 @@ ICO = {
 }
 def ico(n): return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICO[n]}</svg>'
 
+
+# ---------- home hero slideshow: every img/hero/hero-NN-*.webp, in file-name order ----------
+HERO_DIR = os.path.join(B.OUT, "img", "hero")
+
+def hero_slides():
+    """Captions come from img/hero/hero.json; a photo without an entry gets one from its file name."""
+    meta = {}
+    jp = os.path.join(HERO_DIR, "hero.json")
+    if os.path.exists(jp):
+        meta = {m["file"]: m for m in json.load(open(jp, encoding="utf-8"))}
+    files = sorted(f[:-5] for f in os.listdir(HERO_DIR) if f.startswith("hero-") and f.endswith(".webp") and not f.endswith("-800.webp"))
+    return [(f, meta.get(f, {}).get("caption") or f.split("-", 2)[-1].replace("-", " ").capitalize()) for f in files]
+
+def hero_img(name, lazy=True):
+    from PIL import Image
+    w, h = Image.open(os.path.join(HERO_DIR, name + ".webp")).size
+    small = os.path.exists(os.path.join(HERO_DIR, name + "-800.webp"))
+    ss = f' srcset="img/hero/{name}-800.webp 800w, img/hero/{name}.webp {w}w" sizes="100vw"' if small else ""
+    return f'<img src="img/hero/{name}.webp"{ss} alt="" width="{w}" height="{h}"{" loading=\"lazy\"" if lazy else " fetchpriority=\"high\""}>'
+
 # ======================================================================= HOME
 def build_home():
-    slides = [("campus-building.jpg", "St. Clare College, Zabarte Road, Caloocan City"),
-              ("fac-virtual-lab-thronos", "The Virtual Lab: Predator Thronos stations"),
-              ("graduates.jpg", "The Stars of 2024: 38th Commencement Exercises"),
-              ("fac-library", "Library and Learning Resource Center")]
+    slides = hero_slides()
     sl = []
     for i, (s, c) in enumerate(slides):
-        im = B.img(s, "", 1600, 900, lazy=i > 0, sizes="100vw") if s.endswith(".jpg") else simg(s, "", "100vw", lazy=i > 0)
+        im = hero_img(s, lazy=i > 0)
         if i > 0: im = im.replace(' src="', ' data-src="').replace(' srcset="', ' data-srcset="').replace("<img ", '<img fetchpriority="low" ')
         sl.append(f'<div class="slide{" on" if i == 0 else ""}" data-cap="{esc(c)}">{im}</div>')
     dots = "".join(f'<button type="button" aria-label="Show photo {i + 1}: {esc(c)}"><i></i></button>' for i, (_, c) in enumerate(slides))
