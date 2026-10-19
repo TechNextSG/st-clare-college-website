@@ -1061,3 +1061,19 @@ html:not(.js) .tl-x li { opacity: 1; }
   .h-acad .stair { flex-direction: column; }
 }
 @media (max-width: 480px) { .h-acad .stp { grid-template-columns: 96px minmax(0, 1fr); } .h-acad .stp-body { padding-right: 48px; } }
+
+/* ======== contact form: aligned fields, custom selects, calm focus ======== */
+.form .fld { gap: 8px; margin-bottom: 18px; }
+.form .fld label { font-size: .88rem; }
+.form .fld input, .form .fld select { height: 52px; min-height: 52px; padding: 0 16px; line-height: 52px; font-size: .95rem; border-radius: 12px; background-color: var(--bg-2); border: 1.5px solid transparent; color: var(--ink); transition: border-color .25s, background-color .25s, box-shadow .25s; }
+.form .fld select { -webkit-appearance: none; appearance: none; padding-right: 44px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a6192e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; background-size: 18px; }
+.form .fld textarea { min-height: 140px; padding: 14px 16px; font-size: .95rem; line-height: 1.55; border-radius: 12px; background: var(--bg-2); border: 1.5px solid transparent; transition: border-color .25s, background-color .25s, box-shadow .25s; }
+.form .fld input:hover, .form .fld select:hover, .form .fld textarea:hover { border-color: var(--line); }
+.form .fld input:focus, .form .fld select:focus, .form .fld textarea:focus { background-color: #fff; border-color: var(--c600); box-shadow: 0 0 0 4px rgba(166, 25, 46, .1); }
+.form .fld input::placeholder, .form .fld textarea::placeholder { color: #a39a9c; }
+.form ::selection { background: rgba(166, 25, 46, .14); color: inherit; }
+.form .fld-row { gap: 18px; align-items: start; }
+.form .btn { margin-top: 4px; }
+.form .hint { font-size: .84rem; }

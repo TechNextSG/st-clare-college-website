@@ -303,12 +303,12 @@ def build_contact():
     <p class="follow">Follow St. Clare College</p>{B.socials()}</div>
   <form class="form rv" data-mailto="{EMAIL}">
     <h2 style="font-size:1.4rem;margin-bottom:18px">Send an inquiry</h2>
-    <div class="fld-row"><div class="fld"><label for="f-name">Full name <em>(required)</em></label><input id="f-name" name="Name" autocomplete="name" required></div>
-    <div class="fld"><label for="f-email">Email <em>(required)</em></label><input id="f-email" name="Email" type="email" autocomplete="email" required></div></div>
+    <div class="fld-row"><div class="fld"><label for="f-name">Full name <em>(required)</em></label><input id="f-name" name="Name" autocomplete="name" placeholder="Juan Dela Cruz" required></div>
+    <div class="fld"><label for="f-email">Email <em>(required)</em></label><input id="f-email" name="Email" type="email" autocomplete="email" placeholder="you@example.com" required></div></div>
     <div class="fld-row"><div class="fld"><label for="f-level">Interested in</label><select id="f-level" name="Level"><option>Basic Education</option><option>Senior High School</option><option selected>College</option><option>Other</option></select></div>
     <div class="fld"><label for="f-src">Where did you hear about us?</label><select id="f-src" name="Source"><option>Facebook</option><option>YouTube</option><option>Friend or family</option><option>Search</option><option>Other</option></select></div></div>
     <div class="fld"><label for="f-sub">Subject</label><input id="f-sub" name="subject" value="Enrollment inquiry"></div>
-    <div class="fld"><label for="f-msg">Message <em>(required)</em></label><textarea id="f-msg" name="Message" required></textarea></div>
+    <div class="fld"><label for="f-msg">Message <em>(required)</em></label><textarea id="f-msg" name="Message" placeholder="Your question about programmes, requirements, dates or fees" required></textarea></div>
     <button class="btn" type="submit"><span>Send inquiry</span> {ARROW}</button>
     <p class="hint">Opens your email app, addressed to {EMAIL}. No email app? Call {PHONE}.</p><p class="form-status" role="status"></p>
   </form>
