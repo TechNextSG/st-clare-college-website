@@ -258,7 +258,7 @@ def build_campus():
            ("3rd floor", "Library and Learning Resource Center", "Study space, enlistment and the ProQuest-powered e-Library."),
            ("Broadcasts", "St. Clare Virtual Studio", "Webinars, parents' orientations and commencement broadcasts."),
            ("Every week", "SCO Online channels", ", ".join(n for n, _ in CHANNELS) + ".")]
-    dh = "".join(f'<div class="panel rv" style="--d:{i % 3}"><span class="where" style="font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy-2)">{t}</span><h3 class="mt" style="margin-top:6px">{h}</h3><p>{p}</p></div>' for i, (t, h, p) in enumerate(day))
+    dh = "".join(f'<div class="panel rv" style="--d:{i % 3}"><h3>{h}</h3><p class="when">{t}</p><p>{p}</p></div>' for i, (t, h, p) in enumerate(day))
     ev = "".join(f'<li class="rv"><span class="d">{m} {dd}</span><div><h3>{h}</h3><p>{p}</p></div><span class="w">{w}</span></li>' for m, dd, h, p, w in EVENTS)
     hb = "".join(f'<li><a href="{SRC}/cms" rel="noopener"><span class="ext">PDF</span><span><b>{h}</b><small>Handbooks and manuals</small></span><span class="arr" aria-hidden="true">&darr;</span></a></li>' for h in HANDBOOKS)
     body = ph("Campus life", "Life at St. Clare", "E-boards in every classroom, a Virtual Lab, our own broadcast channels and a community that keeps learning online.", "virtual-lab-predator.jpg", "The St. Clare Virtual Lab") \

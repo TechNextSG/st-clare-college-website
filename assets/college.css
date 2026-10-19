@@ -129,7 +129,6 @@ p { margin: 0 0 1em; }
 .loaded .hero-img img { transform: scale(1); }
 .hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,22,66,.88) 0%, rgba(6,22,66,.62) 45%, rgba(6,22,66,.15) 80%), linear-gradient(0deg, rgba(6,22,66,.55) 0%, rgba(6,22,66,0) 40%); }
 .hero-card { position: relative; max-width: 660px; }
-.hero-card .kicker-free { display: none; }
 .hero-card h1 { color: var(--white); font-size: clamp(2.5rem, 5.6vw, 4.4rem); }
 .hero-card .lede { color: var(--on-navy); }
 .hero-card .lede { margin: 16px 0 26px; }
@@ -292,7 +291,7 @@ a.panel:hover { border-color: var(--navy-2); box-shadow: var(--shadow); transfor
 .checklist li::before { content: ""; position: absolute; left: 0; top: 13px; width: 20px; height: 20px; border-radius: 50%; background: var(--navy); }
 .checklist li::after { content: ""; position: absolute; left: 7px; top: 17px; width: 5px; height: 9px; border: solid var(--white); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 @media (max-width: 700px) { .checklist { columns: 1; } }
-.notebox { margin-top: 22px; padding: 14px 18px; border-left: 0; border-radius: var(--r); background: var(--bg-2); font-size: .94rem; color: var(--muted); }
+.notebox { margin-top: 22px; padding: 14px 18px; border-radius: var(--r); background: var(--bg-2); font-size: .94rem; color: var(--muted); }
 
 /* ---------- Files / FAQ ---------- */
 .files { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
@@ -397,3 +396,4 @@ a.panel:hover { border-color: var(--navy-2); box-shadow: var(--shadow); transfor
 .hero .btn:not(.line):hover { background: #f0c62a; color: var(--ink); }
 .ph .rule { display: block; }
 .ph .seal-watermark { opacity: .1; }
+.when { font-size: .9rem; font-weight: 600; color: var(--navy-2); }

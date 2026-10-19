@@ -40,11 +40,11 @@ Families compare schools on phones; enrollment happens in three on-campus steps 
 
 ## Evidence on Hand
 
-Photos in `img/`: campus building, graduates (commencement), Virtual Lab (Predator stations), VR student, Basic Ed uniforms. Facts: founded 31 Aug 1985, 38th commencement June 2024, 547,806 views of the 2020 start-up module, e-boards in 95 classrooms. No testimonials, no tuition figures, no rankings: do not invent them.
+Photos in `img/`: campus building, graduates (commencement), Virtual Lab (Predator stations); vector seal `img/seal.svg`. Facts: founded 31 Aug 1985, 38th commencement June 2024, 547,806 views of the 2020 start-up module, e-boards in 95 classrooms. No testimonials, no tuition figures, no rankings: do not invent them.
 
 ## Product Principles
 
 1. Enrollment is the primary action on every page.
 2. Every fact traces to stclareonline.com.
 3. Premium and specific to St. Clare, never a generic school template.
-4. Motion carries the story (rich, cinematic) but content stays readable and reduced-motion safe.
+4. Quiet, professional motion only; content stays readable and reduced-motion safe.
