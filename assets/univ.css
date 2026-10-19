@@ -588,13 +588,13 @@ a.panel:hover::after { transform: translateX(4px) rotate(45deg); }
 
 /* ======== round 4: futuristic running grid floor (empty heroes + red sections) ======== */
 .sec.dark { position: relative; isolation: isolate; overflow: hidden; }
-.gridfloor { position: absolute; left: 0; right: 0; bottom: 0; height: min(58%, 440px); z-index: -1; overflow: hidden; perspective: 380px; perspective-origin: 50% 0; pointer-events: none;
+.gridfloor { position: absolute; left: 0; right: 0; bottom: 0; height: min(58%, 440px); z-index: -1; overflow: hidden; perspective: 1100px; perspective-origin: 50% 0; pointer-events: none;
   -webkit-mask-image: linear-gradient(to top, #000 10%, rgba(0,0,0,.55) 55%, transparent 100%); mask-image: linear-gradient(to top, #000 10%, rgba(0,0,0,.55) 55%, transparent 100%); }
-.gridfloor i { position: absolute; left: -60%; right: -60%; top: 0; height: 320%; transform-origin: 50% 0; transform: rotateX(74deg) translateY(0);
-  background-image: linear-gradient(rgba(240,196,96,.20) 1px, transparent 1px), linear-gradient(90deg, rgba(240,196,96,.14) 1px, transparent 1px);
-  background-size: 56px 56px; animation: gridrun 2.8s linear infinite; will-change: transform; }
+.gridfloor i { position: absolute; left: -60%; right: -60%; top: 0; height: 420%; transform-origin: 50% 0; transform: rotateX(72deg) translateY(0);
+  background-image: linear-gradient(rgba(240,196,96,.17) 1px, transparent 1px), linear-gradient(90deg, rgba(240,196,96,.12) 1px, transparent 1px);
+  background-size: 22px 22px; animation: gridrun 1.6s linear infinite; will-change: transform; }
 .gridfloor::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; z-index: 1; background: linear-gradient(90deg, transparent, rgba(240,196,96,.55), transparent); }
-@keyframes gridrun { to { transform: rotateX(74deg) translateY(56px); } }
+@keyframes gridrun { to { transform: rotateX(72deg) translateY(22px); } }
 .ph .gridfloor, .cta-band .gridfloor { height: min(70%, 300px); }
 .hero-acad .gridfloor, .hero-camp .gridfloor, .hero-news .gridfloor { height: min(46%, 380px); }
 
