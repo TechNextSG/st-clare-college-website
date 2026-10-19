@@ -34,7 +34,8 @@ Families compare schools on phones; enrollment happens in three on-campus steps 
 
 ## Brand Commitments
 
-- Real identity assets: the St. Clare College of Caloocan seal and the red SCO Online logo. User pinned nothing else (palette, type and style are open for redesign, 19 Oct 2026).
+- Real identity assets: the St. Clare College of Caloocan seal (now a faithful vector redraw, img/seal.svg) and the SCO Online name.
+- User direction (19 Oct 2026): professional, corporate college style like top PH universities (Ateneo, De La Salle, Mapua): clean, easy to read, NOT playful or kindergarten-like. Typography pinned to TechNext's fonts: Plus Jakarta Sans (headings) + Inter (body).
 - Taglines from the school: "The School of Life Skills", "the leading edge in online education system", "Transforming Education, Building Our Future", Professional Mace "The Eternal Flame of Professionalism".
 
 ## Evidence on Hand
