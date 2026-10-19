@@ -87,11 +87,12 @@
     tabs.forEach(function (t, i) {
       t.addEventListener("click", function () { select(t); });
       t.addEventListener("keydown", function (e) {
-        var n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : null;
+        var n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 : null;
         if (n === null) return; e.preventDefault(); select(tabs[(n + tabs.length) % tabs.length], true);
       });
     });
-    if (location.hash) { var h = list.querySelector('[data-hash="' + location.hash.slice(1) + '"]'); if (h) select(h); }
+    function fromHash() { if (location.hash) { var h = list.querySelector('[data-hash="' + location.hash.slice(1) + '"]'); if (h) select(h); } }
+    fromHash(); window.addEventListener("hashchange", fromHash);
   });
 
   /* rails */
@@ -158,14 +159,29 @@
     var f = new FormData(form), lines = [];
     f.forEach(function (v, k) { if (k !== "subject") lines.push(k + ": " + v); });
     location.href = "mailto:" + form.getAttribute("data-mailto") + "?subject=" + encodeURIComponent(f.get("subject") || "Website inquiry") + "&body=" + encodeURIComponent(lines.join("\n"));
+    var st = form.querySelector(".form-status"); if (st) st.textContent = "Your email app should open with your message. If it doesn't, write to " + form.getAttribute("data-mailto") + " or call (02) 8232-4483.";
   });
+
+  /* marquee pause */
+  d.querySelectorAll(".marquee").forEach(function (m) {
+    var b = d.createElement("button"); b.className = "mq-btn"; b.type = "button"; b.setAttribute("aria-label", "Pause scrolling text"); b.textContent = "II";
+    b.addEventListener("click", function () { var p = m.classList.toggle("paused"); b.setAttribute("aria-label", p ? "Play scrolling text" : "Pause scrolling text"); b.textContent = p ? "\u25B6" : "II"; });
+    m.appendChild(b);
+  });
+
+  /* three.js only where the globe shows */
+  var gh = d.getElementById("globe");
+  if (gh && window.matchMedia("(min-width: 921px) and (prefers-reduced-motion: no-preference)").matches) {
+    var sc = d.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    sc.onload = function () { window.initGlobe && window.initGlobe(); }; d.head.appendChild(sc);
+  }
 
   /* year */
   d.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
 
 /* 3D dotted globe (SCO Online - "the leading edge in online education") */
-(function () {
+window.initGlobe = function () {
   var host = document.getElementById("globe");
   if (!host || !window.THREE) return;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -227,4 +243,4 @@
   }
   if (reduce) arcs.forEach(function (a) { a.geo.setDrawRange(0, 61); });
   running = true; loop();
-})();
+};

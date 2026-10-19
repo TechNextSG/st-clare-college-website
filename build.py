@@ -11,8 +11,8 @@ ADDRESS = "Zabarte Road, Barangay 172, Camarin, Caloocan City 1400, Metro Manila
 FB = "https://www.facebook.com/stclarecollege"
 YT = "https://www.youtube.com/channel/UCxlcF5cS_spNnil5pp5-aNQ"
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900"
-         "&family=Figtree:wght@400..800&family=Fraunces:ital,opsz,wght@1,9..144,400..600&display=swap")
+FONTS = ("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900"
+         "&family=Figtree:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap")
 
 NAV = [("index.html", "Home"), ("about.html", "About"), ("academics.html", "Academics"),
        ("admissions.html", "Admissions"), ("campus-life.html", "Campus Life"),
@@ -56,8 +56,8 @@ TERTIARY = [
      "Students practise the basic functions of management (planning, organizing, leading and controlling) through theory classes, practicum exercises and experiential learning.",
      ["Management", "Practicum", "Experiential learning"]),
     ("BEEd", "Bachelor of Elementary Education", "book", "Teacher Education",
-     "An undergraduate teacher-education degree that prepares you to teach at the elementary level.",
-     "Built for future elementary teachers who want strong foundations in pedagogy and classroom practice.",
+     "An undergraduate teacher-education degree designed to prepare individuals intending to teach at the elementary level.",
+     "",
      ["Teaching", "Elementary level"]),
     ("BSEd-Eng", "Bachelor of Secondary Education, Major in English", "abc", "Teacher Education",
      "Competencies to teach English at the secondary level.",
@@ -81,7 +81,7 @@ SHS = [
     ("A&D", "Arts & Design", "Arts & Design track",
      "For the design, performance and creative industries. Exposure to architecture, interior and industrial design, graphic design, animation, painting, fashion design, photography and film, with employment skills to start a creative career after graduation.", []),
     ("ICT", "TVL - Information & Communications Technology", "Technical-Vocational-Livelihood",
-     "Uses information and communications technology to support, enhance and optimise learning, with a focus on communication technologies.",
+     "Uses information and communications technology to support, enhance and optimize the delivery of information, with a focus on communication.",
      ["Computer Programming", "Animation"]),
     ("HE", "TVL - Home Economics", "Technical-Vocational-Livelihood",
      "Hands-on livelihood skills with TESDA competency-based assessment for National Certification (NC), which raises employability after SHS and leads into business, culinary, hospitality, tourism, nutrition, fashion and interior-design degrees.",
@@ -168,17 +168,17 @@ PORTALS = [
 
 NEWS = [
     ("Sept 23, 2023", "Institution", "The Professional Mace: the eternal flame of professionalism",
-     "St. Clare College unveiled its Professional Mace, “a beacon of professionalism and culture of excellence.”", "", "mace", SRC + "/"),
+     "St. Clare College introduced its Professional Mace, “a beacon of professionalism and culture of excellence.”", "", "mace", SRC + "/"),
     ("Class of 2024", "Scholarship", "SHS Alumni VIP Package for St. Clare graduates",
-     "Senior High graduates of St. Clare who continue to college can avail of the President's Scholarship with zero down payment.", "graduates.jpg", "", SRC + "/news"),
+     "St. Clare SHS Class of 2024 graduates who continued to college could avail of the President's Scholarship with zero down payment for SY 2024-2025.", "graduates.jpg", "", SRC + "/news"),
     ("June 2024", "Commencement", "The Stars of 2024: 38th Commencement Exercises",
      "St. Clare College celebrated its 38th Commencement Exercises in June 2024, streamed on the Virtual Management System.", "", "38th", SRC + "/vms"),
     ("SY 2023-2024", "UniFAST-TES", "Releasing of UniFAST-TES guidelines",
      "Verify your TES grantee status, then secure your official disbursement schedule through the Personal Management System.", "", "TES", SRC + "/pms"),
     ("Advisory", "Registrar", "Official Document Request Portal",
      "Requests for official school documents, such as Transcripts of Records and diplomas, are processed only through the Official Document Request Portal. Do not transact with fixers.", "", "TOR", SRC + "/pms"),
-    ("Now hiring", "Careers", "We are hiring teachers and instructors",
-     "Basic Education teachers, SHS teachers and college instructors: NC II holder or equivalent, Licensed Professional Teacher, good communication and computer skills.", "", "Hiring", SRC + "/ims"),
+    ("See IMS", "Careers", "We are hiring teachers and instructors",
+     "Basic Education teachers, SHS teachers and college instructors: NC II holder or equivalent, Licensed Professional Teacher, good communication and computer skills, good moral character and trainable.", "", "Hiring", SRC + "/ims"),
     ("2025", "Parents", "Parents' Webinar Orientation",
      "Webinar orientations for tertiary, Basic Education and Senior High parents, held at the St. Clare Virtual Studio.", "", "Live", SRC + "/calendar"),
     ("Every Monday", "Broadcast", "Virtual Flag Ceremony at 7:00 AM",
@@ -188,15 +188,15 @@ NEWS = [
 ]
 
 EVENTS = [
-    ("Aug", "31", "St. Clare College Founding Anniversary", "Founded 31 August 1985; also the President's birthday.", "Campus"),
-    ("Sep", "1-4", "Class Orientation & Sectioning", "Meet & greet with your teachers, advisers, instructors and professors. Sectioning for students not yet enlisted.", "St. Clare College"),
+    ("Aug", "31", "Foundation Day", "St. Clare College was founded in 1985 (36th anniversary in 2021).", "Campus"),
+    ("Sep 2025", "1-4", "Class Orientation & Sectioning", "Meet & greet with your teachers, advisers, instructors and professors. Sectioning for students not yet enlisted.", "St. Clare College"),
     ("Mon", "7AM", "Virtual Flag Ceremony", "Every Monday, streamed for the whole community.", "Online"),
     ("2025", "Web", "Parents' Webinar Orientation", "Tertiary 1-3 PM; Basic Education 9 AM; Senior High 1 PM.", "Virtual Studio"),
 ]
 
 # ---------------------------------------------------------------- layout
 def head(title, desc, page):
-    three = '\n<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>' if page == "index.html" else ""
+    three = ""
     return f"""<!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -232,7 +232,7 @@ def header(page):
 </div></div>
 <header class="site-header"><div class="wrap">
   <a class="brand" href="index.html" aria-label="St. Clare College home">
-    <img src="img/seal-200.png" alt="St. Clare College of Caloocan seal" width="50" height="50">
+    <img src="img/seal-200.webp" alt="St. Clare College of Caloocan seal" width="50" height="50">
     <span><b>St. Clare College</b><small>The School of Life Skills</small></span>
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
@@ -247,13 +247,13 @@ def footer():
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand"><img src="img/seal-200.png" alt="" width="64" height="64"><div><b>St. Clare College</b><span>of Caloocan</span></div></div>
-        <p>The School of Life Skills and leading institution for professional development. Nursery to College, on campus and online since 1985.</p>
+        <div class="foot-brand"><img src="img/seal-200.webp" alt="" width="64" height="64"><div><b>St. Clare College</b><span>of Caloocan</span></div></div>
+        <p>The School of Life Skills and leading institution for professional development. Serving Caloocan since 1985; online through St. Clare Online since 2020.</p>
         <div class="socials"><a href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}</a></div>
       </div>
-      <div><h4>Explore</h4><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus Life</a></li><li><a href="news.html">News</a></li></ul></div>
-      <div><h4>St. Clare Online</h4><ul>{"".join(f'<li><a href="{SRC}/{p[3]}" rel="noopener">{p[0]} - {p[1].split()[0]}</a></li>' for p in PORTALS)}<li><a href="{SRC}/downloadable-forms" rel="noopener">Downloadable forms</a></li></ul></div>
-      <div><h4>Visit</h4><ul><li>{ADDRESS}</li><li><a href="tel:{PHONE_TEL}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li>9:00 AM - 5:00 PM</li></ul></div>
+      <div><h3>Explore</h3><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus Life</a></li><li><a href="news.html">News</a></li></ul></div>
+      <div><h3>St. Clare Online</h3><ul>{"".join(f'<li><a href="{SRC}/{p[3]}" rel="noopener">{p[0]} - {p[1].split()[0]}</a></li>' for p in PORTALS)}<li><a href="{SRC}/downloadable-forms" rel="noopener">Downloadable forms</a></li></ul></div>
+      <div><h3>Visit</h3><ul><li>{ADDRESS}</li><li><a href="tel:{PHONE_TEL}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li>9:00 AM - 5:00 PM</li></ul></div>
     </div>
     <div class="foot-bottom"><span>&copy; <span data-year>2026</span> St. Clare College of Caloocan &middot; St. Clare Online Education System&reg;</span><a class="sdg" href="https://sdgs.un.org/goals/goal4" rel="noopener" style="padding:6px 14px 6px 6px"><b style="width:32px;height:32px;font-size:1rem">4</b><span>Quality Education</span></a></div>
   </div>
@@ -330,7 +330,7 @@ MACE = """<section class="mace dark pad noise">
 """
 
 def channels_html():
-    tiles = ['<div class="chan logo rv-s"><img src="img/sco-online.png" alt="SCO Online logo" width="256" height="256" loading="lazy"></div>']
+    tiles = ['<div class="chan logo rv-s"><img src="img/sco-online.webp" alt="SCO Online logo" width="256" height="256" loading="lazy"></div>']
     for i, (n, k) in enumerate(CHANNELS):
         tiles.append(f'<article class="chan rv-s" style="--d:{(i + 1) % 4}"><span class="k">SCO &middot; {k}</span><h3>{n}</h3></article>')
     return '<div class="channels">' + "".join(tiles) + "</div>"
@@ -345,7 +345,7 @@ VLAB = f"""<div class="split">
       <span class="term">AR<small>Augmented reality</small></span><span class="op">=</span>
       <span class="term res">MR<small>Mixed reality</small></span>
     </div>
-    <p class="rv" style="color:var(--on-dark-muted);margin-top:40px">Experience the technology behind the <b style="color:#fff">Predator Thronos</b> and the <b style="color:#fff">Mixed Reality facility by Acer</b>. The Virtual Lab is open to visitors from 10:00 AM to 5:00 PM.</p>
+    <p class="rv" style="color:var(--on-dark-muted);margin-top:40px">Experience the technology behind the <b style="color:#fff">Predator Thronos</b> and the <b style="color:#fff">Mixed Reality facility by Acer</b>. Opened in 2021, the Virtual Lab welcomed visitors from 10:00 AM to 5:00 PM. Ask admissions about a visit.</p>
     <a class="btn rv" href="campus-life.html#virtual-lab">Explore the Virtual Lab {ARROW}</a>
   </div>
   <div class="media-stack rv-s">
@@ -358,7 +358,7 @@ MODALITY = """<div class="modality">
   <article class="mode rv" data-tilt>
     <span class="eyebrow">Modality 01</span>
     <div class="big">Full<br>online</div>
-    <p>Learn from anywhere through St. Clare Online: LMS classes, the e-Library, virtual broadcasts and Teacher-DJs.</p>
+    <p>Learn from anywhere through St. Clare Online: LMS classes, the e-Library and virtual broadcasts.</p>
     <div class="meter" style="--w:100%"><i></i></div><div class="meter-l"><span>Online</span><span>On campus</span></div>
   </article>
   <article class="mode rv" style="--d:1" data-tilt>
@@ -373,25 +373,25 @@ MODALITY = """<div class="modality">
 def build_home():
     rail = "".join(prog_card(p, i) for i, p in enumerate(TERTIARY))
     marquee_items = ["Nursery & Kindergarten", "Elementary", "Junior High", "Senior High"] + [p[0] for p in TERTIARY]
-    mq = "".join(f"<span>{html.escape(x)}</span>" for x in marquee_items) * 2
+    mq = "".join(f"<span>{html.escape(x)}</span>" for x in marquee_items) + "".join(f'<span aria-hidden="true">{html.escape(x)}</span>' for x in marquee_items)
     body = f"""<section class="hero noise">
   <canvas class="fx-canvas" aria-hidden="true"></canvas>
   <div class="grid-floor" aria-hidden="true"></div>
   <div class="wrap">
     <div>
-      <span class="hero-tag rv"><b>Enrollment open</b> Full online or blended learning</span>
+      <span class="hero-tag rv"><b>Enroll online</b> Full online or blended learning</span>
       <h1 data-split>The School <span class="grad-text">of Life</span> Skills</h1>
       <p class="lead rv" style="--d:4">St. Clare College of Caloocan: the leading edge in online education. Nursery to College, one campus on Zabarte Road and one online platform where no one gets left behind.</p>
       <div class="btn-row rv" style="--d:6"><a class="btn" href="admissions.html">Enroll now {ARROW}</a><a class="btn ghost" href="about.html">Take a tour</a></div>
     </div>
     <div class="hero-globe rv-s" id="globe" aria-hidden="true">
       <span class="orbit-label">SCO ONLINE<small>the leading edge in online education</small></span>
-      <img class="seal-badge" src="img/seal-200.png" alt="" width="200" height="202">
+      <img class="seal-badge" src="img/seal-200.webp" alt="" width="200" height="202">
     </div>
   </div>
   <a class="hero-scroll" href="#levels"><i></i>Scroll</a>
 </section>
-<div class="marquee" aria-label="Programmes offered"><div class="track">{mq}</div></div>
+<div class="marquee" role="marquee" aria-label="Programmes offered"><div class="track">{mq}</div></div>
 
 <section class="pad-s white">
   <div class="wrap">
@@ -399,7 +399,7 @@ def build_home():
       <div class="stat rv"><b>1985</b><span>Serving Caloocan since 31 August 1985</span></div>
       <div class="stat rv" style="--d:1"><b><span data-count="38">38</span><em>th</em></b><span>Commencement Exercises, held in 2024</span></div>
       <div class="stat rv" style="--d:2"><b><span data-count="8">8</span></b><span>College degree programmes</span></div>
-      <div class="stat rv" style="--d:3"><b><span data-count="547806" data-comma>547,806</span></b><span>Views of the St. Clare Online start-up module</span></div>
+      <div class="stat rv" style="--d:3"><b><span data-count="547806" data-comma>547,806</span></b><span>Views of the 2020 St. Clare Online start-up module</span></div>
     </div>
   </div>
 </section>
@@ -459,10 +459,10 @@ def build_home():
   <div class="wrap">
     <div class="vip rv-s">
       <div class="txt">
-        <span class="eyebrow" style="color:var(--gold)">SHS Alumni VIP Package</span>
+        <span class="eyebrow" style="color:var(--gold)">SHS Alumni VIP Package &middot; SY 2024-2025</span>
         <div class="stamp grad-text">VIP</div>
-        <h3 style="font-size:clamp(1.4rem,2.6vw,2.1rem);text-transform:uppercase;margin:18px 0 14px">President's Scholarship + zero down payment</h3>
-        <p style="color:var(--on-dark-muted)">To value and support our Senior High graduates as they move on to college, St. Clare SHS alumni can avail of the President's Scholarship with zero down payment.</p>
+        <h3 class="vip-h">President's Scholarship + zero down payment</h3>
+        <p style="color:var(--on-dark-muted)">To value and support its Senior High graduates moving on to college, St. Clare offered the SHS Class of 2024 the President's Scholarship with zero down payment for SY 2024-2025. Ask admissions about this year's scholarships.</p>
         <a class="btn" href="admissions.html#scholarships">See scholarships {ARROW}</a>
       </div>
       <div class="media"><img src="img/graduates.jpg" alt="St. Clare College graduates applauding at commencement" loading="lazy" width="1230" height="640"></div>
@@ -501,21 +501,21 @@ def build_about():
     tl = [
         ("1985", "St. Clare College is founded", "Founded on 31 August 1985 in Caloocan City, Metro Manila, as a school of life skills."),
         ("2020", "St. Clare Online keeps learning going", "During the pandemic the college moved classes to its own online platform so no student got left behind. Applications for UniFAST-TES opened for A.Y. 2020-2021."),
-        ("2021", "Virtual Lab and the 36th anniversary", "The Virtual Lab (VR + AR = MR) opened, Teacher-DJs went live on Zoom daily, and the college marked its 36th founding anniversary."),
-        ("2023", "The Professional Mace", "On 23 September 2023 St. Clare College unveiled its Professional Mace, the eternal flame of professionalism."),
-        ("2024", "38th Commencement + SHS Alumni VIP", "The Stars of 2024 graduated at the 38th Commencement Exercises, and SHS alumni received the President's Scholarship with zero down payment."),
+        ("2021", "Virtual Lab and the 36th anniversary", "The Virtual Lab (VR + AR = MR) opened, Teacher-DJs went live on Zoom, Monday to Saturday, and the college marked its 36th founding anniversary."),
+        ("2023", "The Professional Mace", "On 23 September 2023 St. Clare College introduced its Professional Mace, the eternal flame of professionalism."),
+        ("2024", "38th Commencement + SHS Alumni VIP", "The Stars of 2024 graduated at the 38th Commencement Exercises, and the SHS Class of 2024 was offered the President's Scholarship with zero down payment."),
     ]
     tls = "".join(f'<div class="tl rv"><span class="y">{y}</span><div class="c"><h3>{h}</h3><p>{p}</p></div></div>' for y, h, p in tl)
-    fac = ["Air-conditioned classrooms", "Air-conditioned restrooms", "Virtual Lab with Acer Mixed Reality", "Computer laboratories",
+    fac = ["E-boards in all 95 classrooms", "Air-conditioned classrooms", "Air-conditioned restrooms", "Virtual Lab with Acer Mixed Reality", "Computer laboratories",
            "Library and Learning Resource Center (3rd floor)", "St. Clare Virtual Studio"]
     body = phero("About", "Transforming education, <span class='grad-text'>building our future</span>",
-                 "St. Clare College of Caloocan is the School of Life Skills and a leading institution for professional development, on campus and online since 1985.",
+                 "St. Clare College of Caloocan is the School of Life Skills and a leading institution for professional development, serving Caloocan since 1985.",
                  "campus-building.jpg") + f"""
 <section class="pad">
   <div class="wrap split">
     <div class="media-stack rv-s">
       <div class="media wide"><img src="img/campus-building.jpg" alt="St. Clare College building on Zabarte Road with the SCO Online sign" width="1600" height="900" loading="lazy"></div>
-      <div class="float"><img src="img/sco-online.png" alt="SCO Online logo" width="512" height="512" loading="lazy"></div>
+      <div class="float"><img src="img/sco-online.webp" alt="SCO Online logo" width="512" height="512" loading="lazy"></div>
     </div>
     <div>
       <span class="eyebrow">Welcome to St. Clare</span>
@@ -564,7 +564,7 @@ def build_academics():
   <div class="code">{code}<small>{school}</small></div>
   <div><h3>{name}</h3><p>{short} {longd}</p><div class="chips">{"".join(f"<span>{t}</span>" for t in tags)}</div></div>
 </article>""")
-    strands = "".join(f"""<article class="strand rv" style="--d:{i % 3}"><span class="k">{k}</span><h3>{n}</h3><p style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">{t}</p><p>{d}</p>{("<ul>" + "".join(f"<li>{s}</li>" for s in sp) + "</ul>") if sp else ""}</article>""" for i, (k, n, t, d, sp) in enumerate(SHS))
+    strands = "".join(f"""<article class="strand rv" style="--d:{i % 3}"><span class="k">{k}</span><h3>{n}</h3><p class="t">{t}</p><p>{d}</p>{("<ul>" + "".join(f"<li>{s}</li>" for s in sp) + "</ul>") if sp else ""}</article>""" for i, (k, n, t, d, sp) in enumerate(SHS))
     basic = "".join(f'<a class="level lv-{i + 1} rv" style="--d:{i};min-height:340px" href="admissions.html#requirements" data-tilt><span class="num">{k}</span><h3>{n}</h3><p>{d}</p><span class="go">Admission requirements</span></a>' for i, (k, n, d) in enumerate(BASIC))
     body = phero("Academics", "Programmes for <span class='grad-text'>every stage</span>",
                  "Basic Education, Senior High School and eight college degrees, taught on campus, online or blended.") + f"""
@@ -616,7 +616,7 @@ def build_admissions():
     faq = [
         ("Can I study fully online?", "Yes. St. Clare College offers two modalities: full online and blended (online plus on-campus days). Choose the one that fits you when you enroll."),
         ("How do I get my class schedule?", "After paying the matriculation fee and filling up your registration form, register online for enlistment at the Library on the 3rd floor (stclareonline.com/ims). Your section and schedule are posted on the website and sent by email by your Program Head."),
-        ("Are there scholarships?", "Yes. St. Clare SHS alumni can avail of the President's Scholarship with zero down payment, qualified college students can apply for the UniFAST Tertiary Education Subsidy (TES), and a certificate of indigency can be submitted for scholarship consideration."),
+        ("Are there scholarships?", "Ask the admissions office for this school year's offers. A certificate of indigency can be submitted with your requirements for scholarship consideration, and UniFAST-TES grantees can verify their status and disbursement schedule on the PMS."),
         ("How do I request my Transcript of Records or diploma?", "Only through the Official Document Request Portal on the Personal Management System (PMS). Do not transact with fixers or unauthorized persons."),
         ("When is the admissions office open?", f"9:00 AM to 5:00 PM. Call {PHONE} or email {EMAIL}."),
     ]
@@ -644,7 +644,7 @@ def build_admissions():
 <section class="pad white" id="scholarships"><div class="wrap">
   <div class="sec-head"><div><span class="eyebrow">Scholarships &amp; financial aid</span><h2 data-split>Invest in <span class="grad-text-brand">your future</span></h2></div><p class="lead rv">&ldquo;An investment in knowledge pays the best interest.&rdquo; Benjamin Franklin</p></div>
   <div class="cards">
-    <article class="card rv"><div class="thumb"><img src="img/graduates.jpg" alt="" loading="lazy"></div><div class="body"><span class="meta">SHS Alumni VIP</span><h3>President's Scholarship</h3><p>For St. Clare Senior High graduates moving on to college, with zero down payment.</p></div></article>
+    <article class="card rv"><div class="thumb"><img src="img/graduates.jpg" alt="" loading="lazy" width="1230" height="640"></div><div class="body"><span class="meta">SHS Alumni VIP</span><h3>President's Scholarship</h3><p>Offered to the St. Clare SHS Class of 2024 for SY 2024-2025, with zero down payment.</p></div></article>
     <article class="card rv" style="--d:1"><div class="thumb"><span class="gen" style="background:var(--grad-brand)">UniFAST<br>TES</span></div><div class="body"><span class="meta">Government subsidy</span><h3>Tertiary Education Subsidy</h3><p>Verify your TES grantee status and secure your disbursement schedule on the PMS.</p><a class="link-arrow" href="{SRC}/pms" rel="noopener">Go to PMS</a></div></article>
     <article class="card rv" style="--d:2"><div class="thumb"><span class="gen" style="background:linear-gradient(140deg,#d7141a,#6b23d6)">Need-<br>based</span></div><div class="body"><span class="meta">Optional document</span><h3>Certificate of indigency</h3><p>Submit a certificate of indigency with your requirements to be considered for scholarship.</p></div></article>
   </div>
@@ -672,7 +672,7 @@ def build_admissions():
     <div class="faq" style="margin-top:26px">{faqs}</div>
   </div>
 </div></section>
-""" + cta("Your future <span class='gold'>starts here</span>", "Enroll this semester and take the first step towards a brighter tomorrow.")
+""" + cta("Your future <span class='gold'>starts here</span>", "Take the first step towards a brighter tomorrow.")
     page("admissions.html", "Admissions | Enroll at St. Clare College",
          "How to enroll at St. Clare College: three-step procedure, requirements for college freshmen, transferees, Basic Education and SHS, scholarships and forms.", body)
 
@@ -694,7 +694,7 @@ def build_campus():
   <div>
     <span class="eyebrow">On campus</span>
     <h2 data-split>Built for <span class="grad-text-brand">comfort &amp; focus</span></h2>
-    <ul class="checks rv"><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories for hands-on programming and networking</li><li>Library and enlistment area on the 3rd floor</li><li>St. Clare Virtual Studio for webinars and broadcasts</li><li>Virtual Lab open to visitors, 10:00 AM - 5:00 PM</li></ul>
+    <ul class="checks rv"><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories for hands-on programming and networking</li><li>Library and enlistment area on the 3rd floor</li><li>St. Clare Virtual Studio for webinars and broadcasts</li><li>E-boards in all 95 classrooms</li><li>Virtual Lab with Acer Mixed Reality (since 2021)</li></ul>
   </div>
 </div></section>
 
@@ -711,7 +711,7 @@ def build_campus():
   </div>
   <div class="dl-list rv">{hb}</div>
 </div></section>
-""" + cta("See it for <span class='gold'>yourself</span>", "Visit the Virtual Lab and tour the campus. We're open 9:00 AM to 5:00 PM.")
+""" + cta("See it for <span class='gold'>yourself</span>", "Tour the campus on Zabarte Road. We're open 9:00 AM to 5:00 PM.")
     page("campus-life.html", "Campus Life | Virtual Lab, SCO Online & Events",
          "The St. Clare College Virtual Lab (VR + AR = MR), SCO Online channels, campus facilities, calendar of activities and digital citizenship.", body)
 
@@ -758,7 +758,7 @@ def build_news():
   <div class="cards">{"".join(cards)}</div>
 </div></section>
 <div class="marquee red" aria-hidden="true"><div class="track">{"".join(f"<span>{n}</span>" for n, _ in CHANNELS) * 2}</div></div>
-""" + cta("Be part of the <span class='gold'>story</span>", "Enrollment is open for Basic Education, Senior High School and College.")
+""" + cta("Be part of the <span class='gold'>story</span>", "Basic Education, Senior High School and College, on campus or online.")
     page("news.html", "News | St. Clare College", "Latest news, scholarships, advisories and events from St. Clare College of Caloocan.", body)
 
 
@@ -791,6 +791,7 @@ def build_contact():
       <div class="field"><label for="f-sub">Subject</label><input id="f-sub" name="subject" value="Enrollment inquiry"></div>
       <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="Message" required></textarea></div>
       <button class="btn royal" type="submit">Send inquiry {ARROW}</button>
+      <p class="form-status" role="status"></p>
       <p class="hint">Opens your email app with the message ready to send to {EMAIL}.</p>
     </form>
   </div>
