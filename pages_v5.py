@@ -49,8 +49,20 @@ ICO = {
 def ico(n): return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICO[n]}</svg>'
 
 
-# ---------- home hero slideshow: every img/hero/hero-NN-*.webp, in file-name order ----------
+# ---------- home hero slideshow: PNG masters in img/hero (hero-NN-*.png), in file-name order ----------
+# The build makes light web copies in img/hero/web (full + 800 px webp) whenever a PNG is new or changed.
 HERO_DIR = os.path.join(B.OUT, "img", "hero")
+HERO_WEB = os.path.join(HERO_DIR, "web")
+HERO_EXT = (".png", ".jpg", ".jpeg", ".webp")
+
+def _hero_web(name, src):
+    from PIL import Image
+    os.makedirs(HERO_WEB, exist_ok=True)
+    full, small = os.path.join(HERO_WEB, name + ".webp"), os.path.join(HERO_WEB, name + "-800.webp")
+    if not os.path.exists(full) or os.path.getmtime(full) < os.path.getmtime(src):
+        im = Image.open(src).convert("RGB")
+        big = im.copy(); big.thumbnail((2000, 2000)); big.save(full, quality=86, method=6)
+        sm = im.copy(); sm.thumbnail((800, 800)); sm.save(small, quality=80, method=6)
 
 def hero_slides():
     """Captions come from img/hero/hero.json; a photo without an entry gets one from its file name."""
@@ -58,15 +70,22 @@ def hero_slides():
     jp = os.path.join(HERO_DIR, "hero.json")
     if os.path.exists(jp):
         meta = {m["file"]: m for m in json.load(open(jp, encoding="utf-8"))}
-    files = sorted(f[:-5] for f in os.listdir(HERO_DIR) if f.startswith("hero-") and f.endswith(".webp") and not f.endswith("-800.webp"))
-    return [(f, meta.get(f, {}).get("caption") or f.split("-", 2)[-1].replace("-", " ").capitalize()) for f in files]
+    out = []
+    for f in sorted(os.listdir(HERO_DIR)):
+        base, ext = os.path.splitext(f)
+        if not (f.startswith("hero-") and ext.lower() in HERO_EXT): continue
+        _hero_web(base, os.path.join(HERO_DIR, f))
+        out.append((base, meta.get(base, {}).get("caption") or base.split("-", 2)[-1].replace("-", " ").capitalize()))
+    keep = {n for n, _ in out}
+    for f in os.listdir(HERO_WEB):   # drop web copies of removed photos
+        if f.replace("-800.webp", "").replace(".webp", "") not in keep: os.remove(os.path.join(HERO_WEB, f))
+    return out
 
 def hero_img(name, lazy=True):
     from PIL import Image
-    w, h = Image.open(os.path.join(HERO_DIR, name + ".webp")).size
-    small = os.path.exists(os.path.join(HERO_DIR, name + "-800.webp"))
-    ss = f' srcset="img/hero/{name}-800.webp 800w, img/hero/{name}.webp {w}w" sizes="100vw"' if small else ""
-    return f'<img src="img/hero/{name}.webp"{ss} alt="" width="{w}" height="{h}"{" loading=\"lazy\"" if lazy else " fetchpriority=\"high\""}>'
+    w, h = Image.open(os.path.join(HERO_WEB, name + ".webp")).size
+    ss = f' srcset="img/hero/web/{name}-800.webp 800w, img/hero/web/{name}.webp {w}w" sizes="100vw"'
+    return f'<img src="img/hero/web/{name}.webp"{ss} alt="" width="{w}" height="{h}"{" loading=\"lazy\"" if lazy else " fetchpriority=\"high\""}>'
 
 # ======================================================================= HOME
 def build_home():

@@ -21,7 +21,7 @@ def home(slides, hero_img, ico):
     for i, (s, c) in enumerate(slides):
         im = hero_img(s, lazy=i > 0)
         sl.append(f'<div class="slide{" on" if i == 0 else ""}" data-cap="{esc(c)}">{lowfetch(im) if i > 0 else im}</div>')
-        th.append(f'<button type="button" aria-label="Show photo {i + 1}: {esc(c)}"><img src="img/hero/{s}-800.webp" alt="" width="96" height="64" loading="lazy"><i></i></button>')
+        th.append(f'<button type="button" aria-label="Show photo {i + 1}: {esc(c)}"><img src="img/hero/web/{s}-800.webp" alt="" width="96" height="64" loading="lazy"><i></i></button>')
     return f"""<section class="hero h-home">{GRID}
   <div class="wrap h-grid">
     <div class="h-copy">
