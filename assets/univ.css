@@ -631,11 +631,36 @@ a.panel:hover::after { transform: translateX(4px) rotate(45deg); }
 @media (max-width: 900px) { .theater { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 480px) { .pl { grid-template-columns: 22px 92px minmax(0, 1fr); gap: 10px; padding: 8px; } }
 
-/* ======== contact list icons ======== */
-.contact-list > div { position: relative; padding-left: 64px; min-height: 48px; }
-.contact-list .ic { position: absolute; left: 0; top: 2px; width: 48px; height: 48px; border-radius: 14px; background: var(--rose50); color: var(--c600); display: grid; place-items: center; transition: background .3s, color .3s, transform .4s var(--ease); }
-.contact-list .ic svg { width: 22px; height: 22px; }
-.contact-list > div:hover .ic { background: var(--c600); color: #fff; transform: rotate(-6deg); }
+/* ======== contact list icons: no tiles, line icons that draw in and keep moving ======== */
+.contact-list > div { position: relative; padding-left: 58px; min-height: 48px; }
+.contact-list .ic { position: absolute; left: 0; top: 0; width: 42px; height: 42px; color: var(--c600); transition: color .3s, transform .45s var(--ease); }
+.contact-list .ic svg { width: 42px; height: 42px; overflow: visible; }
+.contact-list > div:hover .ic { color: var(--r500); transform: scale(1.15); }
+.li .d { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.contact-list.live .li .d { animation: draw 1.4s var(--ease) forwards; }
+.contact-list.live > div:nth-child(2) .li .d { animation-delay: .15s; }
+.contact-list.live > div:nth-child(3) .li .d { animation-delay: .3s; }
+.contact-list.live > div:nth-child(4) .li .d { animation-delay: .45s; }
+.contact-list.live > div:nth-child(5) .li .d { animation-delay: .6s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.li { transform-box: view-box; }
+.li-pin { animation: pinHop 2.6s var(--ease) 1.6s infinite; transform-origin: 50% 100%; }
+@keyframes pinHop { 0%, 60%, 100% { transform: translateY(0) scaleY(1); } 20% { transform: translateY(-5px) scaleY(1.04); } 35% { transform: translateY(0) scaleY(.94); } 45% { transform: translateY(0) scaleY(1); } }
+.li-phone { animation: ring 3.2s ease-in-out 1.6s infinite; transform-origin: 50% 50%; }
+@keyframes ring { 0%, 30%, 100% { transform: rotate(0); } 4% { transform: rotate(-14deg); } 8% { transform: rotate(12deg); } 12% { transform: rotate(-10deg); } 16% { transform: rotate(8deg); } 20% { transform: rotate(-4deg); } }
+.li .wave { opacity: 0; animation: wave 3.2s ease-out 1.6s infinite; }
+.li .w2 { animation-delay: 1.75s; }
+@keyframes wave { 0%, 100% { opacity: 0; } 6%, 22% { opacity: 1; } 30% { opacity: 0; } }
+.li .flap { transform-box: view-box; transform-origin: 12px 7px; }
+.contact-list.live .li .flap { animation: draw 1.4s var(--ease) .3s forwards, flap 3.4s ease-in-out 2s infinite; }
+@keyframes flap { 0%, 40%, 100% { transform: scaleY(1); } 15%, 25% { transform: scaleY(-1); } }
+.li .hand { transform-box: view-box; transform-origin: 12px 12px; }
+.li .hm { animation: spin 4s linear infinite; }
+.li .hh { animation: spin 24s linear infinite; }
+.li-brief .sway { transform-box: view-box; transform-origin: 12px 3px; animation: sway 3s ease-in-out 1.6s infinite; }
+@keyframes sway { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(6deg); } 75% { transform: rotate(-6deg); } }
+html:not(.js) .li .d { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) { .li .d { stroke-dashoffset: 0; animation: none !important; } .li, .li *, .li .sway { animation: none !important; } .li .wave { opacity: 1; } }
 .follow { margin: 30px 0 0; font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 
 /* ======== social buttons ======== */

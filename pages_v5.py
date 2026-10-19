@@ -46,6 +46,17 @@ ICO = {
     "brief": '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
     "pin": '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
 }
+
+LIVE_ICO = {
+    "pin": '<path class="d" pathLength="1" d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle class="d dot" pathLength="1" cx="12" cy="10" r="2.5"/>',
+    "phone": '<path class="d" pathLength="1" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/><path class="wave w1" d="M15 3.5a5.5 5.5 0 0 1 5.5 5.5"/><path class="wave w2" d="M15 7a2 2 0 0 1 2 2"/>',
+    "mail": '<rect class="d" pathLength="1" x="3" y="5" width="18" height="14" rx="2"/><path class="d flap" pathLength="1" d="m3 7 9 6 9-6"/>',
+    "clock": '<circle class="d" pathLength="1" cx="12" cy="12" r="9"/><path class="hand hm" d="M12 12V7"/><path class="hand hh" d="M12 12l3 2"/>',
+    "brief": '<g class="sway"><rect class="d" pathLength="1" x="3" y="7" width="18" height="13" rx="2"/><path class="d" pathLength="1" d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></g>',
+}
+def live_ico(n):
+    return f'<svg class="li li-{n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{LIVE_ICO[n]}</svg>'
+
 def ico(n): return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICO[n]}</svg>'
 
 
@@ -261,7 +272,7 @@ def build_contact():
     cards = "".join(f'<a class="qa" href="{h}"{" rel=\"noopener\"" if h.startswith("http") else ""}>{ico(i)}<span><b>{t}</b><small>{s}</small></span></a>' for h, i, t, s in qa)
     body = H.contact(cards) + sec(f"""<div class="split" style="align-items:start">
   <div class="info rv"><h2>Visit, call or write</h2>
-    <dl class="mt-l contact-list"><div><dt><span class="ic">{ico("pin")}</span>Campus</dt><dd>{ADDRESS}</dd></div><div><dt><span class="ic">{ico("phone")}</span>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt><span class="ic">{ico("mail")}</span>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt><span class="ic">{ico("clock")}</span>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div><div><dt><span class="ic">{ico("brief")}</span>Careers (Human Resource)</dt><dd><a href="mailto:stclarecollege.humanresource@gmail.com">stclarecollege.humanresource@gmail.com</a></dd></div></dl>
+    <dl class="mt-l contact-list"><div><dt><span class="ic">{live_ico("pin")}</span>Campus</dt><dd>{ADDRESS}</dd></div><div><dt><span class="ic">{live_ico("phone")}</span>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt><span class="ic">{live_ico("mail")}</span>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt><span class="ic">{live_ico("clock")}</span>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div><div><dt><span class="ic">{live_ico("brief")}</span>Careers (Human Resource)</dt><dd><a href="mailto:stclarecollege.humanresource@gmail.com">stclarecollege.humanresource@gmail.com</a></dd></div></dl>
     <p class="follow">Follow St. Clare College</p>{B.socials()}</div>
   <form class="form rv" data-mailto="{EMAIL}">
     <h2 style="font-size:1.4rem;margin-bottom:18px">Send an inquiry</h2>

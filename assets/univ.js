@@ -176,6 +176,14 @@
   /* ---------- ticker pause ---------- */
   $$(".tick-btn").forEach(function (b) { b.addEventListener("click", function () { var t = b.closest(".ticker, .reel"), on = !t.classList.contains("paused"); t.classList.toggle("paused", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Play programme ticker" : "Pause programme ticker"); }); });
 
+  /* ---------- contact icons draw in when the list comes into view ---------- */
+  $$(".contact-list").forEach(function (l) {
+    if (!("IntersectionObserver" in w)) { l.classList.add("live"); return; }
+    var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { l.classList.add("live"); io.disconnect(); } }, { threshold: .2 });
+    io.observe(l);
+    setTimeout(function () { l.classList.add("live"); }, 4000); /* failsafe */
+  });
+
   /* ---------- admission pass: 3D tilt toward the pointer ---------- */
   $$(".pass-wrap").forEach(function (wr) {
     var card = wr.querySelector(".pass"); if (!card || !fine || reduce) return;
