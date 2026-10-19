@@ -56,7 +56,16 @@ button { font: inherit; }
 ::selection { background: var(--rose100); color: var(--m900); }
 :focus-visible { outline: 3px solid var(--r500); outline-offset: 3px; border-radius: 4px; }
 .on-dark :focus-visible, .hero :focus-visible, .ph :focus-visible, .foot :focus-visible { outline-color: var(--gold); }
-html { scrollbar-color: var(--m700) var(--bg-2); }
+/* page scrollbar: native one hidden on desktop; a thin floating thumb (assets/univ.js) sits over the page with no track */
+@media (hover: hover) and (pointer: fine) {
+  html { scrollbar-width: none; }
+  html::-webkit-scrollbar { width: 0; height: 0; }
+}
+.sbar { position: fixed; top: 0; right: 3px; z-index: 950; width: 7px; border-radius: 7px; background: rgba(122,12,30,.45); opacity: 0; transition: opacity .4s, background .25s, width .2s; cursor: grab; touch-action: none; }
+.sbar.show, .sbar:hover, .sbar.drag { opacity: 1; }
+.sbar:hover, .sbar.drag { background: rgba(122,12,30,.85); width: 9px; }
+.sbar.drag { cursor: grabbing; }
+@media (hover: none), (pointer: coarse) { .sbar { display: none; } }
 .wrap { width: min(var(--wrap), 100% - 2 * var(--gutter)); margin-inline: auto; }
 .skip { position: absolute; left: 12px; top: -80px; z-index: 300; background: var(--gold); color: var(--ink); padding: 12px 18px; font-weight: 700; border-radius: 6px; }
 .skip:focus { top: 12px; }

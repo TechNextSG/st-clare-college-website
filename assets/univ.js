@@ -233,6 +233,24 @@
   var scT;
   w.addEventListener("scroll", function () { d.body.classList.add("scrolling"); clearTimeout(scT); scT = setTimeout(function () { d.body.classList.remove("scrolling"); }, 650); }, { passive: true });
 
+  /* ---------- floating scrollbar (desktop): transparent track, draggable thumb ---------- */
+  if (fine) {
+    var bar = d.createElement("div"); bar.className = "sbar"; bar.setAttribute("aria-hidden", "true"); d.body.appendChild(bar);
+    var hideT, dragY = null, dragTop = 0;
+    function place(show) {
+      var H = root.scrollHeight, vh = w.innerHeight; if (H <= vh + 2) { bar.style.display = "none"; return; }
+      bar.style.display = ""; var h = Math.max(40, vh * vh / H), t = (w.scrollY / (H - vh)) * (vh - h);
+      bar.style.height = h + "px"; bar.style.transform = "translateY(" + t + "px)";
+      if (show) { bar.classList.add("show"); clearTimeout(hideT); hideT = setTimeout(function () { bar.classList.remove("show"); }, 1100); }
+    }
+    w.addEventListener("scroll", function () { place(true); }, { passive: true });
+    w.addEventListener("resize", function () { place(false); }); w.addEventListener("load", function () { place(false); }); place(false);
+    d.addEventListener("mousemove", function (e) { if (e.clientX > w.innerWidth - 24) place(true); });
+    bar.addEventListener("pointerdown", function (e) { e.preventDefault(); dragY = e.clientY; dragTop = w.scrollY; bar.classList.add("drag"); bar.setPointerCapture(e.pointerId); });
+    bar.addEventListener("pointermove", function (e) { if (dragY === null) return; var H = root.scrollHeight, vh = w.innerHeight, h = bar.offsetHeight; w.scrollTo(0, dragTop + (e.clientY - dragY) * (H - vh) / (vh - h)); });
+    bar.addEventListener("pointerup", function () { dragY = null; bar.classList.remove("drag"); });
+  }
+
   /* ---------- admission pass: 3D tilt toward the pointer ---------- */
   $$(".pass-wrap").forEach(function (wr) {
     var card = wr.querySelector(".pass"); if (!card || !fine || reduce) return;
