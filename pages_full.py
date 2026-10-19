@@ -174,7 +174,7 @@ def build_portals():
     rows = "".join(f'<a class="portal rv" href="{h}"><span class="acr">{k}</span><span><h3>{n}</h3><p>{d}</p></span><span class="go">Open &rarr;</span></a>' for h, k, n, d in svc)
     body = ph("Student services", "St. Clare Online Education System", "Five connected systems for learning, content, enrollment, personal transactions and virtual broadcasting, plus forms and the calendar.") \
         + portal_nav("portals.html") \
-        + sec(f'<div class="portal-list">{rows}</div>') \
+        + sec(f'<h2 class="sr-only">Systems</h2><div class="portal-list">{rows}</div>') \
         + sec(shead("Most requested") + f"""<div class="grid3">
   <a class="panel rv" href="lms.html#college"><span class="tag" style="font-size:.85rem">LMS</span><h3>Class schedules and sections</h3><p>College, SHS and Basic Education corners.</p></a>
   <a class="panel rv" style="--d:1" href="pms.html#documents"><span class="tag" style="font-size:.85rem">PMS</span><h3>Official Document Request Portal</h3><p>Transcripts, diplomas and other documents. No fixers.</p></a>
@@ -191,7 +191,7 @@ def build_lms():
     cc_t, cc_s, cc_l = LMS["college_corner"]
     groups = "".join(f'<div class="linkset rv"><h3>{esc(t)}</h3>{links(items)}</div>' for t, items in LMS["groups"])
     body = ph("LMS", "Learning Management System", LMS["intro"]) + portal_nav("lms.html") \
-        + sec(f'<div class="callout rv" id="college"><div><h3>{cc_t}</h3><p>{cc_s}</p>{links(cc_l)}</div>{zoom("online-learning", "Online learning")}</div>') \
+        + sec(f'<div class="callout rv" id="college"><div><h2>{cc_t}</h2><p>{cc_s}</p>{links(cc_l)}</div>{zoom("online-learning", "Online learning")}</div>') \
         + sec(shead("Welcome Clareans!", LMS["welcome"]) + f'<div class="linkgrid">{groups}</div>' + SRC_NOTE, "alt") \
         + cta("Questions about your schedule?", f"Contact your Program Head or call {PHONE}.")
     page("lms.html", "LMS | St. Clare College Learning Management System",
@@ -201,7 +201,7 @@ def build_lms():
 def build_cms():
     t, s, url = CMS["elibrary"]
     body = ph("CMS", "Content Management System", CMS["intro"]) + portal_nav("cms.html") \
-        + sec(f'<div class="callout rv"><div><h3>{t}</h3><p>{s}</p><a class="btn" href="{url}" rel="noopener" target="_blank">Open the e-Library {ARROW}</a></div>{zoom("poster-elibrary-proquest", "St. Clare College Learning Resource Center, powered by ProQuest")}</div>') \
+        + sec(f'<div class="callout rv"><div><h2>{t}</h2><p>{s}</p><a class="btn" href="{url}" rel="noopener" target="_blank">Open the e-Library {ARROW}</a></div>{zoom("poster-elibrary-proquest", "St. Clare College Learning Resource Center, powered by ProQuest")}</div>') \
         + sec(shead("Downloadable handbooks and manuals") + docs(HANDBOOKS), "alt") \
         + cta("Need a document?", 'Forms and memoranda are on the downloads page.')
     page("cms.html", "CMS | St. Clare College e-Library & Handbooks",

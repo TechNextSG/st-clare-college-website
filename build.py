@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "13"
+V = "14"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -40,9 +40,9 @@ def head(title, desc):
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/univ.css?v={V}">
 <link rel="stylesheet" href="assets/content.css?v={V}">
+<script src="assets/univ.js?v={V}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="assets/univ.js?v={V}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -57,7 +57,7 @@ def header(page):
 </div></div>
 <header class="head"><div class="wrap">
   <a class="brand" href="index.html" aria-label="St. Clare College of Caloocan, home">
-    <img src="img/seal.svg" alt="" width="58" height="58">
+    <img src="img/seal-128.webp" srcset="img/seal-128.webp 1x, img/seal-256.webp 2x" alt="" width="58" height="58">
     <span><b>St. Clare College</b><small>of Caloocan &middot; The School of Life Skills</small></span>
   </a>
   <nav class="nav" id="nav" aria-label="Main">{links}<a class="btn" href="admissions.html"><span>Apply now</span> {ARROW}</a></nav>
@@ -73,7 +73,7 @@ def footer():
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <div class="fb"><img src="img/seal.svg" alt="" width="54" height="54" loading="lazy"><b>St. Clare College<br>of Caloocan</b></div>
+        <div class="fb"><img src="img/seal-128.webp" srcset="img/seal-128.webp 1x, img/seal-256.webp 2x" alt="" width="54" height="54" loading="lazy"><b>St. Clare College<br>of Caloocan</b></div>
         <p>The School of Life Skills. {ADDRESS}.</p>
         <div class="socials"><a href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}</a></div>
       </div>
@@ -109,7 +109,7 @@ def shead(title, lede="", solo=False):
 def ph(crumb, title, lede, photo=None, alt="", extra=""):
     pic = f'<div class="ph-img">{img(photo, alt, 1600, 900, lazy=False, sizes="(max-width: 900px) 0px, 40vw")}</div>' if photo else "<div></div>"
     return f"""<section class="ph">
-  <img class="seal-watermark" src="img/seal.svg" alt="" width="440" height="440">
+  <img class="seal-watermark" src="img/seal-512.webp" alt="" width="440" height="440" loading="lazy">
   <div class="wrap">
     <div><p class="crumbs"><a href="index.html">Home</a> / {crumb}</p><h1>{lines(title)}</h1><p class="lede">{lede}</p>{extra}</div>
     {pic}

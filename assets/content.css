@@ -6,7 +6,7 @@
 @media (max-width: 560px) { .vids { grid-template-columns: minmax(0, 1fr); } }
 .vid { display: flex; flex-direction: column; }
 .yt { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r); overflow: hidden; background: var(--navy-3); }
-.yt button { all: unset; position: absolute; inset: 0; cursor: pointer; display: block; }
+.yt button { all: unset; position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; display: block; }
 .yt img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease), opacity .3s; }
 .yt button:hover img { transform: scale(1.03); opacity: .9; }
 .yt button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 64px; height: 44px; margin: -22px 0 0 -32px; border-radius: 10px; background: rgba(61,6,16,.88); box-shadow: 0 6px 18px rgba(0,0,0,.3); transition: background .2s; }

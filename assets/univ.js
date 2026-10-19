@@ -49,17 +49,22 @@
   }
 
   /* ---------- home hero slideshow ---------- */
-  var slides = $$(".slide"), dots = $$(".dots button"), cap = d.querySelector(".slide-cap"), cur = 0, timer;
+  var slides = $$(".slide"), dots = $$(".dots button"), cap = d.querySelector(".slide-cap"), cur = 0, timer, paused = reduce;
+  function loadSlide(n) { var im = slides.length && slides[(n + slides.length) % slides.length].querySelector("img[data-src]"); if (!im) return; if (im.dataset.srcset) im.srcset = im.dataset.srcset; im.src = im.dataset.src; im.removeAttribute("data-src"); im.removeAttribute("data-srcset"); }
   function show(n) {
     if (!slides.length) return;
     cur = (n + slides.length) % slides.length;
     slides.forEach(function (s, i) { s.classList.toggle("on", i === cur); });
     dots.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-current", i === cur ? "true" : "false"); var bar = b.querySelector("i"); if (bar) { bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = ""; } });
     if (cap) cap.textContent = slides[cur].getAttribute("data-cap") || "";
-    clearTimeout(timer); if (!reduce) timer = setTimeout(function () { show(cur + 1); }, 7000);
+    loadSlide(cur); loadSlide(cur + 1);
+    clearTimeout(timer); if (!reduce && !paused) timer = setTimeout(function () { show(cur + 1); }, 7000);
   }
   if (slides.length) {
-    dots.forEach(function (b, i) { b.addEventListener("click", function () { show(i); }); });
+    dots.forEach(function (b, i) { b.addEventListener("click", function () { if (cap) cap.setAttribute("aria-live", "polite"); show(i); }); });
+    var pb = d.querySelector(".slide-pause");
+    if (pb) { if (paused) { pb.setAttribute("aria-pressed", "true"); pb.setAttribute("aria-label", "Play slideshow"); }
+      pb.addEventListener("click", function () { paused = !paused; pb.setAttribute("aria-pressed", paused); pb.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow"); d.querySelector(".hero-home").classList.toggle("paused", paused); show(cur); }); }
     show(0);
     d.addEventListener("visibilitychange", function () { if (d.hidden) clearTimeout(timer); else show(cur); });
   }
@@ -96,6 +101,7 @@
       });
     });
     function fromHash() { var h = location.hash.slice(1), t = h && list.querySelector('[data-hash="' + h + '"]'); if (t) select(t); }
+    select(tabs.filter(function (t) { return t.getAttribute("aria-selected") === "true"; })[0] || tabs[0]);
     fromHash(); w.addEventListener("hashchange", fromHash);
   });
 
@@ -156,7 +162,11 @@
   else w.addEventListener("load", function () { (w.gsap && w.ScrollTrigger) ? motion() : fallback(); });
   setTimeout(function () { if (!w.gsap) showAll(); }, 7000); /* failsafe if the CDN is blocked */
 
+  /* ---------- ticker pause ---------- */
+  $$(".tick-btn").forEach(function (b) { b.addEventListener("click", function () { var t = b.closest(".ticker"), on = !t.classList.contains("paused"); t.classList.toggle("paused", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Play programme ticker" : "Pause programme ticker"); }); });
+
   /* ---------- lite YouTube ---------- */
+  $$(".yt img").forEach(function (im) { function bad() { if (im.naturalWidth && im.naturalWidth <= 120) im.closest(".yt").classList.add("noimg"); } im.addEventListener("error", function () { im.closest(".yt").classList.add("noimg"); }); im.complete ? bad() : im.addEventListener("load", bad); });
   $$(".yt[data-id]").forEach(function (box) {
     var b = box.querySelector("button"); if (!b) return;
     b.addEventListener("click", function () {

@@ -18,7 +18,7 @@ PROGRAM_TICKER = ["BS Hospitality Management", "BS Business Administration", "BS
 
 def ticker():
     items = "".join(f"<span>{esc(x)}</span>" for x in PROGRAM_TICKER)
-    return f'<div class="ticker" aria-label="Programmes offered"><div class="track" aria-hidden="true">{items}{items}</div><p class="sr-only">{esc(", ".join(PROGRAM_TICKER))}</p></div>\n'
+    return f'<div class="ticker" aria-label="Programmes offered"><div class="track" aria-hidden="true">{items}{items}</div><p class="sr-only">{esc(", ".join(PROGRAM_TICKER))}</p><button class="tick-btn" type="button" aria-label="Pause programme ticker" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button></div>\n'
 
 ICO = {
     "book": '<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M8 7h7"/>',
@@ -41,6 +41,7 @@ def build_home():
     sl = []
     for i, (s, c) in enumerate(slides):
         im = B.img(s, "", 1600, 900, lazy=i > 0, sizes="100vw") if s.endswith(".jpg") else simg(s, "", "100vw", lazy=i > 0)
+        if i > 0: im = im.replace(' src="', ' data-src="').replace(' srcset="', ' data-srcset="').replace("<img ", '<img fetchpriority="low" ')
         sl.append(f'<div class="slide{" on" if i == 0 else ""}" data-cap="{esc(c)}">{im}</div>')
     dots = "".join(f'<button type="button" aria-label="Show photo {i + 1}: {esc(c)}"><i></i></button>' for i, (_, c) in enumerate(slides))
     quick = [("academics.html", "book", "Programmes", "College, SHS, Basic Ed"), ("admissions.html#steps", "steps", "How to enroll", "Three steps on campus"),
@@ -58,7 +59,7 @@ def build_home():
     <p class="lede">St. Clare College of Caloocan educates learners from Nursery to College, on one campus in Caloocan City and online through St. Clare Online.</p>
     <div class="actions"><a class="btn" href="admissions.html"><span>How to enroll</span> {ARROW}</a><a class="btn ghost" href="academics.html"><span>Explore programmes</span></a></div>
   </div></div>
-  <div class="slide-ui"><p class="slide-cap" aria-live="polite"></p><div class="dots">{dots}</div></div>
+  <div class="slide-ui"><p class="slide-cap"></p><div class="slide-ctrl"><button class="slide-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button><div class="dots">{dots}</div></div></div>
   <span class="scroll-cue" aria-hidden="true"></span>
 </section>
 <nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
@@ -116,7 +117,7 @@ def build_about():
 </div>""") \
         + sec(shead("Leadership") + f'<div class="leaders">{leaders}</div>', "alt") \
         + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>The leading edge in online education</h2><p class="lede mt">Long before the COVID-19 crisis, St. Clare College prepared its ICT capability, so that it was ready to embrace the new normal in education while continuing to provide quality, affordable and sustainable development education.</p></div><ol class="timeline">{hist}</ol></div>') \
-        + sec(shead("State-of-the-art facilities", "Transforming education, building our future. Select a photo to enlarge it.") + gallery(FACILITIES), "alt", "facilities") \
+        + sec(shead("State-of-the-art facilities", "Transforming education, building our future. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("prog-bscs-lab", "Computer laboratory")]), "alt", "facilities") \
         + sec(shead("St. Clare in video", "Officials, facilities and the story of St. Clare Online.") + '<div class="vids">' + "".join(f'<div class="rv">{vcard(t, v, w)}</div>' for t, v, w in vids) + '</div><p class="mt-l rv"><a class="more" href="vms.html">Full video library</a></p>') \
         + sec(f"""<div class="split"><div class="rv"><h2>The seal and the St. Clare reds</h2><p class="lede mt">The original college seal, restored in high definition, leads a palette built on deep crimson and maroon, with the seal's gold as the accent.</p></div>
   <div class="rv" style="display:grid;place-items:center"><img src="img/seal.svg" alt="St. Clare College of Caloocan seal" width="300" height="300" loading="lazy" style="width:min(300px,70vw);filter:drop-shadow(0 18px 30px rgba(61,6,16,.25))"></div></div>
@@ -134,7 +135,7 @@ def build_academics():
     doors = [("tertiary", "prog-bscs-lab", "College", "Eight bachelor's degrees: BSHM, BSBA, BSCS, BEEd, BSEd, BSTM, AB PolSci"),
              ("shs", "shs-ict-virtual-lab", "Senior High School", "ABM, HUMSS, Arts & Design, TVL-ICT and TVL-HE"),
              ("basic", "basic-elementary", "Basic Education", "Nursery and Kindergarten, Elementary and Junior High School")]
-    dh = "".join(f'<a class="panel-x" href="#{h}">{simg(s, "", "(max-width: 760px) 100vw, 60vw", lazy=False)}<span class="in"><b>{t}</b><span>{d}</span><em>View programmes &rarr;</em></span></a>' for h, s, t, d in doors)
+    dh = "".join(f'<a class="panel-x" href="#{h}">{simg(s, "", "(max-width: 760px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" " if h == "tertiary" else "<img ")}<span class="in"><b>{t}</b><span>{d}</span><em>View programmes &rarr;</em></span></a>' for h, s, t, d in doors)
     body = f"""<section class="hero hero-acad">
   <div class="wrap"><div class="head-copy">{crumbs("Academics")}<h1>{lines("Programmes for|every stage")}</h1>
     <p class="lede" style="margin-top:18px">Basic Education, Senior High School and eight college degrees, taught on campus, online or blended. Choose a level.</p></div>
@@ -155,7 +156,7 @@ def build_admissions():
     for i, (k, (label, ab, items)) in enumerate(REQ.items()):
         sel = i == 0
         tabs.append(f'<button role="tab" id="rt-{k}" aria-controls="rp-{k}" aria-selected="{"true" if sel else "false"}"{"" if sel else " tabindex=\"-1\""} data-hash="{k}">{label}</button>')
-        panels.append(f'<div role="tabpanel" id="rp-{k}" aria-labelledby="rt-{k}"{"" if sel else " hidden"}>{checklist(items)}</div>')
+        panels.append(f'<div role="tabpanel" id="rp-{k}" aria-labelledby="rt-{k}">{checklist(items)}</div>')
     faq = [
         ("Can I enroll online?", 'Yes. Online enrollment is through the IMS: <a href="ims.html">St. Clare IMS</a>. You can also enroll on campus in three steps.'),
         ("Can I study fully online?", "Yes. St. Clare College offers two modalities: full online and blended (online plus on-campus days)."),
@@ -206,7 +207,7 @@ def build_campus():
               ("prog-bshm", "Hospitality students"), ("shs-tvl-he", "TVL Home Economics"), ("prog-education", "Teacher education"),
               ("basic-kinder", "Kindergarten"), ("prog-bstm", "Tourism management"), ("i-love-st-clare", "I love St. Clare")]
     mosaic = [("fac-virtual-lab-thronos", "Virtual Lab"), ("fac-library", "Library"), ("prog-bshm", "Hospitality kitchen"), ("fac-vr-headset", "Mixed reality"), ("basic-kinder", "Basic Education")]
-    mz = "".join(f'<figure>{simg(s, c, "(max-width: 760px) 50vw, 25vw", lazy=False)}<figcaption>{c}</figcaption></figure>' for s, c in mosaic)
+    mz = "".join(f'<figure>{simg(s, c, "(max-width: 760px) 50vw, 25vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" " if s == mosaic[0][0] else "<img ")}<figcaption>{c}</figcaption></figure>' for s, c in mosaic)
     vids = [("St. Clare College Virtual Lab", "Ncj3mlHUiok", "2021"), ("St. Clare Online: Virtual Lab", "avbXu3J7PoI", "Predator Thronos & Mixed Reality by Acer"), ("St. Clare College Virtual Flag Ceremony", "QSRZvHk7TMA", "Every Monday, 7:00 AM")]
     body = f"""<section class="hero hero-camp">
   <div class="wrap">{crumbs("Campus life")}<h1>{lines("Life at|St. Clare")}</h1>
@@ -216,7 +217,7 @@ def build_campus():
 """ + sec(shead("A week on campus", "From the Monday flag ceremony to the Virtual Studio.") + f'<div class="grid3">{dh}</div>', "", "week") \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Inside the Virtual Lab</h2></div><p class="lede">Visit St. Clare College and experience the immersive technology behind the Predator Thronos and the Mixed Reality facility by Acer.</p></div>
 <div class="feature-video on-dark"><div class="vid rv">{yt(vids[0][1], vids[0][0])}<h3>{vids[0][0]}</h3><p class="when">{vids[0][2]}</p></div><div class="side">{"".join(vid_side(t, v, w) for t, v, w in vids[1:])}</div></div>""", "dark", "virtual-lab") \
-        + sec(shead("State-of-the-art facilities", "The library, the Virtual Lab and mixed-reality learning. Select a photo to enlarge it.") + gallery(FACILITIES), "", "facilities") \
+        + sec(shead("State-of-the-art facilities", "The library, the Virtual Lab and mixed-reality learning. Select a photo to enlarge it.") + gallery([f for f in FACILITIES if f[0] != "fac-state-of-the-art"] + [("virtual-lab-predator-units", "Predator units in the Virtual Lab")]), "", "facilities") \
         + sec(shead("Campus in pictures") + gallery(photos), "alt") \
         + sec(f'<div class="split"><figure class="photo rv-img">{B.img("campus-building.jpg", "St. Clare College campus building", 1600, 900)}<figcaption>The campus on Zabarte Road</figcaption></figure><div class="rv"><h2>Facilities at a glance</h2><ul class="checklist" style="columns:1;margin-top:18px"><li>E-boards in all 95 classrooms</li><li>Air-conditioned classrooms and restrooms</li><li>Computer laboratories with stacked servers</li><li>Library and enlistment area on the 3rd floor</li><li>Virtual Lab: Predator Thronos and Mixed Reality by Acer</li><li>St. Clare Virtual Studio</li></ul></div></div>') \
         + sec(f'<div class="split" style="align-items:start"><div class="rv"><h2>Digital citizenship</h2><p class="lede mt">Online learning comes with responsibilities. These policies guide life on St. Clare Online.</p></div>{docs(HANDBOOKS)}</div>', "alt", "digital-citizenship") \
@@ -230,19 +231,25 @@ def build_news():
         return simg(im, "", sizes) if im else f'<img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">' if vid else simg("campus-sco-sign", "", sizes)
     lead = NEWS_FULL[0]
     heads = "".join(f'<li><a href="#n{i}">{thumb(im, vid, "76px")}<span><b>{esc(t)}</b><small>{esc(dt)}</small></span></a></li>' for i, (dt, t, tx, im, vid) in list(enumerate(NEWS_FULL))[1:6])
-    items = []
-    for i, (date, title, text, imgslug, vid) in enumerate(NEWS_FULL):
+    items, last_year = [], None
+    def yr_of(dt): return next((y for y in ("2024", "2023", "2021", "2020") if y in dt), "2020")
+    order = sorted(range(len(NEWS_FULL)), key=lambda i: -int(yr_of(NEWS_FULL[i][0])))
+    for i in order:
+        date, title, text, imgslug, vid = NEWS_FULL[i]
         media = yt(vid, title) if vid else zoom(imgslug, title) if imgslug else ""
         extra = ""
         if title.startswith("Health Survey"): extra = f'<p><a class="more" href="{HEALTH_SURVEY}" rel="noopener" target="_blank">Open the health survey form</a></p>'
         if "UniFAST guidelines" in title: extra = '<p><a class="more" href="pms.html#tes">TES guidelines on the PMS</a></p>'
         if "leading edge" in title: extra = '<p><a class="more" href="about.html">Read the full history</a></p>'
         if "AI technology" in title: extra = '<p><a class="more" href="campus-life.html#virtual-lab">Inside the Virtual Lab</a></p>'
-        items.append(f'<article class="item rv" id="n{i}"><div class="media">{media}</div><div><span class="date">{esc(date)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p>{extra}</div></article>')
+        yr = yr_of(date)
+        if yr != last_year:
+            items.append(f'<h2 class="year rv">{yr if yr != "2020" else "2020 and earlier"}</h2>'); last_year = yr
+        items.append(f'<article class="item rv" id="n{i}"><div class="media">{media or '<div class="noimg" aria-hidden="true"></div>'}</div><div><span class="date">{esc(date)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p>{extra}</div></article>')
     body = f"""<section class="hero hero-news">
   <div class="wrap">{crumbs("News")}<h1>{lines("News and|announcements")}</h1>
     <div class="feature">
-      <a class="lead-story" href="#n0"><span class="pic">{simg(lead[3], "", "(max-width: 900px) 100vw, 60vw", lazy=False)}</span><span class="in"><span class="tag">Latest &middot; {esc(lead[0])}</span><b>{esc(lead[1])}</b><span style="color:var(--on-dark)">{esc(lead[2])}</span></span></a>
+      <a class="lead-story" href="#n0"><span class="pic">{simg(lead[3], "", "(max-width: 900px) 100vw, 60vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" ")}</span><span class="in"><span class="tag">Featured &middot; {esc(lead[0])}</span><b>{esc(lead[1])}</b><span style="color:var(--on-dark)">{esc(lead[2])}</span></span></a>
       <ul class="headlines">{heads}</ul>
     </div></div>
 </section>
@@ -255,7 +262,7 @@ def build_contact():
           ("https://m.me/stclarecollege", "chat", "Messenger", "St. Clare College on Facebook"), ("#map", "pin", "Visit", "Zabarte Road, Caloocan City")]
     cards = "".join(f'<a class="qa" href="{h}"{" rel=\"noopener\"" if h.startswith("http") else ""}>{ico(i)}<span><b>{t}</b><small>{s}</small></span></a>' for h, i, t, s in qa)
     body = f"""<section class="hero hero-contact">
-  <div class="bgimg">{simg("campus-sco-sign", "", "100vw", lazy=False)}</div><div class="scrim"></div>
+  <div class="bgimg">{simg("campus-sco-sign", "", "100vw", lazy=False).replace("<img ", "<img fetchpriority=\"high\" ")}</div><div class="scrim"></div>
   <div class="wrap grid">
     <div>{crumbs("Contact")}<h1>{lines("We'd love to|hear from you")}</h1>
       <p class="lede" style="margin-top:20px">Questions about programmes, requirements, dates or fees? The admissions office is open 9:00 AM to 5:00 PM.</p></div>
