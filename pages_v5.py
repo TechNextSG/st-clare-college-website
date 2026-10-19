@@ -124,9 +124,8 @@ def build_home():
   </div></div>
   <div class="slide-ui"><p class="slide-cap"></p><div class="slide-ctrl"><button class="slide-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button><div class="dots">{dots}</div></div></div>
 </section>
-<nav class="quick" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
-<div style="height:clamp(48px,6vw,80px)"></div>
-""" + ticker() \
+""" + ticker() + f"""<nav class="quick quick-flow" aria-label="Quick access"><ul class="wrap">{q}</ul></nav>
+""" \
         + sec(shead("Academic programmes", "From a child's first school day to a bachelor's degree, every stage of learning happens at St. Clare.") + B.levels_html()) \
         + sec(f"""<div class="sec-head on-dark rv"><div><h2>Proud moments, on video</h2></div><p class="lede">The Professional Mace, the Virtual Lab and the commencement of the Stars of 2024, from the St. Clare College channel.</p></div>
 {theater([("The Eternal Flame of Professionalism", "0RI2tMRZf8w", "The Professional Mace &middot; September 23, 2023"), ("The Stars of 2024: 38th Commencement Exercises", "z_bUjTOihzA", "June 2024"), ("St. Clare College Virtual Lab", "Ncj3mlHUiok", "2021"), ("Welcome to St. Clare", "f4jWTiXrIOs", "2021"), ("St. Clare College Facilities 2021", "ENCCIBqdPMs", "State-of-the-art facilities")], "St. Clare College channel")}<p class="mt-l rv"><a class="more" href="vms.html">All 46 videos</a></p>""", "dark") \
