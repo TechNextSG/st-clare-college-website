@@ -1,286 +1,209 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#070a2b">
+<meta name="theme-color" content="#d7141a">
 <title>St. Clare College of Caloocan | The School of Life Skills</title>
-<meta name="description" content="St. Clare College of Caloocan: Nursery to College, full online or blended learning. BSCS, BSHM, BSTM, BSBA, BEEd, BSEd and AB Political Science, plus Senior High tracks.">
+<meta name="description" content="St. Clare College of Caloocan: Nursery to College, full online or blended. BSCS, BSHM, BSTM, BSBA, BEEd, BSEd, AB Political Science and Senior High tracks.">
 <meta property="og:title" content="St. Clare College of Caloocan | The School of Life Skills">
-<meta property="og:description" content="St. Clare College of Caloocan: Nursery to College, full online or blended learning. BSCS, BSHM, BSTM, BSBA, BEEd, BSEd and AB Political Science, plus Senior High tracks.">
+<meta property="og:description" content="St. Clare College of Caloocan: Nursery to College, full online or blended. BSCS, BSHM, BSTM, BSBA, BEEd, BSEd, AB Political Science and Senior High tracks.">
 <meta property="og:image" content="img/campus-building.jpg">
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Figtree:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">
-<link rel="stylesheet" href="assets/site.css">
-<script src="assets/site.js" defer></script>
+<link rel="preload" href="fonts/bigshoulders.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/tarp.css?v=5">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="assets/tarp.js?v=5" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="progress" aria-hidden="true"></div>
-<div class="topbar"><div class="wrap">
-  <div class="tb-left"><a href="tel:+63282324483">(02) 8232-4483</a><a class="hide-sm" href="mailto:stclarecollege.ph@gmail.com">stclarecollege.ph@gmail.com</a><span class="hide-sm">Office hours 9:00 AM - 5:00 PM</span></div>
-  <div class="tb-right"><span class="pill">SCO Online</span><a href="https://stclareonline.com/lms" rel="noopener">LMS</a><a href="https://stclareonline.com/ims" rel="noopener">IMS</a><a href="https://stclareonline.com/downloadable-forms" rel="noopener">Forms</a></div>
-</div></div>
-<header class="site-header"><div class="wrap">
-  <a class="brand" href="index.html" aria-label="St. Clare College home">
-    <img src="img/seal-200.webp" alt="St. Clare College of Caloocan seal" width="50" height="50">
-    <span><b>St. Clare College</b><small>The School of Life Skills</small></span>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="index.html" aria-label="St. Clare College, home">
+    <img src="img/seal-200.webp" alt="" width="52" height="52">
+    <span><b>St. Clare College</b><span>The School of Life Skills</span></span>
   </a>
-  <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
-  <nav class="nav" id="nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="academics.html">Academics</a><a href="admissions.html">Admissions</a><a href="campus-life.html">Campus Life</a><a href="portals.html">Portals</a><a href="news.html">News</a><a href="contact.html">Contact</a><a class="btn" href="admissions.html">Enroll now</a></nav>
+  <nav class="menu" id="menu" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="academics.html">Academics</a><a href="admissions.html">Admissions</a><a href="campus-life.html">Campus Life</a><a href="portals.html">Portals</a><a href="news.html">News</a><a href="contact.html">Contact</a><a class="tag-btn" href="admissions.html">Enroll now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></nav>
+  <a class="tag-btn top" href="admissions.html">Enroll now</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="menu"><span>Menu</span></button>
 </div></header>
 <main id="main">
-<section class="hero noise">
-  <canvas class="fx-canvas" aria-hidden="true"></canvas>
-  <div class="grid-floor" aria-hidden="true"></div>
+<section class="hero">
+  <div class="hero-photo"><img src="img/campus-building.jpg" alt="" fetchpriority="high" width="1600" height="900"></div>
+  <div class="pipe" aria-hidden="true"></div>
   <div class="wrap">
-    <div>
-      <span class="hero-tag rv"><b>Enroll online</b> Full online or blended learning</span>
-      <h1 data-split>The School <span class="grad-text">of Life</span> Skills</h1>
-      <p class="lead rv" style="--d:4">St. Clare College of Caloocan: the leading edge in online education. Nursery to College, one campus on Zabarte Road and one online platform where no one gets left behind.</p>
-      <div class="btn-row rv" style="--d:6"><a class="btn" href="admissions.html">Enroll now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="about.html">Take a tour</a></div>
-    </div>
-    <div class="hero-globe rv-s" id="globe" aria-hidden="true">
-      <span class="orbit-label">SCO ONLINE<small>the leading edge in online education</small></span>
-      <img class="seal-badge" src="img/seal-200.webp" alt="" width="200" height="202">
+    <div class="tarp red-v hero-tarp"><span class="tie" aria-hidden="true"></span><span class="tie" aria-hidden="true"></span><span class="tie" aria-hidden="true"></span><span class="grommets" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <h1><span class="l"><span>The school</span></span><span class="l"><span><span class='sun'>of life skills</span></span></span></h1>
+      <p class="lede">St. Clare College of Caloocan. Nursery to College on one campus, and the leading edge in online education.</p>
+      <div class="hero-actions"><a class="plain" href="#levels">Find your level</a></div>
+      <span class="hang"><span class="cord" aria-hidden="true"></span><a class="tag-btn" href="admissions.html">Enroll now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span>
+      <img class="stamp" src="img/seal-400.webp" alt="St. Clare College of Caloocan seal" width="392" height="396">
     </div>
   </div>
-  <a class="hero-scroll" href="#levels"><i></i>Scroll</a>
+  <img class="hero-vr" src="img/cut-vr.webp" alt="" width="888" height="875">
+  <div class="flap-strip on-dark"><div class="wrap"><span class="lbl">Programmes</span><div class="flaps" data-flaps='[&quot;BSCS Computer Science&quot;, &quot;BSHM Hospitality&quot;, &quot;BSTM Tourism&quot;, &quot;BSBA Business Admin&quot;, &quot;BEEd Elementary Ed&quot;, &quot;BSEd English&quot;, &quot;BSEd Math&quot;, &quot;AB Political Science&quot;, &quot;SHS ABM&quot;, &quot;SHS HUMSS&quot;, &quot;SHS Arts &amp; Design&quot;, &quot;SHS TVL-ICT&quot;, &quot;SHS TVL-HE&quot;, &quot;Nursery to Grade 10&quot;, &quot;Now enrolling&quot;]' data-len="21"></div><button class="mq-btn" type="button" aria-label="Pause programme ticker"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1h4v14H3zM9 1h4v14H9z"/></svg></button></div></div>
 </section>
-<div class="marquee" role="marquee" aria-label="Programmes offered"><div class="track"><span>Nursery &amp; Kindergarten</span><span>Elementary</span><span>Junior High</span><span>Senior High</span><span>BSCS</span><span>BSHM</span><span>BSTM</span><span>BSBA</span><span>BEEd</span><span>BSEd-Eng</span><span>BSEd-Math</span><span>AB PolSci</span><span aria-hidden="true">Nursery &amp; Kindergarten</span><span aria-hidden="true">Elementary</span><span aria-hidden="true">Junior High</span><span aria-hidden="true">Senior High</span><span aria-hidden="true">BSCS</span><span aria-hidden="true">BSHM</span><span aria-hidden="true">BSTM</span><span aria-hidden="true">BSBA</span><span aria-hidden="true">BEEd</span><span aria-hidden="true">BSEd-Eng</span><span aria-hidden="true">BSEd-Math</span><span aria-hidden="true">AB PolSci</span></div></div>
 
-<section class="pad-s white">
+<section class="sec" id="levels">
   <div class="wrap">
-    <div class="stats">
-      <div class="stat rv"><b>1985</b><span>Serving Caloocan since 31 August 1985</span></div>
-      <div class="stat rv" style="--d:1"><b><span data-count="38">38</span><em>th</em></b><span>Commencement Exercises, held in 2024</span></div>
-      <div class="stat rv" style="--d:2"><b><span data-count="8">8</span></b><span>College degree programmes</span></div>
-      <div class="stat rv" style="--d:3"><b><span data-count="547806" data-comma>547,806</span></b><span>Views of the 2020 St. Clare Online start-up module</span></div>
-    </div>
+    <div class="head"><h2 data-letters>Pick your level</h2><p class="lede">From a child's first school day to a college degree, everything happens under one St. Clare roof.</p></div>
+    <div class="picker" role="tablist" aria-label="Choose a school level"><button role="tab" id="lt-basic" aria-controls="lp-basic" aria-selected="false" tabindex="-1" data-v="basic"><b>Basic Ed</b><small>Nursery to Grade 10</small></button><button role="tab" id="lt-shs" aria-controls="lp-shs" aria-selected="false" tabindex="-1" data-v="shs"><b>Senior High</b><small>Grades 11-12, five tracks</small></button><button role="tab" id="lt-college" aria-controls="lp-college" aria-selected="true" data-v="college"><b>College</b><small>Eight degree programmes</small></button></div><div class="deal" role="tabpanel" id="lp-basic" aria-labelledby="lt-basic" hidden>
+  <div class="deal-grid">
+    <ul class="rows"><li><span class="c">K</span><span class="n">Nursery & Kindergarten<small>Nurturing young minds: where curiosity and growth blossom.</small></span></li><li><span class="c">1-6</span><span class="n">Elementary<small>Building strong foundations: empowering students for lifelong learning.</small></span></li><li><span class="c">7-10</span><span class="n">Junior High School<small>Unlocking potential, shaping futures: a journey of growth and discovery.</small></span></li></ul>
+    <aside><div class="deal-figs"><img src="img/cut-girl.webp" alt="Girl in the St. Clare Basic Education uniform" width="254" height="786" loading="lazy"><img src="img/cut-boy.webp" alt="Boy in the St. Clare Basic Education uniform" width="260" height="767" loading="lazy"></div>
+      <p style="margin-top:18px"><a class="tag-btn" href="admissions.html#basic">What to bring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      <p><a href="academics.html#basic">Programme details</a></p></aside>
   </div>
-</section>
-
-<section class="pad" id="levels">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">Three schools, one campus</span><h2 data-split>From first steps <span class="grad-text-brand">to first job</span></h2></div>
-      <p class="lead rv">St. Clare College carries learners from Nursery all the way to a college degree, with life skills built in at every level.</p>
-    </div>
-    <div class="levels">
-      <a class="level lv-1 rv" href="academics.html#basic" data-tilt><span class="num">01</span><h3>Basic Education</h3><p>Nursery &amp; Kindergarten, Elementary (Grades 1-6) and Junior High (Grades 7-10).</p><ul><li>Nursery</li><li>Kinder</li><li>Grades 1-10</li></ul><span class="go">Explore Basic Ed</span></a>
-      <a class="level lv-2 rv" style="--d:1" href="academics.html#shs" data-tilt><span class="num">02</span><h3>Senior High School</h3><p>Academic, Arts &amp; Design and TVL tracks with TESDA-assessed specializations.</p><ul><li>ABM</li><li>HUMSS</li><li>Arts &amp; Design</li><li>TVL-ICT</li><li>TVL-HE</li></ul><span class="go">Explore SHS</span></a>
-      <a class="level lv-3 rv" style="--d:2" href="academics.html#tertiary" data-tilt><span class="num">03</span><h3>Tertiary</h3><p>Eight degree programmes in computing, hospitality, tourism, business, education and political science.</p><ul><li>BSCS</li><li>BSHM</li><li>BSTM</li><li>BSBA</li><li>BEEd</li><li>BSEd</li><li>AB PolSci</li></ul><span class="go">Explore College</span></a>
-    </div>
+</div><div class="deal" role="tabpanel" id="lp-shs" aria-labelledby="lt-shs" hidden>
+  <div class="deal-grid">
+    <ul class="rows"><li><span class="c">ABM</span><span class="n">Accountancy, Business & Management<small>Academic track</small></span></li><li><span class="c">HUMSS</span><span class="n">Humanities & Social Sciences<small>Academic track</small></span></li><li><span class="c">A&D</span><span class="n">Arts & Design<small>Arts & Design track</small></span></li><li><span class="c">ICT</span><span class="n">TVL - Information & Communications Technology<small>Technical-Vocational-Livelihood: Computer Programming, Animation</small></span></li><li><span class="c">HE</span><span class="n">TVL - Home Economics<small>Technical-Vocational-Livelihood: Bread & Pastry Production, Food & Beverage Services, Housekeeping, Local Guiding Services, Travel Services</small></span></li></ul>
+    <aside><div class="deal-figs"><div class="note-card yellow" style="--r:-2deg"><span class="pin" aria-hidden="true"></span><h3>TESDA-assessed</h3><p>TVL-HE students take TESDA competency assessment for National Certification (NC).</p></div></div>
+      <p style="margin-top:18px"><a class="tag-btn" href="admissions.html#shs">What to bring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      <p><a href="academics.html#shs">Programme details</a></p></aside>
   </div>
-</section>
-
-<section class="pad paper-2" data-rail>
-  <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">College programmes</span><h2 data-split>Degrees built <span class="grad-text-brand">for the industry</span></h2></div>
-      <div><p class="lead rv">Theory in the classroom, mastery in the laboratory, kitchen and field. Choose the path that fits your future.</p>
-        <div class="rail-ctrl rv" style="margin-top:22px" data-rail-ctrl><button data-dir="-1" aria-label="Previous programmes">&larr;</button><button data-dir="1" aria-label="Next programmes">&rarr;</button></div></div>
-    </div>
+</div><div class="deal" role="tabpanel" id="lp-college" aria-labelledby="lt-college">
+  <div class="deal-grid">
+    <ul class="rows"><li><span class="c">BSCS</span><span class="n">Bachelor of Science in Computer Science<small>College of Computing</small></span></li><li><span class="c">BSHM</span><span class="n">Bachelor of Science in Hospitality Management<small>Hospitality & Tourism</small></span></li><li><span class="c">BSTM</span><span class="n">Bachelor of Science in Tourism Management<small>Hospitality & Tourism</small></span></li><li><span class="c">BSBA</span><span class="n">Bachelor of Science in Business Administration<small>Business</small></span></li><li><span class="c">BEEd</span><span class="n">Bachelor of Elementary Education<small>Teacher Education</small></span></li><li><span class="c">BSEd-Eng</span><span class="n">Bachelor of Secondary Education, Major in English<small>Teacher Education</small></span></li><li><span class="c">BSEd-Math</span><span class="n">Bachelor of Secondary Education, Major in Math<small>Teacher Education</small></span></li><li><span class="c">AB PolSci</span><span class="n">Bachelor of Arts in Political Science<small>Social Sciences</small></span></li></ul>
+    <aside><div class="deal-figs"><figure class="photo-print" style="--r:-2deg;margin:0"><span class="pin" aria-hidden="true"></span><img src="img/graduates.jpg" alt="St. Clare College graduates at the 2024 commencement" width="1230" height="640" loading="lazy"><figcaption>The Stars of 2024</figcaption></figure></div>
+      <p style="margin-top:18px"><a class="tag-btn" href="admissions.html#freshmen">What to bring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      <p><a href="academics.html#tertiary">Programme details</a></p></aside>
   </div>
-  <div class="rail-wrap"><div class="rail" tabindex="0" aria-label="College programmes"><article class="prog rv" style="--d:0">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg></span>
-  <span class="code">BSCS</span>
-  <h3>Bachelor of Science in Computer Science</h3>
-  <p>Proficiency in designing, writing and developing computer programs and computer networks: algorithms, software applications, data processing, web development, programming and computer architecture.</p>
-  <div class="tags"><span>Programming</span><span>Web development</span><span>Networks</span></div>
-</article><article class="prog rv" style="--d:1">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13.9A4 4 0 1 1 7.5 6a5 5 0 0 1 9 0A4 4 0 1 1 18 13.9V20H6z"/><path d="M6 17h12"/></svg></span>
-  <span class="code">BSHM</span>
-  <h3>Bachelor of Science in Hospitality Management</h3>
-  <p>Competencies to run operations and management functions across the hospitality industry.</p>
-  <div class="tags"><span>Culinary</span><span>Accommodation</span><span>F&B service</span></div>
-</article><article class="prog rv" style="--d:2">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-8-4 12-6-4-4 4v-6"/></svg></span>
-  <span class="code">BSTM</span>
-  <h3>Bachelor of Science in Tourism Management</h3>
-  <p>Operational and management competencies for hospitality, tourism and their emerging sectors.</p>
-  <div class="tags"><span>Tourism planning</span><span>Travel & tours</span><span>Transport services</span></div>
-</article><article class="prog rv" style="--d:3">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
-  <span class="code">BSBA</span>
-  <h3>Bachelor of Science in Business Administration</h3>
-  <p>Knowledge, skills and attitude to provide quality service in business and industry.</p>
-  <div class="tags"><span>Management</span><span>Practicum</span><span>Experiential learning</span></div>
-</article><article class="prog rv" style="--d:0">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8z"/></svg></span>
-  <span class="code">BEEd</span>
-  <h3>Bachelor of Elementary Education</h3>
-  <p>An undergraduate teacher-education degree designed to prepare individuals intending to teach at the elementary level.</p>
-  <div class="tags"><span>Teaching</span><span>Elementary level</span></div>
-</article><article class="prog rv" style="--d:1">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-12 4 12M5.5 16h5"/><path d="M15 8h3a2 2 0 0 1 0 4h-3zM15 12h3.5a2 2 0 0 1 0 4H15z"/></svg></span>
-  <span class="code">BSEd-Eng</span>
-  <h3>Bachelor of Secondary Education, Major in English</h3>
-  <p>Competencies to teach English at the secondary level.</p>
-  <div class="tags"><span>Teaching</span><span>English</span><span>Secondary level</span></div>
-</article><article class="prog rv" style="--d:2">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4H6l6 8-6 8h12"/></svg></span>
-  <span class="code">BSEd-Math</span>
-  <h3>Bachelor of Secondary Education, Major in Math</h3>
-  <p>Competencies to teach Mathematics at the secondary level.</p>
-  <div class="tags"><span>Teaching</span><span>Mathematics</span><span>Secondary level</span></div>
-</article><article class="prog rv" style="--d:3">
-  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M9 21V10M15 21V10M19 21V10M2 10l10-6 10 6z"/></svg></span>
-  <span class="code">AB PolSci</span>
-  <h3>Bachelor of Arts in Political Science</h3>
-  <p>Prepares you for a professional career in government service, or for careers dealing with public issues and problems.</p>
-  <div class="tags"><span>Government</span><span>Public issues</span><span>Policy</span></div>
-</article></div></div>
-  <div class="wrap"><a class="link-arrow" href="academics.html#tertiary">See full programme details</a></div>
-</section>
-
-<section class="dusk pad noise" style="overflow:hidden">
-  <canvas class="fx-canvas" aria-hidden="true"></canvas>
-  <div class="wrap" style="position:relative">
-    <div class="sec-head">
-      <div><span class="eyebrow">Choose your modality</span><h2 data-split>Learn your way, <span class="grad-text">succeed your way</span></h2></div>
-      <p class="lead rv">Personalized learning pathways: choose the modality that fits your life, full online or blended.</p>
-    </div>
-    <div class="modality">
-  <article class="mode rv" data-tilt>
-    <span class="eyebrow">Modality 01</span>
-    <div class="big">Full<br>online</div>
-    <p>Learn from anywhere through St. Clare Online: LMS classes, the e-Library and virtual broadcasts.</p>
-    <div class="meter" style="--w:100%"><i></i></div><div class="meter-l"><span>Online</span><span>On campus</span></div>
-  </article>
-  <article class="mode rv" style="--d:1" data-tilt>
-    <span class="eyebrow">Modality 02</span>
-    <div class="big">Blended</div>
-    <p>Combine online learning with on-campus days in air-conditioned classrooms, laboratories and the Virtual Lab.</p>
-    <div class="meter" style="--w:55%"><i></i></div><div class="meter-l"><span>Online</span><span>On campus</span></div>
-  </article>
 </div>
   </div>
 </section>
 
-<section class="dark pad" style="overflow:hidden"><div class="wrap" style="position:relative"><div class="split">
-  <div>
-    <span class="eyebrow">St. Clare Virtual Lab</span>
-    <h2 data-split>Immersion, <span class="grad-text">reimagined</span></h2>
-    <p class="lead rv">Another first from St. Clare College: a Virtual Lab that brings immersive technology into the classroom.</p>
-    <div class="equation rv" aria-label="Virtual Reality plus Augmented Reality equals Mixed Reality">
-      <span class="term">VR<small>Virtual reality</small></span><span class="op">+</span>
-      <span class="term">AR<small>Augmented reality</small></span><span class="op">=</span>
-      <span class="term res">MR<small>Mixed reality</small></span>
-    </div>
-    <p class="rv" style="color:var(--on-dark-muted);margin-top:40px">Experience the technology behind the <b style="color:#fff">Predator Thronos</b> and the <b style="color:#fff">Mixed Reality facility by Acer</b>. Opened in 2021, the Virtual Lab welcomed visitors from 10:00 AM to 5:00 PM. Ask admissions about a visit.</p>
-    <a class="btn rv" href="campus-life.html#virtual-lab">Explore the Virtual Lab <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div>
-  <div class="media-stack rv-s">
-    <div class="media tall"><img src="img/virtual-lab-predator.jpg" alt="Predator gaming stations inside the St. Clare Virtual Lab" loading="lazy" width="1600" height="1066"></div>
-    <div class="float"><img src="img/vr-student.jpg" alt="Student wearing a VR headset" loading="lazy" width="868" height="1030"></div>
-  </div>
-</div></div></section>
+<div class="factband"><p class="facttrack"><span>Since <span class="r">1985</span></span><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.1 7.6L23 9.3l-6 5.3 1.8 8L12 18.4 5.2 22.6 7 14.6 1 9.3l7.9-.7z"/></svg><span>E-boards in all <span class="b">95</span> classrooms</span><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.1 7.6L23 9.3l-6 5.3 1.8 8L12 18.4 5.2 22.6 7 14.6 1 9.3l7.9-.7z"/></svg><span><span class="r">38th</span> commencement, June 2024</span><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.1 7.6L23 9.3l-6 5.3 1.8 8L12 18.4 5.2 22.6 7 14.6 1 9.3l7.9-.7z"/></svg><span>Full online <span class="b">or</span> blended</span><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.1 7.6L23 9.3l-6 5.3 1.8 8L12 18.4 5.2 22.6 7 14.6 1 9.3l7.9-.7z"/></svg><span><span class="r">547,806</span> views of our 2020 start-up module</span></p></div>
 
-<section class="pad white">
+<section class="sec on-white" id="steps">
   <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">SCO Online</span><h2 data-split>Stay connected, <span class="grad-text-brand">stay inspired</span></h2></div>
-      <p class="lead rv">St. Clare Online is the college's own channel network: wellness, sport, leadership, innovation and the stories of Clareans.</p>
-    </div>
-    <div class="channels"><div class="chan logo rv-s"><img src="img/sco-online.webp" alt="SCO Online logo" width="256" height="256" loading="lazy"></div><article class="chan rv-s" style="--d:1"><span class="k">SCO &middot; Wellness</span><h3>Health Talk</h3></article><article class="chan rv-s" style="--d:2"><span class="k">SCO &middot; Athletics</span><h3>Sports Desk</h3></article><article class="chan rv-s" style="--d:3"><span class="k">SCO &middot; Voices</span><h3>Leading Women</h3></article><article class="chan rv-s" style="--d:0"><span class="k">SCO &middot; Innovation</span><h3>Virtual Lab</h3></article><article class="chan rv-s" style="--d:1"><span class="k">SCO &middot; Technology</span><h3>Digital First</h3></article><article class="chan rv-s" style="--d:2"><span class="k">SCO &middot; Stories</span><h3>Heart of a Champion</h3></article><article class="chan rv-s" style="--d:3"><span class="k">SCO &middot; Learning</span><h3>Education That Matters</h3></article></div>
-  </div>
-</section>
-
-<section class="mace dark pad noise">
-  <div class="glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="flame rv-s" aria-hidden="true"><i></i><i></i><i></i></div>
-    <span class="eyebrow">St. Clare College Professional Mace</span>
-    <h2 data-split>The eternal flame <span class="grad-text">of professionalism</span></h2>
-    <blockquote class="rv">&ldquo;A beacon of professionalism and culture of excellence.&rdquo;</blockquote>
-    <cite class="rv">By ERA &amp; EJA &middot; September 23, 2023</cite>
-  </div>
-</section>
-
-
-<section class="pad">
-  <div class="wrap">
-    <div class="vip rv-s">
-      <div class="txt">
-        <span class="eyebrow" style="color:var(--gold)">SHS Alumni VIP Package &middot; SY 2024-2025</span>
-        <div class="stamp grad-text">VIP</div>
-        <h3 class="vip-h">President's Scholarship + zero down payment</h3>
-        <p style="color:var(--on-dark-muted)">To value and support its Senior High graduates moving on to college, St. Clare offered the SHS Class of 2024 the President's Scholarship with zero down payment for SY 2024-2025. Ask admissions about this year's scholarships.</p>
-        <a class="btn" href="admissions.html#scholarships">See scholarships <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="head"><h2 data-letters>Bring the brown envelope</h2><p class="lede">Every St. Clare enrollment starts with a long brown envelope and three stops on campus.</p></div>
+    <div class="route">
+      <div class="envelope">
+        <div class="env" role="img" aria-label="A long brown envelope holding the enrollment documents">
+          <div class="env-flap"></div>
+          <div class="env-docs"><div class="env-doc"><b>PSA birth certificate</b>Photocopy</div><div class="env-doc"><b>Form 138</b>Report card</div><div class="env-doc"><b>2x2 photos</b>2 pcs., recent</div></div>
+          <div class="env-front"><span class="hand">For: Enrollment Officer<br>St. Clare College</span></div>
+        </div>
+        <ul class="checklist"><li>Graduating SHS students: latest grading report card as reflected in the original F138 or report card</li><li>PSA or local civil registry birth certificate</li><li>2x2 ID photos, recent (2 pcs.)</li><li>Certificate of indigency (optional, for scholarship)</li><li>Photocopies of all the documents above</li></ul>
+        <p style="margin-top:14px"><a href="admissions.html#requirements">Full checklist for every level</a></p>
       </div>
-      <div class="media"><img src="img/graduates.jpg" alt="St. Clare College graduates applauding at commencement" loading="lazy" width="1230" height="640"></div>
+      <div class="steps"><article class="ticket" style="--r:-1.2deg">
+  <span class="where">Cashier</span><span class="no" aria-hidden="true">1</span>
+  <h3>Pay the matriculation fee</h3><ul><li>Proceed to the cashier and pay the matriculation fee (designated cashier only).</li><li>Get and keep your OFFICIAL RECEIPT.</li></ul>
+</article><article class="ticket" style="--r:0.8deg">
+  <span class="where">Lobby</span><span class="no" aria-hidden="true">2</span>
+  <h3>Fill up the registration form</h3><ul><li>Go to the LOBBY and present your Official Receipt to the Enrollment Officer.</li><li>Fill up the REGISTRATION FORM.</li><li>Check that your SUBJECTS are listed on the registration form.</li></ul>
+</article><article class="ticket" style="--r:-0.6deg">
+  <span class="where">Library, 3rd floor</span><span class="no" aria-hidden="true">3</span>
+  <h3>Register online for your schedule</h3><ul><li>Proceed to the LIBRARY on the 3rd floor for ENLISTMENT at stclareonline.com/ims.</li><li>Your section and schedule are posted on the website and sent by email by your Program Head.</li></ul>
+</article></div>
     </div>
   </div>
 </section>
 
-<section class="pad white">
+
+<section class="sec on-sun">
+  <div class="wrap"><div class="vlab">
+  <div>
+    <h2 class="sr-only">The St. Clare Virtual Lab</h2>
+    <p class="eq" aria-label="Virtual reality plus augmented reality equals mixed reality"><span>VR</span><span class="op">+</span><span>AR</span><span class="op">=</span><span class="res">MR</span></p>
+    <h3 style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:14px">The Virtual Lab</h3>
+    <p class="lede">Another first from St. Clare College: an immersive lab with the Predator Thronos and the Mixed Reality facility by Acer, opened in 2021.</p>
+    <a class="tag-btn ink-t" href="campus-life.html#virtual-lab">See the lab <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <figure class="photo-print" style="--r:2.5deg" data-pin>
+    <span class="pin y" aria-hidden="true"></span>
+    <img src="img/virtual-lab-predator.jpg" alt="Predator gaming stations in the St. Clare Virtual Lab" width="1600" height="1066" loading="lazy">
+    <figcaption>Predator Thronos + Acer Mixed Reality</figcaption>
+  </figure>
+</div></div>
+</section>
+
+<section class="sec on-red on-dark">
   <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">Vision &amp; Mission</span><h2 data-split>Why we <span class="grad-text-brand">teach</span></h2></div>
-      <p class="lead rv">A responsible, innovative, skillful and professional global workforce, starting here in Caloocan.</p>
+    <div class="head"><h2 data-letters>Tune in to SCO Online</h2><p class="lede">St. Clare runs its own channels: wellness, sport, leadership, innovation and the stories of Clareans, plus a virtual flag ceremony every Monday at 7:00 AM.</p></div>
+    <div class="bunting"><span class="line" aria-hidden="true"></span><div class="flags"><div class="flag logo"><img src="img/sco-online.webp" alt="SCO Online" width="512" height="512" loading="lazy"></div><div class="flag"><b>Health Talk</b><small>Wellness</small></div><div class="flag"><b>Sports Desk</b><small>Athletics</small></div><div class="flag"><b>Leading Women</b><small>Voices</small></div><div class="flag"><b>Virtual Lab</b><small>Innovation</small></div><div class="flag"><b>Digital First</b><small>Technology</small></div><div class="flag"><b>Heart of a Champion</b><small>Stories</small></div><div class="flag"><b>Education That Matters</b><small>Learning</small></div></div></div>
+  </div>
+</section>
+
+<section class="sec-tight on-white">
+  <div class="wrap">
+    <div class="tarp royal-v congrats" data-unfurl><span class="tie" aria-hidden="true"></span><span class="tie" aria-hidden="true"></span><span class="grommets" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <div class="inner">
+        <div class="ph"><img src="img/graduates.jpg" alt="St. Clare College graduates applauding at commencement" width="1230" height="640" loading="lazy"></div>
+        <div class="txt"><h2><span class="sun">Congratulations,</span> Stars of 2024!</h2><p>St. Clare College held its 38th Commencement Exercises in June 2024.</p></div>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="sec mace on-ink on-dark">
+  <div class="wrap">
+    <svg class="flame" viewBox="0 0 120 170" aria-hidden="true"><path fill="#d7141a" d="M60 4C78 40 112 62 112 108c0 32-23 58-52 58S8 140 8 108C8 74 32 58 40 30c10 18 6 34 20 44C64 50 52 28 60 4z"/><path fill="#ffd400" d="M60 52c10 22 32 38 32 66 0 22-14 38-32 38s-32-16-32-38c0-20 14-30 18-48 6 12 4 22 14 28 2-16-6-30 0-46z"/><path fill="#ffffff" d="M60 100c6 12 16 20 16 34 0 11-7 20-16 20s-16-9-16-20c0-10 8-16 9-26 3 6 3 10 7 12 1-8-3-14 0-20z"/></svg>
+    <h2 data-letters>The eternal flame of professionalism</h2>
+    <blockquote>&ldquo;A beacon of professionalism and culture of excellence.&rdquo;</blockquote>
+    <cite>St. Clare College Professional Mace &middot; 23 September 2023</cite>
+  </div>
+</section>
+
+
+<section class="sec on-cork">
+  <div class="wrap">
+    <div class="split top">
+      <div class="note-card" style="--r:-1.5deg" data-pin><span class="pin" aria-hidden="true"></span>
+        <span class="rubber red" style="float:right">SY 2024-2025</span>
+        <h3>SHS Alumni VIP Package</h3>
+        <p>For the St. Clare SHS Class of 2024: the President's Scholarship with zero down payment.</p>
+        <p class="hand" style="font-size:1.2rem">Ask admissions about this year's scholarships.</p>
+      </div>
+      <div class="note-card blue" style="--r:1.2deg" data-pin><span class="pin b" aria-hidden="true"></span>
+        <h3>Full online or blended</h3>
+        <p>Learn from anywhere on St. Clare Online, or combine online days with air-conditioned classrooms, e-boards and the Virtual Lab.</p>
+        <a class="more" href="admissions.html#modality">Compare the two</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head"><h2 data-letters>Why we teach</h2><p class="lede">A responsible, innovative, skillful and professional global workforce, starting here in Caloocan.</p></div>
     <div class="vm">
-  <article class="rv" data-big="Vision"><span class="tag">Vision</span><p>To become the leading institution for professional development and the first and foremost provider of quality, affordable and sustainable development education.</p></article>
-  <article class="rv" style="--d:1" data-big="Mission"><span class="tag">Mission</span><p>To provide quality and excellent global education for the total development of a responsible, innovative, skillful and professional global workforce whose values and dignity are beyond par.</p></article>
+  <div class="tarp royal-v" data-unfurl><span class="tie" aria-hidden="true"></span><span class="tie" aria-hidden="true"></span><span class="grommets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><h3>Vision</h3><p>To become the leading institution for professional development and the first and foremost provider of quality, affordable and sustainable development education.</p></div>
+  <div class="tarp white-v" data-unfurl><span class="tie" aria-hidden="true"></span><span class="tie" aria-hidden="true"></span><span class="grommets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><h3 class="red">Mission</h3><p>To provide quality and excellent global education for the total development of a responsible, innovative, skillful and professional global workforce whose values and dignity are beyond par.</p></div>
 </div>
   </div>
 </section>
 
-<section class="pad paper-2">
+<section class="sec closer on-sun">
   <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">Enrollment procedure</span><h2 data-split>Enroll in <span class="grad-text-brand">three steps</span></h2></div>
-      <p class="lead rv">Simplified and seamless. Bring your requirements, follow the three steps, and your schedule arrives by email.</p>
-    </div>
-    <div class="steps"><article class="step" style="--i:0">
-  <span class="n">01</span>
-  <div><h3>Pay the matriculation fee</h3><ul><li>Proceed to the cashier and pay the matriculation fee (designated cashier only).</li><li>Get and keep your OFFICIAL RECEIPT.</li></ul></div>
-  <span class="where">Cashier</span>
-</article><article class="step" style="--i:1">
-  <span class="n">02</span>
-  <div><h3>Fill up the registration form</h3><ul><li>Go to the LOBBY and present your Official Receipt to the Enrollment Officer.</li><li>Fill up the REGISTRATION FORM.</li><li>Check that your SUBJECTS are listed on the registration form.</li></ul></div>
-  <span class="where">Lobby</span>
-</article><article class="step" style="--i:2">
-  <span class="n">03</span>
-  <div><h3>Register online for your schedule</h3><ul><li>Proceed to the LIBRARY on the 3rd floor for ENLISTMENT at stclareonline.com/ims.</li><li>Your section and schedule are posted on the website and sent by email by your Program Head.</li></ul></div>
-  <span class="where">Library, 3rd floor</span>
-</article></div>
-    <p style="margin-top:34px"><a class="link-arrow" href="admissions.html#requirements">Check the admission requirements</a></p>
-  </div>
-</section>
-
-<section class="cta brandband pad noise">
-  <canvas class="fx-canvas" data-tone="gold" aria-hidden="true"></canvas><div class="grid-floor" aria-hidden="true"></div>
-  <div class="wrap" style="position:relative">
-    <h2 data-split>Make your <span class='gold'>mark</span> today</h2>
-    <p class="lead rv">Join a thriving community of achievers and unlock a world of possibilities at St. Clare College.</p>
-    <div class="btn-row rv" style="--d:2"><a class="btn" href="admissions.html">Start your enrollment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="contact.html">Talk to admissions</a></div>
+    <h2>Enroll now</h2>
+    <p class="lede">Basic Education, Senior High School and College, on campus or fully online.</p>
+    <div class="hero-actions"><a class="tag-btn ink-t" href="admissions.html">Start enrollment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="tag-btn red-t" href="contact.html">Ask admissions</a></div>
   </div>
 </section>
 
 </main>
-<footer class="site-footer">
+<footer class="foot on-dark">
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand"><img src="img/seal-200.webp" alt="" width="64" height="64"><div><b>St. Clare College</b><span>of Caloocan</span></div></div>
-        <p>The School of Life Skills and leading institution for professional development. Serving Caloocan since 1985; online through St. Clare Online since 2020.</p>
+        <div class="brand-f"><img src="img/seal-200.webp" alt="" width="66" height="66"><b>St. Clare<br>College</b></div>
+        <p>The School of Life Skills. Serving Caloocan since 1985; online through St. Clare Online since 2020.</p>
         <div class="socials"><a href="https://www.facebook.com/stclarecollege" rel="noopener" aria-label="St. Clare College on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8z"/></svg></a><a href="https://www.youtube.com/channel/UCxlcF5cS_spNnil5pp5-aNQ" rel="noopener" aria-label="St. Clare College on YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5zM9.8 15V9l5.2 3z"/></svg></a></div>
       </div>
-      <div><h3>Explore</h3><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus Life</a></li><li><a href="news.html">News</a></li></ul></div>
-      <div><h3>St. Clare Online</h3><ul><li><a href="https://stclareonline.com/lms" rel="noopener">LMS - Learning</a></li><li><a href="https://stclareonline.com/cms" rel="noopener">CMS - Content</a></li><li><a href="https://stclareonline.com/ims" rel="noopener">IMS - Institutional</a></li><li><a href="https://stclareonline.com/pms" rel="noopener">PMS - Personal</a></li><li><a href="https://stclareonline.com/vms" rel="noopener">VMS - Virtual</a></li><li><a href="https://stclareonline.com/downloadable-forms" rel="noopener">Downloadable forms</a></li></ul></div>
-      <div><h3>Visit</h3><ul><li>Zabarte Road, Barangay 172, Camarin, Caloocan City 1400, Metro Manila</li><li><a href="tel:+63282324483">(02) 8232-4483</a></li><li><a href="mailto:stclarecollege.ph@gmail.com">stclarecollege.ph@gmail.com</a></li><li>9:00 AM - 5:00 PM</li></ul></div>
+      <div><h3>Explore</h3><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3>St. Clare Online</h3><ul><li><a href="https://stclareonline.com/lms" rel="noopener">LMS: Learning Management System</a></li><li><a href="https://stclareonline.com/cms" rel="noopener">CMS: Content Management System</a></li><li><a href="https://stclareonline.com/ims" rel="noopener">IMS: Institutional Management System</a></li><li><a href="https://stclareonline.com/pms" rel="noopener">PMS: Personal Management System</a></li><li><a href="https://stclareonline.com/vms" rel="noopener">VMS: Virtual Management System</a></li><li><a href="https://stclareonline.com/downloadable-forms" rel="noopener">Downloadable forms</a></li></ul></div>
+      <div><h3>Visit</h3><ul><li>Zabarte Road, Barangay 172, Camarin, Caloocan City 1400, Metro Manila</li><li><a href="tel:+63282324483">(02) 8232-4483</a></li><li><a href="mailto:stclarecollege.ph@gmail.com">stclarecollege.ph@gmail.com</a></li><li>Office hours 9:00 AM - 5:00 PM</li></ul></div>
     </div>
-    <div class="foot-bottom"><span>&copy; <span data-year>2026</span> St. Clare College of Caloocan &middot; St. Clare Online Education System&reg;</span><a class="sdg" href="https://sdgs.un.org/goals/goal4" rel="noopener" style="padding:6px 14px 6px 6px"><b style="width:32px;height:32px;font-size:1rem">4</b><span>Quality Education</span></a></div>
+    <div class="foot-bottom"><span>&copy; <span data-year>2026</span> St. Clare College of Caloocan &middot; St. Clare Online Education System&reg;</span><a href="https://sdgs.un.org/goals/goal4" rel="noopener">UN SDG 4: Quality Education</a></div>
   </div>
-  <p class="big" aria-hidden="true">St. Clare</p>
+  <p class="foot-word" aria-hidden="true">Clareans</p>
 </footer>
-<button class="to-top" aria-label="Back to top">&uarr;</button>
 </body>
 </html>
