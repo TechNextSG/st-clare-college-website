@@ -169,7 +169,7 @@ html:not(.js) .menu-btn { display: none !important; }
 .crumbs { font-size: .86rem; color: var(--on-dark-2); margin-bottom: 18px; }
 .crumbs a { color: #fff; padding: 10px 0; }
 .hero .kick-line { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-.split-line { display: block; overflow: hidden; }
+.split-line { display: block; overflow: hidden; padding: .06em 0 .16em; margin: -.06em 0 -.16em; }  /* room for descenders (g, y, p) inside the reveal mask */
 .split-line > span { display: inline-block; }
 
 /* home hero: full-bleed slideshow with Ken Burns */
