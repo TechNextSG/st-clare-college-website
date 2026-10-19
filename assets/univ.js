@@ -76,6 +76,22 @@
     d.addEventListener("visibilitychange", function () { if (d.hidden) clearTimeout(timer); else show(cur); });
   }
 
+  /* ---------- home hero: photo tilts toward the pointer; gentle sway on touch / idle ---------- */
+  var hh = d.querySelector(".hero-home");
+  if (hh && !reduce) {
+    if (!fine) hh.classList.add("idle");
+    else {
+      hh.addEventListener("pointermove", function (e) {
+        var r = hh.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        hh.style.setProperty("--ry", (x * 7).toFixed(2) + "deg");
+        hh.style.setProperty("--rx", (-y * 5).toFixed(2) + "deg");
+      });
+      hh.addEventListener("pointerleave", function () {
+        hh.style.setProperty("--ry", "0deg"); hh.style.setProperty("--rx", "0deg");
+      });
+    }
+  }
+
   /* ---------- buttons: ripple + magnetic ---------- */
   $$(".btn").forEach(function (b) {
     b.addEventListener("pointerdown", function (e) {
