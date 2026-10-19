@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "11"
+V = "12"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -39,7 +39,9 @@ def head(title, desc):
 <link rel="preload" href="fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/college.css?v={V}">
+<link rel="stylesheet" href="assets/content.css?v={V}">
 <script src="assets/college.js?v={V}" defer></script>
+<script src="assets/content.js?v={V}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -49,7 +51,7 @@ def header(page):
     links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == page else ""}>{t}</a>' for h, t in NAV if h not in ("index.html", "portals.html"))
     return f"""<div class="util"><div class="wrap">
   <div class="l"><a href="tel:{PHONE_TEL}">{PHONE}</a><a class="hide-sm" href="mailto:{EMAIL}">{EMAIL}</a></div>
-  <div class="r"><b class="hide-sm">Students &amp; faculty:</b><a href="portals.html">St. Clare Online portals</a><a href="{SRC}/lms" rel="noopener">LMS</a><a href="{SRC}/ims" rel="noopener">IMS</a></div>
+  <div class="r"><b class="hide-sm">Students &amp; faculty:</b><a href="portals.html">Student services</a><a href="lms.html">LMS</a><a href="pms.html">PMS</a><a class="hide-sm" href="downloads.html">Downloads</a><a class="hide-sm" href="calendar.html">Calendar</a></div>
 </div></div>
 <header class="head"><div class="wrap">
   <a class="brand" href="index.html" aria-label="St. Clare College of Caloocan, home">
@@ -63,7 +65,7 @@ def header(page):
 """
 
 def footer():
-    portals = "".join(f'<li><a href="{SRC}/{p[3]}" rel="noopener">{p[0]}: {p[1]}</a></li>' for p in PORTALS)
+    portals = "".join(f'<li><a href="{p[3]}.html">{p[0]}: {p[1]}</a></li>' for p in PORTALS)
     return f"""</main>
 <footer class="foot on-navy">
   <div class="wrap">
@@ -73,8 +75,8 @@ def footer():
         <p>The School of Life Skills. Serving Caloocan since 1985; online through St. Clare Online since 2020.</p>
         <div class="socials"><a href="{FB}" rel="noopener" aria-label="St. Clare College on Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="St. Clare College on YouTube">{YT_SVG}</a></div>
       </div>
-      <div><h3>The college</h3><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div><h3>St. Clare Online</h3><ul>{portals}<li><a href="{SRC}/downloadable-forms" rel="noopener">Downloadable forms</a></li></ul></div>
+      <div><h3>The college</h3><ul><li><a href="about.html">About St. Clare</a></li><li><a href="academics.html">Academics</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="campus-life.html">Campus life</a></li><li><a href="news.html">News</a></li><li><a href="vms.html">Videos</a></li><li><a href="ims.html#hiring">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3>St. Clare Online</h3><ul>{portals}<li><a href="downloads.html">Downloadable forms</a></li><li><a href="calendar.html">Calendar</a></li></ul></div>
       <div><h3>Visit</h3><ul><li><a href="contact.html">{ADDRESS}</a></li><li><a href="tel:{PHONE_TEL}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li></ul><p class="mt">Office hours 9:00 AM - 5:00 PM</p></div>
     </div>
     <div class="foot-bottom"><span>&copy; <span data-year>2026</span> St. Clare College of Caloocan &middot; St. Clare Online Education System&reg;</span><a href="https://sdgs.un.org/goals/goal4" rel="noopener" style="color:inherit">UN SDG 4: Quality Education</a></div>
@@ -298,7 +300,7 @@ def build_contact():
     body = ph("Contact", "Contact the college", "Questions about programmes, requirements, dates or fees? The admissions office is open 9:00 AM to 5:00 PM.") \
         + sec(f"""<div class="split" style="align-items:start">
   <div class="info rv"><h2>Visit, call or write</h2>
-    <dl class="mt-l"><div><dt>Campus</dt><dd>{ADDRESS}</dd></div><div><dt>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt>Messenger</dt><dd><a href="https://m.me/stclarecollege" rel="noopener">St. Clare College on Facebook</a></dd></div><div><dt>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div></dl>
+    <dl class="mt-l"><div><dt>Campus</dt><dd>{ADDRESS}</dd></div><div><dt>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div><div><dt>Messenger</dt><dd><a href="https://m.me/stclarecollege" rel="noopener">St. Clare College on Facebook</a></dd></div><div><dt>Office hours</dt><dd>9:00 AM - 5:00 PM</dd></div><div><dt>Careers (Human Resource)</dt><dd><a href="mailto:stclarecollege.humanresource@gmail.com">stclarecollege.humanresource@gmail.com</a></dd></div></dl>
     <div class="socials"><a href="{FB}" rel="noopener" aria-label="Facebook">{FB_SVG}</a><a href="{YT}" rel="noopener" aria-label="YouTube">{YT_SVG}</a></div></div>
   <form class="form rv" style="--d:1" data-mailto="{EMAIL}">
     <h2 style="font-size:1.4rem;margin-bottom:18px">Send an inquiry</h2>
@@ -311,11 +313,11 @@ def build_contact():
     <button class="btn" type="submit">Send inquiry {ARROW}</button>
     <p class="hint">Opens your email app, addressed to {EMAIL}. No email app? Call {PHONE}.</p><p class="form-status" role="status"></p>
   </form>
-</div>""") + sec('<div class="map rv"><iframe title="Map to St. Clare College of Caloocan" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=St.+Clare+College+of+Caloocan,+Zabarte+Road,+Caloocan+City&output=embed"></iframe></div>', "alt")
+</div>""") + sec('<figure class="photo wide rv" style="margin:0 0 24px"><img src="img/site/campus-sco-sign.webp" srcset="img/site/campus-sco-sign-800.webp 800w, img/site/campus-sco-sign.webp 1600w" sizes="100vw" alt="St. Clare College building on Zabarte Road with the SCO Online sign" width="1600" height="900" loading="lazy"><figcaption>St. Clare College, Zabarte Road, Caloocan City</figcaption></figure><div class="map rv"><iframe title="Map to St. Clare College of Caloocan" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=St.+Clare+College+of+Caloocan,+Zabarte+Road,+Caloocan+City&output=embed"></iframe></div>', "alt")
     page("contact.html", "Contact St. Clare College | Caloocan City",
          f"Contact St. Clare College of Caloocan: {ADDRESS}. Phone {PHONE}, email {EMAIL}, 9:00 AM - 5:00 PM.", body)
 
 
 if __name__ == "__main__":
-    build_home(); build_about(); build_academics(); build_admissions()
-    build_campus(); build_portals(); build_news(); build_contact()
+    import pages_full
+    pages_full.build_all()

@@ -1,0 +1,292 @@
+{
+"prog-bshm": {
+"w": 1404,
+"h": 936,
+"small": true
+},
+"prog-bsba": {
+"w": 1600,
+"h": 800,
+"small": true
+},
+"prog-bscs-lab": {
+"w": 1600,
+"h": 1067,
+"small": true
+},
+"prog-education": {
+"w": 1491,
+"h": 1200,
+"small": true
+},
+"prog-bstm": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"prog-polsci": {
+"w": 600,
+"h": 343,
+"small": false
+},
+"shs-academic": {
+"w": 1404,
+"h": 936,
+"small": true
+},
+"shs-ict-virtual-lab": {
+"w": 1600,
+"h": 1067,
+"small": true
+},
+"shs-tvl-he": {
+"w": 1600,
+"h": 1067,
+"small": true
+},
+"basic-kinder": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"basic-elementary": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"virtual-lab-predator-units": {
+"w": 1600,
+"h": 1066,
+"small": true
+},
+"online-learning": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"campus-sco-sign": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"i-love-st-clare": {
+"w": 1600,
+"h": 1295,
+"small": true
+},
+"poster-elibrary-proquest": {
+"w": 1557,
+"h": 1059,
+"small": true
+},
+"poster-epayments-dropbox": {
+"w": 1557,
+"h": 1557,
+"small": true
+},
+"poster-hiring": {
+"w": 1080,
+"h": 1080,
+"small": true
+},
+"poster-digital-passport": {
+"w": 1600,
+"h": 786,
+"small": true
+},
+"poster-document-request": {
+"w": 1080,
+"h": 1080,
+"small": true
+},
+"poster-shs-alumni-vip": {
+"w": 1131,
+"h": 1600,
+"small": true
+},
+"poster-flexible-study": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"poster-enrolment-2023": {
+"w": 1600,
+"h": 1341,
+"small": true
+},
+"poster-online-enrollment": {
+"w": 1600,
+"h": 1341,
+"small": true
+},
+"poster-opening-of-classes-2024": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"flier-tertiary": {
+"w": 1600,
+"h": 1341,
+"small": true
+},
+"flier-shs": {
+"w": 1600,
+"h": 1341,
+"small": true
+},
+"flier-basic-ed": {
+"w": 1600,
+"h": 1341,
+"small": true
+},
+"poster-tes-2020": {
+"w": 1600,
+"h": 994,
+"small": true
+},
+"poster-tes-late-claims-f2f": {
+"w": 1441,
+"h": 1600,
+"small": true
+},
+"poster-tes-late-claims-bank": {
+"w": 1200,
+"h": 1600,
+"small": true
+},
+"poster-walang-pasok-2020": {
+"w": 1200,
+"h": 800,
+"small": true
+},
+"poster-tes-announcement": {
+"w": 1600,
+"h": 1194,
+"small": true
+},
+"poster-547806-views": {
+"w": 1280,
+"h": 720,
+"small": true
+},
+"sco-online-logo": {
+"w": 1600,
+"h": 1506,
+"small": true
+},
+"sco-live": {
+"w": 1600,
+"h": 1506,
+"small": true
+},
+"sco-education-that-matters": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"sco-heart-of-a-champion": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"sco-sports-desk": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"sco-virtual-lab": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"sco-leading-women": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"sco-health-talk": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"sco-digital-first": {
+"w": 1600,
+"h": 1600,
+"small": true
+},
+"partner-fnet": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"partner-unesco": {
+"w": 640,
+"h": 360,
+"small": false
+},
+"partner-predator": {
+"w": 720,
+"h": 452,
+"small": false
+},
+"partner-mixed-reality": {
+"w": 300,
+"h": 300,
+"small": false
+},
+"partner-microsoft": {
+"w": 740,
+"h": 500,
+"small": false
+},
+"partner-google": {
+"w": 1024,
+"h": 768,
+"small": true
+},
+"slide-enrollment-open": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-college-programs": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-college-requirements": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-vision-mission": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-enrollment-procedure": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-basic-ed-requirements": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-basic-ed-uniform": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-shs-tracks": {
+"w": 1600,
+"h": 900,
+"small": true
+},
+"slide-shs-requirements": {
+"w": 1600,
+"h": 900,
+"small": true
+}
+}
