@@ -2,7 +2,7 @@
 import os, html
 from data import *
 
-V = "30"
+V = "31"
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -33,7 +33,7 @@ def head(title, desc):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:image" content="img/campus-building.jpg">
-<link rel="icon" href="img/seal.svg" type="image/svg+xml">
+<link rel="icon" href="img/seal-256.webp" type="image/webp">
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
@@ -131,7 +131,7 @@ def ph(crumb, title, lede, photo=None, alt="", extra=""):
     {pic}
   </div>
 </section>
-"""
+""" + __import__("pages_v5").ticker()
 
 def cta(title="Begin your journey at St. Clare", line="Basic Education, Senior High School and College, on campus or fully online."):
     return f"""<section class="sec cta-band"><div class="gridfloor" aria-hidden="true"><i></i></div><div class="wrap"><div class="cta on-dark rv"><div><h2>{title}</h2><p class="lede">{line}</p></div>
