@@ -1229,51 +1229,6 @@ html:not(.js) .tl-x li { opacity: 1; }
 .sec.alt { overflow: hidden; }
 @media (max-width: 700px) { .sec.alt > .wrap::after { width: 260px; right: -80px; bottom: -90px; } }
 
-/* ======== alternate sections = dark crimson bands in the hero's style (white cards stay white) ======== */
-.sec.alt {
-  --ink: #ffffff; --text: #f5e9eb; --muted: #dcc7cb; --line: rgba(255,255,255,.14); --bg-2: rgba(255,255,255,.07); --c600: #f3c45a; --rose50: rgba(255,255,255,.08); --rose100: rgba(255,255,255,.22);
-  color: var(--text);
-  background:
-    radial-gradient(720px 520px at 0% 0%, rgba(200,16,46,.42), transparent 70%),
-    radial-gradient(620px 460px at 100% 100%, rgba(224,173,28,.12), transparent 70%),
-    radial-gradient(500px 400px at 70% 10%, rgba(122,12,30,.6), transparent 70%),
-    linear-gradient(165deg, var(--m950) 0%, var(--m800) 55%, var(--m900) 100%);
-}
-.sec.alt::before { background-image: radial-gradient(rgba(243,196,90,.28) 1.3px, transparent 1.5px) !important; }
-.sec.alt > .wrap::after { opacity: .07; filter: grayscale(1) brightness(2.4); }
-.sec.alt::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.03) 47%, transparent 54%) !important; height: auto !important; }
-.sec.alt .lede, .sec.alt p { color: var(--text); }
-.sec.alt a:not(.btn):not(.panel):not(.portal):not(.cp):not(.post) { color: var(--c600); }
-.sec.alt .btn:not(.gold):not(.ghost):not(.line) { --bg: #c8102e; --fill: #7a0c1e; }
-.sec.alt .btn.line { --fg: #fff; --bd: rgba(255,255,255,.6); --fill: #fff; }
-.sec.alt .btn.line:hover { --fg: var(--m800); }
-.sec.alt :focus-visible { outline-color: var(--gold); }
-/* white surfaces inside dark bands get the light palette back */
-.sec.alt :is(.panel, .steps > li, .level, .callout, .form, .portal, .vm2 article:last-child, .leaders > div, .notebox, .next, .gallery button, .linkset, .events li, .faq, .docs, .links, .apply-card, .item, .cp .photo, .tabs button:not([aria-selected="true"])) {
-  --ink: #1d1416; --text: #2c2225; --muted: #675a5e; --line: #ebe2e3; --bg-2: #f8f5f5; --c600: #a6192e; --rose50: #fcf3f4; --rose100: #f6e1e4;
-}
-.sec.alt :is(.panel, .steps > li, .level, .callout, .notebox, .next, .leaders > div) p, .sec.alt :is(.panel, .steps > li, .level, .callout, .leaders > div) .lede { color: var(--muted); }
-.sec.alt :is(.panel, .callout, .level, .notebox, .steps > li) a:not(.btn) { color: var(--c600); }
-.sec.alt .notebox, .sec.alt .next { background: #fff; }
-.sec.alt .faq, .sec.alt .docs, .sec.alt .links { background: #fff; border-radius: var(--r-lg); padding: 6px 20px; border-top: 0; }
-.sec.alt .events { border-top: 0; }
-.sec.alt .events li { background: #fff; border-radius: 12px; margin-bottom: 8px; padding-inline: 18px; border-bottom: 0; }
-.sec.alt .linkset { background: #fff; border-radius: var(--r-lg); padding: 20px 22px; }
-.sec.alt .cp h3, .sec.alt .cp p { color: inherit; }
-.sec.alt .cp p { color: var(--muted); }
-.sec.alt .steps::before { background: repeating-linear-gradient(90deg, rgba(243,196,90,.5) 0 10px, transparent 10px 18px); }
-.sec.alt .steps > li::before { box-shadow: 0 0 0 6px var(--m900); }
-.sec.alt .gallery figcaption, .sec.alt .src-note { color: var(--muted); }
-.sec.alt .tabs { background: rgba(255,255,255,.08); }
-.sec.alt .tabs button:not([aria-selected="true"]) { color: #f5e9eb; }
-.sec.alt .tabs button[aria-selected="true"] { background: #c8102e; }
-.sec.alt .checklist li { border-color: rgba(255,255,255,.14); }
-.sec.alt .checklist li::before { background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1.5px rgba(243,196,90,.5); }
-.sec.alt .checklist li::after { border-color: var(--gold); }
-.sec.alt .prog-row .code { background: rgba(255,255,255,.1); }
-.sec.alt .prog-row .noimg { background: rgba(255,255,255,.08); }
-.sec.alt .swipe-hint { color: var(--muted); }
-.sec.alt .jump a { background: rgba(255,255,255,.08); color: #fff; }
 /* phone chat button: solid, clear icon */
 @media (max-width: 700px) {
   .sca-launch { width: 56px; height: 56px; padding: 0; justify-content: center; gap: 0; background: var(--r500); border: 2px solid rgba(255,255,255,.9); box-shadow: 0 10px 26px -8px rgba(0,0,0,.55), 0 0 0 4px rgba(200,16,46,.18); }
