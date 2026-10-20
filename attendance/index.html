@@ -111,6 +111,51 @@ button{cursor:pointer}
   @page{size:A4;margin:12mm}
 }
 
+/* ---------- class schedules */
+.hnext{font-size:14px;margin-top:6px;font-weight:600}
+.hnext span{font-weight:400;opacity:.85}
+.tlx{margin:12px 0 2px}
+.tlt{position:relative;height:30px;border-radius:9px;background:rgba(255,255,255,.08)}
+.tb{position:absolute;top:4px;bottom:10px;border-radius:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4)}
+.tb.done{background:rgba(255,255,255,.88);border-color:transparent}
+.tb.now{background:#fff;border-color:#fff;box-shadow:0 0 0 2px var(--gold)}
+.tb.miss{background:repeating-linear-gradient(135deg,rgba(255,255,255,.4) 0 3px,transparent 3px 7px);border-color:rgba(255,255,255,.55)}
+.tb.cxl{background:none;border-style:dashed;opacity:.45}
+.tp{position:absolute;bottom:3px;height:4px;border-radius:2px;background:var(--gold)}
+.tn{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:#fff;border-radius:1px}
+.tlh{position:relative;height:15px;margin-top:3px;font-size:12px;opacity:.8}
+.tlh span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.tlh span:first-child{transform:none}.tlh span:last-child{transform:translateX(-100%)}
+.tlk{display:flex;gap:12px;font-size:12px;opacity:.85;margin-top:6px;flex-wrap:wrap}
+.tlk i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:5px;vertical-align:0;background:rgba(255,255,255,.88)}
+.tlk i.g{height:4px;background:var(--gold);vertical-align:2px}
+.clist{display:flex;flex-direction:column}
+.crow{display:grid;grid-template-columns:20px 80px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0}
+.crow+.crow{border-top:1px solid var(--line)}
+.crow .ci{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.crow .ci svg{width:11px;height:11px;fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.crow.done .ci{background:var(--ok);border-color:var(--ok)}
+.crow.now .ci{border-color:var(--accent);box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 9px var(--accent)}
+.crow.miss .ci{background:var(--bad);border-color:var(--bad)}
+.crow.cxl{opacity:.6}.crow.cxl .cw b{text-decoration:line-through}
+.crow .ct{font-weight:700;font-size:13px;white-space:nowrap}
+.crow .ct small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.crow .cw{min-width:0}.crow .cw b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .cw small{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .cw small em{font-style:normal;color:var(--ink-2)}
+.crow.now .ct,.crow.now .cw b{color:var(--accent)}
+.cflex{font-size:13px;color:var(--ink-2);padding:8px 0}
+.pill.chg{background:var(--accent-soft);color:var(--accent)}
+.cell{position:relative}
+.cell.chg::after{content:"";position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--card)}
+.mirule{font-size:13px;color:var(--ink-2);margin:0 0 8px}
+.schedtbl td.blk{line-height:1.45;text-align:left;padding-left:12px}
+.schedtbl td.blk span{display:block}
+.schedtbl td.blk small{color:var(--muted)}
+.teacher #recentCard{grid-column:span 7}
+@media (max-width:960px){.teacher #recentCard{grid-column:span 12}}
+@media (max-width:720px){.crow{grid-template-columns:18px 76px minmax(0,1fr);}.crow .ctag{grid-column:3}.tlk{gap:10px}}
+
 /* ---------- leave */
 .pill.leave{background:var(--leave-soft);color:var(--leave)}
 .pill.pend{background:var(--warn-soft);color:var(--warn)}
@@ -482,14 +527,22 @@ button.cell:hover{filter:brightness(.97)}
 
   <main id="main">
   <!-- TODAY -->
-  <section data-page="today" class="grid">
+  <section data-page="today" class="grid" id="todayGrid">
     <div class="card hero s7" id="hero">
       <span class="tag"><i></i><span id="hState">--</span></span>
       <div class="timer" id="hTimer">0:00<small>:00</small></div>
       <div id="hLine" style="opacity:.92">worked today</div>
-      <div class="bar"><i id="hBar"></i></div>
-      <div class="meta"><span id="hTarget"></span><span id="hLeft"></span></div>
-      <div class="punches" id="hPunches"></div>
+      <div class="hnext" id="hNext" hidden></div>
+      <div id="hTL" hidden></div>
+      <div id="hOffice">
+        <div class="bar"><i id="hBar"></i></div>
+        <div class="meta"><span id="hTarget"></span><span id="hLeft"></span></div>
+        <div class="punches" id="hPunches"></div>
+      </div>
+    </div>
+    <div class="card s5" id="clsCard" hidden>
+      <div class="ch"><h2>Today's classes</h2><span class="muted" id="clsCount"></span></div>
+      <div class="clist" id="clsList"></div>
     </div>
     <div class="card s5">
       <div class="ch"><h2>This week</h2><span class="muted" id="weekRange"></span></div>
@@ -504,7 +557,7 @@ button.cell:hover{filter:brightness(.97)}
         <div class="kpi"><small>Late</small><b id="mLate">0</b><em id="mLateNote"></em></div>
         <div class="kpi"><small>Undertime</small><b id="mUnder">0m</b><em id="mUnderNote"></em></div>
         <div class="kpi"><small>Hours worked</small><b id="mHours">0h</b><em id="mAvg"></em></div>
-        <div class="kpi"><small>Average time-in</small><b id="mAvgIn">--</b><em id="mShift"></em></div>
+        <div class="kpi"><small id="mAvgLbl">Average time-in</small><b id="mAvgIn">--</b><em id="mShift"></em></div>
       </div>
       <div class="kpis" id="kPay" hidden></div>
       <div class="fine" id="payNote" hidden><span id="ppRange"></span>. For reference only; payroll uses HR's final figures.</div>
@@ -513,7 +566,7 @@ button.cell:hover{filter:brightness(.97)}
       <div class="ch"><h2>Coming up</h2></div>
       <div class="up" id="upcoming"></div>
     </div>
-    <div class="card s12">
+    <div class="card s12" id="recentCard">
       <div class="ch"><h2>Recent days</h2><button class="btn sm" data-goto="history">See all</button></div>
       <div class="days" id="recent"></div>
     </div>
@@ -524,7 +577,7 @@ button.cell:hover{filter:brightness(.97)}
     <div class="card s8">
       <div class="ch">
         <div class="monthnav"><button class="iconbtn" id="prevM" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b id="calTitle"></b><button class="iconbtn" id="nextM" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><button class="btn sm" id="toToday" type="button">Today</button></div>
-        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span><span><i style="background:var(--hol)"></i>Holiday</span></div>
+        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span><span><i style="background:var(--hol)"></i>Holiday</span><span id="lgChg" hidden><i style="background:var(--accent);border-radius:50%"></i>Class change</span></div>
       </div>
       <div class="cal" id="cal"></div>
     </div>
@@ -591,6 +644,8 @@ button.cell:hover{filter:brightness(.97)}
       <button class="iconbtn" type="button" id="meClose" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <div class="info" id="miInfo"></div>
     <h2 style="margin:0 0 6px;font-size:14px">My schedule</h2>
+    <p class="mirule" id="miRule"></p>
+    <div class="seg mini" id="miWeek" hidden style="margin:0 0 8px;width:max-content"><button type="button" data-w="0" class="on">Week A</button><button type="button" data-w="1">Week B</button></div>
     <table class="schedtbl" id="miSched"></table>
     <div class="help"><b>Need help?</b> For a wrong record, PIN reset or leave questions, contact the HR office: <a href="tel:+63282324483"><b>(02) 8232-4483</b></a>, Zabarte Road, Camarin, Caloocan.</div>
     <div class="meact"><button class="btn sm" type="button" id="meRefresh">Refresh</button><button class="btn sm" type="button" id="meLogout">Sign out</button></div>
@@ -658,7 +713,57 @@ function prepCalendar(x){
   x.holidayMap = new Map((x.holidays || []).map(o => [o.date, o]));
   CAL = x;
 }
-function sched(k){ const d = new Date(k+"T00:00:00"); if (!CAL) return isWork(d) ? {start: CFG.work_start, end: "16:30"} : null; return CAL.schedule[d.getDay()] || null; }
+// classes: weekly load (Week A / Week B like Odoo's two-week schedules) + date changes from HR / Registrar
+const ORD_ANCHOR = {k:"2026-01-05", ord:739621};          // Python date(2026,1,5).toordinal()
+function weekType(k){ const ord = ORD_ANCHOR.ord + Math.round((Date.parse(k+"T00:00:00Z") - Date.parse(ORD_ANCHOR.k+"T00:00:00Z"))/864e5); return Math.floor((ord - 1)/7) % 2; }
+function classesOn(k, src = CAL){
+  if (!src?.classload) return null;                       // office staff keep fixed hours
+  const dow = new Date(k+"T00:00:00").getDay(), wt = weekType(k);
+  const day = (src.classload[dow] || []).filter(b => b.week == null || +b.week === wt).map(b => ({...b}));
+  for (const c of (src.changes || []).filter(c => c.date === k)){
+    const at = day.find(b => b.start === c.start && !b.flex);
+    if (c.kind === "cancel"){ if (at){ at.cancelled = true; at.note = c.note; } }
+    else if (c.kind === "room"){ if (at){ at.room = c.room; at.tag = "room"; at.note = c.note; } }
+    else day.push({start:c.start, end:c.end, subject:c.subject, section:c.section, room:c.room, tag:c.kind, note:c.note});
+  }
+  return day.sort((a, b) => String(a.start).localeCompare(String(b.start)));
+}
+const liveClasses = cls => (cls || []).filter(b => !b.cancelled && !b.flex);
+function sched(k){
+  const d = new Date(k+"T00:00:00");
+  if (!CAL) return isWork(d) ? {start: CFG.work_start, end: "16:30"} : null;
+  const cls = classesOn(k);
+  if (cls){
+    const live = liveClasses(cls), flex = cls.find(b => b.flex);
+    if (live.length) return {start: live[0].start, end: live.reduce((m, b) => b.end > m ? b.end : m, "00:00"), classes: cls};
+    if (flex) return {flex: true, hours: flex.hours, classes: cls};
+    return null;                                          // no classes that day (or all cancelled)
+  }
+  return CAL.schedule[d.getDay()] || null;
+}
+const isTeacher = () => !!CAL?.classload;
+const BREAK_MIN = 60;                                     // full-time faculty: one break between classes
+function dayTarget(k){
+  const s = sched(k); if (!s) return 0;
+  if (s.flex) return s.hours;
+  if (s.classes && D.employee.basis === "parttime") return liveClasses(s.classes).reduce((t, b) => t + (hm2m(b.end) - hm2m(b.start))/60, 0);
+  const w = (hm2m(s.end) - hm2m(s.start))/60; return Math.max(0, w - (w > 5 ? 1 : 0));
+}
+function presence(d){   // time on campus as [from, to] minutes; an open punch runs to now (today) only
+  if (!d) return [];
+  const nowM = minsOf(iso(new Date(nowMs())));
+  return d.punches.map(p => [minsOf(p.in), p.out ? minsOf(p.out) : d.key === D.today ? nowM : minsOf(p.in)]);
+}
+const covered = (iv, a, b) => iv.reduce((s, [x, y]) => s + Math.max(0, Math.min(b, y) - Math.max(a, x)), 0);
+function classState(b, k, d){
+  if (b.cancelled) return "cxl";
+  if (b.flex) return "flex";
+  const a = hm2m(b.start), z = hm2m(b.end), nowM = minsOf(iso(new Date(nowMs()))), iv = presence(d);
+  if (d?.noOut && k < D.today) return z > minsOf(d.first) ? "done" : "miss";   // no time-out: assume present after the time-in until HR fixes it
+  if (k > D.today || (k === D.today && nowM < a)) return "next";
+  if (k === D.today && nowM < z) return covered(iv, a, nowM) > 0 || (d && d.open) ? "now" : "miss";
+  return covered(iv, a, z) >= (z - a) * .5 ? "done" : "miss";
+}
 const holidayOn = k => CAL?.holidayMap?.get(k) || null;
 const isSchedDay = k => !!sched(k) && !holidayOn(k);
 
@@ -676,14 +781,23 @@ function derive(){
     D.days.set(k, d);
   }
   for (const d of D.days.values()){
-    const sc = sched(d.key) || {start: D.work_start, end: "16:30"}, st = hm2m(sc.start), en = hm2m(sc.end);
+    const sc = sched(d.key) || {start: D.work_start, end: "16:30"};
     d.first = d.punches[0].in;
     d.last = d.punches.filter(p=>p.out).map(p=>p.out).sort().pop() || null;
-    d.late = minsOf(d.first) > st + (D.grace_minutes||0);
-    d.lateBy = d.late ? minsOf(d.first) - st : 0;                       // minutes after the scheduled start
     d.noOut = d.open && d.key < D.today;                               // forgot to tap out
-    d.under = !d.open && d.key < D.today && d.last ? Math.max(0, en - minsOf(d.last)) : 0;
     d.sched = sc;
+    if (sc.flex){ d.late = false; d.lateBy = 0; d.under = 0; continue; } // flexible day: hours only
+    const st = hm2m(sc.start), en = hm2m(sc.end), past = d.key < D.today && !d.open;
+    d.late = minsOf(d.first) > st + (D.grace_minutes||0);              // judged on the day's first class
+    d.lateBy = d.late ? minsOf(d.first) - st : 0;                       // minutes after the scheduled start
+    if (sc.classes){
+      const live = liveClasses(sc.classes), iv = presence(d);
+      d.classTotal = live.length;
+      d.classDone = live.filter(b => ["done", "now"].includes(classState(b, d.key, d))).length;
+      d.under = !past ? 0 : D.employee.basis === "parttime"
+        ? Math.max(0, live.reduce((s, b) => s + (hm2m(b.end) - hm2m(b.start)) - covered(iv, hm2m(b.start), hm2m(b.end)), 0) - d.lateBy)  // class time missed
+        : Math.max(0, (en - st) - covered(iv, st, en) - d.lateBy - BREAK_MIN);                                                       // away between first and last class
+    } else d.under = past && d.last ? Math.max(0, en - minsOf(d.last)) : 0;
   }
   const oldest = D.attendances.length ? dkey(D.attendances[D.attendances.length-1].in) : D.today;
   D.since = oldest;
@@ -705,11 +819,11 @@ function dayStatus(k){
   if (lv && lv.state === "approved") return "leave";
   if (lv) return "lpend";
   if (k > D.today) return "future";
-  if (!sched(k)) return "wk";
+  if (!sched(k)) return classesOn(k)?.length ? "nocls" : "wk";
   if (k === D.today || k < D.since) return "none";
   return "abs";
 }
-const PILL = {ok:'<span class="pill ok">On time</span>', late:'<span class="pill late">Late</span>', live:'<span class="pill in">On campus</span>', abs:'<span class="pill bad">No record</span>', wk:'<span class="pill off">Rest day</span>', hol:'<span class="pill hol">Holiday</span>', noout:'<span class="pill noout">No time-out</span>', leave:'<span class="pill leave">On leave</span>', lpend:'<span class="pill pend">Leave pending</span>', none:'<span class="pill off">--</span>', future:''};
+const PILL = {ok:'<span class="pill ok">On time</span>', late:'<span class="pill late">Late</span>', live:'<span class="pill in">On campus</span>', abs:'<span class="pill bad">No record</span>', wk:'<span class="pill off">Rest day</span>', nocls:'<span class="pill off">No classes</span>', hol:'<span class="pill hol">Holiday</span>', noout:'<span class="pill noout">No time-out</span>', leave:'<span class="pill leave">On leave</span>', lpend:'<span class="pill pend">Leave pending</span>', none:'<span class="pill off">--</span>', future:''};
 function liveHours(d){ // includes the running punch, ticking
   if (!d) return 0;
   return d.punches.reduce((s,p) => s + (p.out ? p.hours : d.key < D.today ? 0 : Math.max(0,(nowMs()-toDate(p.in).getTime())/36e5)), 0);
@@ -725,8 +839,10 @@ function renderToday(){
   $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}`
     : hol ? `Holiday today · ${hol.name}` : lvToday?.state === "approved" ? `On leave today · ${lvToday.type}` : !sc ? "Rest day" : "No time-in yet today";
   $("#hLine").textContent = t ? `First time-in ${fmtTime(t.first)} · ${t.late ? `${t.lateBy} min late` : "on time"}`
-    : hol || lvToday?.state === "approved" || !sc ? "Enjoy your day." : `Tap your ID at the kiosk. Time-in starts ${m2t(hm2m(sc.start))}.`;
+    : hol || lvToday?.state === "approved" || !sc ? (classesOn(D.today)?.length && !hol ? "All your classes today are cancelled." : "Enjoy your day.")
+    : sc.flex ? `Flexible day · ${sc.hours}h target, no fixed time-in.` : `Tap your ID at the kiosk. ${sc.classes ? "First class" : "Time-in"} starts ${m2t(hm2m(sc.start))}.`;
   $("#hPunches").innerHTML = t ? t.punches.map(p => `<span>In <b>${fmtTime(p.in)}</b> &rarr; ${p.out ? `Out <b>${fmtTime(p.out)}</b>` : "<b>now</b>"}</span>`).join("") : "";
+  renderClassesToday(sc, t);
   tickToday();
 
   // week strip Mon..Sun
@@ -742,7 +858,7 @@ function renderToday(){
   }).join("");
   $("#weekRange").textContent = `${keys[0].toLocaleDateString([], {month:"short",day:"numeric"})} to ${keys[6].toLocaleDateString([], {month:"short",day:"numeric"})}`;
   $("#weekTotal").textContent = fmtHrs(total);
-  const weekTarget = keys.filter(d => isSchedDay(ymd(d)) && dayStatus(ymd(d)) !== "leave").reduce((s, d) => { const c = sched(ymd(d)); return s + (hm2m(c.end) - hm2m(c.start) - 60)/60; }, 0);
+  const weekTarget = keys.filter(d => isSchedDay(ymd(d)) && dayStatus(ymd(d)) !== "leave").reduce((s, d) => s + dayTarget(ymd(d)), 0);
   $("#weekOf").textContent = `of ${Math.round(weekTarget)}h scheduled`;
 
   // this month
@@ -759,15 +875,70 @@ function renderToday(){
   $("#mUnder").textContent = fmtMin(under); $("#mUnderNote").textContent = noOut ? `${noOut} missing time-out${noOut > 1 ? "s" : ""}` : under ? "left before schedule" : "None";
   const hrs = present.reduce((s,d)=>s+liveHours(d),0);
   $("#mHours").textContent = fmtHrs(hrs); $("#mAvg").textContent = present.length ? `${fmtHrs(hrs/present.length)} a day` : "";
-  if (present.length){ const avg = Math.round(present.reduce((s,d)=>s+minsOf(d.first),0)/present.length); $("#mAvgIn").textContent = m2t(avg); } else $("#mAvgIn").textContent = "--";
-  $("#mShift").textContent = sc ? `Today's start ${m2t(hm2m(sc.start))}` : "Rest day today";
+  if (isTeacher()){ const c = classTally(keysM); $("#mAvgLbl").textContent = "Classes attended"; $("#mAvgIn").textContent = `${c.done} of ${c.total}`; $("#mShift").textContent = c.cxl ? `${c.cxl} cancelled by school` : "this month"; }
+  else { $("#mAvgLbl").textContent = "Average time-in";
+    if (present.length){ const avg = Math.round(present.reduce((s,d)=>s+minsOf(d.first),0)/present.length); $("#mAvgIn").textContent = m2t(avg); } else $("#mAvgIn").textContent = "--";
+    $("#mShift").textContent = sc && !sc.flex ? `Today's start ${m2t(hm2m(sc.start))}` : "Rest day today"; }
   renderPay(); renderUpcoming();
 
   // recent: last 7 days with a record, leave, holiday or a missing workday
   const rec = []; const d = new Date(D.now);
-  while (rec.length < 7 && ymd(d) >= D.since){ const k = ymd(d), st = dayStatus(k); if (!["wk","none","lpend","future"].includes(st)) rec.push(k); d.setDate(d.getDate()-1); }
+  while (rec.length < 7 && ymd(d) >= D.since){ const k = ymd(d), st = dayStatus(k); if (!["wk","none","lpend","future","nocls"].includes(st)) rec.push(k); d.setDate(d.getDate()-1); }
   $("#recent").innerHTML = rec.map(dayRow).join("") || `<div class="empty">No attendance yet</div>`;
 }
+function classTally(keys){   // classes held vs attended, up to now
+  let total = 0, done = 0, cxl = 0;
+  for (const k of keys){
+    if (k > D.today || holidayOn(k) || dayStatus(k) === "leave") continue;
+    const cls = classesOn(k) || [], d = D.days.get(k);
+    cxl += cls.filter(b => b.cancelled).length;
+    for (const b of liveClasses(cls)){ const s = classState(b, k, d); if (s === "next") continue; total++; if (s === "done" || s === "now") done++; }
+  }
+  return {total, done, cxl};
+}
+const ICO_OK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>', ICO_NO = '<svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>';
+const TAG = {makeup:["Make-up","chg"], sub:["Substitute","hol"], room:["Room change","pend"]};
+function classRows(cls, k, d){
+  return cls.map(b => {
+    if (b.flex) return `<div class="cflex"><b>Flexible:</b> ${b.hours}h ${esc(b.subject || "")}, no fixed time-in</div>`;
+    const st = classState(b, k, d), tag = b.cancelled ? ["Cancelled","off"] : TAG[b.tag];
+    const where = [b.section, b.room].filter(Boolean).map(esc).join(" · ");
+    return `<div class="crow ${st}"><i class="ci">${st === "done" ? ICO_OK : st === "miss" ? ICO_NO : ""}</i>
+      <span class="ct">${m2t(hm2m(b.start))}<small>–${m2t(hm2m(b.end))}</small></span>
+      <span class="cw"><b>${esc(b.subject || "Class")}</b><small>${where}${b.note ? ` · <em>${esc(b.note)}</em>` : ""}</small></span>
+      ${tag ? `<span class="ctag"><span class="pill ${tag[1]}">${tag[0]}</span></span>` : "<span></span>"}</div>`;
+  }).join("");
+}
+function renderClassesToday(sc, t){
+  const cls = classesOn(D.today), teacher = isTeacher(), has = !!(cls && cls.length);
+  $("#todayGrid").classList.toggle("teacher", teacher);
+  $("#clsCard").hidden = !has;
+  $("#hOffice").hidden = teacher && has && !sc?.flex;
+  $("#hTL").hidden = $("#hNext").hidden = !(teacher && has && !sc?.flex);
+  if (!has) return;
+  const live = liveClasses(cls), states = live.map(b => classState(b, D.today, t));
+  $("#clsList").innerHTML = classRows(cls, D.today, t);
+  const doneN = states.filter(s => s === "done").length;
+  $("#clsCount").textContent = live.length ? `${doneN} of ${live.length} done${cls.some(b => b.cancelled) ? ` · ${cls.filter(b => b.cancelled).length} cancelled` : ""}` : "";
+  if (!live.length || sc?.flex) return;
+  // next / current class line
+  const nowI = states.indexOf("now"), nextI = states.indexOf("next"), b = live[nowI >= 0 ? nowI : nextI];
+  $("#hNext").innerHTML = nowI >= 0 ? `In class until ${m2t(hm2m(b.end))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
+    : nextI >= 0 ? `Next class ${m2t(hm2m(b.start))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
+    : `Classes done for today <span>· ${doneN} of ${live.length} attended</span>`;
+  // day timeline: class blocks, time on campus (gold), now marker
+  const iv = presence(t), nowM = minsOf(iso(new Date(nowMs())));
+  const lo = Math.floor(Math.min(hm2m(live[0].start), ...iv.map(x => x[0])) / 60) * 60;
+  const hi = Math.ceil(Math.max(...live.map(x => hm2m(x.end)), ...iv.map(x => x[1])) / 60) * 60;
+  const pc = m => ((m - lo) / (hi - lo) * 100).toFixed(2) + "%", w = (a, z) => ((z - a) / (hi - lo) * 100).toFixed(2) + "%";
+  const blocks = cls.filter(x => !x.flex).map(x => `<i class="tb ${classState(x, D.today, t)}" style="left:${pc(hm2m(x.start))};width:${w(hm2m(x.start), hm2m(x.end))}" title="${m2t(hm2m(x.start))} ${esc(x.subject)}"></i>`).join("");
+  const pres = iv.map(([a, z]) => `<b class="tp" style="left:${pc(a)};width:${w(a, z)}"></b>`).join("");
+  const step = hi - lo > 8*60 ? 180 : 120, hrs = [];
+  for (let m = lo; m <= hi; m += step) hrs.push(`<span style="left:${pc(m)}">${((Math.floor(m/60) + 11) % 12) + 1}${m % 60 ? ":" + pad(m % 60) : ""}${m < 720 ? "am" : "pm"}</span>`);
+  $("#hTL").innerHTML = `<div class="tlx" role="img" aria-label="Today's classes and your time on campus"><div class="tlt">${blocks}${pres}${nowM > lo && nowM < hi ? `<s class="tn" style="left:${pc(nowM)}"></s>` : ""}</div><div class="tlh">${hrs.join("")}</div></div>
+    <div class="tlk"><span><i></i>Class</span><span><i class="g"></i>On campus</span></div>`;
+}
+
 function payPeriod(){ const n = new Date(D.today+"T00:00:00"), y = n.getFullYear(), m = n.getMonth(), first = n.getDate() <= 15;
   return {from: ymd(new Date(y, m, first ? 1 : 16)), to: ymd(first ? new Date(y, m, 15) : new Date(y, m+1, 0))}; }
 function renderPay(){
@@ -784,7 +955,7 @@ function renderPay(){
     ["Late", lateD.length, lateD.length ? `${fmtMin(lateD.reduce((s,d)=>s+d.lateBy,0))} in total` : "times"],
     ["Undertime", fmtMin(present.reduce((s,d)=>s+d.under,0)), "left early"],
     ["On leave", lv.length, unpaid ? `${unpaid} without pay` : "paid days"],
-    ["Holidays", all.filter(k => holidayOn(k)).length, "in this period"],
+    isTeacher() ? (c => ["Classes attended", `${c.done}/${c.total}`, c.cxl ? `${c.cxl} cancelled` : "so far"])(classTally(sofar)) : ["Holidays", all.filter(k => holidayOn(k)).length, "in this period"],
     ["Missing time-out", present.filter(d => d.noOut).length, "ask HR to fix"],
     ["Hours worked", fmtHrs(present.reduce((s,d)=>s+liveHours(d),0)), "so far"],
   ];
@@ -797,6 +968,11 @@ function renderUpcoming(){
   const items = [], lim = new Date(D.today+"T00:00:00"); lim.setDate(lim.getDate()+75); const limK = ymd(lim);
   for (const o of (D.holidays || [])) if (o.date > D.today && o.date <= limK) items.push({k:o.date, cls:"hol", t:esc(o.name), s: o.kind === "regular" ? "Regular holiday" : o.kind === "special" ? "Special non-working day" : "No work"});
   for (const r of (D.leave?.requests || [])) if ((r.state === "approved" || r.state === "pending") && r.to > D.today) items.push({k:r.from > D.today ? r.from : D.today, cls:"lv", t:esc(r.type), s:`${fmtRange(r.from, r.to)} · ${r.state === "approved" ? "approved" : "waiting for approval"}`});
+  const lim2 = new Date(D.today+"T00:00:00"); lim2.setDate(lim2.getDate()+14); const lim2K = ymd(lim2);
+  for (const c of (D.changes || [])) if (c.date >= D.today && c.date <= lim2K && c.kind !== "room"){
+    const base = (classesOn(c.date) || []).find(b => b.start === c.start) || c;
+    items.push({k:c.date, cls: c.kind === "cancel" ? "hol" : "lv", t: c.kind === "cancel" ? `Class cancelled · ${esc(base.subject || "")}` : c.kind === "makeup" ? `Make-up class · ${esc(c.subject)}` : `Substitute class · ${esc(c.subject)}`,
+      s: `${m2t(hm2m(c.start))}${base.end ? "–" + m2t(hm2m(base.end)) : ""} · ${esc(base.section || "")}${base.room ? " · " + esc(base.room) : ""}`}); }
   const {to} = payPeriod(); items.push({k:to, cls:"pay", t:"Pay period ends", s:"Cutoff for this period's attendance"});
   items.sort((a,b) => a.k.localeCompare(b.k));
   $("#upcoming").innerHTML = items.slice(0,4).map(i => { const d = new Date(i.k+"T00:00:00"), n = daysUntil(i.k);
@@ -808,7 +984,7 @@ function dayRow(k){
   const extra = d ? [d.late ? `${d.lateBy}m late` : "", d.under ? `${fmtMin(d.under)} undertime` : ""].filter(Boolean).join(" · ") : "";
   const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : d.noOut ? "no time-out" : fmtTime(d.last)}</b> ${extra ? `<span class="muted"> &middot; ${extra}</span>` : ""}`
     : `<span class="muted">${st === "leave" ? esc(D.leaveDays.get(k).type) : st === "hol" ? esc(holidayOn(k).name) : "No time-in recorded"}</span>`;
-  return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${k===D.today?"Today":dt.toLocaleDateString([], {month:"long",day:"numeric"})}<br>${times}</span><span class="r"><b>${d ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`;
+  return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${k===D.today?"Today":dt.toLocaleDateString([], {month:"long",day:"numeric"})}<br>${times}</span><span class="r"><b>${d && !d.noOut ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`;
 }
 function tickToday(){
   if (!D || view !== "today" || document.hidden) return;
@@ -828,16 +1004,17 @@ function renderCalendar(){
   let html = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(d=>`<div class="h">${d}</div>`).join("");
   html += `<div class="cell pad"></div>`.repeat(lead);
   for (const k of monthDays(y, mo)){
-    const d = D.days.get(k), st = dayStatus(k), cls = [st, k===D.today?"today":"", k===selDay?"sel":""].join(" ");
+    const d = D.days.get(k), st = dayStatus(k), chg = (D.changes || []).some(c => c.date === k), cls = [st, k===D.today?"today":"", k===selDay?"sel":"", chg ? "chg" : ""].join(" ");
     const t = d ? `<span class="t"><b>${d.noOut ? "No out" : fmtHrs(liveHours(d))}</b>In ${fmtTime(d.first)}</span>`
       : st==="abs" ? `<span class="t">No record</span>`
       : st==="hol" ? `<span class="t"><b>Holiday</b>${esc(holidayOn(k).name)}</span>`
       : (st==="leave" || st==="lpend") ? `<span class="t"><b>${st==="leave" ? "On leave" : "Pending"}</b>${esc(D.leaveDays.get(k).type.replace(/ Leave$/,""))}</span>` : `<span class="t"></span>`;
     const short = d ? (d.noOut ? "No out" : `${Math.round(liveHours(d)*10)/10}h`) : {abs:"Absent", hol:"Hol", leave:"Leave", lpend:"Pend."}[st] || "";
-    const said = {ok:"on time", late:"late", live:"timed in now", noout:"no time-out", abs:"no record", leave:"on leave", lpend:"leave pending", hol:"holiday", wk:"rest day"}[st];
+    const said = ({ok:"on time", late:"late", live:"timed in now", noout:"no time-out", abs:"no record", leave:"on leave", lpend:"leave pending", hol:"holiday", wk:"rest day", nocls:"no classes"}[st] || "") + (chg ? ", class schedule changed" : "");
     html += `<button class="cell ${cls}" data-day="${k}" aria-label="${fmtDay(k)}${said ? ", " + said : ""}" ${k===D.today ? 'aria-current="date"' : ""} aria-pressed="${k===selDay}"><span class="n">${Number(k.slice(8))}</span>${t}${short ? `<i class="sh" aria-hidden="true">${short}</i>` : ""}</button>`;
   }
   $("#cal").innerHTML = html;
+  $("#lgChg").hidden = !(D.changes || []).length;
   const ahead = new Date(D.today+"T00:00:00"); ahead.setDate(ahead.getDate() + 92);
   $("#prevM").disabled = ymd(new Date(y, mo, 0)) < D.since;
   $("#nextM").disabled = ymd(new Date(y, mo+1, 1)) > [maxLeaveDay(), ymd(ahead)].sort().pop();
@@ -845,7 +1022,9 @@ function renderCalendar(){
 }
 function renderDetail(){
   const k = selDay || D.today, d = D.days.get(k), st = dayStatus(k), sc = sched(k), hol = holidayOn(k), lv = D.leaveDays.get(k);
-  const schedLine = sc ? `<p class="muted" style="margin:10px 0 0;font-size:13px">Schedule: ${m2t(hm2m(sc.start))} to ${m2t(hm2m(sc.end))}</p>` : "";
+  const dcls = classesOn(k);
+  const schedLine = dcls && dcls.length ? `<h3 style="margin:14px 0 2px;font-size:13px">Classes${d?.classTotal ? ` · ${d.classDone} of ${d.classTotal} attended` : ""}</h3><div class="clist">${classRows(dcls, k, d)}</div>`
+    : sc && !sc.flex ? `<p class="muted" style="margin:10px 0 0;font-size:13px">Schedule: ${m2t(hm2m(sc.start))} to ${m2t(hm2m(sc.end))}</p>` : "";
   const fixBtn = k <= D.today && k >= D.since && (st === "abs" || st === "noout" || st === "late" || st === "ok")
     ? `<button class="btn sm" data-fix="${k}" style="margin-top:14px"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Request a correction</button>` : "";
   let body;
@@ -862,7 +1041,7 @@ function renderDetail(){
   } else if (lv){
     body = `<div class="big">${esc(lv.type)}</div><div>${PILL[st]}</div><p class="muted">${lv.state === "approved" ? "Approved leave" : "Waiting for approval"}${lv.half ? (lv.half === "am" ? ", morning only" : ", afternoon only") : ""}.</p>`;
   } else {
-    body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on official business, at a seminar or forgot to tap your ID, request a correction." : st==="wk" ? "Rest day, no work scheduled." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
+    body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on official business, at a seminar or forgot to tap your ID, request a correction." : st==="nocls" ? "All classes this day were cancelled, so no time-in was needed." : st==="wk" ? "Rest day, no work scheduled." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
   }
   $("#detail").innerHTML = `<div class="ch"><h2>${k===D.today?"Today":fmtDay(k)}</h2></div>${body}${schedLine}${fixBtn}`;
 }
@@ -871,7 +1050,18 @@ function renderDetail(){
 function historyKeys(){
   const [y,mo] = $("#hMonth").value.split("-").map(Number), f = $("#hFilter").value;
   return monthDays(y, mo-1).filter(k => k <= D.today).reverse()
-    .filter(k => { const st = dayStatus(k); return !["wk","none","future","lpend"].includes(st) && (!f || st === f || (f === "late" && D.days.get(k)?.late)); });
+    .filter(k => { const st = dayStatus(k); return !["wk","none","future","lpend","nocls"].includes(st) && (!f || st === f || (f === "late" && D.days.get(k)?.late)); });
+}
+function dayNote(k){   // schedule changes and class attendance for one day
+  const cls = classesOn(k), d = D.days.get(k); if (!cls) return "";
+  const n = [], cx = cls.filter(b => b.cancelled).length;
+  if (cls.some(b => b.tag === "makeup")) n.push("Make-up class");
+  if (cls.some(b => b.tag === "sub")) n.push("Substitute class");
+  if (cls.some(b => b.tag === "room")) n.push("Room changed");
+  if (cx) n.push(`${cx} class${cx > 1 ? "es" : ""} cancelled`);
+  if (d?.classTotal && d.classDone < d.classTotal) n.push(`${d.classDone}/${d.classTotal} classes`);
+  if (cls.some(b => b.flex) && !liveClasses(cls).length) n.push("Flexible day");
+  return n.join(" · ");
 }
 function amPm(d){   // DTR style: first block = AM, last block = PM
   if (!d) return ["","","",""];
@@ -882,12 +1072,12 @@ function amPm(d){   // DTR style: first block = AM, last block = PM
 function renderHistory(){
   const keys = historyKeys();
   $("#hBody").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k), [ai, ao, pi, po] = amPm(d);
-    const note = st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "";
+    const note = [st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "", esc(dayNote(k))].filter(Boolean).join(" · ");
     return `<tr data-day="${k}" style="cursor:pointer"><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"})}</td><td>${ai||"--"}</td><td>${ao||"--"}</td><td>${pi||"--"}</td><td class="${po === "?" ? "warn" : ""}">${po||"--"}</td><td class="num">${d && !d.noOut ? fmtHrs(liveHours(d)) : "--"}</td><td class="num ${d?.late ? "warn" : ""}">${d?.late ? d.lateBy + "m" : "--"}</td><td class="num ${d?.under ? "warn" : ""}">${d?.under ? fmtMin(d.under) : "--"}</td><td>${PILL[st]}${note ? ` <span class="muted" style="font-size:12px">${note}</span>` : ""}</td></tr>`; }).join("")
     || `<tr><td colspan="9" class="empty">Nothing to show for this month</td></tr>`;
   $("#hList").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k), [ai, ao, pi, po] = amPm(d), dt = new Date(k+"T00:00:00");
     const line = d ? `<b>${ai}</b> &rarr; <b>${po === "?" ? "no time-out" : po || "--"}</b>` : `<span class="muted">${st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "No time-in recorded"}</span>`;
-    const sub = d ? [ao && pi ? `Break ${ao}–${pi}` : "", d.late ? `${d.lateBy}m late` : "", d.under ? `${fmtMin(d.under)} undertime` : ""].filter(Boolean).join(" · ") : "";
+    const sub = [d && ao && pi ? `Break ${ao}–${pi}` : "", d?.late ? `${d.lateBy}m late` : "", d?.under ? `${fmtMin(d.under)} undertime` : "", dayNote(k)].filter(Boolean).join(" · ");
     return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${line}${sub ? `<small>${sub}</small>` : ""}</span><span class="r"><b>${d && !d.noOut ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`; }).join("")
     || `<div class="empty">Nothing to show for this month</div>`;
   const worked = keys.filter(k => D.days.has(k)), ds = worked.map(k => D.days.get(k));
@@ -1102,11 +1292,32 @@ function openMe(){
   const e = D.employee, days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], todayDow = new Date(D.today+"T00:00:00").getDay();
   $("#miAv").textContent = $("#meAv").textContent; $("#meTitle").textContent = e.name; $("#miJob").textContent = [e.job, e.dept].filter(Boolean).join(" · ");
   const cells = [["Employee ID", e.badge || "Ask HR"], ["Employment", e.type || "--"], ["Department", e.dept || "--"], ["Department head", e.manager || "--"],
-                 ["Work email", e.email || "--"], ["Late after", `${D.grace_minutes} min grace`]];
+                 ["Work email", e.email || "--"], ["Late after", isTeacher() ? `First class + ${D.grace_minutes} min` : `${D.grace_minutes} min grace`]];
   $("#miInfo").innerHTML = cells.map(([a,b]) => `<div><small>${a}</small><span>${esc(b)}</span></div>`).join("");
-  $("#miSched").innerHTML = days.map((n, i) => { const dow = (i+1) % 7, s = D.schedule[dow];
-    return `<tr class="${dow === todayDow ? "today" : ""}"><td>${n}</td><td>${s ? `${m2t(hm2m(s.start))} to ${m2t(hm2m(s.end))}` : "Rest day"}</td></tr>`; }).join("");
+  renderMySched(weekType(D.today));
   openSheet("#meSheet"); setTimeout(() => $("#meClose").focus(), 50);
+}
+
+function renderMySched(wk){
+  const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], todayDow = new Date(D.today+"T00:00:00").getDay(), e = D.employee;
+  if (!isTeacher()){
+    $("#miRule").textContent = "Your office hours are fixed. Late after your start time plus the grace period.";
+    $("#miWeek").hidden = true;
+    $("#miSched").innerHTML = days.map((n, i) => { const dow = (i+1) % 7, s = D.schedule[dow];
+      return `<tr class="${dow === todayDow ? "today" : ""}"><td>${n}</td><td>${s ? `${m2t(hm2m(s.start))} to ${m2t(hm2m(s.end))}` : "Rest day"}</td></tr>`; }).join("");
+    return;
+  }
+  const L = D.classload, alt = Object.values(L).some(arr => arr.some(b => b.week != null));
+  $("#miWeek").hidden = !alt;
+  document.querySelectorAll("#miWeek button").forEach(b => b.classList.toggle("on", +b.dataset.w === wk));
+  const load = dow => (L[dow] || []).filter(b => b.week == null || +b.week === wk);
+  const hours = [1,2,3,4,5,6,0].reduce((s, dow) => s + load(dow).reduce((t, b) => t + (b.flex ? b.hours : (hm2m(b.end) - hm2m(b.start))/60), 0), 0);
+  $("#miRule").innerHTML = (e.basis === "parttime"
+    ? "<b>Part-time:</b> only your class times count. Vacant periods are yours."
+    : "<b>Full-time:</b> expected from your first class to your last, with one 1-hour break. Other time away counts as undertime.")
+    + ` ${alt ? `Week ${wk ? "B" : "A"} load` : "Weekly load"}: <b>${Math.round(hours*10)/10}h</b>.${alt ? ` This week is <b>Week ${weekType(D.today) ? "B" : "A"}</b>; your Fridays and Saturdays alternate.` : ""}`;
+  $("#miSched").innerHTML = days.map((n, i) => { const dow = (i+1) % 7, bl = load(dow);
+    return `<tr class="${dow === todayDow && wk === weekType(D.today) ? "today" : ""}"><td style="vertical-align:top;padding-top:8px">${n.slice(0,3)}</td><td class="blk">${bl.length ? bl.map(b => b.flex ? `<span>Flexible ${b.hours}h <small>${esc(b.subject || "")}</small></span>` : `<span>${m2t(hm2m(b.start))}–${m2t(hm2m(b.end))} <small>${esc(b.subject)} · ${esc(b.section || "")} · ${esc(b.room || "")}</small></span>`).join("") : "No classes"}</td></tr>`; }).join("");
 }
 
 // ---------- PRINTABLE DTR (Daily Time Record)
@@ -1115,9 +1326,9 @@ function printDtr(){
   let tot = 0, late = 0, under = 0, abs = 0;
   for (const k of monthDays(y, mo-1)){
     const d = D.days.get(k), st = k <= D.today ? dayStatus(k) : "future", [ai, ao, pi, po] = amPm(d);
-    const rem = st === "hol" ? holidayOn(k).name : st === "leave" ? D.leaveDays.get(k).type : st === "abs" ? "Absent (no record)" : st === "wk" ? "Rest day" : st === "noout" ? "No time-out" : "";
+    const rem = [st === "hol" ? holidayOn(k).name : st === "leave" ? D.leaveDays.get(k).type : st === "abs" ? "Absent (no record)" : st === "wk" ? "Rest day" : st === "nocls" ? "No classes" : st === "noout" ? "No time-out" : "", k <= D.today ? dayNote(k) : ""].filter(Boolean).join("; ");
     if (d && !d.noOut) tot += liveHours(d); if (d) { late += d.lateBy; under += d.under; } if (st === "abs") abs++;
-    rows.push(`<tr class="${["wk","hol","future"].includes(st) ? "off" : ""}"><td>${Number(k.slice(8))}</td><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short"})}</td><td>${ai}</td><td>${ao}</td><td>${pi}</td><td>${po === "?" ? "" : po}</td><td>${d?.late ? d.lateBy : ""}</td><td>${d?.under || ""}</td><td class="l">${esc(rem)}</td></tr>`);
+    rows.push(`<tr class="${["wk","hol","future","nocls"].includes(st) ? "off" : ""}"><td>${Number(k.slice(8))}</td><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short"})}</td><td>${ai}</td><td>${ao}</td><td>${pi}</td><td>${po === "?" ? "" : po}</td><td>${d?.late ? d.lateBy : ""}</td><td>${d?.under || ""}</td><td class="l">${esc(rem)}</td></tr>`);
   }
   const month = new Date(y, mo-1, 1).toLocaleDateString([], {month:"long", year:"numeric"});
   $("#dtr").innerHTML = `<div class="hd"><img src="seal-128.webp" alt=""><div><h1>St. Clare College of Caloocan</h1><h2>DAILY TIME RECORD</h2></div></div>
@@ -1184,6 +1395,62 @@ const DEMO_START = (() => { // outside school hours the demo shows a weekday aft
   if (d.getHours() < 7 || d.getHours() >= 17 || !isWork(d)){ while (!isWork(d)) d.setDate(d.getDate()-1); d.setHours(14,30,0); }
   return {offset: d - real};
 })();
+const B = (start, end, subject, section, room, week) => ({start, end, subject, section, room, ...(week != null ? {week} : {})});
+const MARIA_MW = [B("07:30","09:00","Math 4","St. Rose","Rm 204"), B("09:15","10:45","Science 4","St. Rose","Rm 204"), B("13:00","14:30","Math 4","St. Clare","Rm 206"), B("14:45","16:15","Reading 4","St. Rose","Rm 204")];
+const MARIA_TT = [B("09:00","10:30","Math 4","St. Clare","Rm 206"), B("10:45","12:15","Science 4","St. Clare","Rm 206"), B("15:00","16:30","Homeroom","St. Rose","Rm 204")];
+const JOSE_MWF = [B("07:00","08:30","Gen. Chemistry","STEM 11-A","Lab 3"), B("08:30","10:00","Gen. Chemistry","STEM 11-B","Lab 3"), B("10:30","12:00","Earth Science","STEM 12-A","Rm 301"), B("13:00","14:30","Research 2","STEM 12-B","Rm 301")];
+const JOSE_TT = [B("10:00","11:30","Gen. Chemistry","STEM 11-C","Lab 3"), B("13:00","14:30","Earth Science","STEM 12-C","Rm 302"), B("14:30","16:00","Research 2","STEM 12-A","Rm 301"), B("16:00","17:30","Advisory","STEM 11-A","Rm 305")];
+const ANG_MW = [B("08:00","09:30","Fin. Accounting 1","BSA 1A","Rm 401"), B("09:30","11:00","Fin. Accounting 1","BSA 1B","Rm 401"), B("14:00","15:30","Taxation","BSA 3A","Rm 402")];
+const ANG_TT = [B("10:00","11:30","Auditing","BSA 4A","Rm 403"), B("13:00","14:30","Taxation","BSA 3B","Rm 402"), B("16:00","17:30","Cost Accounting","BSA 2A","Rm 401"), B("17:30","19:00","Cost Accounting","BSA 2B","Rm 401")];
+const PAO_MW = [B("13:00","14:30","IT 101","BSIT 1A","Lab 2"), B("14:30","16:00","IT 101","BSIT 1B","Lab 2")];
+const DEMO_LOADS = {   // sample class loads; the real ones come from each teacher's working schedule in Odoo
+  1: {basis:"fulltime", load:{1:MARIA_MW, 2:MARIA_TT, 3:MARIA_MW, 4:MARIA_TT,
+      5:[B("07:30","09:00","Math 4","St. Rose","Rm 204",0), B("09:15","10:45","Science 4","St. Clare","Rm 206",0), B("13:00","14:00","Faculty meeting","Basic Ed","AVR",0), B("13:00","16:00","Remedial reading","Grade 4","Library",1)],
+      6:[B("08:00","11:00","Remedial reading","Grade 4","Library",1)]}},
+  2: {basis:"fulltime", load:{1:JOSE_MWF, 2:JOSE_TT, 3:JOSE_MWF, 4:JOSE_TT, 5:JOSE_MWF}},
+  3: {basis:"fulltime", load:{1:ANG_MW, 2:ANG_TT, 3:ANG_MW, 4:ANG_TT, 5:[{flex:true, hours:4, subject:"Research & consultation"}], 6:[B("08:00","11:00","Review class","BSA 4A","Rm 403",0)]}},
+  6: {basis:"parttime", load:{1:PAO_MW, 3:PAO_MW, 4:[B("18:00","19:30","IT 210","BSIT 2B","Lab 2")], 6:[B("08:00","11:00","IT 105","BSIT 2A","Lab 1")]}},
+};
+function demoChanges(load, today, basis){   // a realistic mix around "today": room change, cancellation, make-up, substitution
+  const base = {classload: load, changes: []}, add = (d, n) => { const x = new Date(d+"T00:00:00"); x.setDate(x.getDate()+n); return ymd(x); };
+  const find = (from, step, test) => { for (let i = 1; i < 30; i++){ const k = add(from, i*step); if (!DEMO_HOL_SET.has(k) && test(k)) return k; } return null; };
+  const live = k => liveClasses(classesOn(k, base));
+  const ch = [], tl = live(today);
+  if (tl.length >= 2) ch.push({date: today, kind:"room", start: tl[Math.min(2, tl.length-1)].start, room:"AVR", note:"Program rehearsal"});
+  const c1 = find(today, 1, k => live(k).length);
+  if (c1){ const b = live(c1)[0]; ch.push({date:c1, kind:"cancel", start:b.start, note:"Cancelled for the school program"});
+    const sat = find(c1, 1, k => new Date(k+"T00:00:00").getDay() === 6 && !live(k).length);
+    if (sat) ch.push({date:sat, kind:"makeup", start:"08:00", end:"09:30", subject:b.subject, section:b.section, room:b.room, note:`Make-up for ${fmtShortK(c1)}`}); }
+  const sub = basis === "parttime" ? null : find(add(today, 4), 1, k => { const l = live(k); return l.length && !l.some(b => b.start < "14:30" && b.end > "13:00") && l[0].start < "13:00"; });
+  const own = Object.values(load).flat().find(b => !b.flex) || {};
+  if (sub) ch.push({date:sub, kind:"sub", start:"13:00", end:"14:30", subject: own.subject, section:"Another section", room: own.room, note:"Covering for a colleague on leave"});
+  const past = find(today, -1, k => live(k).length >= 2 && add(today, -5) >= k);
+  if (past){ const l = live(past); ch.push({date:past, kind:"cancel", start:l[l.length-1].start, note:"Cancelled, class on a field trip"}); }
+  return ch;
+}
+const fmtShortK = k => new Date(k+"T00:00:00").toLocaleDateString([], {month:"short", day:"numeric"});
+function demoDay(cls, basis, day, r, punctual){   // time-in / time-out pairs that follow the class schedule
+  const at = hhmm => { const [a, b] = hhmm.split(":").map(Number); const x = new Date(day); x.setHours(a, b, 0, 0); return x; };
+  const mins = (x, m) => new Date(+x + m*6e4);
+  const flex = cls.find(b => b.flex), live = liveClasses(cls);
+  if (!live.length){ if (!flex) return []; const s = at("09:00"); return [[mins(s, Math.floor(r()*40)), mins(s, flex.hours*60 + Math.floor(r()*50))]]; }
+  const sessions = [];
+  for (const b of live){ const last = sessions[sessions.length-1];
+    if (last && (basis === "fulltime" || hm2m(b.start) - hm2m(last.end) < 90)) last.end = b.end > last.end ? b.end : last.end; else sessions.push({start:b.start, end:b.end}); }
+  const out = [];
+  sessions.forEach((s, i) => {
+    let a = mins(at(s.start), i === 0 && r() > punctual ? 12 + Math.floor(r()*30) : -25 + Math.floor(r()*28));
+    let z = mins(at(s.end), r() < .12 ? -(10 + Math.floor(r()*35)) : Math.floor(r()*30));
+    if (basis === "fulltime"){   // lunch tap between classes on most days
+      const gap = live.findIndex((b, j) => j && hm2m(b.start) - hm2m(live[j-1].end) >= 50 && hm2m(live[j-1].end) >= 11*60 && hm2m(b.start) <= 14*60+30);
+      if (gap > 0 && r() < .65){ const o = mins(at(live[gap-1].end), 3 + Math.floor(r()*9)); out.push([a, o]);
+        a = new Date(Math.min(+mins(o, 45 + Math.floor(r()*24)), +mins(at(live[gap].start), -3))); }   // back after about an hour
+    }
+    out.push([a, z]);
+  });
+  return out;
+}
+
 function demoData(id){
   const [name, job, dept] = DEMO_PEOPLE[id-1];
   const now = new Date(Date.now() + DEMO_START.offset); now.setMilliseconds(0);
@@ -1191,9 +1458,21 @@ function demoData(id){
   const punctual = 0.7 + rng("p"+id)()*0.25;
   const emp = {id, name, job, dept, email: demoEmail(name), state:"checked_out", last_in:null, last_out:null};
   const atts = []; let aid = 1;
+  const prof = DEMO_LOADS[id], changes = prof ? demoChanges(prof.load, ymd(now), prof.basis) : [];
   for (let back = 186; back >= 0; back--){
     const day = new Date(now); day.setDate(now.getDate()-back); day.setHours(0,0,0,0);
     const r = rng(id + "-" + ymd(day));
+    if (prof){   // teachers: taps follow that day's classes
+      if (DEMO_HOL_SET.has(ymd(day)) || r() < 0.05) continue;
+      const cls = classesOn(ymd(day), {classload: prof.load, changes});
+      for (const [a, b] of demoDay(cls, prof.basis, day, r, punctual)){
+        if (a > now) break;
+        const out = b > now ? null : b;
+        atts.push({id: aid++, in: iso(a), out: out ? iso(out) : null, hours: Math.round(((out || now) - a)/36e3)/100});
+        emp.last_in = iso(a); if (out) emp.last_out = iso(out); emp.state = out ? "checked_out" : "checked_in";
+      }
+      continue;
+    }
     if (!isWork(day) || DEMO_HOL_SET.has(ymd(day)) || r() < 0.05) continue;
     const late = r() > punctual;
     const start = new Date(day); start.setHours(wh, wm + (late ? 12 + Math.floor(r()*36) : -25 + Math.floor(r()*33)));
@@ -1212,9 +1491,10 @@ function demoData(id){
   // one sample day where the time-out tap was missed
   const miss = atts.find(a => a.out && dkey(a.in) < ymd(now) && dkey(a.in) > ymd(new Date(+now - 12*864e5)) && hm2m(a.in.slice(11,16)) > 12*60);
   if (miss){ miss.out = null; miss.hours = 0; }
-  return {employee: {...emp, badge: "00044172" + pad(id), type: id === 6 ? "Part-time faculty" : /Instructor|Teacher|Adviser/.test(job) ? "Full-time faculty" : "Staff",
-                     manager: DEPT_HEAD[dept] || "Department head"},
-          attendances: atts, now: iso(now), mode: "demo", schedule, holidays: DEMO_HOLIDAYS, ...CFG};
+  return {employee: {...emp, badge: "00044172" + pad(id), type: id === 6 ? "Part-time faculty" : prof ? "Full-time faculty" : "Staff",
+                     basis: prof ? prof.basis : "office", manager: DEPT_HEAD[dept] || "Department head"},
+          attendances: atts, now: iso(now), mode: "demo", schedule, holidays: DEMO_HOLIDAYS,
+          classload: prof ? prof.load : null, changes, ...CFG};
 }
 // sample leave: types + allocations, saved in this browser so trying it out keeps your requests
 const DEMO_LEAVE_TYPES = [   // route = who approves, as set on the Odoo time-off type
@@ -1336,7 +1616,8 @@ $("#fCancel").onclick = () => closeSheet("#fixSheet");
 $("#fixForm").addEventListener("submit", sendFix);
 $("#fixForm").addEventListener("input", checkFix);
 $("#fDate").addEventListener("change", () => { const k = $("#fDate").value, d = D.days.get(k), sc = sched(k); $("#fIn").value = d ? d.first.slice(11,16) : sc ? sc.start : ""; $("#fOut").value = d?.last && !d.noOut ? d.last.slice(11,16) : sc ? sc.end : ""; checkFix(); });
-$("#meBtn").onclick = openMe; $("#meClose").onclick = () => closeSheet("#meSheet");
+$("#meBtn").onclick = openMe;
+$("#miWeek").addEventListener("click", e => { const b = e.target.closest("button"); if (b) renderMySched(+b.dataset.w); }); $("#meClose").onclick = () => closeSheet("#meSheet");
 $("#printDtr").onclick = () => D && printDtr();
 for (const id of ["#fixSheet", "#meSheet"]) $(id).addEventListener("click", e => { if (e.target === $(id)) closeSheet(id); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") ["#fixSheet", "#meSheet"].forEach(id => closeSheet(id)); });
