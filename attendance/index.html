@@ -19,14 +19,14 @@
   --bg:#F1EDEE; --card:#fff; --ink:#1D1416; --ink-2:#3E3235; --muted:#7D6F73; --line:#EBE2E3; --soft:#F8F5F5;
   --accent:#A6192E; --accent-2:#C8102E; --accent-soft:#F6E1E4; --maroon:#5C0A17; --gold:#E0AD1C;
   --ok:#1F9D63; --ok-soft:#E5F6EE; --warn:#B7850F; --warn-soft:#FBF1D6; --bad:#D64545; --bad-soft:#FCEAEA;
-  --r:22px; --r-sm:14px; --hint-ink:#8a4d12;
+  --r:22px; --r-sm:14px; --hint-ink:#8a4d12; --leave:#4A63C9; --leave-soft:#E8ECFB;
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#120E0F; --card:#1C1617; --ink:#F4EDEE; --ink-2:#D3C6C9; --muted:#9C8D91; --line:#2F2628; --soft:#251D1F;
   --accent:#E0384A; --accent-2:#F05264; --accent-soft:rgba(224,56,74,.16); --maroon:#8E1426; --gold:#F2C94C;
   --ok:#3FBF80; --ok-soft:rgba(63,191,128,.15); --warn:#E5B23A; --warn-soft:rgba(229,178,58,.15); --bad:#F06B6B; --bad-soft:rgba(240,107,107,.14);
-  --hint-ink:#F2C94C;
+  --hint-ink:#F2C94C; --leave:#93A6F2; --leave-soft:rgba(147,166,242,.15);
 }
 :root[data-theme="dark"] .card,:root[data-theme="dark"] .top,:root[data-theme="dark"] .login .box{box-shadow:0 0 0 1px var(--line)}
 :root[data-theme="dark"] .hero.out{background:linear-gradient(135deg,#3A2A2E 0%,#241C1E 100%)}
@@ -38,6 +38,57 @@ body{background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-s
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 [hidden]{display:none!important}
+/* ---------- leave */
+.pill.leave{background:var(--leave-soft);color:var(--leave)}
+.pill.pend{background:var(--warn-soft);color:var(--warn)}
+.pill.refused{background:var(--bad-soft);color:var(--bad)}
+.cell.leave{background:var(--leave-soft)}.cell.leave .t{color:var(--leave)}
+.cell.lpend{background:repeating-linear-gradient(135deg,var(--leave-soft) 0 6px,transparent 6px 12px);border-color:var(--leave-soft)}.cell.lpend .t{color:var(--leave)}
+.bals{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.bal{background:var(--soft);border-radius:var(--r-sm);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.bal small{color:var(--muted);font-size:12px}
+.bal b{font:700 26px/1 "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.02em}
+.bal b span{font:500 13px Inter,sans-serif;color:var(--muted);letter-spacing:0;margin-left:4px}
+.bal .track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bal .track i{display:block;height:100%;border-radius:99px;background:var(--leave)}
+.bal.low .track i{background:var(--warn)}
+.lreq{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px 6px}
+.lreq+.lreq{border-top:1px solid var(--line)}
+.lreq .date{background:var(--leave-soft);color:var(--leave)}
+.lreq .date small{color:var(--leave)}
+.lreq .what b{font-weight:600}
+.lreq .what small{display:block;color:var(--muted);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:520px}
+.lreq .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.linkbtn{border:0;background:none;color:var(--bad);font-size:12px;padding:2px 0;text-decoration:underline;text-underline-offset:2px}
+/* request sheet */
+.sheet{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:rgba(18,14,15,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet.open{opacity:1;pointer-events:auto}
+.sheet .panel{width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border-radius:24px;padding:24px;transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.2,.9,.25,1.1);box-shadow:0 30px 80px -30px rgba(0,0,0,.5)}
+.sheet.open .panel{transform:none}
+.sheet h2{margin:0 0 4px;font-size:22px}
+.types{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:6px 0 16px}
+.types label{position:relative;display:block;cursor:pointer}
+.types input{position:absolute;opacity:0;pointer-events:none}
+.types span{display:block;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--soft);transition:border-color .2s,background .2s}
+.types span b{display:block;font-weight:600;font-size:13px}
+.types span small{color:var(--muted);font-size:11px}
+.types input:checked+span{border-color:var(--accent);background:var(--accent-soft)}
+.types input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.types input:disabled+span{opacity:.45;cursor:not-allowed}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:999px;margin-bottom:14px}
+.seg button{flex:1;border:0;background:none;padding:8px;border-radius:999px;color:var(--ink-2);font-size:13px}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12);font-weight:600}
+textarea.input{height:auto;min-height:84px;padding:12px 14px;resize:vertical;font:inherit}
+.sum{border-radius:14px;padding:12px 14px;background:var(--leave-soft);color:var(--leave);font-size:13px;margin:4px 0 14px}
+.sum.bad{background:var(--bad-soft);color:var(--bad)}
+.actions{display:flex;gap:8px;justify-content:flex-end}
+.done{text-align:center;padding:12px 0 4px}
+.done svg{width:64px;height:64px;stroke:var(--ok);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.done circle{stroke-dasharray:160;stroke-dashoffset:160;animation:dr .7s ease-out forwards}
+.done path{stroke-dasharray:40;stroke-dashoffset:40;animation:dr .4s .55s ease-out forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+@media (max-width:720px){.sheet{place-items:end center;padding:0}.sheet .panel{border-radius:24px 24px 0 0;max-height:92vh}.two{grid-template-columns:1fr}.lreq .what small{max-width:180px}}
 h1,h2,h3,.timer,.kpi b,.weektotal b,.detail .big,.brand,.monthnav b{font-family:"Plus Jakarta Sans",Inter,sans-serif}
 .ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
@@ -242,6 +293,7 @@ button.cell:hover{filter:brightness(.97)}
       <button class="on" data-view="today"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Today</button>
       <button data-view="calendar"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
       <button data-view="history"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>History</button>
+      <button data-view="leave"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg>Leave</button>
     </nav>
     <div class="me">
       <span class="av" id="meAv">--</span>
@@ -294,11 +346,24 @@ button.cell:hover{filter:brightness(.97)}
     <div class="card s8">
       <div class="ch">
         <div class="monthnav"><button class="iconbtn" id="prevM" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b id="calTitle"></b><button class="iconbtn" id="nextM" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
-        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span></div>
+        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span></div>
       </div>
       <div class="cal" id="cal"></div>
     </div>
     <div class="card s4 detail" id="detail"></div>
+  </section>
+
+  <!-- LEAVE -->
+  <section data-page="leave" class="grid" hidden>
+    <div class="card s12">
+      <div class="ch"><h3>My leave balance</h3><button class="btn sm dark" id="newLeave"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Request leave</button></div>
+      <div class="bals" id="bals"></div>
+      <div class="muted" id="balNote" style="font-size:12px;margin-top:12px"></div>
+    </div>
+    <div class="card s12">
+      <div class="ch"><h3>My requests</h3><span class="muted" id="reqCount"></span></div>
+      <div id="reqs"></div>
+    </div>
   </section>
 
   <!-- HISTORY -->
@@ -306,7 +371,7 @@ button.cell:hover{filter:brightness(.97)}
     <div class="card">
       <div class="filters">
         <select class="input" id="hMonth"></select>
-        <select class="input" id="hFilter"><option value="">All days</option><option value="late">Late only</option><option value="abs">No record only</option></select>
+        <select class="input" id="hFilter"><option value="">All days</option><option value="late">Late only</option><option value="abs">No record only</option><option value="leave">On leave only</option></select>
         <span class="muted" id="hSum" style="margin-right:auto"></span>
         <button class="btn sm dark" id="csv"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CSV</button>
       </div>
@@ -315,13 +380,40 @@ button.cell:hover{filter:brightness(.97)}
   </section>
 </div>
 
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="panel" id="sheetPanel">
+    <form id="leaveForm" novalidate>
+      <h2 id="sheetTitle">Request leave</h2>
+      <div class="muted" style="font-size:13px">Your request goes to HR for approval. You'll see its status under My requests.</div>
+      <div class="field" style="margin-top:16px"><span>Type of leave</span></div>
+      <div class="types" id="lTypes"></div>
+      <div class="two">
+        <label class="field"><span>From</span><input class="input" type="date" id="lFrom" required></label>
+        <label class="field"><span>To</span><input class="input" type="date" id="lTo" required></label>
+      </div>
+      <div class="seg" id="lHalf" hidden><button type="button" data-h="" class="on">Full day</button><button type="button" data-h="am">Morning only</button><button type="button" data-h="pm">Afternoon only</button></div>
+      <label class="field"><span>Reason</span><textarea class="input" id="lReason" maxlength="500" placeholder="e.g. family trip, medical check-up" required></textarea></label>
+      <div class="sum" id="lSum"></div>
+      <div class="actions"><button class="btn" type="button" id="lCancel">Cancel</button><button class="btn dark" type="submit" id="lSend">Send request</button></div>
+    </form>
+    <div class="done" id="leaveDone" hidden>
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="25"/><path d="M21 33l7 7 15-16"/></svg>
+      <h2 style="margin:10px 0 6px">Request sent</h2>
+      <p class="muted" id="doneText" style="margin:0 0 18px"></p>
+      <button class="btn dark" type="button" id="doneClose">Done</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const $ = s => document.querySelector(s);
 const PAGES = {
   today:["Today", ""],
   calendar:["Calendar","Tap any day to see your time-ins and time-outs."],
-  history:["History","Every day you worked, month by month. Download it for your records."]
+  history:["History","Every day you worked, month by month. Download it for your records."],
+  leave:["Leave","Your leave balance and requests. Approved leave shows on your calendar."]
 };
+const LSTATE = {pending:'<span class="pill pend">Waiting for approval</span>', approved:'<span class="pill leave">Approved</span>', refused:'<span class="pill refused">Not approved</span>', cancelled:'<span class="pill off">Cancelled</span>'};
 let D = null, view = "today", calMonth = null, selDay = null;
 
 // ---------- helpers
@@ -357,16 +449,29 @@ function derive(){
   }
   const oldest = D.attendances.length ? dkey(D.attendances[D.attendances.length-1].in) : D.today;
   D.since = oldest;
+  // leave days: approved wins over pending
+  D.leaveDays = new Map();
+  for (const r of (D.leave?.requests || [])){
+    if (r.state !== "approved" && r.state !== "pending") continue;
+    for (const k of eachDay(r.from, r.to)){
+      const cur = D.leaveDays.get(k);
+      if (!cur || (cur.state === "pending" && r.state === "approved")) D.leaveDays.set(k, {state:r.state, type:r.type, half:r.half});
+    }
+  }
 }
+function eachDay(a, b){ const out = [], d = new Date(a+"T00:00:00"), end = new Date(b+"T00:00:00"); while (d <= end){ if (isWork(d)) out.push(ymd(d)); d.setDate(d.getDate()+1); } return out; }
 function dayStatus(k){
   const d = D.days.get(k), dt = new Date(k+"T00:00:00");
-  if (k > D.today) return "future";
+  const lv = D.leaveDays?.get(k);
   if (d) return d.open && k === D.today ? "live" : d.late ? "late" : "ok";
+  if (lv && lv.state === "approved") return "leave";
+  if (lv) return "lpend";
+  if (k > D.today) return "future";
   if (!isWork(dt)) return "wk";
   if (k === D.today || k < D.since) return "none";
   return "abs";
 }
-const PILL = {ok:'<span class="pill ok">On time</span>', late:'<span class="pill late">Late</span>', live:'<span class="pill in">On campus</span>', abs:'<span class="pill bad">No record</span>', wk:'<span class="pill off">Weekend</span>', none:'<span class="pill off">--</span>', future:''};
+const PILL = {ok:'<span class="pill ok">On time</span>', late:'<span class="pill late">Late</span>', live:'<span class="pill in">On campus</span>', abs:'<span class="pill bad">No record</span>', wk:'<span class="pill off">Weekend</span>', leave:'<span class="pill leave">On leave</span>', lpend:'<span class="pill pend">Leave pending</span>', none:'<span class="pill off">--</span>', future:''};
 function liveHours(d){ // includes the running punch, ticking
   if (!d) return 0;
   return d.punches.reduce((s,p) => s + (p.out ? p.hours : Math.max(0,(nowMs()-toDate(p.in).getTime())/36e5)), 0);
@@ -379,7 +484,8 @@ function renderToday(){
   const hr = toDate(D.now).getHours();
   $("#subtitle").textContent = `Good ${hr<12?"morning":hr<18?"afternoon":"evening"}, ${e.name.split(" ")[0]}. ${fmtDay(D.today)}.`;
   $("#hero").classList.toggle("out", !isIn);
-  $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}` : "No time-in yet today";
+  const lvToday = D.leaveDays.get(D.today);
+  $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}` : lvToday?.state === "approved" ? `On leave today · ${lvToday.type}` : "No time-in yet today";
   $("#hLine").textContent = t ? (t.late ? `worked today, first time-in ${fmtTime(t.first)} (${t.lateBy} min late)` : `worked today, first time-in ${fmtTime(t.first)} (on time)`) : `Tap your ID at the attendance kiosk. Time-in starts ${D.work_start}.`;
   $("#hPunches").innerHTML = t ? t.punches.map(p => `<span>In <b>${fmtTime(p.in)}</b> &rarr; ${p.out ? `Out <b>${fmtTime(p.out)}</b>` : "<b>now</b>"}</span>`).join("") : "";
   tickToday();
@@ -400,7 +506,7 @@ function renderToday(){
 
   // this month
   const n = toDate(D.now), keysM = monthDays(n.getFullYear(), n.getMonth()).filter(k => k <= D.today);
-  const work = keysM.filter(k => isWork(new Date(k+"T00:00:00")) && (k < D.today || D.days.has(k)));
+  const work = keysM.filter(k => isWork(new Date(k+"T00:00:00")) && (k < D.today || D.days.has(k)) && (D.days.has(k) || dayStatus(k) !== "leave"));
   const present = keysM.filter(k => D.days.has(k)).map(k => D.days.get(k));
   const late = present.filter(d => d.late);
   $("#monthTitle").textContent = n.toLocaleDateString([], {month:"long",year:"numeric"});
@@ -417,12 +523,12 @@ function renderToday(){
 
   // recent: last 7 days with a record or a missing workday
   const rec = []; const d = new Date(D.now);
-  while (rec.length < 7 && ymd(d) >= D.since){ const k = ymd(d), st = dayStatus(k); if (st !== "wk" && st !== "none") rec.push(k); d.setDate(d.getDate()-1); }
+  while (rec.length < 7 && ymd(d) >= D.since){ const k = ymd(d), st = dayStatus(k); if (st !== "wk" && st !== "none" && st !== "lpend") rec.push(k); d.setDate(d.getDate()-1); }
   $("#recent").innerHTML = rec.map(dayRow).join("") || `<div class="empty">No attendance yet</div>`;
 }
 function dayRow(k){
   const d = D.days.get(k), st = dayStatus(k), dt = new Date(k+"T00:00:00");
-  const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : fmtTime(d.last)}</b> <span class="muted">&middot; ${d.punches.length} punch${d.punches.length>1?"es":""}</span>` : `<span class="muted">No time-in recorded</span>`;
+  const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : fmtTime(d.last)}</b> <span class="muted">&middot; ${d.punches.length} punch${d.punches.length>1?"es":""}</span>` : `<span class="muted">${st === "leave" ? esc(D.leaveDays.get(k).type) : "No time-in recorded"}</span>`;
   return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${k===D.today?"Today":dt.toLocaleDateString([], {month:"long",day:"numeric"})}<br>${times}</span><span class="r"><b>${d ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`;
 }
 function tickToday(){
@@ -444,12 +550,12 @@ function renderCalendar(){
   html += `<div class="cell pad"></div>`.repeat(lead);
   for (const k of monthDays(y, mo)){
     const d = D.days.get(k), st = dayStatus(k), cls = [st, k===D.today?"today":"", k===selDay?"sel":""].join(" ");
-    const t = d ? `<span class="t"><b>${fmtHrs(liveHours(d))}</b>In ${fmtTime(d.first)}</span>` : st==="abs" ? `<span class="t">No record</span>` : `<span class="t"></span>`;
+    const t = d ? `<span class="t"><b>${fmtHrs(liveHours(d))}</b>In ${fmtTime(d.first)}</span>` : st==="abs" ? `<span class="t">No record</span>` : (st==="leave" || st==="lpend") ? `<span class="t"><b>${st==="leave" ? "On leave" : "Pending"}</b>${esc(D.leaveDays.get(k).type.replace(/ Leave$/,""))}</span>` : `<span class="t"></span>`;
     html += `<button class="cell ${cls}" data-day="${k}" aria-label="${fmtDay(k)}"><span class="n">${Number(k.slice(8))}</span>${t}</button>`;
   }
   $("#cal").innerHTML = html;
   $("#prevM").disabled = ymd(new Date(y, mo, 0)) < D.since;
-  $("#nextM").disabled = ymd(new Date(y, mo+1, 1)) > D.today;
+  $("#nextM").disabled = ymd(new Date(y, mo+1, 1)) > maxLeaveDay();
   renderDetail();
 }
 function renderDetail(){
@@ -463,7 +569,9 @@ function renderDetail(){
     });
     body = `<div class="big">${fmtHrs(liveHours(d))}</div><div>${PILL[st]}</div><ul class="tl">${items.join("")}</ul>`;
   } else {
-    body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on leave or forgot to tap your ID, let the HR office know." : st==="wk" ? "Weekend." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
+    const lv = D.leaveDays.get(k);
+    if (lv) body = `<div class="big">${esc(lv.type)}</div><div>${PILL[st]}</div><p class="muted">${lv.state === "approved" ? "Approved leave" : "Waiting for HR approval"}${lv.half ? (lv.half === "am" ? ", morning only" : ", afternoon only") : ""}.</p>`;
+    else body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on leave or forgot to tap your ID, let the HR office know." : st==="wk" ? "Weekend." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
   }
   $("#detail").innerHTML = `<div class="ch"><h3>${k===D.today?"Today":fmtDay(k)}</h3></div>${body}`;
 }
@@ -472,7 +580,7 @@ function renderDetail(){
 function historyKeys(){
   const [y,mo] = $("#hMonth").value.split("-").map(Number), f = $("#hFilter").value;
   return monthDays(y, mo-1).filter(k => k <= D.today).reverse()
-    .filter(k => { const st = dayStatus(k); return st !== "wk" && st !== "none" && st !== "future" && (!f || st === f); });
+    .filter(k => { const st = dayStatus(k); return st !== "wk" && st !== "none" && st !== "future" && st !== "lpend" && (!f || st === f); });
 }
 function renderHistory(){
   const keys = historyKeys();
@@ -499,6 +607,96 @@ function exportCSV(){
   a.download = `stclare-attendance-${D.today}.csv`; a.click();
 }
 
+// ---------- LEAVE
+const workdays = (a, b) => eachDay(a, b).length;
+function maxLeaveDay(){ return (D.leave?.requests || []).reduce((m, r) => r.to > m ? r.to : m, D.today); }
+function fmtRange(a, b){
+  const o = {month:"short", day:"numeric"}, A = new Date(a+"T00:00:00"), B = new Date(b+"T00:00:00");
+  return a === b ? A.toLocaleDateString([], {weekday:"short", ...o}) : `${A.toLocaleDateString([], o)} to ${B.toLocaleDateString([], o)}`;
+}
+function renderLeave(){
+  const L = D.leave || {types:[], requests:[]};
+  $("#bals").innerHTML = L.types.map(t => t.allocated == null
+    ? `<div class="bal"><small>${esc(t.name)}</small><b>No limit</b><small>${t.used ? `${t.used} day${t.used === 1 ? "" : "s"} used this year` : "Not used this year"}</small></div>`
+    : `<div class="bal ${t.remaining < t.allocated && t.remaining <= t.allocated*.2 ? "low" : ""}"><small>${esc(t.name)}</small><b>${t.remaining}<span>of ${t.allocated} days left</span></b><div class="track"><i style="width:${Math.max(0, t.remaining/t.allocated*100)}%"></i></div></div>`).join("")
+    || `<div class="empty">No leave types set up for you yet. Please ask the HR office.</div>`;
+  $("#balNote").textContent = D.mode === "demo" ? "Sample balances. The real leave types and days come from St. Clare's Odoo Time Off." : "Days waiting for approval are already taken off what's left.";
+  const reqs = [...L.requests].sort((a, b) => b.from.localeCompare(a.from));
+  $("#reqCount").textContent = reqs.length ? `${reqs.filter(r => r.state === "pending").length} waiting for approval` : "";
+  $("#reqs").innerHTML = reqs.map(r => { const A = new Date(r.from+"T00:00:00");
+    return `<div class="lreq"><span class="date"><small>${A.toLocaleDateString([], {month:"short"})}</small><b>${A.getDate()}</b></span>
+      <span class="what"><b>${esc(r.type)}</b> <span class="muted">&middot; ${fmtRange(r.from, r.to)} &middot; ${r.half ? (r.half === "am" ? "Half day (morning)" : "Half day (afternoon)") : `${r.days} day${r.days === 1 ? "" : "s"}`}</span><small>${esc(r.reason || "")}</small></span>
+      <span class="r">${LSTATE[r.state] || ""}${r.state === "pending" ? `<button class="linkbtn" data-cancel="${r.id}">Cancel request</button>` : ""}</span></div>`; }).join("")
+    || `<div class="empty">No leave requests yet.</div>`;
+}
+
+let lHalf = "";
+function openLeave(){
+  const L = D.leave; if (!L) return;
+  $("#lTypes").innerHTML = L.types.map((t, i) => `<label><input type="radio" name="ltype" value="${t.id}" ${i === 0 ? "checked" : ""} ${t.allocated != null && t.remaining <= 0 ? "disabled" : ""}><span><b>${esc(t.name)}</b><small>${t.allocated == null ? "No limit" : `${t.remaining} day${t.remaining === 1 ? "" : "s"} left`}</small></span></label>`).join("");
+  const first = $("#lTypes input:not(:disabled)"); if (first) first.checked = true;
+  const minD = new Date(D.now); minD.setDate(minD.getDate() - 30);
+  $("#lFrom").min = $("#lTo").min = ymd(minD);
+  const next = new Date(D.now); do { next.setDate(next.getDate()+1); } while (!isWork(next));
+  $("#lFrom").value = $("#lTo").value = ymd(next);
+  $("#lReason").value = ""; lHalf = ""; setHalf("");
+  $("#leaveForm").hidden = false; $("#leaveDone").hidden = true;
+  $("#sheet").classList.add("open"); setTimeout(() => $("#lTypes input:checked")?.focus(), 50);
+  checkLeave();
+}
+function closeLeave(){ $("#sheet").classList.remove("open"); }
+function setHalf(v){ lHalf = v; document.querySelectorAll("#lHalf button").forEach(b => b.classList.toggle("on", b.dataset.h === v)); }
+function leaveDraft(){
+  const id = +($("#lTypes input:checked")?.value || 0), t = D.leave.types.find(x => x.id === id);
+  const from = $("#lFrom").value, to = $("#lTo").value, single = from && from === to;
+  $("#lHalf").hidden = !(single && t?.half); if ($("#lHalf").hidden) setHalf("");
+  const days = from && to && to >= from ? (single && lHalf ? .5 : workdays(from, to)) : 0;
+  return {t, from, to, half: single ? lHalf : "", days, reason: $("#lReason").value.trim()};
+}
+function checkLeave(){
+  const f = leaveDraft(), box = $("#lSum");
+  let err = "";
+  if (!f.t) err = "Pick a type of leave.";
+  else if (!f.from || !f.to) err = "Pick the dates.";
+  else if (f.to < f.from) err = "The end date is before the start date.";
+  else if (!f.days) err = "Those dates are only weekends.";
+  else if (f.t.allocated != null && f.days > f.t.remaining) err = `You only have ${f.t.remaining} day${f.t.remaining === 1 ? "" : "s"} of ${f.t.name} left.`;
+  else {
+    const clash = D.leave.requests.find(r => (r.state === "pending" || r.state === "approved") && r.from <= f.to && r.to >= f.from);
+    if (clash) err = `You already have ${clash.type} on ${fmtRange(clash.from, clash.to)}.`;
+  }
+  box.classList.toggle("bad", !!err);
+  box.textContent = err || `${f.days === .5 ? "Half a day" : `${f.days} working day${f.days === 1 ? "" : "s"}`} of ${f.t.name}${f.t.allocated != null ? `, ${f.t.remaining - f.days} left after this` : ""}.`;
+  return err;
+}
+async function sendLeave(ev){
+  ev.preventDefault();
+  const err = checkLeave(); if (err) return;
+  const f = leaveDraft();
+  if (f.reason.length < 3){ $("#lSum").classList.add("bad"); $("#lSum").textContent = "Please add a short reason."; $("#lReason").focus(); return; }
+  const btn = $("#lSend"); btn.disabled = true; btn.textContent = "Sending...";
+  try {
+    const body = {type_id: f.t.id, date_from: f.from, date_to: f.to, half: f.half || null, reason: f.reason};
+    if (MODE === "demo") demoLeaveAdd(body, f);
+    else {
+      const r = await fetch("api/leave", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+      const data = await r.json(); if (!r.ok) throw new Error(data.error);
+    }
+    $("#doneText").textContent = `${f.t.name}, ${fmtRange(f.from, f.to)} (${f.days === .5 ? (f.half === "am" ? "morning" : "afternoon") : `${f.days} day${f.days === 1 ? "" : "s"}`}). HR will review it.`;
+    $("#leaveForm").hidden = true; $("#leaveDone").hidden = false;
+    await load();
+  } catch (e){ $("#lSum").classList.add("bad"); $("#lSum").textContent = e.message || "Could not send. Please try again."; }
+  finally { btn.disabled = false; btn.textContent = "Send request"; }
+}
+async function cancelLeave(id){
+  if (!confirm("Cancel this leave request?")) return;
+  try {
+    if (MODE === "demo") demoLeaveCancel(id);
+    else { const r = await fetch("api/leave/cancel", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({id})}); const d = await r.json(); if (!r.ok) throw new Error(d.error); }
+    await load();
+  } catch (e){ alert(e.message || "Could not cancel. Please ask the HR office."); }
+}
+
 // ---------- shell
 function setView(v){
   view = v;
@@ -515,7 +713,7 @@ function renderAll(){
   const src = $("#source"); src.classList.toggle("demo", D.mode === "demo");
   src.lastElementChild.textContent = D.mode === "demo" ? `Sample data, shown as ${fmtTime(D.now)}` : "Live from Odoo";
   if (!calMonth) calMonth = new Date(toDate(D.now).getFullYear(), toDate(D.now).getMonth(), 1);
-  fillMonths(); renderToday(); renderCalendar(); renderHistory();
+  fillMonths(); renderToday(); renderCalendar(); renderHistory(); renderLeave();
   setView(view);
 }
 // ---------- demo mode: runs in the browser when Odoo isn't connected (or no server, e.g. a static preview link)
@@ -562,6 +760,38 @@ function demoData(id){
   atts.reverse();
   return {employee: emp, attendances: atts, now: iso(now), mode: "demo", ...CFG};
 }
+// sample leave: types + allocations, saved in this browser so trying it out keeps your requests
+const DEMO_LEAVE_TYPES = [
+  {id:1, name:"Vacation Leave", allocated:15, half:true}, {id:2, name:"Sick Leave", allocated:15, half:true},
+  {id:3, name:"Emergency Leave", allocated:3, half:true}, {id:4, name:"Birthday Leave", allocated:1, half:false},
+  {id:5, name:"Bereavement Leave", allocated:3, half:false}, {id:6, name:"Leave Without Pay", allocated:null, half:true},
+];
+const demoLeaveKey = id => "att-demo-leave-" + id;
+function demoLeave(id, data){
+  let reqs = null;
+  try { reqs = JSON.parse(localStorage.getItem(demoLeaveKey(id)) || "null"); } catch(_){}
+  if (!reqs){   // first visit: two approved past leaves on days with no time-in, one request waiting
+    const have = new Set(data.attendances.map(a => dkey(a.in))), gaps = [], d = new Date(data.now);
+    for (let i = 1; i < 120 && gaps.length < 2; i++){ d.setDate(d.getDate()-1); const k = ymd(d); if (isWork(d) && !have.has(k)) gaps.push(k); }
+    const fut = new Date(data.now); fut.setDate(fut.getDate() + 18); while (fut.getDay() !== 5) fut.setDate(fut.getDate()+1);
+    reqs = [];
+    if (gaps[0]) reqs.push({id:1, type_id:2, from:gaps[0], to:gaps[0], half:"", reason:"Fever, clinic visit", state:"approved"});
+    if (gaps[1]) reqs.push({id:2, type_id:1, from:gaps[1], to:gaps[1], half:"", reason:"Family matter", state:"approved"});
+    reqs.push({id:3, type_id:1, from:ymd(fut), to:ymd(fut), half:"", reason:"Out-of-town family event", state:"pending"});
+    try { localStorage.setItem(demoLeaveKey(id), JSON.stringify(reqs)); } catch(_){}
+  }
+  const year = data.now.slice(0, 4);
+  const requests = reqs.map(r => { const t = DEMO_LEAVE_TYPES.find(x => x.id === r.type_id); return {...r, type: t.name, days: r.half ? .5 : workdays(r.from, r.to)}; });
+  const types = DEMO_LEAVE_TYPES.map(t => {
+    const used = requests.filter(r => r.type_id === t.id && (r.state === "approved" || r.state === "pending") && r.from.slice(0, 4) === year).reduce((s, r) => s + r.days, 0);
+    return {...t, used, remaining: t.allocated == null ? null : t.allocated - used};
+  });
+  return {types, requests};
+}
+function demoLeaveSave(fn){ const id = demoSession.get(); let reqs = []; try { reqs = JSON.parse(localStorage.getItem(demoLeaveKey(id)) || "[]"); } catch(_){} reqs = fn(reqs); try { localStorage.setItem(demoLeaveKey(id), JSON.stringify(reqs)); } catch(_){ throw new Error("This browser can't save sample requests."); } }
+function demoLeaveAdd(b){ demoLeaveSave(reqs => [...reqs, {id: Math.max(0, ...reqs.map(r => r.id)) + 1, type_id:b.type_id, from:b.date_from, to:b.date_to, half:b.half || "", reason:b.reason, state:"pending"}]); }
+function demoLeaveCancel(id){ demoLeaveSave(reqs => reqs.map(r => r.id === id && r.state === "pending" ? {...r, state:"cancelled"} : r)); }
+
 const demoSession = {get(){ try { return +sessionStorage.getItem("att-demo") || 0; } catch(_){ return 0; } },
                      set(v){ try { v ? sessionStorage.setItem("att-demo", v) : sessionStorage.removeItem("att-demo"); } catch(_){} }};
 
@@ -575,11 +805,13 @@ async function load(){
   if (MODE === "demo"){
     const id = demoSession.get(); if (!id) return showLogin();
     data = demoData(id);
+    data.leave = demoLeave(id, data);
   } else {
     const r = await fetch("api/me", {cache:"no-store"});
     if (r.status === 401) return showLogin();
     data = await r.json();
     if (!r.ok){ $("#err").textContent = "Could not load your attendance: " + data.error; $("#err").hidden = false; return; }
+    try { const lr = await fetch("api/leave", {cache:"no-store"}); if (lr.ok) data.leave = await lr.json(); } catch(_){}
   }
   $("#err").hidden = true;
   D = data; derive();
@@ -614,6 +846,15 @@ $("#loginForm").addEventListener("submit", async ev => {
 });
 $("#logout").onclick = async () => { if (MODE === "demo") demoSession.set(0); else await fetch("api/logout", {method:"POST"}); calMonth = null; selDay = null; showLogin(); };
 $("#refresh").onclick = load;
+$("#newLeave").onclick = openLeave;
+$("#lCancel").onclick = closeLeave; $("#doneClose").onclick = closeLeave;
+$("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") closeLeave(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#sheet").classList.contains("open")) closeLeave(); });
+$("#leaveForm").addEventListener("submit", sendLeave);
+$("#leaveForm").addEventListener("input", checkLeave);
+$("#lFrom").addEventListener("change", () => { if ($("#lTo").value < $("#lFrom").value) $("#lTo").value = $("#lFrom").value; checkLeave(); });
+$("#lHalf").addEventListener("click", e => { const b = e.target.closest("button"); if (b){ setHalf(b.dataset.h); checkLeave(); } });
+$("#reqs").addEventListener("click", e => { const b = e.target.closest("[data-cancel]"); if (b) cancelLeave(+b.dataset.cancel); });
 document.querySelectorAll(".theme").forEach(b => b.addEventListener("click", () => {
   const t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", t);
