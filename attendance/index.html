@@ -16,17 +16,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F1EDEE; --card:#fff; --ink:#1D1416; --ink-2:#3E3235; --muted:#7D6F73; --line:#EBE2E3; --soft:#F8F5F5;
+  --bg:#F1EDEE; --card:#fff; --ink:#1D1416; --ink-2:#3E3235; --muted:#665A5E; --line:#EBE2E3; --soft:#F8F5F5;
   --accent:#A6192E; --accent-2:#C8102E; --accent-soft:#F6E1E4; --maroon:#5C0A17; --gold:#E0AD1C;
   --ok:#1F9D63; --ok-soft:#E5F6EE; --warn:#B7850F; --warn-soft:#FBF1D6; --bad:#D64545; --bad-soft:#FCEAEA;
-  --r:22px; --r-sm:14px; --hint-ink:#8a4d12; --leave:#4A63C9; --leave-soft:#E8ECFB;
+  --r:18px; --r-sm:12px; --hint-ink:#8a4d12; --leave:#4A63C9; --leave-soft:#E8ECFB; --hol:#7A5AA8; --hol-soft:#F1ECF8;
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#120E0F; --card:#1C1617; --ink:#F4EDEE; --ink-2:#D3C6C9; --muted:#9C8D91; --line:#2F2628; --soft:#251D1F;
+  --bg:#120E0F; --card:#1C1617; --ink:#F4EDEE; --ink-2:#D3C6C9; --muted:#AFA2A6; --line:#2F2628; --soft:#251D1F;
   --accent:#E0384A; --accent-2:#F05264; --accent-soft:rgba(224,56,74,.16); --maroon:#8E1426; --gold:#F2C94C;
   --ok:#3FBF80; --ok-soft:rgba(63,191,128,.15); --warn:#E5B23A; --warn-soft:rgba(229,178,58,.15); --bad:#F06B6B; --bad-soft:rgba(240,107,107,.14);
-  --hint-ink:#F2C94C; --leave:#93A6F2; --leave-soft:rgba(147,166,242,.15);
+  --hint-ink:#F2C94C; --leave:#93A6F2; --leave-soft:rgba(147,166,242,.15); --hol:#C3A8EE; --hol-soft:rgba(195,168,238,.14);
 }
 :root[data-theme="dark"] .card,:root[data-theme="dark"] .top,:root[data-theme="dark"] .login .box{box-shadow:0 0 0 1px var(--line)}
 :root[data-theme="dark"] .hero.out{background:linear-gradient(135deg,#3A2A2E 0%,#241C1E 100%)}
@@ -38,26 +38,129 @@ body{background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-s
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 [hidden]{display:none!important}
+/* ---------- holidays, undertime, pay period, coming up */
+.pill.hol{background:var(--hol-soft);color:var(--hol)}
+.pill.noout{background:var(--warn-soft);color:var(--warn)}
+.cell.hol{background:var(--hol-soft)}.cell.hol .t{color:var(--hol)}
+.cell.noout{background:var(--warn-soft);border-color:var(--warn)}.cell.noout .t{color:var(--warn)}
+.tbl td.warn{color:var(--warn);font-weight:600}
+.pp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.pp div{background:var(--soft);border-radius:12px;padding:10px 12px}
+.pp small{display:block;color:var(--ink-2);font-size:12px}
+.pp b{display:block;font:700 18px/1.2 "Plus Jakarta Sans",Inter,sans-serif;margin-top:2px}
+.pp em{font-style:normal;font-size:11px;color:var(--muted)}
+.fine{font-size:12px;color:var(--muted);margin-top:12px}
+.up{display:flex;flex-direction:column}
+.up .row{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 0}
+.up .row+.row{border-top:1px solid var(--line)}
+.up .date{width:46px;height:46px;border-radius:12px}
+.up .date b{font-size:17px}
+.up .row.hol .date{background:var(--hol-soft);color:var(--hol)}.up .row.hol .date small{color:var(--hol)}
+.up .row.lv .date{background:var(--leave-soft);color:var(--leave)}.up .row.lv .date small{color:var(--leave)}
+.up .row.pay .date{background:var(--ok-soft);color:var(--ok)}.up .row.pay .date small{color:var(--ok)}
+.up .row b{font-weight:600}.up .row small.s{display:block;color:var(--muted);font-size:12px}
+.up .in{font-size:12px;color:var(--muted);white-space:nowrap}
+@media (max-width:960px){.pp{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- corrections, my info, DTR */
+.fixrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 4px}
+.fixrow+.fixrow{border-top:1px solid var(--line)}
+.fixrow .date{width:44px;height:44px;border-radius:12px;background:var(--warn-soft);color:var(--warn)}
+.fixrow .date small{color:var(--warn)}
+.fixrow b{font-weight:600}.fixrow small.s{display:block;color:var(--ink-2);font-size:12px;margin-top:2px}
+.kinds{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+.kinds label{cursor:pointer}.kinds input{position:absolute;opacity:0;pointer-events:none}
+.kinds span{display:inline-block;padding:8px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--soft);font-size:13px}
+.kinds input:checked+span{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+.kinds input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.mebtn{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;border-radius:999px;text-align:left}
+.mebtn:hover .av{box-shadow:0 0 0 2px var(--accent)}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:16px 0}
+.info small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.info span{display:block;margin-top:2px;font-weight:500}
+.schedtbl{width:100%;border-collapse:collapse;font-size:13px}
+.schedtbl td{padding:7px 0;border-top:1px solid var(--line)}.schedtbl td+td{text-align:right}
+.schedtbl tr.today td{font-weight:700;color:var(--accent)}
+.help{margin-top:16px;padding:12px 14px;border-radius:14px;background:var(--soft);font-size:13px;color:var(--ink-2)}
+.help b{color:var(--ink)}
+.privacy{display:block;color:var(--muted);font-size:11px;margin-top:10px;text-align:center;line-height:1.4}
+#dtr{display:none}
+@media print{
+  body{background:#fff!important}
+  body>*:not(#dtr){display:none!important}
+  #dtr{display:block;color:#000;font:11px/1.35 Inter,Arial,sans-serif;padding:0}
+  #dtr .hd{display:flex;align-items:center;gap:12px;border-bottom:2px solid #7A0C1E;padding-bottom:8px;margin-bottom:8px}
+  #dtr .hd img{width:52px;height:52px}
+  #dtr h1{font:700 16px "Plus Jakarta Sans",Arial,sans-serif;margin:0}
+  #dtr h2{font:700 13px Arial,sans-serif;margin:2px 0 0;letter-spacing:.08em}
+  #dtr .who{display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;margin:6px 0 8px}
+  #dtr table{width:100%;border-collapse:collapse}
+  #dtr th,#dtr td{border:1px solid #555;padding:2px 4px;text-align:center}
+  #dtr th{background:#eee}
+  #dtr td.l{text-align:left}
+  #dtr tr.off td{color:#666}
+  #dtr .tot{margin-top:6px}
+  #dtr .cert{margin-top:10px}
+  #dtr .sign{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:34px;text-align:center}
+  #dtr .sign div{border-top:1px solid #000;padding-top:3px}
+  @page{size:A4;margin:12mm}
+}
+
 /* ---------- leave */
 .pill.leave{background:var(--leave-soft);color:var(--leave)}
 .pill.pend{background:var(--warn-soft);color:var(--warn)}
 .pill.refused{background:var(--bad-soft);color:var(--bad)}
 .cell.leave{background:var(--leave-soft)}.cell.leave .t{color:var(--leave)}
 .cell.lpend{background:repeating-linear-gradient(135deg,var(--leave-soft) 0 6px,transparent 6px 12px);border-color:var(--leave-soft)}.cell.lpend .t{color:var(--leave)}
-.bals{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.bal{background:var(--soft);border-radius:var(--r-sm);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.bals{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.bal{background:var(--soft);border-radius:var(--r-sm);padding:10px 12px;display:flex;flex-direction:column;gap:5px}
 .bal small{color:var(--muted);font-size:12px}
-.bal b{font:700 26px/1 "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.02em}
+.bal b{font:700 22px/1 "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.02em}
 .bal b span{font:500 13px Inter,sans-serif;color:var(--muted);letter-spacing:0;margin-left:4px}
 .bal .track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
 .bal .track i{display:block;height:100%;border-radius:99px;background:var(--leave)}
 .bal.low .track i{background:var(--warn)}
-.lreq{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px 6px}
+.lreq{display:grid;grid-template-columns:44px minmax(0,1fr) auto 34px;gap:4px 12px;align-items:center;padding:8px 4px;cursor:pointer;border-radius:14px;transition:background .2s}
+.lreq:hover{background:var(--soft)}
+.lreq.open{background:transparent}
+.lreq .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--muted);margin-top:5px}
+.lreq .meta .soon{color:var(--leave);font-weight:600}
+.lreq .meta .now{color:var(--ok);font-weight:600}
+.lreq .r small{font-size:11px;color:var(--muted);text-align:right}
+.chev{width:32px;height:32px;border-radius:50%;border:0;background:var(--soft);display:grid;place-items:center;color:var(--ink-2);transition:transform .3s cubic-bezier(.2,.8,.2,1),background .2s}
+.chev:hover{background:var(--line)}
+.lreq.open .chev{transform:rotate(180deg)}
+.ldet{grid-column:1/-1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)}
+.lreq.open .ldet{grid-template-rows:1fr}
+.ldet>div{overflow:hidden;min-height:0}
+.ldin{margin:8px 0 4px 56px;padding:14px;border-radius:16px;background:var(--soft);cursor:default}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 20px}
+.facts small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.facts span{display:block;margin-top:4px;font-weight:500}
+.facts span em{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+.facts .wide{grid-column:1/-1}
+.steps{display:flex;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.step{flex:1;position:relative;padding-top:34px;text-align:center;font-size:12px;min-width:0}
+.step::before{content:"";position:absolute;top:12px;left:-50%;right:50%;height:2px;background:var(--line)}
+.step:first-child::before{display:none}
+.step.done::before,.step.wait::before,.step.refused::before{background:var(--ok)}
+.step i{position:absolute;top:0;left:50%;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:2px solid var(--line);z-index:1}
+.step i svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.step.done i{background:var(--ok);border-color:var(--ok)}
+.step.refused i{background:var(--bad);border-color:var(--bad)}
+.step.wait i{border-color:var(--warn);background:var(--warn-soft)}
+.step.wait i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn);animation:wp 1.4s ease-in-out infinite}
+@keyframes wp{50%{transform:scale(.5);opacity:.5}}
+.step.skipped{opacity:.45}
+.step b{display:block;font-weight:600;padding:0 4px}
+.step em{display:block;font-style:normal;color:var(--muted);font-size:11px;margin-top:2px;padding:0 4px;overflow-wrap:anywhere}
+.lnote{margin-top:14px;font-size:13px;color:var(--ink-2);display:flex;gap:8px;align-items:flex-start}
+.lnote.bad{color:var(--bad)}
 .lreq+.lreq{border-top:1px solid var(--line)}
 .lreq .date{background:var(--leave-soft);color:var(--leave)}
 .lreq .date small{color:var(--leave)}
 .lreq .what b{font-weight:600}
-.lreq .what small{display:block;color:var(--muted);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:520px}
+.lreq .what small{display:block;color:var(--ink-2);font-size:13px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lreq .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 .linkbtn{border:0;background:none;color:var(--bad);font-size:12px;padding:2px 0;text-decoration:underline;text-underline-offset:2px}
 /* request sheet */
@@ -83,12 +186,12 @@ textarea.input{height:auto;min-height:84px;padding:12px 14px;resize:vertical;fon
 .sum{border-radius:14px;padding:12px 14px;background:var(--leave-soft);color:var(--leave);font-size:13px;margin:4px 0 14px}
 .sum.bad{background:var(--bad-soft);color:var(--bad)}
 .actions{display:flex;gap:8px;justify-content:flex-end}
-.done{text-align:center;padding:12px 0 4px}
-.done svg{width:64px;height:64px;stroke:var(--ok);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.done circle{stroke-dasharray:160;stroke-dashoffset:160;animation:dr .7s ease-out forwards}
-.done path{stroke-dasharray:40;stroke-dashoffset:40;animation:dr .4s .55s ease-out forwards}
+.sentok{text-align:center;padding:12px 0 4px}
+.sentok svg{width:64px;height:64px;stroke:var(--ok);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.sentok circle{stroke-dasharray:160;stroke-dashoffset:160;animation:dr .7s ease-out forwards}
+.sentok path{stroke-dasharray:40;stroke-dashoffset:40;animation:dr .4s .55s ease-out forwards}
 @keyframes dr{to{stroke-dashoffset:0}}
-@media (max-width:720px){.sheet{place-items:end center;padding:0}.sheet .panel{border-radius:24px 24px 0 0;max-height:92vh}.two{grid-template-columns:1fr}.lreq .what small{max-width:180px}}
+@media (max-width:720px){.sheet{place-items:end center;padding:0}.sheet .panel{border-radius:24px 24px 0 0;max-height:92vh}.two{grid-template-columns:1fr}.lreq{grid-template-columns:44px minmax(0,1fr) 30px;gap:4px 10px}.lreq .r{grid-column:2/3;align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:6px 10px}.lreq .chev{grid-row:1;grid-column:3}.ldin{margin-left:0;padding:14px}.facts{grid-template-columns:1fr 1fr}.step b{font-size:11px}}
 h1,h2,h3,.timer,.kpi b,.weektotal b,.detail .big,.brand,.monthnav b{font-family:"Plus Jakarta Sans",Inter,sans-serif}
 .ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
@@ -139,17 +242,17 @@ h1,h2,h3,.timer,.kpi b,.weektotal b,.detail .big,.brand,.monthnav b{font-family:
 .login .theme{position:absolute;top:18px;right:18px}
 .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);flex:none}
 
-.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:28px 4px 18px;flex-wrap:wrap}
-h1.title{font-size:34px;line-height:1.1;letter-spacing:-.02em;margin:0;font-weight:600}
-.sub{color:var(--muted);margin-top:6px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:18px 2px 12px;flex-wrap:wrap}
+h1.title{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:700}
+.sub{color:var(--ink-2);margin-top:4px;font-size:14px}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:12px;color:var(--ink-2)}
 .chip i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
 .chip.demo i{background:var(--warn)}
 
-.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
-.card{background:var(--card);border-radius:var(--r);padding:20px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border-radius:var(--r);padding:16px;min-width:0}
 .card h3{margin:0;font-size:15px;font-weight:600}
-.ch{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
 .muted{color:var(--muted)}
 .s4{grid-column:span 4}.s5{grid-column:span 5}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
 
@@ -161,17 +264,17 @@ h1.title{font-size:34px;line-height:1.1;letter-spacing:-.02em;margin:0;font-weig
 .tag i{width:7px;height:7px;border-radius:50%;background:#fff}
 .hero:not(.out) .tag i{animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.3}}
-.timer{font-size:68px;font-weight:600;letter-spacing:-.03em;line-height:1;margin:24px 0 6px}
+.timer{font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1;margin:14px 0 4px}
 .timer small{font-size:28px;opacity:.7;font-weight:500}
-.bar{height:8px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;margin:20px 0 10px}
+.bar{height:7px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;margin:12px 0 8px}
 .bar i{display:block;height:100%;background:#fff;border-radius:99px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
 .hero .meta{display:flex;justify-content:space-between;gap:12px;font-size:13px;opacity:.92;flex-wrap:wrap}
-.punches{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.punches{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .punches span{background:rgba(255,255,255,.14);border-radius:10px;padding:6px 10px;font-size:12px}
 .punches b{font-weight:600}
 
 /* week */
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:170px;margin-top:4px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:128px;margin-top:2px}
 .wd{display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
 .wd .col{width:100%;max-width:38px;flex:1;background:var(--soft);border-radius:10px;position:relative;overflow:hidden}
 .wd .col i{position:absolute;left:0;right:0;bottom:0;border-radius:10px;background:var(--ink)}
@@ -181,23 +284,23 @@ h1.title{font-size:34px;line-height:1.1;letter-spacing:-.02em;margin:0;font-weig
 .wd small{font-size:11px;color:var(--muted)}
 .wd b{font-size:12px;font-weight:600}
 .wd.today small{color:var(--ink);font-weight:600}
-.weektotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.weektotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 .weektotal b{font-size:22px;font-weight:600;letter-spacing:-.02em}
 
-.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.kpi{background:var(--soft);border-radius:var(--r-sm);padding:14px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.kpi{background:var(--soft);border-radius:var(--r-sm);padding:10px 12px}
 .kpi small{color:var(--muted);font-size:12px;display:block}
-.kpi b{display:block;font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:6px;white-space:nowrap}
+.kpi b{display:block;font-size:20px;font-weight:700;letter-spacing:-.02em;margin-top:3px;white-space:nowrap}
 .kpi em{font-style:normal;font-size:12px;color:var(--muted)}
 
 /* day rows */
 .days{display:flex;flex-direction:column}
-.day{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px 6px;border-radius:12px;border:0;background:none;text-align:left;width:100%}
+.day{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:7px 4px;border-radius:12px;border:0;background:none;text-align:left;width:100%}
 .day+.day{border-top:1px solid var(--line)}
 button.day:hover{background:var(--soft)}
-.date{width:52px;height:52px;border-radius:14px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
+.date{width:44px;height:44px;border-radius:12px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
 .date small{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.date b{font-size:19px;font-weight:600}
+.date b{font-size:17px;font-weight:700}
 .day .times{font-size:13px;color:var(--ink-2)}
 .day .times b{color:var(--ink);font-weight:600}
 .day .r{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
@@ -213,7 +316,7 @@ button.day:hover{background:var(--soft)}
 .monthnav b{min-width:150px;text-align:center;font-size:16px;font-weight:600}
 .cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .cal .h{font-size:12px;color:var(--muted);text-align:center;padding-bottom:4px;font-weight:500}
-.cell{min-height:88px;border-radius:14px;background:var(--soft);border:2px solid transparent;padding:8px 10px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;font-size:12px;color:var(--muted)}
+.cell{min-height:70px;border-radius:12px;background:var(--soft);border:2px solid transparent;padding:8px 10px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;font-size:12px;color:var(--muted)}
 .cell .n{font-weight:600;font-size:13px;color:var(--ink-2)}
 .cell .t{font-size:12px;line-height:1.3}
 .cell .t b{display:block;font-size:14px;color:var(--ink);font-weight:600}
@@ -240,8 +343,8 @@ button.cell:hover{filter:brightness(.97)}
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
 .filters .input{width:auto;height:38px;border-radius:999px;background:var(--card)}
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-weight:500;color:var(--muted);font-size:12px;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
-.tbl td{padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th{font-weight:600;color:var(--ink-2);font-size:12px;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 .tbl .num{text-align:right}
 .tblwrap{overflow-x:auto}
 
@@ -280,7 +383,8 @@ button.cell:hover{filter:brightness(.97)}
     <label class="field"><span>Work email</span><input class="input" id="email" type="email" autocomplete="username" required placeholder="Your work email"></label>
     <label class="field"><span>Attendance PIN</span><input class="input pin" id="pin" type="password" inputmode="numeric" autocomplete="current-password" required placeholder="&bull;&bull;&bull;&bull;"></label>
     <button class="btn dark block" id="loginBtn" type="submit">Sign in</button>
-    <small class="note">Use the same PIN as the attendance kiosk. Forgot it? Ask the HR office.</small>
+    <small class="note">Use the same PIN as the attendance kiosk. Forgot it? Call the HR office at (02) 8232-4483.</small>
+    <small class="privacy">Your attendance records are personal data, used only for timekeeping and payroll under the Data Privacy Act of 2012.</small>
   </form>
 </section>
 
@@ -293,11 +397,11 @@ button.cell:hover{filter:brightness(.97)}
       <button class="on" data-view="today"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Today</button>
       <button data-view="calendar"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
       <button data-view="history"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>History</button>
-      <button data-view="leave"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg>Leave</button>
+      <button data-view="leave"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg>Requests</button>
     </nav>
     <div class="me">
-      <span class="av" id="meAv">--</span>
-      <div class="txt"><b id="meName">--</b><small id="meJob">--</small></div>
+      <button class="mebtn" id="meBtn" type="button" title="My info" aria-label="Open my info"><span class="av" id="meAv">--</span>
+      <span class="txt"><b id="meName">--</b><small id="meJob">--</small></span></button>
       <button class="iconbtn theme" type="button" title="Dark / light mode" aria-label="Switch dark or light mode"><svg class="ico moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="ico sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
       <button class="iconbtn" id="refresh" title="Refresh" aria-label="Refresh"><svg class="ico" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
       <button class="iconbtn" id="logout" title="Sign out" aria-label="Sign out"><svg class="ico" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg></button>
@@ -331,9 +435,19 @@ button.cell:hover{filter:brightness(.97)}
         <div class="kpi"><small>Days present</small><b id="mPresent">0</b><em id="mPresentOf"></em></div>
         <div class="kpi"><small>On time</small><b id="mOnTime">0%</b><em id="mStreak"></em></div>
         <div class="kpi"><small>Late days</small><b id="mLate">0</b><em id="mLateNote"></em></div>
+        <div class="kpi"><small>Undertime</small><b id="mUnder">0m</b><em id="mUnderNote"></em></div>
         <div class="kpi"><small>Hours worked</small><b id="mHours">0h</b><em id="mAvg"></em></div>
         <div class="kpi"><small>Average time-in</small><b id="mAvgIn">--</b><em id="mShift"></em></div>
       </div>
+    </div>
+    <div class="card s7">
+      <div class="ch"><h3>This pay period</h3><span class="muted" id="ppRange"></span></div>
+      <div class="pp" id="pp"></div>
+      <div class="fine">For your reference. Payroll uses the HR office's final, approved figures.</div>
+    </div>
+    <div class="card s5">
+      <div class="ch"><h3>Coming up</h3></div>
+      <div class="up" id="upcoming"></div>
     </div>
     <div class="card s12">
       <div class="ch"><h3>Recent days</h3><button class="btn sm" data-goto="history">See all</button></div>
@@ -346,7 +460,7 @@ button.cell:hover{filter:brightness(.97)}
     <div class="card s8">
       <div class="ch">
         <div class="monthnav"><button class="iconbtn" id="prevM" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b id="calTitle"></b><button class="iconbtn" id="nextM" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
-        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span></div>
+        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span><span><i style="background:var(--hol)"></i>Holiday</span></div>
       </div>
       <div class="cal" id="cal"></div>
     </div>
@@ -364,6 +478,11 @@ button.cell:hover{filter:brightness(.97)}
       <div class="ch"><h3>My requests</h3><span class="muted" id="reqCount"></span></div>
       <div id="reqs"></div>
     </div>
+    <div class="card s12">
+      <div class="ch"><h3>Attendance corrections</h3><button class="btn sm" id="newFix"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>New correction</button></div>
+      <div class="muted" style="font-size:13px;margin:-2px 0 6px">Forgot to tap, or out on official business? Send it to HR here.</div>
+      <div id="fixes"></div>
+    </div>
   </section>
 
   <!-- HISTORY -->
@@ -371,20 +490,54 @@ button.cell:hover{filter:brightness(.97)}
     <div class="card">
       <div class="filters">
         <select class="input" id="hMonth"></select>
-        <select class="input" id="hFilter"><option value="">All days</option><option value="late">Late only</option><option value="abs">No record only</option><option value="leave">On leave only</option></select>
+        <select class="input" id="hFilter"><option value="">All days</option><option value="late">Late only</option><option value="abs">No record only</option><option value="leave">On leave only</option><option value="noout">Missing time-out</option><option value="hol">Holidays</option></select>
         <span class="muted" id="hSum" style="margin-right:auto"></span>
+        <button class="btn sm" id="printDtr"><svg class="ico" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg>Print DTR</button>
         <button class="btn sm dark" id="csv"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CSV</button>
       </div>
-      <div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>First in</th><th>Last out</th><th>Punches</th><th class="num">Worked</th><th>Status</th></tr></thead><tbody id="hBody"></tbody></table></div>
+      <div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>AM in</th><th>AM out</th><th>PM in</th><th>PM out</th><th class="num">Worked</th><th class="num">Late</th><th class="num">Undertime</th><th>Status</th></tr></thead><tbody id="hBody"></tbody></table></div>
     </div>
   </section>
 </div>
+
+<div class="sheet" id="fixSheet" role="dialog" aria-modal="true" aria-labelledby="fixTitle">
+  <div class="panel">
+    <form id="fixForm" novalidate>
+      <h2 id="fixTitle">Request a correction</h2>
+      <div class="muted" style="font-size:13px">HR checks it and fixes your record in Odoo.</div>
+      <div class="two" style="margin-top:14px"><label class="field"><span>Date</span><input class="input" type="date" id="fDate" required></label><div></div></div>
+      <div class="field"><span>What happened?</span></div>
+      <div class="kinds" id="fKinds"></div>
+      <div class="two">
+        <label class="field"><span id="fInLbl">Actual time in</span><input class="input" type="time" id="fIn"></label>
+        <label class="field"><span id="fOutLbl">Actual time out</span><input class="input" type="time" id="fOut"></label>
+      </div>
+      <label class="field"><span>Details</span><textarea class="input" id="fReason" maxlength="500" placeholder="e.g. Kiosk was offline when I arrived. Seminar at DepEd NCR, memo no. 12." required></textarea></label>
+      <div class="sum" id="fSum">HR may ask for proof, like a memo or certificate of attendance.</div>
+      <div class="actions"><button class="btn" type="button" id="fCancel">Cancel</button><button class="btn dark" type="submit" id="fSend">Send to HR</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="sheet" id="meSheet" role="dialog" aria-modal="true" aria-labelledby="meTitle">
+  <div class="panel">
+    <div style="display:flex;gap:12px;align-items:center"><span class="av" id="miAv" style="width:52px;height:52px;font-size:18px"></span>
+      <div style="flex:1;min-width:0"><h2 id="meTitle" style="margin:0"></h2><div class="muted" id="miJob"></div></div>
+      <button class="iconbtn" type="button" id="meClose" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="info" id="miInfo"></div>
+    <h3 style="margin:0 0 6px;font-size:14px">My schedule</h3>
+    <table class="schedtbl" id="miSched"></table>
+    <div class="help"><b>Need help?</b> For a wrong record, PIN reset or leave questions, contact the HR office: <b>(02) 8232-4483</b>, Zabarte Road, Camarin, Caloocan.</div>
+  </div>
+</div>
+
+<div id="dtr" aria-hidden="true"></div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <div class="panel" id="sheetPanel">
     <form id="leaveForm" novalidate>
       <h2 id="sheetTitle">Request leave</h2>
-      <div class="muted" style="font-size:13px">Your request goes to HR for approval. You'll see its status under My requests.</div>
+      <div class="muted" style="font-size:13px">HR approves it in Odoo. Track it under My requests.</div>
       <div class="field" style="margin-top:16px"><span>Type of leave</span></div>
       <div class="types" id="lTypes"></div>
       <div class="two">
@@ -396,7 +549,7 @@ button.cell:hover{filter:brightness(.97)}
       <div class="sum" id="lSum"></div>
       <div class="actions"><button class="btn" type="button" id="lCancel">Cancel</button><button class="btn dark" type="submit" id="lSend">Send request</button></div>
     </form>
-    <div class="done" id="leaveDone" hidden>
+    <div class="sentok" id="leaveDone" hidden>
       <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="25"/><path d="M21 33l7 7 15-16"/></svg>
       <h2 style="margin:10px 0 6px">Request sent</h2>
       <p class="muted" id="doneText" style="margin:0 0 18px"></p>
@@ -409,9 +562,9 @@ button.cell:hover{filter:brightness(.97)}
 const $ = s => document.querySelector(s);
 const PAGES = {
   today:["Today", ""],
-  calendar:["Calendar","Tap any day to see your time-ins and time-outs."],
-  history:["History","Every day you worked, month by month. Download it for your records."],
-  leave:["Leave","Your leave balance and requests. Approved leave shows on your calendar."]
+  calendar:["Calendar","Tap a day to see its time-ins, time-outs and status."],
+  history:["History","Your daily time record. Print it as a DTR or download it."],
+  leave:["Requests","File leave and attendance corrections. Track their status here."]
 };
 const LSTATE = {pending:'<span class="pill pend">Waiting for approval</span>', approved:'<span class="pill leave">Approved</span>', refused:'<span class="pill refused">Not approved</span>', cancelled:'<span class="pill off">Cancelled</span>'};
 let D = null, view = "today", calMonth = null, selDay = null;
@@ -429,7 +582,22 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt
 const isWork = d => d.getDay() % 6 !== 0;
 const nowMs = () => D ? D.nowBase + (Date.now() - D.loadedAt) : Date.now();  // server clock, ticking
 
+// schedule + holidays: from Odoo (working schedule, public holidays) or the sample data
+let CAL = null;
+const hm2m = s => { const [a, b] = String(s).split(":").map(Number); return a*60 + (b||0); };
+const m2t = m => { const d = new Date(2000, 0, 1, 0, m); return d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}); };
+const fmtMin = m => m >= 60 ? `${Math.floor(m/60)}h ${pad(m%60)}m` : `${m}m`;
+function prepCalendar(x){
+  if (!x.schedule){ x.schedule = {}; for (let i = 1; i <= 5; i++) x.schedule[i] = {start: x.work_start || CFG.work_start, end: CFG.work_end || "16:30"}; }
+  x.holidayMap = new Map((x.holidays || []).map(o => [o.date, o]));
+  CAL = x;
+}
+function sched(k){ const d = new Date(k+"T00:00:00"); if (!CAL) return isWork(d) ? {start: CFG.work_start, end: "16:30"} : null; return CAL.schedule[d.getDay()] || null; }
+const holidayOn = k => CAL?.holidayMap?.get(k) || null;
+const isSchedDay = k => !!sched(k) && !holidayOn(k);
+
 function derive(){
+  prepCalendar(D);
   const [h,m] = D.work_start.split(":").map(Number);
   D.lateAfter = h*60 + m + (D.grace_minutes||0);
   D.nowBase = toDate(D.now).getTime(); D.loadedAt = Date.now();
@@ -442,10 +610,14 @@ function derive(){
     D.days.set(k, d);
   }
   for (const d of D.days.values()){
+    const sc = sched(d.key) || {start: D.work_start, end: "16:30"}, st = hm2m(sc.start), en = hm2m(sc.end);
     d.first = d.punches[0].in;
     d.last = d.punches.filter(p=>p.out).map(p=>p.out).sort().pop() || null;
-    d.late = minsOf(d.first) > D.lateAfter;
-    d.lateBy = minsOf(d.first) - (D.lateAfter - D.grace_minutes);
+    d.late = minsOf(d.first) > st + (D.grace_minutes||0);
+    d.lateBy = d.late ? minsOf(d.first) - st : 0;                       // minutes after the scheduled start
+    d.noOut = d.open && d.key < D.today;                               // forgot to tap out
+    d.under = !d.open && d.key < D.today && d.last ? Math.max(0, en - minsOf(d.last)) : 0;
+    d.sched = sc;
   }
   const oldest = D.attendances.length ? dkey(D.attendances[D.attendances.length-1].in) : D.today;
   D.since = oldest;
@@ -455,38 +627,39 @@ function derive(){
     if (r.state !== "approved" && r.state !== "pending") continue;
     for (const k of eachDay(r.from, r.to)){
       const cur = D.leaveDays.get(k);
-      if (!cur || (cur.state === "pending" && r.state === "approved")) D.leaveDays.set(k, {state:r.state, type:r.type, half:r.half});
+      if (!cur || (cur.state === "pending" && r.state === "approved")) D.leaveDays.set(k, {state:r.state, type:r.type, half:r.half, unpaid:/without pay/i.test(r.type)});
     }
   }
 }
-function eachDay(a, b){ const out = [], d = new Date(a+"T00:00:00"), end = new Date(b+"T00:00:00"); while (d <= end){ if (isWork(d)) out.push(ymd(d)); d.setDate(d.getDate()+1); } return out; }
+function eachDay(a, b){ const out = [], d = new Date(a+"T00:00:00"), end = new Date(b+"T00:00:00"); while (d <= end){ const k = ymd(d); if (isSchedDay(k)) out.push(k); d.setDate(d.getDate()+1); } return out; }
 function dayStatus(k){
-  const d = D.days.get(k), dt = new Date(k+"T00:00:00");
-  const lv = D.leaveDays?.get(k);
-  if (d) return d.open && k === D.today ? "live" : d.late ? "late" : "ok";
+  const d = D.days.get(k), lv = D.leaveDays?.get(k), hol = holidayOn(k);
+  if (d) return d.open && k === D.today ? "live" : d.noOut ? "noout" : d.late ? "late" : "ok";
+  if (hol) return "hol";
   if (lv && lv.state === "approved") return "leave";
   if (lv) return "lpend";
   if (k > D.today) return "future";
-  if (!isWork(dt)) return "wk";
+  if (!sched(k)) return "wk";
   if (k === D.today || k < D.since) return "none";
   return "abs";
 }
-const PILL = {ok:'<span class="pill ok">On time</span>', late:'<span class="pill late">Late</span>', live:'<span class="pill in">On campus</span>', abs:'<span class="pill bad">No record</span>', wk:'<span class="pill off">Weekend</span>', leave:'<span class="pill leave">On leave</span>', lpend:'<span class="pill pend">Leave pending</span>', none:'<span class="pill off">--</span>', future:''};
+const PILL = {ok:'<span class="pill ok">On time</span>', late:'<span class="pill late">Late</span>', live:'<span class="pill in">On campus</span>', abs:'<span class="pill bad">No record</span>', wk:'<span class="pill off">Rest day</span>', hol:'<span class="pill hol">Holiday</span>', noout:'<span class="pill noout">No time-out</span>', leave:'<span class="pill leave">On leave</span>', lpend:'<span class="pill pend">Leave pending</span>', none:'<span class="pill off">--</span>', future:''};
 function liveHours(d){ // includes the running punch, ticking
   if (!d) return 0;
-  return d.punches.reduce((s,p) => s + (p.out ? p.hours : Math.max(0,(nowMs()-toDate(p.in).getTime())/36e5)), 0);
+  return d.punches.reduce((s,p) => s + (p.out ? p.hours : d.key < D.today ? 0 : Math.max(0,(nowMs()-toDate(p.in).getTime())/36e5)), 0);
 }
 function monthDays(y, mo){ const out = []; const d = new Date(y, mo, 1); while (d.getMonth() === mo){ out.push(ymd(d)); d.setDate(d.getDate()+1); } return out; }
 
 // ---------- TODAY
 function renderToday(){
   const e = D.employee, t = D.days.get(D.today), isIn = e.state === "checked_in";
-  const hr = toDate(D.now).getHours();
+  const hr = toDate(D.now).getHours(), sc = sched(D.today), hol = holidayOn(D.today), lvToday = D.leaveDays.get(D.today);
   $("#subtitle").textContent = `Good ${hr<12?"morning":hr<18?"afternoon":"evening"}, ${e.name.split(" ")[0]}. ${fmtDay(D.today)}.`;
   $("#hero").classList.toggle("out", !isIn);
-  const lvToday = D.leaveDays.get(D.today);
-  $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}` : lvToday?.state === "approved" ? `On leave today · ${lvToday.type}` : "No time-in yet today";
-  $("#hLine").textContent = t ? (t.late ? `worked today, first time-in ${fmtTime(t.first)} (${t.lateBy} min late)` : `worked today, first time-in ${fmtTime(t.first)} (on time)`) : `Tap your ID at the attendance kiosk. Time-in starts ${D.work_start}.`;
+  $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}`
+    : hol ? `Holiday today · ${hol.name}` : lvToday?.state === "approved" ? `On leave today · ${lvToday.type}` : !sc ? "Rest day" : "No time-in yet today";
+  $("#hLine").textContent = t ? `worked today, first time-in ${fmtTime(t.first)} (${t.late ? `${t.lateBy} min late` : "on time"})${sc ? ` · schedule ${m2t(hm2m(sc.start))} to ${m2t(hm2m(sc.end))}` : ""}`
+    : hol || lvToday?.state === "approved" || !sc ? "Enjoy your day." : `Tap your ID at the attendance kiosk. Your time-in starts ${m2t(hm2m(sc.start))}.`;
   $("#hPunches").innerHTML = t ? t.punches.map(p => `<span>In <b>${fmtTime(p.in)}</b> &rarr; ${p.out ? `Out <b>${fmtTime(p.out)}</b>` : "<b>now</b>"}</span>`).join("") : "";
   tickToday();
 
@@ -496,39 +669,78 @@ function renderToday(){
   const maxH = Math.max(D.daily_hours + 1, ...keys.map(d => liveHours(D.days.get(ymd(d)))));
   let total = 0;
   $("#week").innerHTML = keys.map(d => {
-    const k = ymd(d), day = D.days.get(k), h = liveHours(day), st = dayStatus(k); total += h;
+    const k = ymd(d), day = D.days.get(k), hh = liveHours(day), st = dayStatus(k); total += hh;
     const cls = st === "live" ? "live" : st === "late" ? "late" : "";
-    return `<div class="wd ${k===D.today?"today":""}" title="${fmtDay(k)}${day?": "+fmtHrs(h):""}"><b>${h ? Math.round(h*10)/10 : st==="abs" ? "&ndash;" : ""}</b><div class="col">${h?`<i class="${cls}" style="height:${h/maxH*100}%"></i>`:""}</div><small>${d.toLocaleDateString([], {weekday:"short"})}</small></div>`;
+    const label = hh ? Math.round(hh*10)/10 : st === "abs" ? "&ndash;" : st === "hol" ? "Hol" : st === "leave" ? "Lv" : "";
+    return `<div class="wd ${k===D.today?"today":""}" title="${fmtDay(k)}${day ? ": "+fmtHrs(hh) : st === "hol" ? ": " + esc(holidayOn(k).name) : st === "leave" ? ": on leave" : ""}"><b>${label}</b><div class="col">${hh?`<i class="${cls}" style="height:${hh/maxH*100}%"></i>`:""}</div><small>${d.toLocaleDateString([], {weekday:"short"})}</small></div>`;
   }).join("");
   $("#weekRange").textContent = `${keys[0].toLocaleDateString([], {month:"short",day:"numeric"})} to ${keys[6].toLocaleDateString([], {month:"short",day:"numeric"})}`;
   $("#weekTotal").textContent = fmtHrs(total);
-  $("#weekOf").textContent = `of ${D.daily_hours*5}h`;
+  const weekTarget = keys.filter(d => isSchedDay(ymd(d)) && dayStatus(ymd(d)) !== "leave").reduce((s, d) => { const c = sched(ymd(d)); return s + (hm2m(c.end) - hm2m(c.start) - 60)/60; }, 0);
+  $("#weekOf").textContent = `of ${Math.round(weekTarget)}h scheduled`;
 
   // this month
   const n = toDate(D.now), keysM = monthDays(n.getFullYear(), n.getMonth()).filter(k => k <= D.today);
-  const work = keysM.filter(k => isWork(new Date(k+"T00:00:00")) && (k < D.today || D.days.has(k)) && (D.days.has(k) || dayStatus(k) !== "leave"));
+  const work = keysM.filter(k => isSchedDay(k) && (k < D.today || D.days.has(k)) && dayStatus(k) !== "leave");
   const present = keysM.filter(k => D.days.has(k)).map(k => D.days.get(k));
-  const late = present.filter(d => d.late);
+  const late = present.filter(d => d.late), under = present.reduce((s, d) => s + d.under, 0), noOut = present.filter(d => d.noOut).length;
   $("#monthTitle").textContent = n.toLocaleDateString([], {month:"long",year:"numeric"});
   $("#monthNote").textContent = "so far this month";
   $("#mPresent").textContent = present.length; $("#mPresentOf").textContent = `of ${work.length} working days`;
   $("#mOnTime").textContent = present.length ? Math.round((present.length-late.length)/present.length*100)+"%" : "--";
   let streak = 0; for (const k of [...D.days.keys()].sort().reverse()){ if (D.days.get(k).late) break; streak++; }
   $("#mStreak").textContent = streak ? `${streak}-day on-time streak` : "Streak starts tomorrow";
-  $("#mLate").textContent = late.length; $("#mLateNote").textContent = late.length ? `${late.reduce((s,d)=>s+d.lateBy,0)} min late in total` : "Nice, none";
+  $("#mLate").textContent = late.length; $("#mLateNote").textContent = late.length ? `${fmtMin(late.reduce((s,d)=>s+d.lateBy,0))} late in total` : "Nice, none";
+  $("#mUnder").textContent = fmtMin(under); $("#mUnderNote").textContent = noOut ? `${noOut} missing time-out${noOut > 1 ? "s" : ""}` : under ? "left before schedule" : "None";
   const hrs = present.reduce((s,d)=>s+liveHours(d),0);
   $("#mHours").textContent = fmtHrs(hrs); $("#mAvg").textContent = present.length ? `${fmtHrs(hrs/present.length)} a day` : "";
-  if (present.length){ const avg = Math.round(present.reduce((s,d)=>s+minsOf(d.first),0)/present.length); const d = new Date(); d.setHours(0,avg,0,0); $("#mAvgIn").textContent = d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}); } else $("#mAvgIn").textContent = "--";
-  $("#mShift").textContent = `Shift starts ${D.work_start}`;
+  if (present.length){ const avg = Math.round(present.reduce((s,d)=>s+minsOf(d.first),0)/present.length); $("#mAvgIn").textContent = m2t(avg); } else $("#mAvgIn").textContent = "--";
+  $("#mShift").textContent = sc ? `Today's start ${m2t(hm2m(sc.start))}` : "Rest day today";
+  renderPay(); renderUpcoming();
 
-  // recent: last 7 days with a record or a missing workday
+  // recent: last 7 days with a record, leave, holiday or a missing workday
   const rec = []; const d = new Date(D.now);
-  while (rec.length < 7 && ymd(d) >= D.since){ const k = ymd(d), st = dayStatus(k); if (st !== "wk" && st !== "none" && st !== "lpend") rec.push(k); d.setDate(d.getDate()-1); }
+  while (rec.length < 7 && ymd(d) >= D.since){ const k = ymd(d), st = dayStatus(k); if (!["wk","none","lpend","future"].includes(st)) rec.push(k); d.setDate(d.getDate()-1); }
   $("#recent").innerHTML = rec.map(dayRow).join("") || `<div class="empty">No attendance yet</div>`;
+}
+function payPeriod(){ const n = new Date(D.today+"T00:00:00"), y = n.getFullYear(), m = n.getMonth(), first = n.getDate() <= 15;
+  return {from: ymd(new Date(y, m, first ? 1 : 16)), to: ymd(first ? new Date(y, m, 15) : new Date(y, m+1, 0))}; }
+function renderPay(){
+  const {from, to} = payPeriod(), all = [];
+  for (const d = new Date(from+"T00:00:00"); ymd(d) <= to; d.setDate(d.getDate()+1)) all.push(ymd(d));
+  const sofar = all.filter(k => k <= D.today), st = k => dayStatus(k);
+  const present = sofar.filter(k => D.days.has(k)).map(k => D.days.get(k));
+  const lv = sofar.filter(k => st(k) === "leave"), unpaid = lv.filter(k => D.leaveDays.get(k).unpaid).length;
+  const sched = sofar.filter(k => isSchedDay(k) && (k < D.today || D.days.has(k)));
+  const lateD = present.filter(d => d.late);
+  const cells = [
+    ["Days present", present.length, `of ${sched.length - lv.length} working days`],
+    ["Absent (no record)", sofar.filter(k => st(k) === "abs").length, "days so far"],
+    ["Late", lateD.length, lateD.length ? `${fmtMin(lateD.reduce((s,d)=>s+d.lateBy,0))} in total` : "times"],
+    ["Undertime", fmtMin(present.reduce((s,d)=>s+d.under,0)), "left early"],
+    ["On leave", lv.length, unpaid ? `${unpaid} without pay` : "paid days"],
+    ["Holidays", all.filter(k => holidayOn(k)).length, "in this period"],
+    ["Missing time-out", present.filter(d => d.noOut).length, "ask HR to fix"],
+    ["Hours worked", fmtHrs(present.reduce((s,d)=>s+liveHours(d),0)), "so far"],
+  ];
+  $("#ppRange").textContent = fmtRange(from, to);
+  $("#pp").innerHTML = cells.map(([a,b,c]) => `<div><small>${a}</small><b>${b}</b><em>${c}</em></div>`).join("");
+}
+function renderUpcoming(){
+  const items = [], lim = new Date(D.today+"T00:00:00"); lim.setDate(lim.getDate()+75); const limK = ymd(lim);
+  for (const o of (D.holidays || [])) if (o.date > D.today && o.date <= limK) items.push({k:o.date, cls:"hol", t:esc(o.name), s: o.kind === "regular" ? "Regular holiday" : o.kind === "special" ? "Special non-working day" : "No work"});
+  for (const r of (D.leave?.requests || [])) if ((r.state === "approved" || r.state === "pending") && r.to > D.today) items.push({k:r.from > D.today ? r.from : D.today, cls:"lv", t:esc(r.type), s:`${fmtRange(r.from, r.to)} · ${r.state === "approved" ? "approved" : "waiting for approval"}`});
+  const {to} = payPeriod(); items.push({k:to, cls:"pay", t:"Pay period ends", s:"Cutoff for this period's attendance"});
+  items.sort((a,b) => a.k.localeCompare(b.k));
+  $("#upcoming").innerHTML = items.slice(0,5).map(i => { const d = new Date(i.k+"T00:00:00"), n = daysUntil(i.k);
+    return `<div class="row ${i.cls}"><span class="date"><small>${d.toLocaleDateString([], {month:"short"})}</small><b>${d.getDate()}</b></span><span><b>${i.t}</b><small class="s">${i.s}</small></span><span class="in">${n <= 0 ? "Today" : n === 1 ? "Tomorrow" : `in ${n} days`}</span></div>`; }).join("")
+    || `<div class="empty">Nothing coming up</div>`;
 }
 function dayRow(k){
   const d = D.days.get(k), st = dayStatus(k), dt = new Date(k+"T00:00:00");
-  const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : fmtTime(d.last)}</b> <span class="muted">&middot; ${d.punches.length} punch${d.punches.length>1?"es":""}</span>` : `<span class="muted">${st === "leave" ? esc(D.leaveDays.get(k).type) : "No time-in recorded"}</span>`;
+  const extra = d ? [d.late ? `${d.lateBy}m late` : "", d.under ? `${fmtMin(d.under)} undertime` : "", d.noOut ? "no time-out" : ""].filter(Boolean).join(" · ") : "";
+  const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : d.noOut ? "?" : fmtTime(d.last)}</b> <span class="muted">&middot; ${d.punches.length} punch${d.punches.length>1?"es":""}${extra ? " &middot; " + extra : ""}</span>`
+    : `<span class="muted">${st === "leave" ? esc(D.leaveDays.get(k).type) : st === "hol" ? esc(holidayOn(k).name) : "No time-in recorded"}</span>`;
   return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${k===D.today?"Today":dt.toLocaleDateString([], {month:"long",day:"numeric"})}<br>${times}</span><span class="r"><b>${d ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`;
 }
 function tickToday(){
@@ -550,45 +762,62 @@ function renderCalendar(){
   html += `<div class="cell pad"></div>`.repeat(lead);
   for (const k of monthDays(y, mo)){
     const d = D.days.get(k), st = dayStatus(k), cls = [st, k===D.today?"today":"", k===selDay?"sel":""].join(" ");
-    const t = d ? `<span class="t"><b>${fmtHrs(liveHours(d))}</b>In ${fmtTime(d.first)}</span>` : st==="abs" ? `<span class="t">No record</span>` : (st==="leave" || st==="lpend") ? `<span class="t"><b>${st==="leave" ? "On leave" : "Pending"}</b>${esc(D.leaveDays.get(k).type.replace(/ Leave$/,""))}</span>` : `<span class="t"></span>`;
+    const t = d ? `<span class="t"><b>${d.noOut ? "No out" : fmtHrs(liveHours(d))}</b>In ${fmtTime(d.first)}</span>`
+      : st==="abs" ? `<span class="t">No record</span>`
+      : st==="hol" ? `<span class="t"><b>Holiday</b>${esc(holidayOn(k).name)}</span>`
+      : (st==="leave" || st==="lpend") ? `<span class="t"><b>${st==="leave" ? "On leave" : "Pending"}</b>${esc(D.leaveDays.get(k).type.replace(/ Leave$/,""))}</span>` : `<span class="t"></span>`;
     html += `<button class="cell ${cls}" data-day="${k}" aria-label="${fmtDay(k)}"><span class="n">${Number(k.slice(8))}</span>${t}</button>`;
   }
   $("#cal").innerHTML = html;
+  const ahead = new Date(D.today+"T00:00:00"); ahead.setDate(ahead.getDate() + 92);
   $("#prevM").disabled = ymd(new Date(y, mo, 0)) < D.since;
-  $("#nextM").disabled = ymd(new Date(y, mo+1, 1)) > maxLeaveDay();
+  $("#nextM").disabled = ymd(new Date(y, mo+1, 1)) > [maxLeaveDay(), ymd(ahead)].sort().pop();
   renderDetail();
 }
 function renderDetail(){
-  const k = selDay || D.today, d = D.days.get(k), st = dayStatus(k);
+  const k = selDay || D.today, d = D.days.get(k), st = dayStatus(k), sc = sched(k), hol = holidayOn(k), lv = D.leaveDays.get(k);
+  const schedLine = sc ? `<p class="muted" style="margin:10px 0 0;font-size:13px">Schedule: ${m2t(hm2m(sc.start))} to ${m2t(hm2m(sc.end))}</p>` : "";
+  const fixBtn = k <= D.today && k >= D.since && (st === "abs" || st === "noout" || st === "late" || st === "ok")
+    ? `<button class="btn sm" data-fix="${k}" style="margin-top:14px"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Request a correction</button>` : "";
   let body;
   if (d){
     const items = [];
     d.punches.forEach((p,i) => {
-      items.push(`<li><b>Time in ${fmtTime(p.in)}</b>${i===0 ? `<small>${d.late ? d.lateBy+" min after "+D.work_start : "On time"}</small>` : `<small>Back from break</small>`}</li>`);
-      items.push(p.out ? `<li class="o"><b>Time out ${fmtTime(p.out)}</b><small>${fmtHrs(p.hours)} in this block</small></li>` : `<li class="o"><b>Still timed in</b><small>Timer running</small></li>`);
+      items.push(`<li><b>Time in ${fmtTime(p.in)}</b>${i===0 ? `<small>${d.late ? `${d.lateBy} min after ${m2t(hm2m(d.sched.start))}` : "On time"}</small>` : `<small>Back from break</small>`}</li>`);
+      items.push(p.out ? `<li class="o"><b>Time out ${fmtTime(p.out)}</b><small>${fmtHrs(p.hours)} in this block${i === d.punches.length-1 && d.under ? ` · ${fmtMin(d.under)} before ${m2t(hm2m(d.sched.end))}` : ""}</small></li>`
+        : d.noOut ? `<li class="o"><b>No time-out recorded</b><small>Hours for this block can't be counted until HR fixes it</small></li>` : `<li class="o"><b>Still timed in</b><small>Timer running</small></li>`);
     });
-    body = `<div class="big">${fmtHrs(liveHours(d))}</div><div>${PILL[st]}</div><ul class="tl">${items.join("")}</ul>`;
+    body = `<div class="big">${d.noOut ? "Incomplete" : fmtHrs(liveHours(d))}</div><div>${PILL[st]}${d.under ? ` <span class="pill noout">${fmtMin(d.under)} undertime</span>` : ""}</div><ul class="tl">${items.join("")}</ul>`;
+  } else if (hol){
+    body = `<div class="big">${esc(hol.name)}</div><div>${PILL.hol}</div><p class="muted">${hol.kind === "regular" ? "Regular holiday" : hol.kind === "special" ? "Special non-working day" : "No work scheduled"}. No time-in needed.</p>`;
+  } else if (lv){
+    body = `<div class="big">${esc(lv.type)}</div><div>${PILL[st]}</div><p class="muted">${lv.state === "approved" ? "Approved leave" : "Waiting for approval"}${lv.half ? (lv.half === "am" ? ", morning only" : ", afternoon only") : ""}.</p>`;
   } else {
-    const lv = D.leaveDays.get(k);
-    if (lv) body = `<div class="big">${esc(lv.type)}</div><div>${PILL[st]}</div><p class="muted">${lv.state === "approved" ? "Approved leave" : "Waiting for HR approval"}${lv.half ? (lv.half === "am" ? ", morning only" : ", afternoon only") : ""}.</p>`;
-    else body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on leave or forgot to tap your ID, let the HR office know." : st==="wk" ? "Weekend." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
+    body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on official business, at a seminar or forgot to tap your ID, request a correction." : st==="wk" ? "Rest day, no work scheduled." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
   }
-  $("#detail").innerHTML = `<div class="ch"><h3>${k===D.today?"Today":fmtDay(k)}</h3></div>${body}`;
+  $("#detail").innerHTML = `<div class="ch"><h3>${k===D.today?"Today":fmtDay(k)}</h3></div>${body}${schedLine}${fixBtn}`;
 }
 
 // ---------- HISTORY
 function historyKeys(){
   const [y,mo] = $("#hMonth").value.split("-").map(Number), f = $("#hFilter").value;
   return monthDays(y, mo-1).filter(k => k <= D.today).reverse()
-    .filter(k => { const st = dayStatus(k); return st !== "wk" && st !== "none" && st !== "future" && st !== "lpend" && (!f || st === f); });
+    .filter(k => { const st = dayStatus(k); return !["wk","none","future","lpend"].includes(st) && (!f || st === f || (f === "late" && D.days.get(k)?.late)); });
+}
+function amPm(d){   // DTR style: first block = AM, last block = PM
+  if (!d) return ["","","",""];
+  const p = d.punches, a = p[0], z = p[p.length-1];
+  if (p.length === 1) return [fmtTime(a.in), "", "", a.out ? fmtTime(a.out) : (d.noOut ? "?" : "now")];
+  return [fmtTime(a.in), a.out ? fmtTime(a.out) : "", fmtTime(z.in), z.out ? fmtTime(z.out) : (d.noOut ? "?" : "now")];
 }
 function renderHistory(){
   const keys = historyKeys();
-  $("#hBody").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k);
-    return `<tr><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"})}</td><td>${d?fmtTime(d.first):"--"}</td><td>${d?(d.open&&k===D.today?"now":fmtTime(d.last)):"--"}</td><td>${d?d.punches.length:0}</td><td class="num">${d?fmtHrs(liveHours(d)):"--"}</td><td>${PILL[st]}</td></tr>`; }).join("")
-    || `<tr><td colspan="6" class="empty">Nothing to show for this month</td></tr>`;
-  const worked = keys.filter(k => D.days.has(k));
-  $("#hSum").textContent = `${worked.length} days, ${fmtHrs(worked.reduce((s,k)=>s+liveHours(D.days.get(k)),0))}`;
+  $("#hBody").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k), [ai, ao, pi, po] = amPm(d);
+    const note = st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "";
+    return `<tr data-day="${k}" style="cursor:pointer"><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"})}</td><td>${ai||"--"}</td><td>${ao||"--"}</td><td>${pi||"--"}</td><td class="${po === "?" ? "warn" : ""}">${po||"--"}</td><td class="num">${d && !d.noOut ? fmtHrs(liveHours(d)) : "--"}</td><td class="num ${d?.late ? "warn" : ""}">${d?.late ? d.lateBy + "m" : "--"}</td><td class="num ${d?.under ? "warn" : ""}">${d?.under ? fmtMin(d.under) : "--"}</td><td>${PILL[st]}${note ? ` <span class="muted" style="font-size:12px">${note}</span>` : ""}</td></tr>`; }).join("")
+    || `<tr><td colspan="9" class="empty">Nothing to show for this month</td></tr>`;
+  const worked = keys.filter(k => D.days.has(k)), ds = worked.map(k => D.days.get(k));
+  $("#hSum").textContent = `${worked.length} days, ${fmtHrs(ds.reduce((s,d)=>s+liveHours(d),0))} · late ${fmtMin(ds.reduce((s,d)=>s+d.lateBy,0))} · undertime ${fmtMin(ds.reduce((s,d)=>s+d.under,0))}`;
 }
 function fillMonths(){
   const sel = $("#hMonth"), keep = sel.value, opts = [], d = new Date(D.now); d.setDate(1);
@@ -620,14 +849,60 @@ function renderLeave(){
     ? `<div class="bal"><small>${esc(t.name)}</small><b>No limit</b><small>${t.used ? `${t.used} day${t.used === 1 ? "" : "s"} used this year` : "Not used this year"}</small></div>`
     : `<div class="bal ${t.remaining < t.allocated && t.remaining <= t.allocated*.2 ? "low" : ""}"><small>${esc(t.name)}</small><b>${t.remaining}<span>of ${t.allocated} days left</span></b><div class="track"><i style="width:${Math.max(0, t.remaining/t.allocated*100)}%"></i></div></div>`).join("")
     || `<div class="empty">No leave types set up for you yet. Please ask the HR office.</div>`;
-  $("#balNote").textContent = D.mode === "demo" ? "Sample balances. The real leave types and days come from St. Clare's Odoo Time Off." : "Days waiting for approval are already taken off what's left.";
+  $("#balNote").textContent = D.mode === "demo" ? "Sample balances. Real ones come from Odoo Time Off." : "Pending requests are already taken off what's left.";
   const reqs = [...L.requests].sort((a, b) => b.from.localeCompare(a.from));
   $("#reqCount").textContent = reqs.length ? `${reqs.filter(r => r.state === "pending").length} waiting for approval` : "";
-  $("#reqs").innerHTML = reqs.map(r => { const A = new Date(r.from+"T00:00:00");
-    return `<div class="lreq"><span class="date"><small>${A.toLocaleDateString([], {month:"short"})}</small><b>${A.getDate()}</b></span>
-      <span class="what"><b>${esc(r.type)}</b> <span class="muted">&middot; ${fmtRange(r.from, r.to)} &middot; ${r.half ? (r.half === "am" ? "Half day (morning)" : "Half day (afternoon)") : `${r.days} day${r.days === 1 ? "" : "s"}`}</span><small>${esc(r.reason || "")}</small></span>
-      <span class="r">${LSTATE[r.state] || ""}${r.state === "pending" ? `<button class="linkbtn" data-cancel="${r.id}">Cancel request</button>` : ""}</span></div>`; }).join("")
+  $("#reqs").innerHTML = reqs.map(r => lreqHTML(r, L)).join("")
     || `<div class="empty">No leave requests yet.</div>`;
+}
+
+const openReqs = new Set();
+const ICON_OK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>', ICON_NO = '<svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>';
+const fmtStamp = s => s ? new Date(s).toLocaleString([], {month:"short", day:"numeric", year:"numeric", hour:"numeric", minute:"2-digit"}) : "";
+const fmtShort = s => s ? new Date(s).toLocaleDateString([], {month:"short", day:"numeric"}) : "";
+function nextWorkday(k){ const d = new Date(k+"T00:00:00"); do { d.setDate(d.getDate()+1); } while (!isWork(d)); return ymd(d); }
+function daysUntil(k){ return Math.round((new Date(k+"T00:00:00") - new Date(D.today+"T00:00:00")) / 864e5); }
+function lreqHTML(r, L){
+  const A = new Date(r.from+"T00:00:00"), t = L.types.find(x => x.id === r.type_id), open = openReqs.has(r.id);
+  const len = r.half ? (r.half === "am" ? "Half day (morning)" : "Half day (afternoon)") : `${r.days} working day${r.days === 1 ? "" : "s"}`;
+  // at-a-glance line
+  const meta = [`Filed ${fmtShort(r.filed)}`, r.ref ? `Ref ${esc(r.ref)}` : ""];
+  const until = daysUntil(r.from);
+  if ((r.state === "approved" || r.state === "pending") && until > 0) meta.push(`<span class="soon">${until === 1 ? "Starts tomorrow" : `Starts in ${until} days`}</span>`);
+  if (r.state === "approved" && r.from <= D.today && r.to >= D.today) meta.push('<span class="now">On leave now</span>');
+  const steps = r.steps || [];
+  const last = [...steps].reverse().find(s => s.state === "done" || s.state === "refused"), waiting = steps.find(s => s.state === "wait");
+  const sub = r.state === "pending" && waiting ? `Next: ${esc(waiting.label)}` : (r.state === "approved" || r.state === "refused") && last && last.label !== "Filed" ? `by ${esc(last.by || last.label)}${last.at ? " &middot; " + fmtShort(last.at) : ""}` : r.state === "cancelled" && r.cancelled_at ? `on ${fmtShort(r.cancelled_at)}` : "";
+  // details
+  const back = r.half === "am" ? `${fmtRange(r.from, r.from)}, afternoon` : fmtRange(nextWorkday(r.to), nextWorkday(r.to));
+  const bal = !t ? "" : t.allocated == null ? "No limit for this type" : `Uses ${r.days} of your ${t.allocated} days<em>${t.remaining} day${t.remaining === 1 ? "" : "s"} left this year</em>`;
+  const fullDates = r.from === r.to ? new Date(r.from+"T00:00:00").toLocaleDateString([], {weekday:"long", month:"long", day:"numeric", year:"numeric"})
+    : `${new Date(r.from+"T00:00:00").toLocaleDateString([], {weekday:"short", month:"long", day:"numeric"})} to ${new Date(r.to+"T00:00:00").toLocaleDateString([], {weekday:"short", month:"long", day:"numeric", year:"numeric"})}`;
+  const approvers = steps.filter(s => s.label !== "Filed").map(s => s.label);
+  const stepHTML = steps.map(s => `<div class="step ${s.state}"><i>${s.state === "done" ? ICON_OK : s.state === "refused" ? ICON_NO : ""}</i><b>${esc(s.label)}</b><em>${
+    s.state === "done" ? `${esc(s.by || "")}${s.at ? "<br>" + fmtStamp(s.at) : ""}` : s.state === "refused" ? `Not approved${s.by ? " by " + esc(s.by) : ""}${s.at ? "<br>" + fmtStamp(s.at) : ""}` : s.state === "wait" ? `Waiting${s.by ? " for " + esc(s.by) : ""}` : s.state === "skipped" ? "Not needed" : "Next"}</em></div>`).join("");
+  const note = r.state === "refused" ? '<div class="lnote bad">This request wasn\'t approved. Please see the HR office for the reason.</div>'
+    : r.state === "cancelled" ? '<div class="lnote">You cancelled this request. No days were used.</div>'
+    : r.state === "pending" ? '<div class="lnote">You can cancel while it\'s still waiting. Days are held from your balance until it\'s decided.</div>' : "";
+  return `<div class="lreq ${open ? "open" : ""}" data-req="${r.id}">
+    <span class="date"><small>${A.toLocaleDateString([], {month:"short"})}</small><b>${A.getDate()}</b></span>
+    <span class="what"><b>${esc(r.type)}</b> <span class="muted">&middot; ${fmtRange(r.from, r.to)} &middot; ${len}</span><small>${esc(r.reason || "")}</small><span class="meta">${meta.filter(Boolean).join("<span>&middot;</span>")}</span></span>
+    <span class="r">${LSTATE[r.state] || ""}${sub ? `<small>${sub}</small>` : ""}${r.state === "pending" ? `<button class="linkbtn" data-cancel="${r.id}">Cancel request</button>` : ""}</span>
+    <button class="chev" data-toggle="${r.id}" aria-expanded="${open}" aria-label="${open ? "Hide" : "Show"} details"><svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="ldet"><div><div class="ldin">
+      <div class="facts">
+        <div><small>Leave dates</small><span>${fullDates}</span></div>
+        <div><small>Length</small><span>${len}</span></div>
+        <div><small>Back at work</small><span>${back}</span></div>
+        <div><small>Filed on</small><span>${fmtStamp(r.filed)}</span></div>
+        <div><small>Balance</small><span>${bal}</span></div>
+        <div><small>Approved by</small><span>${approvers.length ? esc(approvers.join(", then ")) : "No approval needed"}</span></div>
+        ${r.reason ? `<div class="wide"><small>Reason</small><span>${esc(r.reason)}</span></div>` : ""}
+      </div>
+      <div class="steps">${stepHTML}</div>
+      ${note}
+    </div></div></div>
+  </div>`;
 }
 
 let lHalf = "";
@@ -697,6 +972,89 @@ async function cancelLeave(id){
   } catch (e){ alert(e.message || "Could not cancel. Please ask the HR office."); }
 }
 
+// ---------- ATTENDANCE CORRECTIONS
+const FIX_KINDS = [["in","Forgot to time in"],["out","Forgot to time out"],["wrong","Wrong time recorded"],["ob","Official business / seminar"],["other","Other"]];
+function renderFixes(){
+  const list = [...(D.fixes || [])].sort((a,b) => b.sent.localeCompare(a.sent));
+  $("#fixes").innerHTML = list.map(f => { const d = new Date(f.date+"T00:00:00"), kind = (FIX_KINDS.find(k => k[0] === f.kind) || [,f.kind])[1];
+    const times = [f.time_in ? `in ${m2t(hm2m(f.time_in))}` : "", f.time_out ? `out ${m2t(hm2m(f.time_out))}` : ""].filter(Boolean).join(", ");
+    return `<div class="fixrow"><span class="date"><small>${d.toLocaleDateString([], {month:"short"})}</small><b>${d.getDate()}</b></span>
+      <span><b>${esc(kind)}</b>${times ? ` <span class="muted">&middot; ${times}</span>` : ""}<small class="s">${esc(f.reason)}</small></span>
+      <span style="text-align:right"><span class="pill pend">Sent to HR</span><small class="s muted">${fmtShort(f.sent)}</small></span></div>`; }).join("")
+    || `<div class="empty">No corrections sent.</div>`;
+}
+function openFix(k){
+  const d = k || (() => { const s = new Date(D.now); do { s.setDate(s.getDate()-1); } while (!isSchedDay(ymd(s))); return ymd(s); })();
+  const day = D.days.get(d);
+  $("#fKinds").innerHTML = FIX_KINDS.map(([v,l]) => `<label><input type="radio" name="fkind" value="${v}"><span>${l}</span></label>`).join("");
+  const guess = !day ? "in" : day.noOut ? "out" : "wrong";
+  $(`#fKinds input[value="${guess}"]`).checked = true;
+  const minD = new Date(D.now); minD.setDate(minD.getDate() - 60);
+  $("#fDate").min = ymd(minD); $("#fDate").max = D.today; $("#fDate").value = d;
+  const sc = sched(d); $("#fIn").value = day ? day.first.slice(11,16) : sc ? sc.start : ""; $("#fOut").value = day?.last && !day.noOut ? day.last.slice(11,16) : sc ? sc.end : "";
+  $("#fReason").value = ""; checkFix();
+  $("#fixSheet").classList.add("open"); setTimeout(() => $("#fKinds input:checked")?.focus(), 50);
+}
+function checkFix(){
+  const kind = $("#fKinds input:checked")?.value, box = $("#fSum");
+  $("#fInLbl").textContent = kind === "ob" ? "Left for / started (optional)" : "Actual time in";
+  $("#fOutLbl").textContent = kind === "ob" ? "Came back / ended (optional)" : "Actual time out";
+  let err = "";
+  if (!$("#fDate").value || $("#fDate").value > D.today) err = "Pick a date up to today.";
+  else if (kind === "in" && !$("#fIn").value) err = "Add the time you actually arrived.";
+  else if (kind === "out" && !$("#fOut").value) err = "Add the time you actually left.";
+  else if ($("#fIn").value && $("#fOut").value && $("#fOut").value <= $("#fIn").value) err = "Time out must be after time in.";
+  box.classList.toggle("bad", !!err);
+  box.textContent = err || (kind === "ob" ? "Attach or bring the memo or certificate of attendance to HR." : "HR may ask for proof before fixing your record.");
+  return err;
+}
+async function sendFix(ev){
+  ev.preventDefault();
+  if (checkFix()) return;
+  const body = {date:$("#fDate").value, kind:$("#fKinds input:checked").value, time_in:$("#fIn").value || null, time_out:$("#fOut").value || null, reason:$("#fReason").value.trim()};
+  if (body.reason.length < 3){ $("#fSum").classList.add("bad"); $("#fSum").textContent = "Please add a few words for HR."; $("#fReason").focus(); return; }
+  const btn = $("#fSend"); btn.disabled = true; btn.textContent = "Sending...";
+  try {
+    if (MODE === "demo"){ const key = "att-demo-fix-" + demoSession.get(); let l = []; try { l = JSON.parse(localStorage.getItem(key) || "[]"); } catch(_){} l.push({...body, sent: iso(new Date(nowMs()))}); localStorage.setItem(key, JSON.stringify(l)); }
+    else { const r = await fetch("api/correction", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)}); const d = await r.json(); if (!r.ok) throw new Error(d.error); }
+    $("#fixSheet").classList.remove("open"); await load(); setView("leave");
+  } catch (e){ $("#fSum").classList.add("bad"); $("#fSum").textContent = e.message || "Could not send. Please try again."; }
+  finally { btn.disabled = false; btn.textContent = "Send to HR"; }
+}
+
+// ---------- MY INFO
+function openMe(){
+  const e = D.employee, days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], todayDow = new Date(D.today+"T00:00:00").getDay();
+  $("#miAv").textContent = $("#meAv").textContent; $("#meTitle").textContent = e.name; $("#miJob").textContent = [e.job, e.dept].filter(Boolean).join(" · ");
+  const cells = [["Employee ID", e.badge || "Ask HR"], ["Employment", e.type || "--"], ["Department", e.dept || "--"], ["Department head", e.manager || "--"],
+                 ["Work email", e.email || "--"], ["Late after", `${D.grace_minutes} min grace`]];
+  $("#miInfo").innerHTML = cells.map(([a,b]) => `<div><small>${a}</small><span>${esc(b)}</span></div>`).join("");
+  $("#miSched").innerHTML = days.map((n, i) => { const dow = (i+1) % 7, s = D.schedule[dow];
+    return `<tr class="${dow === todayDow ? "today" : ""}"><td>${n}</td><td>${s ? `${m2t(hm2m(s.start))} to ${m2t(hm2m(s.end))}` : "Rest day"}</td></tr>`; }).join("");
+  $("#meSheet").classList.add("open");
+}
+
+// ---------- PRINTABLE DTR (Daily Time Record)
+function printDtr(){
+  const [y, mo] = $("#hMonth").value.split("-").map(Number), e = D.employee, rows = [];
+  let tot = 0, late = 0, under = 0, abs = 0;
+  for (const k of monthDays(y, mo-1)){
+    const d = D.days.get(k), st = k <= D.today ? dayStatus(k) : "future", [ai, ao, pi, po] = amPm(d);
+    const rem = st === "hol" ? holidayOn(k).name : st === "leave" ? D.leaveDays.get(k).type : st === "abs" ? "Absent (no record)" : st === "wk" ? "Rest day" : st === "noout" ? "No time-out" : "";
+    if (d && !d.noOut) tot += liveHours(d); if (d) { late += d.lateBy; under += d.under; } if (st === "abs") abs++;
+    rows.push(`<tr class="${["wk","hol","future"].includes(st) ? "off" : ""}"><td>${Number(k.slice(8))}</td><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short"})}</td><td>${ai}</td><td>${ao}</td><td>${pi}</td><td>${po === "?" ? "" : po}</td><td>${d?.late ? d.lateBy : ""}</td><td>${d?.under || ""}</td><td class="l">${esc(rem)}</td></tr>`);
+  }
+  const month = new Date(y, mo-1, 1).toLocaleDateString([], {month:"long", year:"numeric"});
+  $("#dtr").innerHTML = `<div class="hd"><img src="seal-128.webp" alt=""><div><h1>St. Clare College of Caloocan</h1><h2>DAILY TIME RECORD</h2></div></div>
+    <div class="who"><div><b>Name:</b> ${esc(e.name)}</div><div><b>Month:</b> ${month}</div><div><b>Position:</b> ${esc(e.job || "")}</div><div><b>Department:</b> ${esc(e.dept || "")}</div>
+    <div><b>Employee ID:</b> ${esc(e.badge || "")}</div><div><b>Printed:</b> ${new Date().toLocaleDateString()}${D.mode === "demo" ? " (sample data)" : ""}</div></div>
+    <table><thead><tr><th rowspan="2">Day</th><th rowspan="2"></th><th colspan="2">Morning</th><th colspan="2">Afternoon</th><th rowspan="2">Late (min)</th><th rowspan="2">Under&shy;time (min)</th><th rowspan="2">Remarks</th></tr><tr><th>In</th><th>Out</th><th>In</th><th>Out</th></tr></thead><tbody>${rows.join("")}</tbody></table>
+    <div class="tot"><b>Totals:</b> ${fmtHrs(tot)} worked · ${late} min late · ${under} min undertime · ${abs} day(s) with no record</div>
+    <div class="cert">I certify on my honor that the above is a true and correct report of the hours of work performed, record of which was made daily at the time of arrival and departure.</div>
+    <div class="sign"><div>${esc(e.name)}<br>Employee</div><div>${esc(e.manager || "")}<br>Verified by (Department head)</div></div>`;
+  window.print();
+}
+
 // ---------- shell
 function setView(v){
   view = v;
@@ -711,9 +1069,9 @@ function renderAll(){
   $("#meName").textContent = e.name; $("#meJob").textContent = e.job || e.dept;
   $("#meAv").textContent = e.name.split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
   const src = $("#source"); src.classList.toggle("demo", D.mode === "demo");
-  src.lastElementChild.textContent = D.mode === "demo" ? `Sample data, shown as ${fmtTime(D.now)}` : "Live from Odoo";
+  src.lastElementChild.textContent = D.mode === "demo" ? `Sample data · ${fmtTime(D.now)}` : `Live from Odoo · updated ${new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`;
   if (!calMonth) calMonth = new Date(toDate(D.now).getFullYear(), toDate(D.now).getMonth(), 1);
-  fillMonths(); renderToday(); renderCalendar(); renderHistory(); renderLeave();
+  fillMonths(); renderToday(); renderCalendar(); renderHistory(); renderLeave(); renderFixes();
   setView(view);
 }
 // ---------- demo mode: runs in the browser when Odoo isn't connected (or no server, e.g. a static preview link)
@@ -725,6 +1083,15 @@ const DEMO_PEOPLE = [
   ["Angela Cruz","Instructor, Accountancy","College"], ["Mark Villanueva","Registrar Staff","Administration"],
   ["Liza Fernandez","Guidance Counselor","Student Services"], ["Paolo Mendoza","ICT Instructor","College"],
 ];
+// sample public holidays (Philippines 2026); the real list comes from Odoo's public holidays
+const DEMO_HOLIDAYS = [
+  ["2026-04-02","Maundy Thursday","regular"], ["2026-04-03","Good Friday","regular"], ["2026-04-04","Black Saturday","special"],
+  ["2026-04-09","Araw ng Kagitingan","regular"], ["2026-05-01","Labor Day","regular"], ["2026-06-12","Independence Day","regular"],
+  ["2026-08-21","Ninoy Aquino Day","special"], ["2026-08-31","National Heroes Day","regular"], ["2026-11-01","All Saints' Day","special"],
+  ["2026-11-02","All Souls' Day","special"], ["2026-11-30","Bonifacio Day","regular"], ["2026-12-08","Feast of the Immaculate Conception","special"],
+  ["2026-12-24","Christmas Eve","special"], ["2026-12-25","Christmas Day","regular"], ["2026-12-30","Rizal Day","regular"], ["2026-12-31","Last Day of the Year","special"],
+].map(([date, name, kind]) => ({date, name, kind}));
+const DEMO_HOL_SET = new Set(DEMO_HOLIDAYS.map(o => o.date));
 const demoEmail = n => n.toLowerCase().replace(/\s+/g,".") + "@stclare.demo";
 function rng(seed){ let a = 1779033703; for (const ch of String(seed)) a = Math.imul(a ^ ch.charCodeAt(0), 3432918353) << 13 | Math.imul(a ^ ch.charCodeAt(0), 3432918353) >>> 19;
   return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -744,7 +1111,7 @@ function demoData(id){
   for (let back = 186; back >= 0; back--){
     const day = new Date(now); day.setDate(now.getDate()-back); day.setHours(0,0,0,0);
     const r = rng(id + "-" + ymd(day));
-    if (!isWork(day) || r() < 0.05) continue;
+    if (!isWork(day) || DEMO_HOL_SET.has(ymd(day)) || r() < 0.05) continue;
     const late = r() > punctual;
     const start = new Date(day); start.setHours(wh, wm + (late ? 12 + Math.floor(r()*36) : -25 + Math.floor(r()*33)));
     if (back === 0 && start > now) continue;
@@ -758,30 +1125,60 @@ function demoData(id){
     }
   }
   atts.reverse();
-  return {employee: emp, attendances: atts, now: iso(now), mode: "demo", ...CFG};
+  const schedule = {}; for (let i = 1; i <= 5; i++) schedule[i] = {start: CFG.work_start, end: "16:30"};
+  // one sample day where the time-out tap was missed
+  const miss = atts.find(a => a.out && dkey(a.in) < ymd(now) && dkey(a.in) > ymd(new Date(+now - 12*864e5)) && hm2m(a.in.slice(11,16)) > 12*60);
+  if (miss){ miss.out = null; miss.hours = 0; }
+  return {employee: {...emp, badge: "00044172" + pad(id), type: id === 6 ? "Part-time faculty" : /Instructor|Teacher|Adviser/.test(job) ? "Full-time faculty" : "Staff",
+                     manager: DEPT_HEAD[dept] || "Department head"},
+          attendances: atts, now: iso(now), mode: "demo", schedule, holidays: DEMO_HOLIDAYS, ...CFG};
 }
 // sample leave: types + allocations, saved in this browser so trying it out keeps your requests
-const DEMO_LEAVE_TYPES = [
-  {id:1, name:"Vacation Leave", allocated:15, half:true}, {id:2, name:"Sick Leave", allocated:15, half:true},
-  {id:3, name:"Emergency Leave", allocated:3, half:true}, {id:4, name:"Birthday Leave", allocated:1, half:false},
-  {id:5, name:"Bereavement Leave", allocated:3, half:false}, {id:6, name:"Leave Without Pay", allocated:null, half:true},
+const DEMO_LEAVE_TYPES = [   // route = who approves, as set on the Odoo time-off type
+  {id:1, name:"Vacation Leave", allocated:15, half:true, route:"both"}, {id:2, name:"Sick Leave", allocated:15, half:true, route:"hr"},
+  {id:3, name:"Emergency Leave", allocated:3, half:true, route:"manager"}, {id:4, name:"Birthday Leave", allocated:1, half:false, route:"hr"},
+  {id:5, name:"Bereavement Leave", allocated:3, half:false, route:"hr"}, {id:6, name:"Leave Without Pay", allocated:null, half:true, route:"both"},
 ];
+const DEPT_HEAD = {"Basic Education":"Basic Education Principal", "Senior High School":"SHS Principal", "College":"College Dean", "Administration":"Administrative Officer", "Student Services":"Student Services Head"};
+function leaveSteps(r, route, head){   // same shape the server sends for Odoo requests
+  const appr = route === "both" ? [["Department head", head], ["HR office", "HR office"]] : route === "manager" ? [["Department head", head]] : route === "hr" ? [["HR office", "HR office"]] : [];
+  const steps = [{label:"Filed", by:"You", at:r.filed, state:"done"}];
+  appr.forEach(([label, by], i) => {
+    let state = "next";
+    if (r.state === "approved") state = "done";
+    else if (r.state === "cancelled") state = "skipped";
+    else if (r.state === "refused") state = i < (r.approvals || 0) ? "done" : i === (r.approvals || 0) ? "refused" : "skipped";
+    else state = i < (r.approvals || 0) ? "done" : i === (r.approvals || 0) ? "wait" : "next";
+    steps.push({label, by, at: (state === "done" || state === "refused") ? (r.decided || [])[i] || null : null, state});
+  });
+  return steps;
+}
+const stampAdd = (k, days, hh, mm) => { const d = new Date(k+"T00:00:00"); d.setDate(d.getDate()+days); d.setHours(hh, mm, 0, 0); return iso(d); };
 const demoLeaveKey = id => "att-demo-leave-" + id;
 function demoLeave(id, data){
   let reqs = null;
   try { reqs = JSON.parse(localStorage.getItem(demoLeaveKey(id)) || "null"); } catch(_){}
   if (!reqs){   // first visit: two approved past leaves on days with no time-in, one request waiting
     const have = new Set(data.attendances.map(a => dkey(a.in))), gaps = [], d = new Date(data.now);
-    for (let i = 1; i < 120 && gaps.length < 2; i++){ d.setDate(d.getDate()-1); const k = ymd(d); if (isWork(d) && !have.has(k)) gaps.push(k); }
+    for (let i = 1; i < 120 && gaps.length < 2; i++){ d.setDate(d.getDate()-1); const k = ymd(d); if (isSchedDay(k) && !have.has(k)) gaps.push(k); }
     const fut = new Date(data.now); fut.setDate(fut.getDate() + 18); while (fut.getDay() !== 5) fut.setDate(fut.getDate()+1);
     reqs = [];
-    if (gaps[0]) reqs.push({id:1, type_id:2, from:gaps[0], to:gaps[0], half:"", reason:"Fever, clinic visit", state:"approved"});
-    if (gaps[1]) reqs.push({id:2, type_id:1, from:gaps[1], to:gaps[1], half:"", reason:"Family matter", state:"approved"});
-    reqs.push({id:3, type_id:1, from:ymd(fut), to:ymd(fut), half:"", reason:"Out-of-town family event", state:"pending"});
+    const today = dkey(data.now);
+    if (gaps[0]) reqs.push({id:1, type_id:2, from:gaps[0], to:gaps[0], half:"", reason:"Fever, clinic visit", state:"approved",
+      filed: stampAdd(gaps[0], 0, 6, 42), approvals:1, decided:[stampAdd(gaps[0], 0, 9, 15)]});
+    if (gaps[1]) reqs.push({id:2, type_id:1, from:gaps[1], to:gaps[1], half:"", reason:"Family matter", state:"approved",
+      filed: stampAdd(gaps[1], -9, 16, 5), approvals:2, decided:[stampAdd(gaps[1], -8, 10, 20), stampAdd(gaps[1], -7, 14, 2)]});
+    reqs.push({id:3, type_id:1, from:ymd(fut), to:ymd(fut), half:"", reason:"Out-of-town family event", state:"pending",
+      filed: stampAdd(today, -2, 15, 31), approvals:1, decided:[stampAdd(today, -1, 11, 48)]});
     try { localStorage.setItem(demoLeaveKey(id), JSON.stringify(reqs)); } catch(_){}
   }
   const year = data.now.slice(0, 4);
-  const requests = reqs.map(r => { const t = DEMO_LEAVE_TYPES.find(x => x.id === r.type_id); return {...r, type: t.name, days: r.half ? .5 : workdays(r.from, r.to)}; });
+  const head = DEPT_HEAD[data.employee.dept] || "Department head";
+  const requests = reqs.map(r => { const t = DEMO_LEAVE_TYPES.find(x => x.id === r.type_id);
+    const filed = r.filed || stampAdd(r.from, -12, 9, 14);
+    const approvals = r.approvals ?? (r.state === "approved" ? (t.route === "both" ? 2 : 1) : 0);
+    const full = {...r, filed, approvals};
+    return {...full, type: t.name, days: r.half ? .5 : workdays(r.from, r.to), ref: "TO-" + String(r.id).padStart(4, "0"), steps: leaveSteps(full, t.route, head)}; });
   const types = DEMO_LEAVE_TYPES.map(t => {
     const used = requests.filter(r => r.type_id === t.id && (r.state === "approved" || r.state === "pending") && r.from.slice(0, 4) === year).reduce((s, r) => s + r.days, 0);
     return {...t, used, remaining: t.allocated == null ? null : t.allocated - used};
@@ -789,8 +1186,8 @@ function demoLeave(id, data){
   return {types, requests};
 }
 function demoLeaveSave(fn){ const id = demoSession.get(); let reqs = []; try { reqs = JSON.parse(localStorage.getItem(demoLeaveKey(id)) || "[]"); } catch(_){} reqs = fn(reqs); try { localStorage.setItem(demoLeaveKey(id), JSON.stringify(reqs)); } catch(_){ throw new Error("This browser can't save sample requests."); } }
-function demoLeaveAdd(b){ demoLeaveSave(reqs => [...reqs, {id: Math.max(0, ...reqs.map(r => r.id)) + 1, type_id:b.type_id, from:b.date_from, to:b.date_to, half:b.half || "", reason:b.reason, state:"pending"}]); }
-function demoLeaveCancel(id){ demoLeaveSave(reqs => reqs.map(r => r.id === id && r.state === "pending" ? {...r, state:"cancelled"} : r)); }
+function demoLeaveAdd(b){ demoLeaveSave(reqs => [...reqs, {id: Math.max(0, ...reqs.map(r => r.id)) + 1, type_id:b.type_id, from:b.date_from, to:b.date_to, half:b.half || "", reason:b.reason, state:"pending", filed: iso(new Date(nowMs())), approvals:0, decided:[]}]); }
+function demoLeaveCancel(id){ demoLeaveSave(reqs => reqs.map(r => r.id === id && r.state === "pending" ? {...r, state:"cancelled", cancelled_at: iso(new Date(nowMs()))} : r)); }
 
 const demoSession = {get(){ try { return +sessionStorage.getItem("att-demo") || 0; } catch(_){ return 0; } },
                      set(v){ try { v ? sessionStorage.setItem("att-demo", v) : sessionStorage.removeItem("att-demo"); } catch(_){} }};
@@ -805,13 +1202,17 @@ async function load(){
   if (MODE === "demo"){
     const id = demoSession.get(); if (!id) return showLogin();
     data = demoData(id);
+    prepCalendar(data);
     data.leave = demoLeave(id, data);
+    try { data.fixes = JSON.parse(localStorage.getItem("att-demo-fix-" + id) || "[]"); } catch(_){ data.fixes = []; }
   } else {
     const r = await fetch("api/me", {cache:"no-store"});
     if (r.status === 401) return showLogin();
     data = await r.json();
     if (!r.ok){ $("#err").textContent = "Could not load your attendance: " + data.error; $("#err").hidden = false; return; }
+    prepCalendar(data);
     try { const lr = await fetch("api/leave", {cache:"no-store"}); if (lr.ok) data.leave = await lr.json(); } catch(_){}
+    try { const fr = await fetch("api/corrections", {cache:"no-store"}); data.fixes = fr.ok ? await fr.json() : []; } catch(_){ data.fixes = []; }
   }
   $("#err").hidden = true;
   D = data; derive();
@@ -847,6 +1248,16 @@ $("#loginForm").addEventListener("submit", async ev => {
 $("#logout").onclick = async () => { if (MODE === "demo") demoSession.set(0); else await fetch("api/logout", {method:"POST"}); calMonth = null; selDay = null; showLogin(); };
 $("#refresh").onclick = load;
 $("#newLeave").onclick = openLeave;
+$("#newFix").onclick = () => openFix();
+$("#fCancel").onclick = () => $("#fixSheet").classList.remove("open");
+$("#fixForm").addEventListener("submit", sendFix);
+$("#fixForm").addEventListener("input", checkFix);
+$("#fDate").addEventListener("change", () => { const k = $("#fDate").value, d = D.days.get(k), sc = sched(k); $("#fIn").value = d ? d.first.slice(11,16) : sc ? sc.start : ""; $("#fOut").value = d?.last && !d.noOut ? d.last.slice(11,16) : sc ? sc.end : ""; checkFix(); });
+$("#meBtn").onclick = openMe; $("#meClose").onclick = () => $("#meSheet").classList.remove("open");
+$("#printDtr").onclick = () => D && printDtr();
+for (const id of ["#fixSheet", "#meSheet"]) $(id).addEventListener("click", e => { if (e.target === $(id)) $(id).classList.remove("open"); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") ["#fixSheet", "#meSheet"].forEach(id => $(id).classList.remove("open")); });
+document.addEventListener("click", e => { const b = e.target.closest("[data-fix]"); if (b){ e.stopPropagation(); openFix(b.dataset.fix); } }, true);
 $("#lCancel").onclick = closeLeave; $("#doneClose").onclick = closeLeave;
 $("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") closeLeave(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#sheet").classList.contains("open")) closeLeave(); });
@@ -854,7 +1265,15 @@ $("#leaveForm").addEventListener("submit", sendLeave);
 $("#leaveForm").addEventListener("input", checkLeave);
 $("#lFrom").addEventListener("change", () => { if ($("#lTo").value < $("#lFrom").value) $("#lTo").value = $("#lFrom").value; checkLeave(); });
 $("#lHalf").addEventListener("click", e => { const b = e.target.closest("button"); if (b){ setHalf(b.dataset.h); checkLeave(); } });
-$("#reqs").addEventListener("click", e => { const b = e.target.closest("[data-cancel]"); if (b) cancelLeave(+b.dataset.cancel); });
+$("#reqs").addEventListener("click", e => {
+  const b = e.target.closest("[data-cancel]"); if (b) return cancelLeave(+b.dataset.cancel);
+  if (e.target.closest(".ldin")) return;                          // clicks inside the details don't close it
+  const row = e.target.closest("[data-req]"); if (!row) return;
+  const id = +row.dataset.req, open = !openReqs.has(id);
+  open ? openReqs.add(id) : openReqs.delete(id);
+  row.classList.toggle("open", open);
+  const chev = row.querySelector(".chev"); chev.setAttribute("aria-expanded", open); chev.setAttribute("aria-label", (open ? "Hide" : "Show") + " details");
+});
 document.querySelectorAll(".theme").forEach(b => b.addEventListener("click", () => {
   const t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", t);
