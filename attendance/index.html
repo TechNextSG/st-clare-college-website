@@ -114,21 +114,30 @@ button{cursor:pointer}
 /* ---------- class schedules */
 .hnext{font-size:14px;margin-top:6px;font-weight:600}
 .hnext span{font-weight:400;opacity:.85}
-.tlx{margin:12px 0 2px}
-.tlt{position:relative;height:30px;border-radius:9px;background:rgba(255,255,255,.08)}
-.tb{position:absolute;top:4px;bottom:10px;border-radius:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4)}
-.tb.done{background:rgba(255,255,255,.88);border-color:transparent}
-.tb.now{background:#fff;border-color:#fff;box-shadow:0 0 0 2px var(--gold)}
-.tb.miss{background:repeating-linear-gradient(135deg,rgba(255,255,255,.4) 0 3px,transparent 3px 7px);border-color:rgba(255,255,255,.55)}
-.tb.cxl{background:none;border-style:dashed;opacity:.45}
-.tp{position:absolute;bottom:3px;height:4px;border-radius:2px;background:var(--gold)}
-.tn{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:#fff;border-radius:1px}
-.tlh{position:relative;height:15px;margin-top:3px;font-size:12px;opacity:.8}
+.tlx{margin:26px 0 2px;position:relative}
+.tb .t{display:none}
+@media (max-width:720px){.tb .n{display:none}.tb .t{display:block}.tb{padding:0 4px;justify-content:center}}
+.tlt{position:relative;height:30px}
+.tgrid{position:absolute;top:-2px;bottom:-22px;width:1px;background:rgba(255,255,255,.14)}
+.tb{position:absolute;top:0;height:30px;border-radius:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.45);
+  display:flex;align-items:center;padding:0 6px;overflow:hidden;min-width:6px}
+.tb span{font:600 12px/1 Inter,sans-serif;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb.done{background:rgba(255,255,255,.92);border-color:transparent}.tb.done span{color:#5C0A17}
+.tb.now{background:#fff;border:2px solid var(--gold)}.tb.now span{color:#5C0A17}
+.tb.due{background:rgba(242,201,76,.25);border:2px solid var(--gold)}
+.tb.miss{background:repeating-linear-gradient(135deg,rgba(255,255,255,.28) 0 3px,transparent 3px 7px);border-color:rgba(255,255,255,.6)}.tb.miss span{text-decoration:line-through}
+.tb.cxl{background:none;border-style:dashed;opacity:.5}.tb.cxl span{text-decoration:line-through}
+.tpl{position:relative;height:6px;margin-top:6px;border-radius:3px;background:rgba(255,255,255,.1)}
+.tp{position:absolute;top:0;height:6px;border-radius:3px;background:var(--gold)}
+.tn{position:absolute;top:-6px;height:50px;width:2px;margin-left:-1px;background:#fff;border-radius:1px;z-index:2}
+.tn em{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font:700 11px/1 Inter,sans-serif;font-style:normal;background:#fff;color:#5C0A17;padding:3px 5px;border-radius:5px;white-space:nowrap}
+.tlh{position:relative;height:15px;margin-top:6px;font-size:12px;opacity:.85}
 .tlh span{position:absolute;transform:translateX(-50%);white-space:nowrap}
-.tlh span:first-child{transform:none}.tlh span:last-child{transform:translateX(-100%)}
+.tlh span.l{transform:none}.tlh span.r{transform:translateX(-100%)}
 .tlk{display:flex;gap:12px;font-size:12px;opacity:.85;margin-top:6px;flex-wrap:wrap}
-.tlk i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:5px;vertical-align:0;background:rgba(255,255,255,.88)}
-.tlk i.g{height:4px;background:var(--gold);vertical-align:2px}
+.tlk i{display:inline-block;width:14px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:rgba(255,255,255,.92)}
+.tlk i.g{height:5px;border-radius:3px;background:var(--gold);vertical-align:1px}
+.tlk i.x{background:repeating-linear-gradient(135deg,rgba(255,255,255,.5) 0 2px,transparent 2px 5px);border:1px solid rgba(255,255,255,.6)}
 .clist{display:flex;flex-direction:column}
 .crow{display:grid;grid-template-columns:20px 80px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0}
 .crow+.crow{border-top:1px solid var(--line)}
@@ -138,6 +147,12 @@ button{cursor:pointer}
 .crow.now .ci{border-color:var(--accent);box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 9px var(--accent)}
 .crow.miss .ci{background:var(--bad);border-color:var(--bad)}
 .crow.cxl{opacity:.6}.crow.cxl .cw b{text-decoration:line-through}
+.crow.auto .ci{background:var(--bad);border-color:var(--bad)}.crow.auto .cw b{text-decoration:line-through;text-decoration-color:var(--bad)}
+.crow.due .ci{border-color:var(--warn);background:var(--warn-soft)}
+.crow.leave{opacity:.7}.crow.leave .ci{border-color:var(--leave);background:var(--leave-soft)}
+.crow.unk .ci{border-style:dashed;border-color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.tb.due{background:rgba(255,255,255,.3);border-color:var(--gold);border-width:2px}
 .crow .ct{font-weight:700;font-size:13px;white-space:nowrap}
 .crow .ct small{display:block;font-weight:500;color:var(--muted);font-size:12px}
 .crow .cw{min-width:0}.crow .cw b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -716,54 +731,93 @@ function prepCalendar(x){
 // classes: weekly load (Week A / Week B like Odoo's two-week schedules) + date changes from HR / Registrar
 const ORD_ANCHOR = {k:"2026-01-05", ord:739621};          // Python date(2026,1,5).toordinal()
 function weekType(k){ const ord = ORD_ANCHOR.ord + Math.round((Date.parse(k+"T00:00:00Z") - Date.parse(ORD_ANCHOR.k+"T00:00:00Z"))/864e5); return Math.floor((ord - 1)/7) % 2; }
+let LEAVE_READY = false;                                 // leave is applied to classes only once D.leaveDays is built
 function classesOn(k, src = CAL){
   if (!src?.classload) return null;                       // office staff keep fixed hours
-  const dow = new Date(k+"T00:00:00").getDay(), wt = weekType(k);
-  const day = (src.classload[dow] || []).filter(b => b.week == null || +b.week === wt).map(b => ({...b}));
+  const dow = new Date(k+"T00:00:00").getDay(), wt = weekType(k), hol = src === CAL && src.holidayMap?.get(k);
+  // holiday: regular classes don't meet; only make-up / substitute classes set for that date do
+  const day = (hol ? [] : (src.classload[dow] || []).filter(b => b.week == null || +b.week === wt)).map(b => ({...b}));
   for (const c of (src.changes || []).filter(c => c.date === k)){
-    const at = day.find(b => b.start === c.start && !b.flex);
-    if (c.kind === "cancel"){ if (at){ at.cancelled = true; at.note = c.note; } }
-    else if (c.kind === "room"){ if (at){ at.room = c.room; at.tag = "room"; at.note = c.note; } }
-    else day.push({start:c.start, end:c.end, subject:c.subject, section:c.section, room:c.room, tag:c.kind, note:c.note});
+    if (c.kind === "makeup" || c.kind === "sub"){ day.push({start:c.start, end:c.end, subject:c.subject, section:c.section, room:c.room, tag:c.kind, note:c.note}); continue; }
+    // a cancellation or room change covers every class it overlaps (whole-day closures, typhoon days), or the class starting at that time
+    const hits = day.filter(b => !b.flex && (c.end ? b.start < c.end && b.end > c.start : b.start === c.start));
+    for (const b of hits){ if (c.kind === "cancel"){ b.cancelled = true; b.note = c.note; } else if (c.kind === "room"){ b.room = c.room; b.tag = "room"; b.note = c.note; } }
   }
+  // approved leave (whole day, or the morning / afternoon half): those classes are excused, not missed
+  const lv = src === CAL && LEAVE_READY ? D?.leaveDays?.get(k) : null;
+  if (lv && lv.state === "approved") for (const b of day){ if (!lv.half || (lv.half === "am") === (String(b.start || "00:00") < "12:00")) b.onLeave = true; }
   return day.sort((a, b) => String(a.start).localeCompare(String(b.start)));
 }
-const liveClasses = cls => (cls || []).filter(b => !b.cancelled && !b.flex);
+const liveClasses = cls => (cls || []).filter(b => !b.cancelled && !b.flex && !b.onLeave);
+const classMin = b => hm2m(b.end) - hm2m(b.start);
 function sched(k){
   const d = new Date(k+"T00:00:00");
   if (!CAL) return isWork(d) ? {start: CFG.work_start, end: "16:30"} : null;
   const cls = classesOn(k);
   if (cls){
-    const live = liveClasses(cls), flex = cls.find(b => b.flex);
+    const live = liveClasses(cls), flex = cls.find(b => b.flex && !b.onLeave);
+    if (flex) return {flex: true, hours: flex.hours + live.reduce((t, b) => t + classMin(b)/60, 0), classes: cls};   // a make-up on a flexible day adds to it
     if (live.length) return {start: live[0].start, end: live.reduce((m, b) => b.end > m ? b.end : m, "00:00"), classes: cls};
-    if (flex) return {flex: true, hours: flex.hours, classes: cls};
-    return null;                                          // no classes that day (or all cancelled)
+    return null;                                          // no classes that day (all cancelled, on leave, or a holiday)
   }
-  return CAL.schedule[d.getDay()] || null;
+  const s = CAL.schedule[d.getDay()] || null, lv = LEAVE_READY ? D?.leaveDays?.get(k) : null;
+  if (s && lv?.state === "approved"){                     // office staff on leave: whole day off, or only the other half counts
+    if (!lv.half) return null;
+    return lv.half === "am" ? {start: s.start > "13:00" ? s.start : "13:00", end: s.end} : {start: s.start, end: s.end < "12:00" ? s.end : "12:00"};
+  }
+  return s;
 }
 const isTeacher = () => !!CAL?.classload;
-const BREAK_MIN = 60;                                     // full-time faculty: one break between classes
+const BREAK_MIN = 60;                                     // full-time faculty: up to one hour away during the gaps between classes
+function gaps(live){ const g = []; for (let i = 1; i < live.length; i++){ const a = hm2m(live[i-1].end), z = hm2m(live[i].start); if (z > a) g.push([a, z]); } return g; }
 function dayTarget(k){
   const s = sched(k); if (!s) return 0;
   if (s.flex) return s.hours;
-  if (s.classes && D.employee.basis === "parttime") return liveClasses(s.classes).reduce((t, b) => t + (hm2m(b.end) - hm2m(b.start))/60, 0);
+  if (s.classes){
+    const live = liveClasses(s.classes), cm = live.reduce((t, b) => t + classMin(b), 0);
+    if (D.employee.basis === "parttime") return cm / 60;
+    const gm = gaps(live).reduce((t, [a, z]) => t + z - a, 0);
+    return (cm + gm - Math.min(BREAK_MIN, gm)) / 60;
+  }
   const w = (hm2m(s.end) - hm2m(s.start))/60; return Math.max(0, w - (w > 5 ? 1 : 0));
 }
 function presence(d){   // time on campus as [from, to] minutes; an open punch runs to now (today) only
   if (!d) return [];
   const nowM = minsOf(iso(new Date(nowMs())));
-  return d.punches.map(p => [minsOf(p.in), p.out ? minsOf(p.out) : d.key === D.today ? nowM : minsOf(p.in)]);
+  // an open punch runs to now today; on a past day (forgot to time out) it's assumed to run to the end of the day until HR fixes it
+  // an open punch runs to now today; on a past day (forgot to time out) the open block is left out until HR fixes it.
+  // a time-out on a later date (should not happen) is capped at midnight
+  return d.punches.map(p => [minsOf(p.in), p.out ? (dkey(p.out) !== d.key ? 24*60 : minsOf(p.out)) : d.key === D.today ? nowM : minsOf(p.in)]);
 }
 const covered = (iv, a, b) => iv.reduce((s, [x, y]) => s + Math.max(0, Math.min(b, y) - Math.max(a, x)), 0);
-function classState(b, k, d){
-  if (b.cancelled) return "cxl";
-  if (b.flex) return "flex";
-  const a = hm2m(b.start), z = hm2m(b.end), nowM = minsOf(iso(new Date(nowMs()))), iv = presence(d);
-  if (d?.noOut && k < D.today) return z > minsOf(d.first) ? "done" : "miss";   // no time-out: assume present after the time-in until HR fixes it
-  if (k > D.today || (k === D.today && nowM < a)) return "next";
-  if (k === D.today && nowM < z) return covered(iv, a, nowM) > 0 || (d && d.open) ? "now" : "miss";
-  return covered(iv, a, z) >= (z - a) * .5 ? "done" : "miss";
+const CANCEL_MIN = () => D?.class_cancel_minutes ?? 15;   // St. Clare rule: 15 min late for a class (or leaving 15 min early) = class cancelled
+const onCampusAt = (iv, m) => iv.some(([x, y]) => x <= m && m < y);
+// One class on one day: done | now | due (started, still inside the 15 min) | next | late | early | absent (all three = cancelled automatically)
+//                       | cxl (cancelled by school) | leave (excused) | unk (no time-out that day: HR decides) | flex
+function classCheck(b, k, d){
+  if (b.cancelled) return {state:"cxl"};
+  if (b.onLeave) return {state:"leave"};
+  if (b.flex) return {state:"flex"};
+  if (d?.noOut && k < D.today){ const open = d.punches.find(p => !p.out); if (open && hm2m(b.end) > minsOf(open.in)) return {state:"unk"}; }
+  const a0 = hm2m(b.start), z = hm2m(b.end), g = CANCEL_MIN(), iv = presence(d), a = a0;
+  const lp = Math.min(a + g, (a + z) / 2), ep = Math.max(z - g, (a + z) / 2);   // check points; short classes meet in the middle
+  const nowM = k < D.today ? 24*60 : k > D.today ? -1 : minsOf(iso(new Date(nowMs())));
+  if (nowM < a) return {state:"next"};
+  const inside = iv.filter(([x, y]) => y > a && x < z);                 // time on campus during the class
+  if (!onCampusAt(iv, lp)){
+    if (nowM < lp) return {state:"due"};                                 // still inside the 15 minutes
+    if (!inside.length) return {state: nowM < z ? "due-x" : "absent"};   // not here; cancelled once 15 min pass
+    const arrive = Math.max(a, Math.min(...inside.map(([x]) => x)));
+    if (arrive > lp) return {state:"late", by: arrive - a};
+  }
+  const left = Math.max(...inside.map(([, y]) => y));
+  if (nowM >= ep && Math.min(left, z) < ep) return {state:"early", by: z - Math.min(left, z)};   // gone before the last 15 min (leaving exactly at 15 min is fine)
+  if (nowM < z && !onCampusAt(iv, nowM)) return left < ep ? {state:"early", by: z - left} : {state:"now"};
+  return {state: nowM < z ? "now" : "done"};
 }
+const AUTO = ["late", "early", "absent", "due-x"];
+const NOT_COUNTED = ["next", "due", "leave", "unk", "cxl", "flex"];
+function classState(b, k, d){ const s = classCheck(b, k, d).state; return s === "due-x" ? "absent" : s; }
 const holidayOn = k => CAL?.holidayMap?.get(k) || null;
 const isSchedDay = k => !!sched(k) && !holidayOn(k);
 
@@ -780,28 +834,8 @@ function derive(){
     d.punches.push(a); d.hours += a.hours; d.open = d.open || !a.out;
     D.days.set(k, d);
   }
-  for (const d of D.days.values()){
-    const sc = sched(d.key) || {start: D.work_start, end: "16:30"};
-    d.first = d.punches[0].in;
-    d.last = d.punches.filter(p=>p.out).map(p=>p.out).sort().pop() || null;
-    d.noOut = d.open && d.key < D.today;                               // forgot to tap out
-    d.sched = sc;
-    if (sc.flex){ d.late = false; d.lateBy = 0; d.under = 0; continue; } // flexible day: hours only
-    const st = hm2m(sc.start), en = hm2m(sc.end), past = d.key < D.today && !d.open;
-    d.late = minsOf(d.first) > st + (D.grace_minutes||0);              // judged on the day's first class
-    d.lateBy = d.late ? minsOf(d.first) - st : 0;                       // minutes after the scheduled start
-    if (sc.classes){
-      const live = liveClasses(sc.classes), iv = presence(d);
-      d.classTotal = live.length;
-      d.classDone = live.filter(b => ["done", "now"].includes(classState(b, d.key, d))).length;
-      d.under = !past ? 0 : D.employee.basis === "parttime"
-        ? Math.max(0, live.reduce((s, b) => s + (hm2m(b.end) - hm2m(b.start)) - covered(iv, hm2m(b.start), hm2m(b.end)), 0) - d.lateBy)  // class time missed
-        : Math.max(0, (en - st) - covered(iv, st, en) - d.lateBy - BREAK_MIN);                                                       // away between first and last class
-    } else d.under = past && d.last ? Math.max(0, en - minsOf(d.last)) : 0;
-  }
-  const oldest = D.attendances.length ? dkey(D.attendances[D.attendances.length-1].in) : D.today;
-  D.since = oldest;
-  // leave days: approved wins over pending
+  // leave days first, so classes and schedules already know about them: approved wins over pending
+  LEAVE_READY = false;
   D.leaveDays = new Map();
   for (const r of (D.leave?.requests || [])){
     if (r.state !== "approved" && r.state !== "pending") continue;
@@ -810,8 +844,44 @@ function derive(){
       if (!cur || (cur.state === "pending" && r.state === "approved")) D.leaveDays.set(k, {state:r.state, type:r.type, half:r.half, unpaid:/without pay/i.test(r.type)});
     }
   }
+  LEAVE_READY = true;
+  for (const d of D.days.values()){
+    // a time-out recorded at the same moment as the time-in = closed automatically by the kiosk, treat as "no time-out"
+    for (const p of d.punches) if (p.out && p.out === p.in && d.key < D.today){ p.out = null; d.open = true; }
+    const sc = sched(d.key), hol = holidayOn(d.key), live = sc?.classes ? liveClasses(sc.classes) : [];
+    d.first = d.punches[0].in;
+    d.last = d.punches.filter(p=>p.out).map(p=>p.out).sort().pop() || null;
+    d.noOut = d.open && d.key < D.today;                               // forgot to tap out
+    d.sched = sc || {start: D.work_start, end: "16:30"};
+    if (sc?.classes){
+      const cs = liveClasses(sc.classes).map(b => classState(b, d.key, d));
+      d.classTotal = cs.filter(s => s !== "unk").length;
+      d.classDone = cs.filter(s => s === "done" || s === "now").length;
+      d.autoCxl = cs.filter(s => AUTO.includes(s)).length;
+    }
+    // hours only: rest day, no classes, holiday without classes, flexible day
+    if (!sc || sc.flex || (hol && !live.length)){ d.late = false; d.lateBy = 0; d.under = 0; d.offDay = !sc || (hol && !live.length); continue; }
+    const st = hm2m(sc.start), en = hm2m(sc.end), past = d.key < D.today && !d.open, fin = minsOf(d.first), iv = presence(d);
+    d.late = fin > st + (D.grace_minutes||0);                          // judged on the day's first class (first one not on leave)
+    if (sc.classes && D.employee.basis === "parttime")
+      d.lateBy = d.late ? live.reduce((s, b) => s + Math.max(0, Math.min(hm2m(b.end), fin) - hm2m(b.start)), 0) : 0;   // class time missed before arriving
+    else d.lateBy = d.late ? fin - st : 0;                              // minutes after the scheduled start
+    if (sc.classes){
+      const miss = (a, z) => (z - a) - covered(iv, a, z);
+      const inClass = live.reduce((s, b) => s + miss(hm2m(b.start), hm2m(b.end)), 0);
+      const inGaps = gaps(live).reduce((s, [a, z]) => s + miss(a, z), 0);
+      d.under = !past ? 0 : D.employee.basis === "parttime"
+        ? Math.max(0, inClass - d.lateBy)                                                  // class time missed
+        : Math.max(0, inClass + Math.max(0, inGaps - BREAK_MIN) - Math.min(d.lateBy, inClass + inGaps));   // away from class, or longer than the 1-hour break
+    } else d.under = past && d.last ? Math.max(0, en - minsOf(d.last)) : 0;
+  }
+  const oldest = D.attendances.length ? dkey(D.attendances[D.attendances.length-1].in) : D.today;
+  D.since = oldest;
 }
-function eachDay(a, b){ const out = [], d = new Date(a+"T00:00:00"), end = new Date(b+"T00:00:00"); while (d <= end){ const k = ymd(d); if (isSchedDay(k)) out.push(k); d.setDate(d.getDate()+1); } return out; }
+function eachDay(a, b){ const was = LEAVE_READY; LEAVE_READY = false;
+  try { const out = [], d = new Date(a+"T00:00:00"), end = new Date(b+"T00:00:00"); while (d <= end){ const k = ymd(d); if (isSchedDay(k)) out.push(k); d.setDate(d.getDate()+1); } return out; }
+  finally { LEAVE_READY = was; } }
+function wouldWork(k){ const dow = new Date(k+"T00:00:00").getDay(); return CAL?.classload ? !!(CAL.classload[dow] || []).length : !!CAL?.schedule?.[dow]; }
 function dayStatus(k){
   const d = D.days.get(k), lv = D.leaveDays?.get(k), hol = holidayOn(k);
   if (d) return d.open && k === D.today ? "live" : d.noOut ? "noout" : d.late ? "late" : "ok";
@@ -819,7 +889,7 @@ function dayStatus(k){
   if (lv && lv.state === "approved") return "leave";
   if (lv) return "lpend";
   if (k > D.today) return "future";
-  if (!sched(k)) return classesOn(k)?.length ? "nocls" : "wk";
+  if (!sched(k)) return classesOn(k)?.some(b => b.cancelled) ? "nocls" : "wk";
   if (k === D.today || k < D.since) return "none";
   return "abs";
 }
@@ -837,9 +907,10 @@ function renderToday(){
   $("#subtitle").textContent = `Good ${hr<12?"morning":hr<18?"afternoon":"evening"}, ${e.name.split(" ")[0]}. ${fmtDay(D.today)}.`;
   $("#hero").classList.toggle("out", !isIn);
   $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}`
-    : hol ? `Holiday today · ${hol.name}` : lvToday?.state === "approved" ? `On leave today · ${lvToday.type}` : !sc ? "Rest day" : "No time-in yet today";
+    : hol && !sc ? `Holiday today · ${hol.name}` : lvToday?.state === "approved" && !lvToday.half ? `On leave today · ${lvToday.type}` : lvToday?.state === "approved" ? `Half-day leave (${lvToday.half === "am" ? "morning" : "afternoon"})` : !sc ? "Rest day" : "No time-in yet today";
   $("#hLine").textContent = t ? `First time-in ${fmtTime(t.first)} · ${t.late ? `${t.lateBy} min late` : "on time"}`
-    : hol || lvToday?.state === "approved" || !sc ? (classesOn(D.today)?.length && !hol ? "All your classes today are cancelled." : "Enjoy your day.")
+    : hol ? "Enjoy the holiday." : lvToday?.state === "approved" && !lvToday.half ? "Enjoy your leave."
+    : !sc ? (classesOn(D.today)?.some(b => b.cancelled) ? "All your classes today are cancelled." : "Enjoy your day.")
     : sc.flex ? `Flexible day · ${sc.hours}h target, no fixed time-in.` : `Tap your ID at the kiosk. ${sc.classes ? "First class" : "Time-in"} starts ${m2t(hm2m(sc.start))}.`;
   $("#hPunches").innerHTML = t ? t.punches.map(p => `<span>In <b>${fmtTime(p.in)}</b> &rarr; ${p.out ? `Out <b>${fmtTime(p.out)}</b>` : "<b>now</b>"}</span>`).join("") : "";
   renderClassesToday(sc, t);
@@ -867,15 +938,19 @@ function renderToday(){
   const present = keysM.filter(k => D.days.has(k)).map(k => D.days.get(k));
   const late = present.filter(d => d.late), under = present.reduce((s, d) => s + d.under, 0), noOut = present.filter(d => d.noOut).length;
   $("#segMonth").textContent = n.toLocaleDateString([], {month:"long"});
-  $("#mPresent").textContent = present.length; $("#mPresentOf").textContent = `of ${work.length} working days`;
+  $("#mPresent").textContent = work.filter(k => D.days.has(k)).length; $("#mPresentOf").textContent = `of ${work.length} working days`;
   $("#mOnTime").textContent = present.length ? Math.round((present.length-late.length)/present.length*100)+"%" : "--";
-  let streak = 0; for (const k of [...D.days.keys()].sort().reverse()){ if (D.days.get(k).late) break; streak++; }
+  let streak = 0;   // on-time working days in a row; a late day or a day with no record ends it
+  for (const k of [...new Set([...D.days.keys(), ...keysM.filter(x => isSchedDay(x))])].filter(x => x <= D.today).sort().reverse()){
+    const s = dayStatus(k), late = D.days.get(k)?.late;
+    if (s === "late" || s === "abs" || s === "noout" || (s === "live" && late)) break;
+    if (s === "ok" || s === "live") streak++; }
   $("#mStreak").textContent = streak ? `${streak}-day on-time streak` : "Streak starts tomorrow";
   $("#mLate").textContent = late.length; $("#mLateNote").textContent = late.length ? `${fmtMin(late.reduce((s,d)=>s+d.lateBy,0))} late in total` : "Nice, none";
   $("#mUnder").textContent = fmtMin(under); $("#mUnderNote").textContent = noOut ? `${noOut} missing time-out${noOut > 1 ? "s" : ""}` : under ? "left before schedule" : "None";
   const hrs = present.reduce((s,d)=>s+liveHours(d),0);
   $("#mHours").textContent = fmtHrs(hrs); $("#mAvg").textContent = present.length ? `${fmtHrs(hrs/present.length)} a day` : "";
-  if (isTeacher()){ const c = classTally(keysM); $("#mAvgLbl").textContent = "Classes attended"; $("#mAvgIn").textContent = `${c.done} of ${c.total}`; $("#mShift").textContent = c.cxl ? `${c.cxl} cancelled by school` : "this month"; }
+  if (isTeacher()){ const c = classTally(keysM); $("#mAvgLbl").textContent = "Classes held"; $("#mAvgIn").textContent = `${c.done} of ${c.total}`; $("#mShift").textContent = c.auto ? `${c.auto} auto-cancelled` : c.cxl ? `${c.cxl} cancelled by school` : "this month"; }
   else { $("#mAvgLbl").textContent = "Average time-in";
     if (present.length){ const avg = Math.round(present.reduce((s,d)=>s+minsOf(d.first),0)/present.length); $("#mAvgIn").textContent = m2t(avg); } else $("#mAvgIn").textContent = "--";
     $("#mShift").textContent = sc && !sc.flex ? `Today's start ${m2t(hm2m(sc.start))}` : "Rest day today"; }
@@ -887,23 +962,25 @@ function renderToday(){
   $("#recent").innerHTML = rec.map(dayRow).join("") || `<div class="empty">No attendance yet</div>`;
 }
 function classTally(keys){   // classes held vs attended, up to now
-  let total = 0, done = 0, cxl = 0;
+  let total = 0, done = 0, cxl = 0, auto = 0;
   for (const k of keys){
-    if (k > D.today || holidayOn(k) || dayStatus(k) === "leave") continue;
+    if (k > D.today || ["leave", "lpend"].includes(dayStatus(k))) continue;
     const cls = classesOn(k) || [], d = D.days.get(k);
     cxl += cls.filter(b => b.cancelled).length;
-    for (const b of liveClasses(cls)){ const s = classState(b, k, d); if (s === "next") continue; total++; if (s === "done" || s === "now") done++; }
+    for (const b of liveClasses(cls)){ const s = classState(b, k, d); if (NOT_COUNTED.includes(s)) continue; total++; if (s === "done" || s === "now") done++; if (AUTO.includes(s)) auto++; }
   }
-  return {total, done, cxl};
+  return {total, done, cxl, auto};
 }
 const ICO_OK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>', ICO_NO = '<svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>';
 const TAG = {makeup:["Make-up","chg"], sub:["Substitute","hol"], room:["Room change","pend"]};
 function classRows(cls, k, d){
   return cls.map(b => {
     if (b.flex) return `<div class="cflex"><b>Flexible:</b> ${b.hours}h ${esc(b.subject || "")}, no fixed time-in</div>`;
-    const st = classState(b, k, d), tag = b.cancelled ? ["Cancelled","off"] : TAG[b.tag];
+    const chk = classCheck(b, k, d), st = chk.state === "due-x" ? "absent" : chk.state;
+    const tag = b.cancelled ? ["Cancelled","off"] : st === "late" ? [`Cancelled · ${chk.by}m late`, "bad"] : st === "early" ? [`Cancelled · left ${chk.by}m early`, "bad"]
+      : st === "absent" ? ["Cancelled · absent", "bad"] : st === "leave" ? ["On leave", "leave"] : st === "unk" ? ["No time-out · ask HR", "pend"] : st === "due" ? [`Tap in by ${m2t(hm2m(b.start) + CANCEL_MIN())}`, "pend"] : TAG[b.tag];
     const where = [b.section, b.room].filter(Boolean).map(esc).join(" · ");
-    return `<div class="crow ${st}"><i class="ci">${st === "done" ? ICO_OK : st === "miss" ? ICO_NO : ""}</i>
+    return `<div class="crow ${st}${AUTO.includes(st) ? " auto" : ""}"><i class="ci">${st === "done" ? ICO_OK : AUTO.includes(st) ? ICO_NO : ""}</i>
       <span class="ct">${m2t(hm2m(b.start))}<small>–${m2t(hm2m(b.end))}</small></span>
       <span class="cw"><b>${esc(b.subject || "Class")}</b><small>${where}${b.note ? ` · <em>${esc(b.note)}</em>` : ""}</small></span>
       ${tag ? `<span class="ctag"><span class="pill ${tag[1]}">${tag[0]}</span></span>` : "<span></span>"}</div>`;
@@ -913,30 +990,41 @@ function renderClassesToday(sc, t){
   const cls = classesOn(D.today), teacher = isTeacher(), has = !!(cls && cls.length);
   $("#todayGrid").classList.toggle("teacher", teacher);
   $("#clsCard").hidden = !has;
-  $("#hOffice").hidden = teacher && has && !sc?.flex;
-  $("#hTL").hidden = $("#hNext").hidden = !(teacher && has && !sc?.flex);
+  const anyLive = !!liveClasses(cls).length;
+  $("#hOffice").hidden = teacher && anyLive && !sc?.flex;
+  $("#hTL").hidden = $("#hNext").hidden = !(teacher && anyLive && !sc?.flex);
   if (!has) return;
   const live = liveClasses(cls), states = live.map(b => classState(b, D.today, t));
   $("#clsList").innerHTML = classRows(cls, D.today, t);
-  const doneN = states.filter(s => s === "done").length;
-  $("#clsCount").textContent = live.length ? `${doneN} of ${live.length} done${cls.some(b => b.cancelled) ? ` · ${cls.filter(b => b.cancelled).length} cancelled` : ""}` : "";
+  const doneN = states.filter(s => s === "done").length, autoN = states.filter(s => AUTO.includes(s)).length, schoolN = cls.filter(b => b.cancelled).length, lvN = cls.filter(b => b.onLeave).length;
+  $("#clsCount").textContent = [live.length ? `${doneN} of ${live.length} done` : "", autoN ? `${autoN} auto-cancelled` : "", schoolN ? `${schoolN} cancelled by school` : "", lvN ? `${lvN} on leave` : ""].filter(Boolean).join(" · ");
   if (!live.length || sc?.flex) return;
   // next / current class line
-  const nowI = states.indexOf("now"), nextI = states.indexOf("next"), b = live[nowI >= 0 ? nowI : nextI];
-  $("#hNext").innerHTML = nowI >= 0 ? `In class until ${m2t(hm2m(b.end))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
+  const dueI = states.indexOf("due"), nowI = states.indexOf("now"), nextI = states.indexOf("next"), b = live[dueI >= 0 ? dueI : nowI >= 0 ? nowI : nextI];
+  $("#hNext").innerHTML = dueI >= 0 ? `Tap in by ${m2t(hm2m(b.start) + CANCEL_MIN())} <span>· ${esc(b.subject)} started ${m2t(hm2m(b.start))}; after that it's cancelled</span>`
+    : nowI >= 0 ? `In class until ${m2t(hm2m(b.end))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
     : nextI >= 0 ? `Next class ${m2t(hm2m(b.start))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
-    : `Classes done for today <span>· ${doneN} of ${live.length} attended</span>`;
-  // day timeline: class blocks, time on campus (gold), now marker
+    : `Classes done for today <span>· ${doneN} of ${live.length} held${autoN ? `, ${autoN} auto-cancelled` : ""}</span>`;
+  // day timeline: class blocks (labelled), time on campus in its own lane, hour ticks, now marker
   const iv = presence(t), nowM = minsOf(iso(new Date(nowMs())));
   const lo = Math.floor(Math.min(hm2m(live[0].start), ...iv.map(x => x[0])) / 60) * 60;
-  const hi = Math.ceil(Math.max(...live.map(x => hm2m(x.end)), ...iv.map(x => x[1])) / 60) * 60;
-  const pc = m => ((m - lo) / (hi - lo) * 100).toFixed(2) + "%", w = (a, z) => ((z - a) / (hi - lo) * 100).toFixed(2) + "%";
-  const blocks = cls.filter(x => !x.flex).map(x => `<i class="tb ${classState(x, D.today, t)}" style="left:${pc(hm2m(x.start))};width:${w(hm2m(x.start), hm2m(x.end))}" title="${m2t(hm2m(x.start))} ${esc(x.subject)}"></i>`).join("");
-  const pres = iv.map(([a, z]) => `<b class="tp" style="left:${pc(a)};width:${w(a, z)}"></b>`).join("");
-  const step = hi - lo > 8*60 ? 180 : 120, hrs = [];
-  for (let m = lo; m <= hi; m += step) hrs.push(`<span style="left:${pc(m)}">${((Math.floor(m/60) + 11) % 12) + 1}${m % 60 ? ":" + pad(m % 60) : ""}${m < 720 ? "am" : "pm"}</span>`);
-  $("#hTL").innerHTML = `<div class="tlx" role="img" aria-label="Today's classes and your time on campus"><div class="tlt">${blocks}${pres}${nowM > lo && nowM < hi ? `<s class="tn" style="left:${pc(nowM)}"></s>` : ""}</div><div class="tlh">${hrs.join("")}</div></div>
-    <div class="tlk"><span><i></i>Class</span><span><i class="g"></i>On campus</span></div>`;
+  const hi = Math.max(lo + 120, Math.ceil(Math.max(...live.map(x => hm2m(x.end)), ...iv.map(x => x[1])) / 60) * 60);
+  const pos = m => (m - lo) / (hi - lo) * 100, pc = m => pos(m).toFixed(2) + "%", w = (a, z) => ((z - a) / (hi - lo) * 100).toFixed(2) + "%";
+  const blocks = cls.filter(x => !x.flex).map(x => { const s = classState(x, D.today, t), c = AUTO.includes(s) ? "miss" : s;
+    return `<i class="tb ${c}" style="left:${pc(hm2m(x.start))};width:${w(hm2m(x.start), hm2m(x.end))}" title="${m2t(hm2m(x.start))}–${m2t(hm2m(x.end))} ${esc(x.subject)}${x.cancelled ? " (cancelled)" : AUTO.includes(s) ? " (auto-cancelled)" : ""}"><span class="n">${esc(x.subject)}</span><span class="t">${m2t(hm2m(x.start)).replace(/\s?[AP]M$/i, "")}</span></i>`; }).join("");
+  const pres = iv.map(([a, z]) => `<b class="tp" style="left:${pc(Math.max(lo, a))};width:${w(Math.max(lo, a), Math.min(hi, z))}"></b>`).join("");
+  const step = hi - lo > 8*60 ? 180 : 120, ticks = [], hrs = [];
+  for (let m = lo; m <= hi; m += step){
+    const edge = pos(m) < 6 ? "l" : pos(m) > 94 ? "r" : "";
+    ticks.push(`<i class="tgrid" style="left:${pc(m)}"></i>`);
+    hrs.push(`<span class="${edge}" style="left:${pc(m)}">${((Math.floor(m/60) + 11) % 12) + 1}${m % 60 ? ":" + pad(m % 60) : ""}${m < 720 ? "am" : "pm"}</span>`);
+  }
+  const showNow = nowM > lo && nowM < hi, nowLbl = m2t(nowM).replace(/\s?[AP]M$/i, "");
+  $("#hTL").innerHTML = `<div class="tlx" role="img" aria-label="Today's classes and your time on campus">
+      <div class="tlt">${ticks.join("")}${blocks}${showNow ? `<s class="tn" style="left:${pc(nowM)}"><em>Now ${nowLbl}</em></s>` : ""}</div>
+      <div class="tpl">${pres}</div>
+      <div class="tlh">${hrs.join("")}</div></div>
+    <div class="tlk"><span><i></i>Class</span><span><i class="x"></i>Missed / cancelled</span><span><i class="g"></i>On campus</span></div>`;
 }
 
 function payPeriod(){ const n = new Date(D.today+"T00:00:00"), y = n.getFullYear(), m = n.getMonth(), first = n.getDate() <= 15;
@@ -947,15 +1035,15 @@ function renderPay(){
   const sofar = all.filter(k => k <= D.today), st = k => dayStatus(k);
   const present = sofar.filter(k => D.days.has(k)).map(k => D.days.get(k));
   const lv = sofar.filter(k => st(k) === "leave"), unpaid = lv.filter(k => D.leaveDays.get(k).unpaid).length;
-  const sched = sofar.filter(k => isSchedDay(k) && (k < D.today || D.days.has(k)));
+  const sched = sofar.filter(k => isSchedDay(k) && (k < D.today || D.days.has(k)));   // leave days are already not working days
   const lateD = present.filter(d => d.late);
   const cells = [
-    ["Days present", present.length, `of ${sched.length - lv.length} working days`],
+    ["Days present", sched.filter(k => D.days.has(k)).length, `of ${sched.length} working days`],
     ["Absent (no record)", sofar.filter(k => st(k) === "abs").length, "days so far"],
     ["Late", lateD.length, lateD.length ? `${fmtMin(lateD.reduce((s,d)=>s+d.lateBy,0))} in total` : "times"],
     ["Undertime", fmtMin(present.reduce((s,d)=>s+d.under,0)), "left early"],
     ["On leave", lv.length, unpaid ? `${unpaid} without pay` : "paid days"],
-    isTeacher() ? (c => ["Classes attended", `${c.done}/${c.total}`, c.cxl ? `${c.cxl} cancelled` : "so far"])(classTally(sofar)) : ["Holidays", all.filter(k => holidayOn(k)).length, "in this period"],
+    isTeacher() ? (c => ["Classes held", `${c.done}/${c.total}`, c.auto ? `${c.auto} auto-cancelled` : c.cxl ? `${c.cxl} cancelled by school` : "so far"])(classTally(sofar)) : ["Holidays", all.filter(k => holidayOn(k) && wouldWork(k)).length, "on working days"],
     ["Missing time-out", present.filter(d => d.noOut).length, "ask HR to fix"],
     ["Hours worked", fmtHrs(present.reduce((s,d)=>s+liveHours(d),0)), "so far"],
   ];
@@ -990,9 +1078,10 @@ function tickToday(){
   if (!D || view !== "today" || document.hidden) return;
   const t = D.days.get(D.today), h = liveHours(t), secs = Math.floor(h*3600);
   $("#hTimer").innerHTML = `${Math.floor(secs/3600)}:${pad(Math.floor(secs/60)%60)}<small>:${pad(secs%60)}</small>`;
-  $("#hBar").style.transform = `scaleX(${Math.min(1, h/D.daily_hours)})`;
-  $("#hTarget").textContent = `Target ${D.daily_hours}h`;
-  const left = D.daily_hours - h;
+  const target = dayTarget(D.today) || D.daily_hours;
+  $("#hBar").style.transform = `scaleX(${Math.min(1, h/target)})`;
+  $("#hTarget").textContent = `Target ${fmtHrs(target).replace(/ 00m$/, "")}`;
+  const left = target - h;
   $("#hLeft").textContent = !t ? "" : left > 0 ? `${fmtHrs(left)} to go` : `Target reached, +${fmtHrs(-left)}`;
 }
 
@@ -1023,9 +1112,10 @@ function renderCalendar(){
 function renderDetail(){
   const k = selDay || D.today, d = D.days.get(k), st = dayStatus(k), sc = sched(k), hol = holidayOn(k), lv = D.leaveDays.get(k);
   const dcls = classesOn(k);
-  const schedLine = dcls && dcls.length ? `<h3 style="margin:14px 0 2px;font-size:13px">Classes${d?.classTotal ? ` · ${d.classDone} of ${d.classTotal} attended` : ""}</h3><div class="clist">${classRows(dcls, k, d)}</div>`
+  const schedLine = dcls && dcls.length ? `<h3 style="margin:14px 0 2px;font-size:13px">Classes${d?.classTotal ? ` · ${d.classDone} of ${d.classTotal} held` : ""}</h3><div class="clist">${classRows(dcls, k, d)}</div>`
     : sc && !sc.flex ? `<p class="muted" style="margin:10px 0 0;font-size:13px">Schedule: ${m2t(hm2m(sc.start))} to ${m2t(hm2m(sc.end))}</p>` : "";
-  const fixBtn = k <= D.today && k >= D.since && (st === "abs" || st === "noout" || st === "late" || st === "ok")
+  const d60 = new Date(D.today+"T00:00:00"); d60.setDate(d60.getDate() - 60);
+  const fixBtn = k <= D.today && k >= D.since && k >= ymd(d60) && (st === "abs" || st === "noout" || st === "late" || st === "ok")
     ? `<button class="btn sm" data-fix="${k}" style="margin-top:14px"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Request a correction</button>` : "";
   let body;
   if (d){
@@ -1059,15 +1149,20 @@ function dayNote(k){   // schedule changes and class attendance for one day
   if (cls.some(b => b.tag === "sub")) n.push("Substitute class");
   if (cls.some(b => b.tag === "room")) n.push("Room changed");
   if (cx) n.push(`${cx} class${cx > 1 ? "es" : ""} cancelled`);
-  if (d?.classTotal && d.classDone < d.classTotal) n.push(`${d.classDone}/${d.classTotal} classes`);
+  if (d?.autoCxl) n.push(`${d.autoCxl} class${d.autoCxl > 1 ? "es" : ""} auto-cancelled`);
+  else if (d?.classTotal && d.classDone < d.classTotal) n.push(`${d.classDone}/${d.classTotal} classes`);
   if (cls.some(b => b.flex) && !liveClasses(cls).length) n.push("Flexible day");
+  if (cls.some(b => b.onLeave)) n.push("Half-day leave");
+  if (d && d.punches.filter(p => minsOf(p.in) < 720).length > 1 || d && d.punches.filter(p => minsOf(p.in) >= 720).length > 1) n.push(`${d.punches.length} taps`);
   return n.join(" · ");
 }
-function amPm(d){   // DTR style: first block = AM, last block = PM
+function amPm(d){   // DTR: morning = blocks that start before 12:00, afternoon = the rest; a block across noon fills AM in + PM out
   if (!d) return ["","","",""];
-  const p = d.punches, a = p[0], z = p[p.length-1];
-  if (p.length === 1) return [fmtTime(a.in), "", "", a.out ? fmtTime(a.out) : (d.noOut ? "?" : "now")];
-  return [fmtTime(a.in), a.out ? fmtTime(a.out) : "", fmtTime(z.in), z.out ? fmtTime(z.out) : (d.noOut ? "?" : "now")];
+  const out = s => s ? fmtTime(s) : (d.noOut ? "?" : "now");
+  const am = d.punches.filter(p => minsOf(p.in) < 720), pm = d.punches.filter(p => minsOf(p.in) >= 720);
+  const amLast = am[am.length - 1], across = amLast && !pm.length && (!amLast.out || minsOf(amLast.out) > 13*60);
+  return [am.length ? fmtTime(am[0].in) : "", am.length && !across ? out(amLast.out) : "",
+          pm.length ? fmtTime(pm[0].in) : "", pm.length ? out(pm[pm.length-1].out) : across ? out(amLast.out) : ""];
 }
 function renderHistory(){
   const keys = historyKeys();
@@ -1197,10 +1292,12 @@ function checkLeave(){
   if (!f.t) err = "Pick a type of leave.";
   else if (!f.from || !f.to) err = "Pick the dates.";
   else if (f.to < f.from) err = "The end date is before the start date.";
-  else if (!f.days) err = "Those dates are only weekends.";
+  else if (f.from < $("#lFrom").min) err = "Leave more than 30 days back has to go through the HR office.";
+  else if (!f.days) err = "You have no classes or work scheduled on those dates.";
   else if (f.t.allocated != null && f.days > f.t.remaining) err = `You only have ${f.t.remaining} day${f.t.remaining === 1 ? "" : "s"} of ${f.t.name} left.`;
   else {
-    const clash = D.leave.requests.find(r => (r.state === "pending" || r.state === "approved") && r.from <= f.to && r.to >= f.from);
+    const clash = D.leave.requests.find(r => (r.state === "pending" || r.state === "approved") && r.from <= f.to && r.to >= f.from
+      && !(r.half && f.half && r.half !== f.half && r.from === r.to && f.from === f.to));   // a morning and an afternoon half on the same day is fine
     if (clash) err = `You already have ${clash.type} on ${fmtRange(clash.from, clash.to)}.`;
   }
   box.classList.toggle("bad", !!err);

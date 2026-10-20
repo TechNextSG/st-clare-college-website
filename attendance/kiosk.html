@@ -177,6 +177,12 @@ button{font:inherit;cursor:pointer}
 .record em{display:block;font-style:normal;font-size:13px;margin-top:4px;color:var(--muted)}
 .record div.now em{color:var(--c);font-weight:600}
 .note{margin-top:14px;color:var(--muted);font-size:15px;max-width:460px}
+.qchip{position:absolute;top:16px;right:16px;z-index:6;background:#1D1416;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+.impact{margin-top:12px;width:100%;text-align:left;border-radius:16px;padding:12px 14px;background:#FDECEA;color:#7A1A12;font-size:14px}
+.impact b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.impact div{display:flex;gap:8px;align-items:baseline;padding:3px 0}
+.impact div span{font-weight:700;white-space:nowrap}
+.impact.hint{background:#FBF1D6;color:#5C4300}
 .countdown{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--line)}
 .countdown i{display:block;height:100%;width:100%;background:var(--c,var(--crimson));transform-origin:left;animation:count var(--dur,4s) linear forwards}
 @keyframes count{to{transform:scaleX(0)}}
@@ -280,10 +286,12 @@ button{font:inherit;cursor:pointer}
       <div class="role" id="rRole"></div>
       <div class="idcode" id="rId">ID code <b></b></div>
       <div class="record" id="rRecord"><div id="rIn"></div><div id="rOut"></div></div>
+      <div class="impact" id="rImpact" hidden></div>
       <div class="note" id="rNote"></div>
     </div>
     <div class="confetti" id="confetti"></div>
     <div class="countdown" id="countdown" hidden><i></i></div>
+    <div class="qchip" id="qchip" role="status" hidden></div>
     <div class="recent" id="recent" aria-live="polite"></div>
   </section>
 </main>
@@ -361,7 +369,8 @@ function show(r){
     status = r.again ? "Welcome back" : kind === "late" ? "Time in recorded · Late" : "Time in recorded";
     inCell = timeCell("Time in", r.time, r.again ? "Back from break" : r.late_minutes > 0 ? lateText(r.late_minutes) : "On time");
     outCell = timeCell("Time out", null, "Tap again when leaving");
-    if (kind === "late") note = `Time-in starts ${CFG.work_start_label}. See the HR office if you had an approved reason.`;
+    if (kind === "late") note = r.first_class ? `Your first class started ${fmtTime(new Date(`2000-01-01T${r.first_class}:00`))}. See the HR office if you had an approved reason.`
+      : `Time-in starts ${CFG.work_start_label}. See the HR office if you had an approved reason.`;
   } else if (kind === "out"){
     status = "Time out recorded"; nowCell = "out";
     inCell = timeCell("Time in", r.first_in, "First time-in today");
@@ -395,6 +404,19 @@ function show(r){
   $("#rIn").innerHTML = inCell || ""; $("#rOut").innerHTML = outCell || "";
   $("#rIn").classList.toggle("now", nowCell === "in"); $("#rOut").classList.toggle("now", nowCell === "out");
   $("#rNote").textContent = note;
+  // classes this tap cancels, or the next class deadline
+  const imp = $("#rImpact"), aff = (kind === "in" || kind === "late" || kind === "out") ? (r.affected || []) : [];
+  const t12 = s => fmtTime(new Date(`2000-01-01T${s}:00`));
+  if (aff.length){
+    imp.className = "impact";
+    const onlyEarly = aff.every(c => c.reason === "early");
+    imp.innerHTML = `<b>${onlyEarly ? (aff.length === 1 ? "Class still running" : `${aff.length} classes still running`) : aff.length === 1 ? "1 class cancelled" : `${aff.length} classes cancelled`}</b>` + aff.map(c => `<div><span>${t12(c.start)}</span>${esc(c.subject)} · ${esc(c.section || "")} — ${
+      c.reason === "early" ? `cancelled unless you're back by ${t12(c.back_by)}` : c.reason === "absent" ? "missed" : `${c.by} min late (limit ${CANCEL_MIN} min)`}</div>`).join("");
+  } else if (r.next_class && (kind === "out" || kind === "in" || kind === "late")){
+    imp.className = "impact hint";
+    imp.innerHTML = `<b>Next class ${t12(r.next_class.start)}</b><div>${esc(r.next_class.subject)} · ${esc(r.next_class.section || "")}. ${kind === "out" ? `Tap in by <span>${t12(r.next_class.deadline)}</span> or it's cancelled.` : `Be in class by ${t12(r.next_class.deadline)}.`}</div>`;
+  }
+  imp.hidden = !(aff.length || (r.next_class && ["in","late","out"].includes(kind)));
   $("#tapIdle").hidden = true; $("#recent").hidden = true; box.hidden = false;
   box.getAnimations({subtree:true}).forEach(a => { a.cancel(); a.play(); });            // replay every entrance on back-to-back taps
   const dur = SHOW_MS[bday ? "bday" : kind];
@@ -402,7 +424,8 @@ function show(r){
   cd.style.setProperty("--c", getComputedStyle(box).getPropertyValue("--c"));
   const bar = cd.firstElementChild; bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = "";
   bday ? tune() : beep(kind);
-  clearTimeout(hideTimer); hideTimer = setTimeout(idle, dur);
+  shownAt = Date.now();
+  clearTimeout(hideTimer); hideTimer = setTimeout(() => showQ.length ? pump() : idle(), dur);
   if (kind !== "error" && kind !== "repeat") addRecent(r.name, kind, t);
 }
 function confetti(){
@@ -424,8 +447,8 @@ function tune(){   // short cheerful arpeggio
     }
   } catch(_){}
 }
-function idle(){ $("#confetti").innerHTML = ""; $("#result").hidden = true; $("#countdown").hidden = true; $("#tapIdle").hidden = false; $("#recent").hidden = false; }
-$("#result").addEventListener("click", () => { clearTimeout(hideTimer); idle(); });
+function idle(){ $("#qchip").hidden = true; $("#confetti").innerHTML = ""; $("#result").hidden = true; $("#countdown").hidden = true; $("#tapIdle").hidden = false; $("#recent").hidden = false; }
+$("#result").addEventListener("click", () => { clearTimeout(hideTimer); if (showQ.length){ shownAt = 0; pump(); } else idle(); });
 
 const recent = [];
 function addRecent(name, kind, t){
@@ -440,6 +463,24 @@ const DEMO = [
   {badge:"0004417203", name:"Angela Cruz", job:"Instructor, Accountancy", dept:"College", birthday:true},
   {badge:"0004417204", name:"Mark Villanueva", job:"Registrar Staff", dept:"Administration"},
 ];
+// sample class schedules for the kiosk demo (real ones come from Odoo working schedules)
+const M_MW = [["07:30","09:00","Math 4","St. Rose"],["09:15","10:45","Science 4","St. Rose"],["13:00","14:30","Math 4","St. Clare"],["14:45","16:15","Reading 4","St. Rose"]];
+const M_TT = [["09:00","10:30","Math 4","St. Clare"],["10:45","12:15","Science 4","St. Clare"],["15:00","16:30","Homeroom","St. Rose"]];
+const J_MWF = [["07:00","08:30","Gen. Chemistry","STEM 11-A"],["08:30","10:00","Gen. Chemistry","STEM 11-B"],["10:30","12:00","Earth Science","STEM 12-A"],["13:00","14:30","Research 2","STEM 12-B"]];
+const J_TT = [["10:00","11:30","Gen. Chemistry","STEM 11-C"],["13:00","14:30","Earth Science","STEM 12-C"],["14:30","16:00","Research 2","STEM 12-A"],["16:00","17:30","Advisory","STEM 11-A"]];
+const DEMO_CLASSES = {"0004417201": {1:M_MW, 2:M_TT, 3:M_MW, 4:M_TT, 5:M_MW}, "0004417202": {1:J_MWF, 2:J_TT, 3:J_MWF, 4:J_TT, 5:J_MWF}};
+const CANCEL_MIN = 15;
+const mm = s => +s.slice(0,2)*60 + +s.slice(3,5);
+const hm = m => `${pad(Math.floor(m/60))}:${pad(m%60)}`;
+function classImpact(classes, punches, nowM, action){   // same rule as the server: 15 min late or leaving 15 min early cancels the class
+  const pick = (c, x) => ({start:c[0], end:c[1], subject:c[2], section:c[3], ...x}), out = [];
+  if (action === "in"){
+    const lastOut = Math.max(-1, ...punches.filter(p => p[1] != null).map(p => p[1]));
+    for (const c of classes){ const a = mm(c[0]), z = mm(c[1]), lp = Math.min(a + CANCEL_MIN, (a + z) / 2); if (lastOut <= lp && lp < nowM) out.push(pick(c, {reason: nowM < z ? "late" : "absent", by: nowM - a})); }
+  } else for (const c of classes){ const a = mm(c[0]), z = mm(c[1]), ep = Math.max(z - CANCEL_MIN, (a + z) / 2); if (a <= nowM && nowM < ep) out.push(pick(c, {reason:"early", by: z - nowM, back_by: hm(Math.floor(ep))})); }
+  const n = classes.find(c => mm(c[0]) > nowM);
+  return {affected: out, next_class: n ? pick(n, {deadline: hm(mm(n[0]) + CANCEL_MIN)}) : null};
+}
 const demoState = {};  // badge -> {state, last, punches:[{in,out}], firstToday}
 function lateMinutes(d){ // minutes after the start time, counted only once past the grace period
   const [h,m] = CFG.work_start.split(":").map(Number), after = d.getHours()*60 + d.getMinutes() - (h*60 + m);
@@ -452,28 +493,62 @@ function demoScan(badge){
     first_in: s.punches.length ? s.punches[0].in.toISOString() : null};
   if (Math.abs(t - s.last) < REPEAT_SECONDS*1000) return {...base, result:"repeat", action:s.state, time:new Date(s.last).toISOString()};
   s.last = +t;
+  const cls = (DEMO_CLASSES[badge] || {})[t.getDay()] || [], nowM = t.getHours()*60 + t.getMinutes();
+  const pm = s.punches.map(x => [x.in.getHours()*60 + x.in.getMinutes(), x.out ? x.out.getHours()*60 + x.out.getMinutes() : null]);
   if (s.state === "out"){
     const again = s.punches.length > 0;
     s.punches.push({in:t}); s.state = "in";
-    return {...base, result:"in", again, late_minutes: again ? 0 : lateMinutes(t)};
+    const after = cls.length ? nowM - mm(cls[0][0]) : null;
+    return {...base, result:"in", again, late_minutes: again ? 0 : cls.length ? (after > CFG.grace_minutes ? after : 0) : lateMinutes(t),
+            first_class: cls.length ? cls[0][0] : null, ...classImpact(cls, pm, nowM, "in")};
   }
   s.punches[s.punches.length-1].out = t; s.state = "out";
-  return {...base, result:"out", worked_today: s.punches.reduce((h,x) => h + ((x.out || t) - x.in)/36e5, 0)};
+  return {...base, result:"out", worked_today: s.punches.reduce((h,x) => h + ((x.out || t) - x.in)/36e5, 0), ...classImpact(cls, pm, nowM, "out")};
 }
 
 // ---------- scanning: USB RFID / barcode readers type the card number then Enter
-let buf = "", bufTimer = null, busy = false;
-async function scan(badge){
-  if (busy) return; busy = true;
-  if (window.cardTapped && !$("#tapIdle").hidden){ window.cardTapped(); await new Promise(r => setTimeout(r, 260)); }   // brief "card read" flash first
+let buf = "", bufTimer = null;
+// Every tap is saved straight away, in the order it happened, even while another confirmation is on screen.
+// Confirmations then show one after another (at least MIN_SHOW each while others are waiting).
+const saveQ = [], showQ = [], MIN_SHOW = 1800, BOUNCE_MS = 1500;
+let saving = false, shownAt = 0, pumpT = null, lastTap = {badge:"", at:0};
+function scan(badge){
+  const t = Date.now();
+  if (badge === lastTap.badge && t - lastTap.at < BOUNCE_MS) return;   // the reader sent the same card twice
+  lastTap = {badge, at:t};
+  if (window.cardTapped && !$("#tapIdle").hidden) window.cardTapped();
+  saveQ.push(badge); queueChip(); saveNext();
+}
+async function saveOne(badge){
   try {
-    if (MODE === "demo") return show(demoScan(badge));
+    if (MODE === "demo") return demoScan(badge);
     const r = await fetch("api/kiosk/scan", {method:"POST", headers:{"Content-Type":"application/json", "X-Kiosk-Key":KEY}, body:JSON.stringify({badge})});
-    if (r.status === 403){ askKey(); return show({result:"error", message:"Kiosk not set up", detail:"Enter the kiosk key to start recording."}); }
-    show(await r.json());
+    if (r.status === 403){ askKey(); return {result:"error", message:"Kiosk not set up", detail:"Enter the kiosk key to start recording."}; }
+    return await r.json();
   } catch (e){
-    show({result:"error", message:"No connection", detail:"The time could not be saved. Please tap again, or tell the HR office if this keeps happening."});
-  } finally { setTimeout(() => busy = false, 800); }
+    return {result:"error", message:"Not saved, tap again", detail:"The kiosk couldn't reach the server, so this tap wasn't recorded. Please tap your card again, or tell the HR office if this keeps happening."};
+  }
+}
+async function saveNext(){
+  if (saving) return; saving = true;
+  while (saveQ.length){
+    const res = await saveOne(saveQ.shift());
+    showQ.push(res); queueChip(); pump();
+  }
+  saving = false; queueChip();
+}
+function pump(){
+  clearTimeout(pumpT);
+  if (!showQ.length) return;
+  const wait = $("#result").hidden ? 0 : Math.max(0, shownAt + MIN_SHOW - Date.now());
+  if (wait){ pumpT = setTimeout(pump, wait); return; }
+  show(showQ.shift()); queueChip();
+  if (showQ.length) pumpT = setTimeout(pump, MIN_SHOW);   // keep the line moving
+}
+function queueChip(){
+  const n = showQ.length + saveQ.length, c = $("#qchip");
+  c.hidden = !n || $("#result").hidden;
+  c.textContent = n === 1 ? "1 more tap saved, showing next" : `${n} more taps saved, showing next`;
 }
 document.addEventListener("keydown", e => {
   if (!$("#setup").hidden) return;
@@ -560,7 +635,7 @@ async function init(){
     $("#demoCards").innerHTML = DEMO.map(p => `<button data-badge="${p.badge}">${esc(p.name)}<span>${p.birthday ? "Birthday today" : esc(p.dept)}</span></button>`).join("") + `<button data-badge="9999999999">Unknown card<span>not registered</span></button>`;
     $("#demoCards").addEventListener("click", e => { const b = e.target.closest("[data-badge]"); if (b) scan(b.dataset.badge); });
     $("#demoHide").onclick = () => $("#demo").hidden = true;
-    const SAMPLE_TIMES = [["7:24 AM",7,24],["7:52 AM",7,52],["12:01 PM",12,1],["12:58 PM",12,58],["4:35 PM",16,35]];
+    const SAMPLE_TIMES = [["7:24 AM",7,24],["7:52 AM",7,52],["10:00 AM",10,0],["12:01 PM",12,1],["12:58 PM",12,58],["1:20 PM",13,20],["4:35 PM",16,35]];
     const setTime = (h, m) => { const d = new Date(); d.setHours(h, m, 0, 0); OFFSET = d - Date.now(); tick();
       document.querySelectorAll("#demoTimes button").forEach(b => b.classList.toggle("on", +b.dataset.h === h && +b.dataset.m === m)); };
     $("#demoTimes").innerHTML = SAMPLE_TIMES.map(([l,h,m]) => `<button data-h="${h}" data-m="${m}">${l}</button>`).join("");
