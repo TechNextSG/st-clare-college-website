@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <script>/* pick the theme before first paint: saved choice, else the device setting */
 (function(){ var t; try { t = localStorage.getItem("att-theme"); } catch(e){}
@@ -18,19 +18,24 @@
 :root{
   --bg:#F1EDEE; --card:#fff; --ink:#1D1416; --ink-2:#3E3235; --muted:#665A5E; --line:#EBE2E3; --soft:#F8F5F5;
   --accent:#A6192E; --accent-2:#C8102E; --accent-soft:#F6E1E4; --maroon:#5C0A17; --gold:#E0AD1C;
-  --ok:#1F9D63; --ok-soft:#E5F6EE; --warn:#B7850F; --warn-soft:#FBF1D6; --bad:#D64545; --bad-soft:#FCEAEA;
+  --ok:#17774B; --ok-soft:#E5F6EE; --warn:#8A6100; --warn-soft:#FBF1D6; --bad:#B42F2F; --bad-soft:#FCEAEA;
+  --hero:linear-gradient(135deg,#C8102E 0%,#A6192E 45%,#5C0A17 100%); --hero-out:linear-gradient(135deg,#3D2A2E 0%,#1D1416 100%);
   --r:18px; --r-sm:12px; --hint-ink:#8a4d12; --leave:#4A63C9; --leave-soft:#E8ECFB; --hol:#7A5AA8; --hol-soft:#F1ECF8;
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#120E0F; --card:#1C1617; --ink:#F4EDEE; --ink-2:#D3C6C9; --muted:#AFA2A6; --line:#2F2628; --soft:#251D1F;
-  --accent:#E0384A; --accent-2:#F05264; --accent-soft:rgba(224,56,74,.16); --maroon:#8E1426; --gold:#F2C94C;
+  --accent:#F06A78; --accent-2:#F48591; --accent-soft:rgba(224,56,74,.16); --maroon:#8E1426; --gold:#F2C94C;
   --ok:#3FBF80; --ok-soft:rgba(63,191,128,.15); --warn:#E5B23A; --warn-soft:rgba(229,178,58,.15); --bad:#F06B6B; --bad-soft:rgba(240,107,107,.14);
   --hint-ink:#F2C94C; --leave:#93A6F2; --leave-soft:rgba(147,166,242,.15); --hol:#C3A8EE; --hol-soft:rgba(195,168,238,.14);
 }
 :root[data-theme="dark"] .card,:root[data-theme="dark"] .top,:root[data-theme="dark"] .login .box{box-shadow:0 0 0 1px var(--line)}
 :root[data-theme="dark"] .hero.out{background:linear-gradient(135deg,#3A2A2E 0%,#241C1E 100%)}
 :root[data-theme="dark"] .tabs{background:var(--soft)}
+:root[data-theme="dark"] .btn.dark{background:var(--maroon);border-color:var(--maroon)}
+:root[data-theme="dark"] .sheet{background:rgba(0,0,0,.62)}
+:root[data-theme="dark"] .sheet .panel{box-shadow:0 0 0 1px var(--line),0 30px 80px -30px rgba(0,0,0,.7)}
+:root[data-theme="dark"] .wd .col i:not(.late):not(.live){background:#C8475A}
 html,body{transition:background-color .3s}
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -48,7 +53,7 @@ button{cursor:pointer}
 .pp div{background:var(--soft);border-radius:12px;padding:10px 12px}
 .pp small{display:block;color:var(--ink-2);font-size:12px}
 .pp b{display:block;font:700 18px/1.2 "Plus Jakarta Sans",Inter,sans-serif;margin-top:2px}
-.pp em{font-style:normal;font-size:11px;color:var(--muted)}
+.pp em{font-style:normal;font-size:12px;color:var(--muted)}
 .fine{font-size:12px;color:var(--muted);margin-top:12px}
 .up{display:flex;flex-direction:column}
 .up .row{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 0}
@@ -76,14 +81,14 @@ button{cursor:pointer}
 .mebtn{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;border-radius:999px;text-align:left}
 .mebtn:hover .av{box-shadow:0 0 0 2px var(--accent)}
 .info{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:16px 0}
-.info small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.info small{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
 .info span{display:block;margin-top:2px;font-weight:500}
 .schedtbl{width:100%;border-collapse:collapse;font-size:13px}
 .schedtbl td{padding:7px 0;border-top:1px solid var(--line)}.schedtbl td+td{text-align:right}
 .schedtbl tr.today td{font-weight:700;color:var(--accent)}
 .help{margin-top:16px;padding:12px 14px;border-radius:14px;background:var(--soft);font-size:13px;color:var(--ink-2)}
 .help b{color:var(--ink)}
-.privacy{display:block;color:var(--muted);font-size:11px;margin-top:10px;text-align:center;line-height:1.4}
+.privacy{display:block;color:var(--muted);font-size:12px;margin-top:10px;text-align:center;line-height:1.4}
 #dtr{display:none}
 @media print{
   body{background:#fff!important}
@@ -126,7 +131,7 @@ button{cursor:pointer}
 .lreq .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--muted);margin-top:5px}
 .lreq .meta .soon{color:var(--leave);font-weight:600}
 .lreq .meta .now{color:var(--ok);font-weight:600}
-.lreq .r small{font-size:11px;color:var(--muted);text-align:right}
+.lreq .r small{font-size:12px;color:var(--muted);text-align:right}
 .chev{width:32px;height:32px;border-radius:50%;border:0;background:var(--soft);display:grid;place-items:center;color:var(--ink-2);transition:transform .3s cubic-bezier(.2,.8,.2,1),background .2s}
 .chev:hover{background:var(--line)}
 .lreq.open .chev{transform:rotate(180deg)}
@@ -135,7 +140,7 @@ button{cursor:pointer}
 .ldet>div{overflow:hidden;min-height:0}
 .ldin{margin:8px 0 4px 56px;padding:14px;border-radius:16px;background:var(--soft);cursor:default}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 20px}
-.facts small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.facts small{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
 .facts span{display:block;margin-top:4px;font-weight:500}
 .facts span em{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
 .facts .wide{grid-column:1/-1}
@@ -149,11 +154,11 @@ button{cursor:pointer}
 .step.done i{background:var(--ok);border-color:var(--ok)}
 .step.refused i{background:var(--bad);border-color:var(--bad)}
 .step.wait i{border-color:var(--warn);background:var(--warn-soft)}
-.step.wait i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn);animation:wp 1.4s ease-in-out infinite}
+.step.wait i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn)}
 @keyframes wp{50%{transform:scale(.5);opacity:.5}}
 .step.skipped{opacity:.45}
 .step b{display:block;font-weight:600;padding:0 4px}
-.step em{display:block;font-style:normal;color:var(--muted);font-size:11px;margin-top:2px;padding:0 4px;overflow-wrap:anywhere}
+.step em{display:block;font-style:normal;color:var(--muted);font-size:12px;margin-top:2px;padding:0 4px;overflow-wrap:anywhere}
 .lnote{margin-top:14px;font-size:13px;color:var(--ink-2);display:flex;gap:8px;align-items:flex-start}
 .lnote.bad{color:var(--bad)}
 .lreq+.lreq{border-top:1px solid var(--line)}
@@ -164,9 +169,10 @@ button{cursor:pointer}
 .lreq .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 .linkbtn{border:0;background:none;color:var(--bad);font-size:12px;padding:2px 0;text-decoration:underline;text-underline-offset:2px}
 /* request sheet */
-.sheet{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:rgba(18,14,15,.45);opacity:0;pointer-events:none;transition:opacity .25s}
-.sheet.open{opacity:1;pointer-events:auto}
-.sheet .panel{width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border-radius:24px;padding:24px;transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.2,.9,.25,1.1);box-shadow:0 30px 80px -30px rgba(0,0,0,.5)}
+.sheet{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:rgba(18,14,15,.45);opacity:0;pointer-events:none;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.sheet.open{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .25s}
+body.locked{overflow:hidden}
+.sheet .panel{width:min(560px,100%);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;background:var(--card);border-radius:24px;padding:20px 20px 0;transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.2,.9,.25,1.1);box-shadow:0 30px 80px -30px rgba(0,0,0,.5)}
 .sheet.open .panel{transform:none}
 .sheet h2{margin:0 0 4px;font-size:22px}
 .types{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:6px 0 16px}
@@ -174,7 +180,7 @@ button{cursor:pointer}
 .types input{position:absolute;opacity:0;pointer-events:none}
 .types span{display:block;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--soft);transition:border-color .2s,background .2s}
 .types span b{display:block;font-weight:600;font-size:13px}
-.types span small{color:var(--muted);font-size:11px}
+.types span small{color:var(--muted);font-size:12px}
 .types input:checked+span{border-color:var(--accent);background:var(--accent-soft)}
 .types input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .types input:disabled+span{opacity:.45;cursor:not-allowed}
@@ -185,19 +191,33 @@ button{cursor:pointer}
 textarea.input{height:auto;min-height:84px;padding:12px 14px;resize:vertical;font:inherit}
 .sum{border-radius:14px;padding:12px 14px;background:var(--leave-soft);color:var(--leave);font-size:13px;margin:4px 0 14px}
 .sum.bad{background:var(--bad-soft);color:var(--bad)}
-.actions{display:flex;gap:8px;justify-content:flex-end}
+.actions{display:flex;gap:8px;justify-content:flex-end;position:sticky;bottom:0;background:var(--card);padding:12px 0 calc(16px + env(safe-area-inset-bottom));margin-top:4px}
+.shead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.shead h2{margin:0}
+#meSheet .panel{padding-bottom:20px}
+.meact{display:flex;gap:8px;margin-top:14px}.meact .btn{flex:1}
+.hlist{display:none}
+.cell .sh{display:none;font-style:normal}
+.hlist .day small{display:block;color:var(--muted);font-size:12px;margin-top:1px}
+.seg.mini{margin:0;padding:3px}.seg.mini button{padding:6px 12px;font-size:12px;white-space:nowrap}
+#sumCard .kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+#sumCard #kMonth{grid-template-columns:repeat(3,minmax(0,1fr))}
+#sumCard{align-self:start}
+.lreq .when{color:var(--muted)}.lreq .when::before{content:" \00b7 "}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cell:focus-visible{outline-offset:1px}
 .sentok{text-align:center;padding:12px 0 4px}
 .sentok svg{width:64px;height:64px;stroke:var(--ok);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .sentok circle{stroke-dasharray:160;stroke-dashoffset:160;animation:dr .7s ease-out forwards}
 .sentok path{stroke-dasharray:40;stroke-dashoffset:40;animation:dr .4s .55s ease-out forwards}
 @keyframes dr{to{stroke-dashoffset:0}}
-@media (max-width:720px){.sheet{place-items:end center;padding:0}.sheet .panel{border-radius:24px 24px 0 0;max-height:92vh}.two{grid-template-columns:1fr}.lreq{grid-template-columns:44px minmax(0,1fr) 30px;gap:4px 10px}.lreq .r{grid-column:2/3;align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:6px 10px}.lreq .chev{grid-row:1;grid-column:3}.ldin{margin-left:0;padding:14px}.facts{grid-template-columns:1fr 1fr}.step b{font-size:11px}}
+@media (max-width:720px){.sheet{place-items:end center;padding:0}.sheet .panel{border-radius:22px 22px 0 0;max-height:92dvh;padding:18px 16px 0}.types{grid-template-columns:1fr 1fr}.types span{padding:8px 10px}.lreq{grid-template-columns:44px minmax(0,1fr) 44px;gap:2px 10px}.lreq .r{grid-column:2/3;align-items:center;flex-direction:row;flex-wrap:wrap;gap:4px 10px}.lreq .chev{grid-row:1;grid-column:3}.lreq .when{display:block}.lreq .meta .ref,.lreq .meta .ref+span{display:none}.lreq .when::before{content:none}.ldin{margin-left:0;padding:12px}.facts{grid-template-columns:1fr 1fr;gap:10px 12px}.steps{margin-top:12px;padding-top:12px}.step b{font-size:12px}}
 h1,h2,h3,.timer,.kpi b,.weektotal b,.detail .big,.brand,.monthnav b{font-family:"Plus Jakarta Sans",Inter,sans-serif}
 .ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
 /* ---------- sign in */
 .login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
-.login .box{width:min(400px,100%);background:var(--card);border-radius:28px;padding:32px;border-top:6px solid var(--accent)}
+.login .box{width:min(400px,100%);background:var(--card);border-radius:28px;padding:32px;overflow:hidden;position:relative}
 .login .logo{width:64px;height:64px}
 .logo{width:44px;height:44px;border-radius:50%;background:#fff;color:#fff;display:grid;place-items:center;font-weight:700;font-size:18px;box-shadow:0 6px 16px -8px rgba(92,10,23,.55);overflow:hidden}
 .logo img{width:100%;height:100%;object-fit:contain;display:block}
@@ -208,7 +228,7 @@ h1,h2,h3,.timer,.kpi b,.weektotal b,.detail .big,.brand,.monthnav b{font-family:
 .input{width:100%;height:46px;border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:0 14px}
 .input:focus{outline:2px solid var(--accent);outline-offset:1px;background:var(--card)}
 .pin{letter-spacing:.5em;font-size:18px}
-.btn{height:46px;border-radius:999px;border:1px solid var(--line);background:var(--card);padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:500}
+.btn{white-space:nowrap;height:46px;border-radius:999px;border:1px solid var(--line);background:var(--card);padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:500}
 .btn:hover{border-color:var(--ink-2)}
 .btn.dark{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn.dark:hover{background:var(--maroon);border-color:var(--maroon)}
@@ -224,14 +244,14 @@ h1,h2,h3,.timer,.kpi b,.weektotal b,.detail .big,.brand,.monthnav b{font-family:
 .top{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:999px;padding:8px 8px 8px 10px}
 .top .logo{width:38px;height:38px;font-size:16px}
 .brand{font-weight:700;white-space:nowrap;line-height:1.1}
-.brand small{display:block;font:500 11px Inter,sans-serif;color:var(--muted)}
+.brand small{display:block;font:500 12px Inter,sans-serif;color:var(--muted)}
 .tabs{display:flex;gap:4px;margin:0 auto;background:var(--soft);padding:4px;border-radius:999px}
 .tabs button{border:0;background:transparent;padding:8px 18px;border-radius:999px;color:var(--ink-2);white-space:nowrap;display:flex;align-items:center;gap:7px;transition:background .2s,color .2s}
 .tabs button:hover{color:var(--ink)}
 .tabs button.on{background:var(--maroon);color:#fff}
 .me{display:flex;align-items:center;gap:10px;padding:4px 4px 4px 4px;border:1px solid var(--line);border-radius:999px}
 .me .txt b{display:block;font-weight:600;font-size:13px;line-height:1.1}
-.me .txt small{color:var(--muted);font-size:11px}
+.me .txt small{color:var(--muted);font-size:12px}
 .iconbtn{width:34px;height:34px;border-radius:50%;border:0;background:var(--soft);display:grid;place-items:center;color:var(--ink-2)}
 .iconbtn:hover{background:var(--line)}
 .theme .moon,:root[data-theme="dark"] .theme .sun{display:block}
@@ -251,14 +271,14 @@ h1.title{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:0;font-wei
 
 .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
 .card{background:var(--card);border-radius:var(--r);padding:16px;min-width:0}
-.card h3{margin:0;font-size:15px;font-weight:600}
+.card h2{margin:0;font-size:15px;font-weight:600;min-width:0}
 .ch{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
 .muted{color:var(--muted)}
 .s4{grid-column:span 4}.s5{grid-column:span 5}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
 
 /* hero */
-.hero{background:linear-gradient(135deg,#C8102E 0%,#A6192E 45%,#5C0A17 100%);color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column}
-.hero.out{background:linear-gradient(135deg,#3D2A2E 0%,#1D1416 100%)}
+.hero{background:var(--hero);color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero.out{background:var(--hero-out)}
 .hero::after{content:"";position:absolute;right:-60px;top:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.2),transparent 65%);pointer-events:none}
 .tag{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:999px;font-size:12px;align-self:flex-start}
 .tag i{width:7px;height:7px;border-radius:50%;background:#fff}
@@ -267,7 +287,7 @@ h1.title{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:0;font-wei
 .timer{font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1;margin:14px 0 4px}
 .timer small{font-size:28px;opacity:.7;font-weight:500}
 .bar{height:7px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;margin:12px 0 8px}
-.bar i{display:block;height:100%;background:#fff;border-radius:99px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar i{display:block;height:100%;width:100%;background:#fff;border-radius:99px;transform-origin:left;transform:scaleX(0);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .hero .meta{display:flex;justify-content:space-between;gap:12px;font-size:13px;opacity:.92;flex-wrap:wrap}
 .punches{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .punches span{background:rgba(255,255,255,.14);border-radius:10px;padding:6px 10px;font-size:12px}
@@ -281,7 +301,7 @@ h1.title{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:0;font-wei
 .wd .col i.late{background:var(--gold)}
 .wd .col i.live{background:repeating-linear-gradient(135deg,var(--accent) 0 6px,var(--accent-2) 6px 12px)}
 .wd .col i:not(.late):not(.live){background:var(--maroon)}
-.wd small{font-size:11px;color:var(--muted)}
+.wd small{font-size:12px;color:var(--muted)}
 .wd b{font-size:12px;font-weight:600}
 .wd.today small{color:var(--ink);font-weight:600}
 .weektotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
@@ -299,7 +319,7 @@ h1.title{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:0;font-wei
 .day+.day{border-top:1px solid var(--line)}
 button.day:hover{background:var(--soft)}
 .date{width:44px;height:44px;border-radius:12px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
-.date small{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.date small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .date b{font-size:17px;font-weight:700}
 .day .times{font-size:13px;color:var(--ink-2)}
 .day .times b{color:var(--ink);font-weight:600}
@@ -351,22 +371,68 @@ button.cell:hover{filter:brightness(.97)}
 .err{background:var(--bad-soft);color:var(--bad);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px}
 
 @media (max-width:960px){.s4,.s5,.s7,.s8{grid-column:span 12}.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:720px){
-  .wrap{padding:12px 16px 90px}
-  .top{border-radius:22px}
-  .top .brand,.me .txt{display:none}
-  .tabs{position:fixed;left:16px;right:16px;bottom:14px;z-index:5;justify-content:space-between;background:var(--card);box-shadow:0 12px 30px -10px rgba(21,23,28,.35);padding:6px}
-  .tabs button{flex:1;justify-content:center;padding:10px 6px}
-  .me{margin-left:auto}
-  h1.title{font-size:28px}
-  .timer{font-size:54px}
-  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cal{gap:4px}
-  .cell{min-height:54px;padding:6px;border-radius:10px}
-  .cell .t{display:none}
-  .monthnav b{min-width:0}
+@media (max-width:960px){
+  .wrap{padding:10px 12px calc(84px + env(safe-area-inset-bottom))}
+  .top{border-radius:16px;padding:6px 6px 6px 8px;gap:10px}
+  .top .logo{flex:none;width:36px;height:36px}
+  .brand{font-size:14px}
+  .me{margin-left:auto;border:0;padding:0;gap:4px}
+  .me .txt,#refresh,#logout{display:none}
+  .tabs{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:20;margin:0;gap:2px;padding:4px;border-radius:20px;background:var(--card);box-shadow:0 10px 30px -12px rgba(21,23,28,.45),0 0 0 1px var(--line)}
+  .tabs button{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:2px;padding:6px 2px;min-height:52px;font-size:12px;font-weight:600;border-radius:16px}
+  .tabs .ico{width:20px;height:20px}
+  .iconbtn,.chev{width:44px;height:44px;flex:none}
+  .btn.sm{height:44px}
+  .filters .input{height:44px}
+  .linkbtn{padding:12px 0;margin:-10px 0}
+  .kinds span{padding:11px 14px}
+  .seg button{padding:10px 8px;min-height:44px}
+  .mebtn{padding:2px}.mebtn .av{width:40px;height:40px}
+  .seg.mini button{padding:9px 12px;min-height:44px}
+  .tabs{max-width:480px;margin-inline:auto}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (pointer:coarse){
+  .iconbtn,.chev{width:44px;height:44px;flex:none}
+  .btn.sm,.filters .input{height:44px}
+  .seg button,.seg.mini button{min-height:44px}
+  .linkbtn{padding:12px 0;margin:-10px 0}
+}
+@media (max-width:720px){
+  .head{margin:10px 2px 8px;align-items:flex-start;flex-wrap:nowrap}
+  h1.title{font-size:22px}
+  .sub{font-size:13px}
+  .head:not([data-v="today"]) .sub{display:none}
+  #source{flex:none;padding:4px 9px;margin-top:2px}
+  .grid{gap:10px}
+  .card{padding:12px}
+  .timer{font-size:44px;margin:10px 0 2px}
+  .bar{margin:8px 0 6px}
+  .punches{margin-top:8px}.punches span{padding:4px 8px}
+  .week{height:96px}
+  #sumCard .kpis,#sumCard #kMonth,.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .kpi{padding:8px 10px}
+  .kpi b{font-size:18px}
+  .kpi em{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #recent .day:nth-child(n+4){display:none}
+  .cal{gap:3px}
+  .cell{min-height:50px;padding:5px 3px;border-radius:9px}
+  .cell .t{display:none}
+  .cell .sh{display:block;font-size:12px;font-weight:700;white-space:nowrap;color:var(--ink-2)}
+  .cell.ok .sh{color:var(--ok)}.cell.late .sh,.cell.noout .sh{color:var(--warn)}.cell.abs .sh{color:var(--bad)}.cell.leave .sh,.cell.lpend .sh{color:var(--leave)}.cell.hol .sh{color:var(--hol)}.cell.live .sh{color:var(--accent)}
+  .s8>.ch{flex-wrap:wrap;gap:8px}
+  .monthnav{flex:1 1 100%;justify-content:space-between}
+  .monthnav b{min-width:0;white-space:nowrap}
+  .legend{flex:1 1 100%;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+  .detail{scroll-margin-top:10px}
+  .tblwrap{display:none}
+  .hlist{display:block}
+  .filters .input,.filters .btn{flex:1 1 calc(50% - 4px);min-width:0}
+  #hSum{flex:1 1 100%;order:3;font-size:12px}
+  .bals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bal b{font-size:18px}
+  .up .row{padding:7px 0}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -383,7 +449,7 @@ button.cell:hover{filter:brightness(.97)}
     <label class="field"><span>Work email</span><input class="input" id="email" type="email" autocomplete="username" required placeholder="Your work email"></label>
     <label class="field"><span>Attendance PIN</span><input class="input pin" id="pin" type="password" inputmode="numeric" autocomplete="current-password" required placeholder="&bull;&bull;&bull;&bull;"></label>
     <button class="btn dark block" id="loginBtn" type="submit">Sign in</button>
-    <small class="note">Use the same PIN as the attendance kiosk. Forgot it? Call the HR office at (02) 8232-4483.</small>
+    <small class="note">Use the same PIN as the attendance kiosk. Forgot it? Call the HR office at <a href="tel:+63282324483">(02) 8232-4483</a>.</small>
     <small class="privacy">Your attendance records are personal data, used only for timekeeping and payroll under the Data Privacy Act of 2012.</small>
   </form>
 </section>
@@ -414,43 +480,41 @@ button.cell:hover{filter:brightness(.97)}
   </div>
   <div class="err" id="err" hidden></div>
 
+  <main id="main">
   <!-- TODAY -->
   <section data-page="today" class="grid">
     <div class="card hero s7" id="hero">
       <span class="tag"><i></i><span id="hState">--</span></span>
       <div class="timer" id="hTimer">0:00<small>:00</small></div>
       <div id="hLine" style="opacity:.92">worked today</div>
-      <div class="bar"><i id="hBar" style="width:0"></i></div>
+      <div class="bar"><i id="hBar"></i></div>
       <div class="meta"><span id="hTarget"></span><span id="hLeft"></span></div>
       <div class="punches" id="hPunches"></div>
     </div>
     <div class="card s5">
-      <div class="ch"><h3>This week</h3><span class="muted" id="weekRange"></span></div>
+      <div class="ch"><h2>This week</h2><span class="muted" id="weekRange"></span></div>
       <div class="week" id="week"></div>
       <div class="weektotal"><span class="muted">Total this week</span><span><b id="weekTotal">0h</b> <span class="muted" id="weekOf"></span></span></div>
     </div>
-    <div class="card s12">
-      <div class="ch"><h3 id="monthTitle">This month</h3><span class="muted" id="monthNote"></span></div>
-      <div class="kpis">
+    <div class="card s7" id="sumCard">
+      <div class="ch"><h2>Summary</h2><div class="seg mini" id="sumSeg" role="group" aria-label="Summary period"><button type="button" data-s="month" class="on" id="segMonth" aria-pressed="true">This month</button><button type="button" data-s="pay" id="segPay" aria-pressed="false">Pay period</button></div></div>
+      <div class="kpis" id="kMonth">
         <div class="kpi"><small>Days present</small><b id="mPresent">0</b><em id="mPresentOf"></em></div>
         <div class="kpi"><small>On time</small><b id="mOnTime">0%</b><em id="mStreak"></em></div>
-        <div class="kpi"><small>Late days</small><b id="mLate">0</b><em id="mLateNote"></em></div>
+        <div class="kpi"><small>Late</small><b id="mLate">0</b><em id="mLateNote"></em></div>
         <div class="kpi"><small>Undertime</small><b id="mUnder">0m</b><em id="mUnderNote"></em></div>
         <div class="kpi"><small>Hours worked</small><b id="mHours">0h</b><em id="mAvg"></em></div>
         <div class="kpi"><small>Average time-in</small><b id="mAvgIn">--</b><em id="mShift"></em></div>
       </div>
-    </div>
-    <div class="card s7">
-      <div class="ch"><h3>This pay period</h3><span class="muted" id="ppRange"></span></div>
-      <div class="pp" id="pp"></div>
-      <div class="fine">For your reference. Payroll uses the HR office's final, approved figures.</div>
+      <div class="kpis" id="kPay" hidden></div>
+      <div class="fine" id="payNote" hidden><span id="ppRange"></span>. For reference only; payroll uses HR's final figures.</div>
     </div>
     <div class="card s5">
-      <div class="ch"><h3>Coming up</h3></div>
+      <div class="ch"><h2>Coming up</h2></div>
       <div class="up" id="upcoming"></div>
     </div>
     <div class="card s12">
-      <div class="ch"><h3>Recent days</h3><button class="btn sm" data-goto="history">See all</button></div>
+      <div class="ch"><h2>Recent days</h2><button class="btn sm" data-goto="history">See all</button></div>
       <div class="days" id="recent"></div>
     </div>
   </section>
@@ -459,7 +523,7 @@ button.cell:hover{filter:brightness(.97)}
   <section data-page="calendar" class="grid" hidden>
     <div class="card s8">
       <div class="ch">
-        <div class="monthnav"><button class="iconbtn" id="prevM" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b id="calTitle"></b><button class="iconbtn" id="nextM" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        <div class="monthnav"><button class="iconbtn" id="prevM" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b id="calTitle"></b><button class="iconbtn" id="nextM" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><button class="btn sm" id="toToday" type="button">Today</button></div>
         <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span><span><i style="background:var(--hol)"></i>Holiday</span></div>
       </div>
       <div class="cal" id="cal"></div>
@@ -470,17 +534,17 @@ button.cell:hover{filter:brightness(.97)}
   <!-- LEAVE -->
   <section data-page="leave" class="grid" hidden>
     <div class="card s12">
-      <div class="ch"><h3>My leave balance</h3><button class="btn sm dark" id="newLeave"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Request leave</button></div>
+      <div class="ch"><h2>My leave balance</h2><button class="btn sm dark" id="newLeave"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Request leave</button></div>
       <div class="bals" id="bals"></div>
       <div class="muted" id="balNote" style="font-size:12px;margin-top:12px"></div>
     </div>
     <div class="card s12">
-      <div class="ch"><h3>My requests</h3><span class="muted" id="reqCount"></span></div>
+      <div class="ch"><h2>My requests</h2><span class="muted" id="reqCount"></span></div>
       <div id="reqs"></div>
     </div>
     <div class="card s12">
-      <div class="ch"><h3>Attendance corrections</h3><button class="btn sm" id="newFix"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>New correction</button></div>
-      <div class="muted" style="font-size:13px;margin:-2px 0 6px">Forgot to tap, or out on official business? Send it to HR here.</div>
+      <div class="ch"><h2>Corrections</h2><button class="btn sm" id="newFix"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>New correction</button></div>
+      <div class="muted" style="font-size:13px;margin:-2px 0 6px">Forgot to tap, or out on official business? Tell HR here.</div>
       <div id="fixes"></div>
     </div>
   </section>
@@ -495,22 +559,23 @@ button.cell:hover{filter:brightness(.97)}
         <button class="btn sm" id="printDtr"><svg class="ico" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg>Print DTR</button>
         <button class="btn sm dark" id="csv"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CSV</button>
       </div>
-      <div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>AM in</th><th>AM out</th><th>PM in</th><th>PM out</th><th class="num">Worked</th><th class="num">Late</th><th class="num">Undertime</th><th>Status</th></tr></thead><tbody id="hBody"></tbody></table></div>
+      <div class="hlist" id="hList"></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>AM in</th><th>AM out</th><th>PM in</th><th>PM out</th><th class="num">Worked</th><th class="num">Late</th><th class="num">Undertime</th><th>Status</th></tr></thead><tbody id="hBody"></tbody></table></div>
     </div>
   </section>
+  </main>
 </div>
 
 <div class="sheet" id="fixSheet" role="dialog" aria-modal="true" aria-labelledby="fixTitle">
   <div class="panel">
     <form id="fixForm" novalidate>
-      <h2 id="fixTitle">Request a correction</h2>
-      <div class="muted" style="font-size:13px">HR checks it and fixes your record in Odoo.</div>
+      <div class="shead"><h2 id="fixTitle">Request a correction</h2><button class="iconbtn" type="button" data-close="#fixSheet" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="muted" style="font-size:13px">HR checks it and fixes your record.</div>
       <div class="two" style="margin-top:14px"><label class="field"><span>Date</span><input class="input" type="date" id="fDate" required></label><div></div></div>
       <div class="field"><span>What happened?</span></div>
       <div class="kinds" id="fKinds"></div>
       <div class="two">
-        <label class="field"><span id="fInLbl">Actual time in</span><input class="input" type="time" id="fIn"></label>
-        <label class="field"><span id="fOutLbl">Actual time out</span><input class="input" type="time" id="fOut"></label>
+        <label class="field" id="fInBox"><span id="fInLbl">Actual time in</span><input class="input" type="time" id="fIn"></label>
+        <label class="field" id="fOutBox"><span id="fOutLbl">Actual time out</span><input class="input" type="time" id="fOut"></label>
       </div>
       <label class="field"><span>Details</span><textarea class="input" id="fReason" maxlength="500" placeholder="e.g. Kiosk was offline when I arrived. Seminar at DepEd NCR, memo no. 12." required></textarea></label>
       <div class="sum" id="fSum">HR may ask for proof, like a memo or certificate of attendance.</div>
@@ -525,9 +590,10 @@ button.cell:hover{filter:brightness(.97)}
       <div style="flex:1;min-width:0"><h2 id="meTitle" style="margin:0"></h2><div class="muted" id="miJob"></div></div>
       <button class="iconbtn" type="button" id="meClose" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <div class="info" id="miInfo"></div>
-    <h3 style="margin:0 0 6px;font-size:14px">My schedule</h3>
+    <h2 style="margin:0 0 6px;font-size:14px">My schedule</h2>
     <table class="schedtbl" id="miSched"></table>
-    <div class="help"><b>Need help?</b> For a wrong record, PIN reset or leave questions, contact the HR office: <b>(02) 8232-4483</b>, Zabarte Road, Camarin, Caloocan.</div>
+    <div class="help"><b>Need help?</b> For a wrong record, PIN reset or leave questions, contact the HR office: <a href="tel:+63282324483"><b>(02) 8232-4483</b></a>, Zabarte Road, Camarin, Caloocan.</div>
+    <div class="meact"><button class="btn sm" type="button" id="meRefresh">Refresh</button><button class="btn sm" type="button" id="meLogout">Sign out</button></div>
   </div>
 </div>
 
@@ -536,15 +602,15 @@ button.cell:hover{filter:brightness(.97)}
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <div class="panel" id="sheetPanel">
     <form id="leaveForm" novalidate>
-      <h2 id="sheetTitle">Request leave</h2>
-      <div class="muted" style="font-size:13px">HR approves it in Odoo. Track it under My requests.</div>
+      <div class="shead"><h2 id="sheetTitle">Request leave</h2><button class="iconbtn" type="button" data-close="#sheet" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="muted" style="font-size:13px">HR reviews and approves it. Track it under My requests.</div>
       <div class="field" style="margin-top:16px"><span>Type of leave</span></div>
       <div class="types" id="lTypes"></div>
       <div class="two">
         <label class="field"><span>From</span><input class="input" type="date" id="lFrom" required></label>
         <label class="field"><span>To</span><input class="input" type="date" id="lTo" required></label>
       </div>
-      <div class="seg" id="lHalf" hidden><button type="button" data-h="" class="on">Full day</button><button type="button" data-h="am">Morning only</button><button type="button" data-h="pm">Afternoon only</button></div>
+      <div class="seg" id="lHalf" hidden><button type="button" data-h="" class="on">Full day</button><button type="button" data-h="am">AM only</button><button type="button" data-h="pm">PM only</button></div>
       <label class="field"><span>Reason</span><textarea class="input" id="lReason" maxlength="500" placeholder="e.g. family trip, medical check-up" required></textarea></label>
       <div class="sum" id="lSum"></div>
       <div class="actions"><button class="btn" type="button" id="lCancel">Cancel</button><button class="btn dark" type="submit" id="lSend">Send request</button></div>
@@ -658,8 +724,8 @@ function renderToday(){
   $("#hero").classList.toggle("out", !isIn);
   $("#hState").textContent = isIn ? `Timed in since ${fmtTime(e.last_in)}` : t ? `Timed out at ${fmtTime(t.last)}`
     : hol ? `Holiday today · ${hol.name}` : lvToday?.state === "approved" ? `On leave today · ${lvToday.type}` : !sc ? "Rest day" : "No time-in yet today";
-  $("#hLine").textContent = t ? `worked today, first time-in ${fmtTime(t.first)} (${t.late ? `${t.lateBy} min late` : "on time"})${sc ? ` · schedule ${m2t(hm2m(sc.start))} to ${m2t(hm2m(sc.end))}` : ""}`
-    : hol || lvToday?.state === "approved" || !sc ? "Enjoy your day." : `Tap your ID at the attendance kiosk. Your time-in starts ${m2t(hm2m(sc.start))}.`;
+  $("#hLine").textContent = t ? `First time-in ${fmtTime(t.first)} · ${t.late ? `${t.lateBy} min late` : "on time"}`
+    : hol || lvToday?.state === "approved" || !sc ? "Enjoy your day." : `Tap your ID at the kiosk. Time-in starts ${m2t(hm2m(sc.start))}.`;
   $("#hPunches").innerHTML = t ? t.punches.map(p => `<span>In <b>${fmtTime(p.in)}</b> &rarr; ${p.out ? `Out <b>${fmtTime(p.out)}</b>` : "<b>now</b>"}</span>`).join("") : "";
   tickToday();
 
@@ -684,8 +750,7 @@ function renderToday(){
   const work = keysM.filter(k => isSchedDay(k) && (k < D.today || D.days.has(k)) && dayStatus(k) !== "leave");
   const present = keysM.filter(k => D.days.has(k)).map(k => D.days.get(k));
   const late = present.filter(d => d.late), under = present.reduce((s, d) => s + d.under, 0), noOut = present.filter(d => d.noOut).length;
-  $("#monthTitle").textContent = n.toLocaleDateString([], {month:"long",year:"numeric"});
-  $("#monthNote").textContent = "so far this month";
+  $("#segMonth").textContent = n.toLocaleDateString([], {month:"long"});
   $("#mPresent").textContent = present.length; $("#mPresentOf").textContent = `of ${work.length} working days`;
   $("#mOnTime").textContent = present.length ? Math.round((present.length-late.length)/present.length*100)+"%" : "--";
   let streak = 0; for (const k of [...D.days.keys()].sort().reverse()){ if (D.days.get(k).late) break; streak++; }
@@ -723,8 +788,10 @@ function renderPay(){
     ["Missing time-out", present.filter(d => d.noOut).length, "ask HR to fix"],
     ["Hours worked", fmtHrs(present.reduce((s,d)=>s+liveHours(d),0)), "so far"],
   ];
-  $("#ppRange").textContent = fmtRange(from, to);
-  $("#pp").innerHTML = cells.map(([a,b,c]) => `<div><small>${a}</small><b>${b}</b><em>${c}</em></div>`).join("");
+  const A = new Date(from+"T00:00:00");
+  $("#segPay").textContent = `${A.toLocaleDateString([], {month:"short"})} ${A.getDate()}–${Number(to.slice(8))}`;
+  $("#ppRange").textContent = `Pay period ${fmtRange(from, to)}`;
+  $("#kPay").innerHTML = cells.map(([a,b,c]) => `<div class="kpi"><small>${a}</small><b>${b}</b><em>${c}</em></div>`).join("");
 }
 function renderUpcoming(){
   const items = [], lim = new Date(D.today+"T00:00:00"); lim.setDate(lim.getDate()+75); const limK = ymd(lim);
@@ -732,22 +799,22 @@ function renderUpcoming(){
   for (const r of (D.leave?.requests || [])) if ((r.state === "approved" || r.state === "pending") && r.to > D.today) items.push({k:r.from > D.today ? r.from : D.today, cls:"lv", t:esc(r.type), s:`${fmtRange(r.from, r.to)} · ${r.state === "approved" ? "approved" : "waiting for approval"}`});
   const {to} = payPeriod(); items.push({k:to, cls:"pay", t:"Pay period ends", s:"Cutoff for this period's attendance"});
   items.sort((a,b) => a.k.localeCompare(b.k));
-  $("#upcoming").innerHTML = items.slice(0,5).map(i => { const d = new Date(i.k+"T00:00:00"), n = daysUntil(i.k);
+  $("#upcoming").innerHTML = items.slice(0,4).map(i => { const d = new Date(i.k+"T00:00:00"), n = daysUntil(i.k);
     return `<div class="row ${i.cls}"><span class="date"><small>${d.toLocaleDateString([], {month:"short"})}</small><b>${d.getDate()}</b></span><span><b>${i.t}</b><small class="s">${i.s}</small></span><span class="in">${n <= 0 ? "Today" : n === 1 ? "Tomorrow" : `in ${n} days`}</span></div>`; }).join("")
     || `<div class="empty">Nothing coming up</div>`;
 }
 function dayRow(k){
   const d = D.days.get(k), st = dayStatus(k), dt = new Date(k+"T00:00:00");
-  const extra = d ? [d.late ? `${d.lateBy}m late` : "", d.under ? `${fmtMin(d.under)} undertime` : "", d.noOut ? "no time-out" : ""].filter(Boolean).join(" · ") : "";
-  const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : d.noOut ? "?" : fmtTime(d.last)}</b> <span class="muted">&middot; ${d.punches.length} punch${d.punches.length>1?"es":""}${extra ? " &middot; " + extra : ""}</span>`
+  const extra = d ? [d.late ? `${d.lateBy}m late` : "", d.under ? `${fmtMin(d.under)} undertime` : ""].filter(Boolean).join(" · ") : "";
+  const times = d ? `<b>${fmtTime(d.first)}</b> &rarr; <b>${d.open && k===D.today ? "now" : d.noOut ? "no time-out" : fmtTime(d.last)}</b> ${extra ? `<span class="muted"> &middot; ${extra}</span>` : ""}`
     : `<span class="muted">${st === "leave" ? esc(D.leaveDays.get(k).type) : st === "hol" ? esc(holidayOn(k).name) : "No time-in recorded"}</span>`;
   return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${k===D.today?"Today":dt.toLocaleDateString([], {month:"long",day:"numeric"})}<br>${times}</span><span class="r"><b>${d ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`;
 }
 function tickToday(){
-  if (!D) return;
+  if (!D || view !== "today" || document.hidden) return;
   const t = D.days.get(D.today), h = liveHours(t), secs = Math.floor(h*3600);
   $("#hTimer").innerHTML = `${Math.floor(secs/3600)}:${pad(Math.floor(secs/60)%60)}<small>:${pad(secs%60)}</small>`;
-  $("#hBar").style.width = Math.min(100, h/D.daily_hours*100) + "%";
+  $("#hBar").style.transform = `scaleX(${Math.min(1, h/D.daily_hours)})`;
   $("#hTarget").textContent = `Target ${D.daily_hours}h`;
   const left = D.daily_hours - h;
   $("#hLeft").textContent = !t ? "" : left > 0 ? `${fmtHrs(left)} to go` : `Target reached, +${fmtHrs(-left)}`;
@@ -766,7 +833,9 @@ function renderCalendar(){
       : st==="abs" ? `<span class="t">No record</span>`
       : st==="hol" ? `<span class="t"><b>Holiday</b>${esc(holidayOn(k).name)}</span>`
       : (st==="leave" || st==="lpend") ? `<span class="t"><b>${st==="leave" ? "On leave" : "Pending"}</b>${esc(D.leaveDays.get(k).type.replace(/ Leave$/,""))}</span>` : `<span class="t"></span>`;
-    html += `<button class="cell ${cls}" data-day="${k}" aria-label="${fmtDay(k)}"><span class="n">${Number(k.slice(8))}</span>${t}</button>`;
+    const short = d ? (d.noOut ? "No out" : `${Math.round(liveHours(d)*10)/10}h`) : {abs:"Absent", hol:"Hol", leave:"Leave", lpend:"Pend."}[st] || "";
+    const said = {ok:"on time", late:"late", live:"timed in now", noout:"no time-out", abs:"no record", leave:"on leave", lpend:"leave pending", hol:"holiday", wk:"rest day"}[st];
+    html += `<button class="cell ${cls}" data-day="${k}" aria-label="${fmtDay(k)}${said ? ", " + said : ""}" ${k===D.today ? 'aria-current="date"' : ""} aria-pressed="${k===selDay}"><span class="n">${Number(k.slice(8))}</span>${t}${short ? `<i class="sh" aria-hidden="true">${short}</i>` : ""}</button>`;
   }
   $("#cal").innerHTML = html;
   const ahead = new Date(D.today+"T00:00:00"); ahead.setDate(ahead.getDate() + 92);
@@ -795,7 +864,7 @@ function renderDetail(){
   } else {
     body = `<div class="big">&ndash;</div><div>${PILL[st]||""}</div><p class="muted">${st==="abs" ? "No time-in was recorded on this working day. If you were on official business, at a seminar or forgot to tap your ID, request a correction." : st==="wk" ? "Rest day, no work scheduled." : st==="future" ? "This day hasn't happened yet." : "No time-in yet today."}</p>`;
   }
-  $("#detail").innerHTML = `<div class="ch"><h3>${k===D.today?"Today":fmtDay(k)}</h3></div>${body}${schedLine}${fixBtn}`;
+  $("#detail").innerHTML = `<div class="ch"><h2>${k===D.today?"Today":fmtDay(k)}</h2></div>${body}${schedLine}${fixBtn}`;
 }
 
 // ---------- HISTORY
@@ -816,6 +885,11 @@ function renderHistory(){
     const note = st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "";
     return `<tr data-day="${k}" style="cursor:pointer"><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"})}</td><td>${ai||"--"}</td><td>${ao||"--"}</td><td>${pi||"--"}</td><td class="${po === "?" ? "warn" : ""}">${po||"--"}</td><td class="num">${d && !d.noOut ? fmtHrs(liveHours(d)) : "--"}</td><td class="num ${d?.late ? "warn" : ""}">${d?.late ? d.lateBy + "m" : "--"}</td><td class="num ${d?.under ? "warn" : ""}">${d?.under ? fmtMin(d.under) : "--"}</td><td>${PILL[st]}${note ? ` <span class="muted" style="font-size:12px">${note}</span>` : ""}</td></tr>`; }).join("")
     || `<tr><td colspan="9" class="empty">Nothing to show for this month</td></tr>`;
+  $("#hList").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k), [ai, ao, pi, po] = amPm(d), dt = new Date(k+"T00:00:00");
+    const line = d ? `<b>${ai}</b> &rarr; <b>${po === "?" ? "no time-out" : po || "--"}</b>` : `<span class="muted">${st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "No time-in recorded"}</span>`;
+    const sub = d ? [ao && pi ? `Break ${ao}–${pi}` : "", d.late ? `${d.lateBy}m late` : "", d.under ? `${fmtMin(d.under)} undertime` : ""].filter(Boolean).join(" · ") : "";
+    return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${line}${sub ? `<small>${sub}</small>` : ""}</span><span class="r"><b>${d && !d.noOut ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`; }).join("")
+    || `<div class="empty">Nothing to show for this month</div>`;
   const worked = keys.filter(k => D.days.has(k)), ds = worked.map(k => D.days.get(k));
   $("#hSum").textContent = `${worked.length} days, ${fmtHrs(ds.reduce((s,d)=>s+liveHours(d),0))} · late ${fmtMin(ds.reduce((s,d)=>s+d.lateBy,0))} · undertime ${fmtMin(ds.reduce((s,d)=>s+d.under,0))}`;
 }
@@ -847,9 +921,9 @@ function renderLeave(){
   const L = D.leave || {types:[], requests:[]};
   $("#bals").innerHTML = L.types.map(t => t.allocated == null
     ? `<div class="bal"><small>${esc(t.name)}</small><b>No limit</b><small>${t.used ? `${t.used} day${t.used === 1 ? "" : "s"} used this year` : "Not used this year"}</small></div>`
-    : `<div class="bal ${t.remaining < t.allocated && t.remaining <= t.allocated*.2 ? "low" : ""}"><small>${esc(t.name)}</small><b>${t.remaining}<span>of ${t.allocated} days left</span></b><div class="track"><i style="width:${Math.max(0, t.remaining/t.allocated*100)}%"></i></div></div>`).join("")
+    : `<div class="bal ${t.remaining < t.allocated && t.remaining <= t.allocated*.2 ? "low" : ""}"><small>${esc(t.name)}</small><b>${t.remaining}<span>of ${t.allocated} day${t.allocated === 1 ? "" : "s"} left</span></b><div class="track"><i style="width:${Math.max(0, t.remaining/t.allocated*100)}%"></i></div></div>`).join("")
     || `<div class="empty">No leave types set up for you yet. Please ask the HR office.</div>`;
-  $("#balNote").textContent = D.mode === "demo" ? "Sample balances. Real ones come from Odoo Time Off." : "Pending requests are already taken off what's left.";
+  $("#balNote").textContent = D.mode === "demo" ? "Sample balances. Real balances come from HR." : "Pending requests are already taken off what's left.";
   const reqs = [...L.requests].sort((a, b) => b.from.localeCompare(a.from));
   $("#reqCount").textContent = reqs.length ? `${reqs.filter(r => r.state === "pending").length} waiting for approval` : "";
   $("#reqs").innerHTML = reqs.map(r => lreqHTML(r, L)).join("")
@@ -866,7 +940,7 @@ function lreqHTML(r, L){
   const A = new Date(r.from+"T00:00:00"), t = L.types.find(x => x.id === r.type_id), open = openReqs.has(r.id);
   const len = r.half ? (r.half === "am" ? "Half day (morning)" : "Half day (afternoon)") : `${r.days} working day${r.days === 1 ? "" : "s"}`;
   // at-a-glance line
-  const meta = [`Filed ${fmtShort(r.filed)}`, r.ref ? `Ref ${esc(r.ref)}` : ""];
+  const meta = [`Filed ${fmtShort(r.filed)}`];
   const until = daysUntil(r.from);
   if ((r.state === "approved" || r.state === "pending") && until > 0) meta.push(`<span class="soon">${until === 1 ? "Starts tomorrow" : `Starts in ${until} days`}</span>`);
   if (r.state === "approved" && r.from <= D.today && r.to >= D.today) meta.push('<span class="now">On leave now</span>');
@@ -880,24 +954,23 @@ function lreqHTML(r, L){
     : `${new Date(r.from+"T00:00:00").toLocaleDateString([], {weekday:"short", month:"long", day:"numeric"})} to ${new Date(r.to+"T00:00:00").toLocaleDateString([], {weekday:"short", month:"long", day:"numeric", year:"numeric"})}`;
   const approvers = steps.filter(s => s.label !== "Filed").map(s => s.label);
   const stepHTML = steps.map(s => `<div class="step ${s.state}"><i>${s.state === "done" ? ICON_OK : s.state === "refused" ? ICON_NO : ""}</i><b>${esc(s.label)}</b><em>${
-    s.state === "done" ? `${esc(s.by || "")}${s.at ? "<br>" + fmtStamp(s.at) : ""}` : s.state === "refused" ? `Not approved${s.by ? " by " + esc(s.by) : ""}${s.at ? "<br>" + fmtStamp(s.at) : ""}` : s.state === "wait" ? `Waiting${s.by ? " for " + esc(s.by) : ""}` : s.state === "skipped" ? "Not needed" : "Next"}</em></div>`).join("");
+    s.state === "done" ? `${esc(s.by || "")}${s.at ? "<br>" + fmtShort(s.at) : ""}` : s.state === "refused" ? `Not approved${s.by ? " by " + esc(s.by) : ""}${s.at ? "<br>" + fmtShort(s.at) : ""}` : s.state === "wait" ? `Waiting${s.by ? " for " + esc(s.by) : ""}` : s.state === "skipped" ? "Not needed" : "Next"}</em></div>`).join("");
   const note = r.state === "refused" ? '<div class="lnote bad">This request wasn\'t approved. Please see the HR office for the reason.</div>'
     : r.state === "cancelled" ? '<div class="lnote">You cancelled this request. No days were used.</div>'
     : r.state === "pending" ? '<div class="lnote">You can cancel while it\'s still waiting. Days are held from your balance until it\'s decided.</div>' : "";
   return `<div class="lreq ${open ? "open" : ""}" data-req="${r.id}">
     <span class="date"><small>${A.toLocaleDateString([], {month:"short"})}</small><b>${A.getDate()}</b></span>
-    <span class="what"><b>${esc(r.type)}</b> <span class="muted">&middot; ${fmtRange(r.from, r.to)} &middot; ${len}</span><small>${esc(r.reason || "")}</small><span class="meta">${meta.filter(Boolean).join("<span>&middot;</span>")}</span></span>
+    <span class="what"><b>${esc(r.type)}</b><span class="when">${fmtRange(r.from, r.to)} &middot; ${len}</span><small>${esc(r.reason || "")}</small><span class="meta">${meta.filter(Boolean).join("<span>&middot;</span>")}</span></span>
     <span class="r">${LSTATE[r.state] || ""}${sub ? `<small>${sub}</small>` : ""}${r.state === "pending" ? `<button class="linkbtn" data-cancel="${r.id}">Cancel request</button>` : ""}</span>
     <button class="chev" data-toggle="${r.id}" aria-expanded="${open}" aria-label="${open ? "Hide" : "Show"} details"><svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
     <div class="ldet"><div><div class="ldin">
       <div class="facts">
-        <div><small>Leave dates</small><span>${fullDates}</span></div>
         <div><small>Length</small><span>${len}</span></div>
         <div><small>Back at work</small><span>${back}</span></div>
         <div><small>Filed on</small><span>${fmtStamp(r.filed)}</span></div>
         <div><small>Balance</small><span>${bal}</span></div>
+        ${r.ref ? `<div><small>Reference</small><span>${esc(r.ref)}</span></div>` : ""}
         <div><small>Approved by</small><span>${approvers.length ? esc(approvers.join(", then ")) : "No approval needed"}</span></div>
-        ${r.reason ? `<div class="wide"><small>Reason</small><span>${esc(r.reason)}</span></div>` : ""}
       </div>
       <div class="steps">${stepHTML}</div>
       ${note}
@@ -916,10 +989,10 @@ function openLeave(){
   $("#lFrom").value = $("#lTo").value = ymd(next);
   $("#lReason").value = ""; lHalf = ""; setHalf("");
   $("#leaveForm").hidden = false; $("#leaveDone").hidden = true;
-  $("#sheet").classList.add("open"); setTimeout(() => $("#lTypes input:checked")?.focus(), 50);
+  openSheet("#sheet"); setTimeout(() => $("#lTypes input:checked")?.focus(), 50);
   checkLeave();
 }
-function closeLeave(){ $("#sheet").classList.remove("open"); }
+function closeLeave(){ closeSheet("#sheet"); }
 function setHalf(v){ lHalf = v; document.querySelectorAll("#lHalf button").forEach(b => b.classList.toggle("on", b.dataset.h === v)); }
 function leaveDraft(){
   const id = +($("#lTypes input:checked")?.value || 0), t = D.leave.types.find(x => x.id === id);
@@ -993,17 +1066,18 @@ function openFix(k){
   $("#fDate").min = ymd(minD); $("#fDate").max = D.today; $("#fDate").value = d;
   const sc = sched(d); $("#fIn").value = day ? day.first.slice(11,16) : sc ? sc.start : ""; $("#fOut").value = day?.last && !day.noOut ? day.last.slice(11,16) : sc ? sc.end : "";
   $("#fReason").value = ""; checkFix();
-  $("#fixSheet").classList.add("open"); setTimeout(() => $("#fKinds input:checked")?.focus(), 50);
+  openSheet("#fixSheet"); setTimeout(() => $("#fKinds input:checked")?.focus(), 50);
 }
 function checkFix(){
   const kind = $("#fKinds input:checked")?.value, box = $("#fSum");
-  $("#fInLbl").textContent = kind === "ob" ? "Left for / started (optional)" : "Actual time in";
-  $("#fOutLbl").textContent = kind === "ob" ? "Came back / ended (optional)" : "Actual time out";
+  $("#fInBox").hidden = kind === "out"; $("#fOutBox").hidden = kind === "in";
+  $("#fInLbl").textContent = kind === "ob" ? "Started (optional)" : "Actual time in";
+  $("#fOutLbl").textContent = kind === "ob" ? "Ended (optional)" : "Actual time out";
   let err = "";
   if (!$("#fDate").value || $("#fDate").value > D.today) err = "Pick a date up to today.";
   else if (kind === "in" && !$("#fIn").value) err = "Add the time you actually arrived.";
   else if (kind === "out" && !$("#fOut").value) err = "Add the time you actually left.";
-  else if ($("#fIn").value && $("#fOut").value && $("#fOut").value <= $("#fIn").value) err = "Time out must be after time in.";
+  else if (!["in","out"].includes(kind) && $("#fIn").value && $("#fOut").value && $("#fOut").value <= $("#fIn").value) err = "Time out must be after time in.";
   box.classList.toggle("bad", !!err);
   box.textContent = err || (kind === "ob" ? "Attach or bring the memo or certificate of attendance to HR." : "HR may ask for proof before fixing your record.");
   return err;
@@ -1011,13 +1085,14 @@ function checkFix(){
 async function sendFix(ev){
   ev.preventDefault();
   if (checkFix()) return;
-  const body = {date:$("#fDate").value, kind:$("#fKinds input:checked").value, time_in:$("#fIn").value || null, time_out:$("#fOut").value || null, reason:$("#fReason").value.trim()};
+  const kind = $("#fKinds input:checked").value;
+  const body = {date:$("#fDate").value, kind, time_in: kind === "out" ? null : $("#fIn").value || null, time_out: kind === "in" ? null : $("#fOut").value || null, reason:$("#fReason").value.trim()};
   if (body.reason.length < 3){ $("#fSum").classList.add("bad"); $("#fSum").textContent = "Please add a few words for HR."; $("#fReason").focus(); return; }
   const btn = $("#fSend"); btn.disabled = true; btn.textContent = "Sending...";
   try {
     if (MODE === "demo"){ const key = "att-demo-fix-" + demoSession.get(); let l = []; try { l = JSON.parse(localStorage.getItem(key) || "[]"); } catch(_){} l.push({...body, sent: iso(new Date(nowMs()))}); localStorage.setItem(key, JSON.stringify(l)); }
     else { const r = await fetch("api/correction", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)}); const d = await r.json(); if (!r.ok) throw new Error(d.error); }
-    $("#fixSheet").classList.remove("open"); await load(); setView("leave");
+    closeSheet("#fixSheet"); await load(); setView("leave");
   } catch (e){ $("#fSum").classList.add("bad"); $("#fSum").textContent = e.message || "Could not send. Please try again."; }
   finally { btn.disabled = false; btn.textContent = "Send to HR"; }
 }
@@ -1031,7 +1106,7 @@ function openMe(){
   $("#miInfo").innerHTML = cells.map(([a,b]) => `<div><small>${a}</small><span>${esc(b)}</span></div>`).join("");
   $("#miSched").innerHTML = days.map((n, i) => { const dow = (i+1) % 7, s = D.schedule[dow];
     return `<tr class="${dow === todayDow ? "today" : ""}"><td>${n}</td><td>${s ? `${m2t(hm2m(s.start))} to ${m2t(hm2m(s.end))}` : "Rest day"}</td></tr>`; }).join("");
-  $("#meSheet").classList.add("open");
+  openSheet("#meSheet"); setTimeout(() => $("#meClose").focus(), 50);
 }
 
 // ---------- PRINTABLE DTR (Daily Time Record)
@@ -1055,10 +1130,18 @@ function printDtr(){
   window.print();
 }
 
+// ---------- sheets
+let sheetReturn = null;
+function openSheet(id){ const s = $(id); sheetReturn = document.activeElement; s.inert = false; s.classList.add("open"); document.body.classList.add("locked"); $("#appView").inert = true; }
+function closeSheet(id){ const s = $(id); if (!s.classList.contains("open")) return; s.classList.remove("open"); s.inert = true;
+  if (!document.querySelector(".sheet.open")){ document.body.classList.remove("locked"); $("#appView").inert = false; if (sheetReturn && document.contains(sheetReturn)) sheetReturn.focus(); } }
+document.querySelectorAll(".sheet").forEach(s => s.inert = true);
+
 // ---------- shell
 function setView(v){
   view = v;
-  document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("on", b.dataset.view === v));
+  document.querySelectorAll("[data-view]").forEach(b => { b.classList.toggle("on", b.dataset.view === v); b.setAttribute("aria-current", b.dataset.view === v ? "page" : "false"); });
+  $(".head").dataset.v = v;
   document.querySelectorAll("[data-page]").forEach(p => p.hidden = p.dataset.page !== v);
   $("#title").textContent = PAGES[v][0];
   if (PAGES[v][1]) $("#subtitle").textContent = PAGES[v][1]; else if (D) renderToday();
@@ -1069,7 +1152,7 @@ function renderAll(){
   $("#meName").textContent = e.name; $("#meJob").textContent = e.job || e.dept;
   $("#meAv").textContent = e.name.split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
   const src = $("#source"); src.classList.toggle("demo", D.mode === "demo");
-  src.lastElementChild.textContent = D.mode === "demo" ? `Sample data · ${fmtTime(D.now)}` : `Live from Odoo · updated ${new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`;
+  src.lastElementChild.textContent = D.mode === "demo" ? `Sample data · ${fmtTime(D.now)}` : `Updated ${new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`;
   if (!calMonth) calMonth = new Date(toDate(D.now).getFullYear(), toDate(D.now).getMonth(), 1);
   fillMonths(); renderToday(); renderCalendar(); renderHistory(); renderLeave(); renderFixes();
   setView(view);
@@ -1249,14 +1332,14 @@ $("#logout").onclick = async () => { if (MODE === "demo") demoSession.set(0); el
 $("#refresh").onclick = load;
 $("#newLeave").onclick = openLeave;
 $("#newFix").onclick = () => openFix();
-$("#fCancel").onclick = () => $("#fixSheet").classList.remove("open");
+$("#fCancel").onclick = () => closeSheet("#fixSheet");
 $("#fixForm").addEventListener("submit", sendFix);
 $("#fixForm").addEventListener("input", checkFix);
 $("#fDate").addEventListener("change", () => { const k = $("#fDate").value, d = D.days.get(k), sc = sched(k); $("#fIn").value = d ? d.first.slice(11,16) : sc ? sc.start : ""; $("#fOut").value = d?.last && !d.noOut ? d.last.slice(11,16) : sc ? sc.end : ""; checkFix(); });
-$("#meBtn").onclick = openMe; $("#meClose").onclick = () => $("#meSheet").classList.remove("open");
+$("#meBtn").onclick = openMe; $("#meClose").onclick = () => closeSheet("#meSheet");
 $("#printDtr").onclick = () => D && printDtr();
-for (const id of ["#fixSheet", "#meSheet"]) $(id).addEventListener("click", e => { if (e.target === $(id)) $(id).classList.remove("open"); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") ["#fixSheet", "#meSheet"].forEach(id => $(id).classList.remove("open")); });
+for (const id of ["#fixSheet", "#meSheet"]) $(id).addEventListener("click", e => { if (e.target === $(id)) closeSheet(id); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") ["#fixSheet", "#meSheet"].forEach(id => closeSheet(id)); });
 document.addEventListener("click", e => { const b = e.target.closest("[data-fix]"); if (b){ e.stopPropagation(); openFix(b.dataset.fix); } }, true);
 $("#lCancel").onclick = closeLeave; $("#doneClose").onclick = closeLeave;
 $("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") closeLeave(); });
@@ -1279,11 +1362,20 @@ document.querySelectorAll(".theme").forEach(b => b.addEventListener("click", () 
   document.documentElement.setAttribute("data-theme", t);
   try { localStorage.setItem("att-theme", t); } catch(_){}
 }));
-document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => setView(b.dataset.view)));
+document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => { setView(b.dataset.view); scrollTo(0, 0); }));
+document.addEventListener("click", e => { const c = e.target.closest("[data-close]"); if (c) closeSheet(c.dataset.close); });
+$("#sumSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const pay = b.dataset.s === "pay";
+  $("#kMonth").hidden = pay; $("#kPay").hidden = !pay; $("#payNote").hidden = !pay;
+  document.querySelectorAll("#sumSeg button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); }); });
+$("#toToday").onclick = () => { const n = toDate(D.now); calMonth = new Date(n.getFullYear(), n.getMonth(), 1); selDay = null; renderCalendar(); };
+$("#meRefresh").onclick = () => { closeSheet("#meSheet"); load(); };
+$("#meLogout").onclick = () => { closeSheet("#meSheet"); $("#logout").click(); };
+document.addEventListener("visibilitychange", () => { if (!document.hidden) tickToday(); });
 document.addEventListener("click", ev => {
-  const g = ev.target.closest("[data-goto]"); if (g) return setView(g.dataset.goto);
+  const g = ev.target.closest("[data-goto]"); if (g){ setView(g.dataset.goto); return scrollTo(0, 0); }
   const day = ev.target.closest("[data-day]");
-  if (day && D){ selDay = day.dataset.day; const dt = new Date(selDay+"T00:00:00"); calMonth = new Date(dt.getFullYear(), dt.getMonth(), 1); renderCalendar(); setView("calendar"); }
+  if (day && D){ const fromCal = !!day.closest("#cal"); selDay = day.dataset.day; const dt = new Date(selDay+"T00:00:00"); calMonth = new Date(dt.getFullYear(), dt.getMonth(), 1); renderCalendar(); setView("calendar");
+    if (matchMedia("(max-width:960px)").matches) $("#detail").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"}); else if (!fromCal) scrollTo(0, 0); }
 });
 $("#prevM").onclick = () => { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1); selDay = null; renderCalendar(); };
 $("#nextM").onclick = () => { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 1); selDay = null; renderCalendar(); };
