@@ -62,6 +62,8 @@ button{cursor:pointer}
 .up .date b{font-size:17px}
 .up .row.hol .date{background:var(--hol-soft);color:var(--hol)}.up .row.hol .date small{color:var(--hol)}
 .up .row.lv .date{background:var(--leave-soft);color:var(--leave)}.up .row.lv .date small{color:var(--leave)}
+.up .row.bad .date{background:var(--bad-soft);color:var(--bad)}.up .row.bad .date small{color:var(--bad)}
+.up .row.chg .date{background:var(--accent-soft);color:var(--accent)}.up .row.chg .date small{color:var(--accent)}
 .up .row.pay .date{background:var(--ok-soft);color:var(--ok)}.up .row.pay .date small{color:var(--ok)}
 .up .row b{font-weight:600}.up .row small.s{display:block;color:var(--muted);font-size:12px}
 .up .in{font-size:12px;color:var(--muted);white-space:nowrap}
@@ -130,7 +132,8 @@ button{cursor:pointer}
 .tpl{position:relative;height:6px;margin-top:6px;border-radius:3px;background:rgba(255,255,255,.1)}
 .tp{position:absolute;top:0;height:6px;border-radius:3px;background:var(--gold)}
 .tn{position:absolute;top:-6px;height:50px;width:2px;margin-left:-1px;background:#fff;border-radius:1px;z-index:2}
-.tn em{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font:700 11px/1 Inter,sans-serif;font-style:normal;background:#fff;color:#5C0A17;padding:3px 5px;border-radius:5px;white-space:nowrap}
+.tn em.l{left:-2px;transform:none}.tn em.r{left:auto;right:-2px;transform:none}
+.tn em{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font:700 12px/1 Inter,sans-serif;font-style:normal;background:#fff;color:#5C0A17;padding:3px 5px;border-radius:5px;white-space:nowrap}
 .tlh{position:relative;height:15px;margin-top:6px;font-size:12px;opacity:.85}
 .tlh span{position:absolute;transform:translateX(-50%);white-space:nowrap}
 .tlh span.l{transform:none}.tlh span.r{transform:translateX(-100%)}
@@ -146,27 +149,30 @@ button{cursor:pointer}
 .crow.done .ci{background:var(--ok);border-color:var(--ok)}
 .crow.now .ci{border-color:var(--accent);box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 9px var(--accent)}
 .crow.miss .ci{background:var(--bad);border-color:var(--bad)}
-.crow.cxl{opacity:.6}.crow.cxl .cw b{text-decoration:line-through}
+.crow.cxl .cw b,.crow.cxl .ct{color:var(--muted)}.crow.cxl .cw b{text-decoration:line-through}
+.crow.away .ci{border-color:var(--warn);background:var(--warn-soft)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.linkbtn.fixl{color:var(--accent);font-size:12px;margin-top:2px;display:inline-flex}
 .crow.auto .ci{background:var(--bad);border-color:var(--bad)}.crow.auto .cw b{text-decoration:line-through;text-decoration-color:var(--bad)}
 .crow.due .ci{border-color:var(--warn);background:var(--warn-soft)}
-.crow.leave{opacity:.7}.crow.leave .ci{border-color:var(--leave);background:var(--leave-soft)}
+.crow.leave{color:var(--muted)}.crow.leave .ci{border-color:var(--leave);background:var(--leave-soft)}
 .crow.unk .ci{border-style:dashed;border-color:var(--warn)}
 .pill.bad{background:var(--bad-soft);color:var(--bad)}
 .tb.due{background:rgba(255,255,255,.3);border-color:var(--gold);border-width:2px}
 .crow .ct{font-weight:700;font-size:13px;white-space:nowrap}
 .crow .ct small{display:block;font-weight:500;color:var(--muted);font-size:12px}
 .crow .cw{min-width:0}.crow .cw b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.crow .cw small{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .cw small{display:block;color:var(--muted);font-size:12px;line-height:1.35}
 .crow .cw small em{font-style:normal;color:var(--ink-2)}
 .crow.now .ct,.crow.now .cw b{color:var(--accent)}
 .cflex{font-size:13px;color:var(--ink-2);padding:8px 0}
 .pill.chg{background:var(--accent-soft);color:var(--accent)}
 .cell{position:relative}
-.cell.chg::after{content:"";position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--card)}
+.cell.chg::after{content:"";position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 2px var(--card)}
 .mirule{font-size:13px;color:var(--ink-2);margin:0 0 8px}
 .schedtbl td.blk{line-height:1.45;text-align:left;padding-left:12px}
 .schedtbl td.blk span{display:block}
-.schedtbl td.blk small{color:var(--muted)}
+.schedtbl td.blk small{color:var(--muted);font-size:12px}
 .teacher #recentCard{grid-column:span 7}
 @media (max-width:960px){.teacher #recentCard{grid-column:span 12}}
 @media (max-width:720px){.crow{grid-template-columns:18px 76px minmax(0,1fr);}.crow .ctag{grid-column:3}.tlk{gap:10px}}
@@ -216,7 +222,7 @@ button{cursor:pointer}
 .step.wait i{border-color:var(--warn);background:var(--warn-soft)}
 .step.wait i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn)}
 @keyframes wp{50%{transform:scale(.5);opacity:.5}}
-.step.skipped{opacity:.45}
+.step.skipped{color:var(--muted)}.step.skipped *{color:var(--muted)!important;border-color:var(--line)!important}
 .step b{display:block;font-weight:600;padding:0 4px}
 .step em{display:block;font-style:normal;color:var(--muted);font-size:12px;margin-top:2px;padding:0 4px;overflow-wrap:anywhere}
 .lnote{margin-top:14px;font-size:13px;color:var(--ink-2);display:flex;gap:8px;align-items:flex-start}
@@ -227,7 +233,7 @@ button{cursor:pointer}
 .lreq .what b{font-weight:600}
 .lreq .what small{display:block;color:var(--ink-2);font-size:13px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lreq .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.linkbtn{border:0;background:none;color:var(--bad);font-size:12px;padding:2px 0;text-decoration:underline;text-underline-offset:2px}
+.linkbtn{border:0;background:none;color:var(--bad);font-size:12px;padding:2px 0;text-decoration:underline;text-underline-offset:2px;min-height:32px;display:inline-flex;align-items:center}
 /* request sheet */
 .sheet{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:rgba(18,14,15,.45);opacity:0;pointer-events:none;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
 .sheet.open{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .25s}
@@ -407,7 +413,10 @@ button.day:hover{background:var(--soft)}
 .cell.wk,.cell.future{background:transparent;border-color:var(--soft)}
 .cell.pad{visibility:hidden}
 .cell.today{border-color:var(--maroon)}
-.cell.sel{box-shadow:0 0 0 3px var(--accent)}
+#cal .cell.sel{background:var(--maroon);border-color:var(--maroon);box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--maroon)}
+#cal .cell.sel .n,#cal .cell.sel .t,#cal .cell.sel .t b,#cal .cell.sel .sh,#cal .cell.sel small{color:#fff}
+textarea[aria-invalid=true],input[aria-invalid=true]{border-color:var(--bad);box-shadow:0 0 0 3px var(--bad-soft)}
+.linkbtn.armed{color:var(--bad);font-weight:700}
 button.cell:hover{filter:brightness(.97)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
@@ -439,10 +448,10 @@ button.cell:hover{filter:brightness(.97)}
   .me{margin-left:auto;border:0;padding:0;gap:4px}
   .me .txt,#refresh,#logout{display:none}
   .tabs{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:20;margin:0;gap:2px;padding:4px;border-radius:20px;background:var(--card);box-shadow:0 10px 30px -12px rgba(21,23,28,.45),0 0 0 1px var(--line)}
-  .tabs button{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:2px;padding:6px 2px;min-height:52px;font-size:12px;font-weight:600;border-radius:16px}
-  .tabs .ico{width:20px;height:20px}
-  .iconbtn,.chev{width:44px;height:44px;flex:none}
-  .btn.sm{height:44px}
+  .tabs button{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:1px;padding:5px 2px;min-height:46px;font-size:12px;font-weight:600;border-radius:16px}
+  .tabs .ico{width:18px;height:18px}
+  .iconbtn,.chev{width:40px;height:40px;flex:none}
+  .btn.sm{height:38px;padding:0 12px;font-size:13px}
   .filters .input{height:44px}
   .linkbtn{padding:12px 0;margin:-10px 0}
   .kinds span{padding:11px 14px}
@@ -452,6 +461,8 @@ button.cell:hover{filter:brightness(.97)}
   .tabs{max-width:480px;margin-inline:auto}
 }
 @media (pointer:coarse){
+  .tabs button{min-height:44px}
+  .kinds span{padding:11px 14px}
   .iconbtn,.chev{width:44px;height:44px;flex:none}
   .btn.sm,.filters .input{height:44px}
   .seg button,.seg.mini button{min-height:44px}
@@ -465,13 +476,19 @@ button.cell:hover{filter:brightness(.97)}
   #source{flex:none;padding:4px 9px;margin-top:2px}
   .grid{gap:10px}
   .card{padding:12px}
-  .timer{font-size:44px;margin:10px 0 2px}
+  .timer{font-size:40px;margin:8px 0 2px}
+  .card h2{font-size:14px}
+  .crow{padding:6px 0;gap:8px}.crow .ct{font-size:12px}.crow .cw b{font-size:13px}
+  .day{padding:6px 2px}.day .date,.up .date{width:40px;height:40px}.date b{font-size:15px}
+  .up .row:nth-child(n+4){display:none}
+  .bal{padding:8px 10px}.bal b{font-size:17px}
+  .wrap{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
   .bar{margin:8px 0 6px}
   .punches{margin-top:8px}.punches span{padding:4px 8px}
-  .week{height:96px}
+  .week{height:80px}
   #sumCard .kpis,#sumCard #kMonth,.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .kpi{padding:8px 10px}
-  .kpi b{font-size:18px}
+  .kpi b{font-size:17px}
   .kpi em{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   #recent .day:nth-child(n+4){display:none}
   .cal{gap:3px}
@@ -482,7 +499,7 @@ button.cell:hover{filter:brightness(.97)}
   .s8>.ch{flex-wrap:wrap;gap:8px}
   .monthnav{flex:1 1 100%;justify-content:space-between}
   .monthnav b{min-width:0;white-space:nowrap}
-  .legend{flex:1 1 100%;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+  .legend{flex:1 1 100%;gap:6px 12px;flex-wrap:wrap}
   .detail{scroll-margin-top:10px}
   .tblwrap{display:none}
   .hlist{display:block}
@@ -505,7 +522,7 @@ button.cell:hover{filter:brightness(.97)}
     <h1>My Attendance</h1>
     <p>St. Clare College of Caloocan faculty and staff: sign in to see your time-ins, time-outs and hours.</p>
     <div class="msg hint" id="demoHint" hidden></div>
-    <div class="msg err" id="loginErr" hidden></div>
+    <div class="msg err" id="loginErr" role="alert" hidden></div>
     <label class="field"><span>Work email</span><input class="input" id="email" type="email" autocomplete="username" required placeholder="Your work email"></label>
     <label class="field"><span>Attendance PIN</span><input class="input pin" id="pin" type="password" inputmode="numeric" autocomplete="current-password" required placeholder="&bull;&bull;&bull;&bull;"></label>
     <button class="btn dark block" id="loginBtn" type="submit">Sign in</button>
@@ -592,7 +609,7 @@ button.cell:hover{filter:brightness(.97)}
     <div class="card s8">
       <div class="ch">
         <div class="monthnav"><button class="iconbtn" id="prevM" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b id="calTitle"></b><button class="iconbtn" id="nextM" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><button class="btn sm" id="toToday" type="button">Today</button></div>
-        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span><span><i style="background:var(--hol)"></i>Holiday</span><span id="lgChg" hidden><i style="background:var(--accent);border-radius:50%"></i>Class change</span></div>
+        <div class="legend"><span><i style="background:var(--ok)"></i>On time</span><span><i style="background:var(--gold)"></i>Late</span><span><i style="background:var(--bad)"></i>No record</span><span><i style="background:var(--leave)"></i>On leave</span><span><i style="background:var(--hol)"></i>Holiday</span><span id="lgChg" hidden><i style="background:var(--warn);border-radius:50%"></i>Class change</span></div>
       </div>
       <div class="cal" id="cal"></div>
     </div>
@@ -621,8 +638,8 @@ button.cell:hover{filter:brightness(.97)}
   <section data-page="history" hidden>
     <div class="card">
       <div class="filters">
-        <select class="input" id="hMonth"></select>
-        <select class="input" id="hFilter"><option value="">All days</option><option value="late">Late only</option><option value="abs">No record only</option><option value="leave">On leave only</option><option value="noout">Missing time-out</option><option value="hol">Holidays</option></select>
+        <select class="input" id="hMonth" aria-label="Month"></select>
+        <select class="input" id="hFilter" aria-label="Show days"><option value="">All days</option><option value="late">Late only</option><option value="abs">No record only</option><option value="leave">On leave only</option><option value="noout">Missing time-out</option><option value="hol">Holidays</option></select>
         <span class="muted" id="hSum" style="margin-right:auto"></span>
         <button class="btn sm" id="printDtr"><svg class="ico" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg>Print DTR</button>
         <button class="btn sm dark" id="csv"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CSV</button>
@@ -639,14 +656,14 @@ button.cell:hover{filter:brightness(.97)}
       <div class="shead"><h2 id="fixTitle">Request a correction</h2><button class="iconbtn" type="button" data-close="#fixSheet" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
       <div class="muted" style="font-size:13px">HR checks it and fixes your record.</div>
       <div class="two" style="margin-top:14px"><label class="field"><span>Date</span><input class="input" type="date" id="fDate" required></label><div></div></div>
-      <div class="field"><span>What happened?</span></div>
-      <div class="kinds" id="fKinds"></div>
+      <div class="field"><span id="fKindsLbl">What happened?</span></div>
+      <div class="kinds" id="fKinds" role="radiogroup" aria-labelledby="fKindsLbl"></div>
       <div class="two">
         <label class="field" id="fInBox"><span id="fInLbl">Actual time in</span><input class="input" type="time" id="fIn"></label>
         <label class="field" id="fOutBox"><span id="fOutLbl">Actual time out</span><input class="input" type="time" id="fOut"></label>
       </div>
       <label class="field"><span>Details</span><textarea class="input" id="fReason" maxlength="500" placeholder="e.g. Kiosk was offline when I arrived. Seminar at DepEd NCR, memo no. 12." required></textarea></label>
-      <div class="sum" id="fSum">HR may ask for proof, like a memo or certificate of attendance.</div>
+      <div class="sum" id="fSum" role="status" aria-live="polite">HR may ask for proof, like a memo or certificate of attendance.</div>
       <div class="actions"><button class="btn" type="button" id="fCancel">Cancel</button><button class="btn dark" type="submit" id="fSend">Send to HR</button></div>
     </form>
   </div>
@@ -660,9 +677,9 @@ button.cell:hover{filter:brightness(.97)}
     <div class="info" id="miInfo"></div>
     <h2 style="margin:0 0 6px;font-size:14px">My schedule</h2>
     <p class="mirule" id="miRule"></p>
-    <div class="seg mini" id="miWeek" hidden style="margin:0 0 8px;width:max-content"><button type="button" data-w="0" class="on">Week A</button><button type="button" data-w="1">Week B</button></div>
+    <div class="seg mini" id="miWeek" role="group" aria-label="Schedule week" hidden style="margin:0 0 8px;width:max-content"><button type="button" data-w="0" class="on">Week A</button><button type="button" data-w="1">Week B</button></div>
     <table class="schedtbl" id="miSched"></table>
-    <div class="help"><b>Need help?</b> For a wrong record, PIN reset or leave questions, contact the HR office: <a href="tel:+63282324483"><b>(02) 8232-4483</b></a>, Zabarte Road, Camarin, Caloocan.</div>
+    <div class="help"><b>Need help?</b> For a wrong record, PIN reset or leave questions, contact the HR office: <a href="tel:+63282324483" style="display:inline-block;padding:10px 0"><b>(02) 8232-4483</b></a>, Zabarte Road, Camarin, Caloocan.</div>
     <div class="meact"><button class="btn sm" type="button" id="meRefresh">Refresh</button><button class="btn sm" type="button" id="meLogout">Sign out</button></div>
   </div>
 </div>
@@ -674,15 +691,15 @@ button.cell:hover{filter:brightness(.97)}
     <form id="leaveForm" novalidate>
       <div class="shead"><h2 id="sheetTitle">Request leave</h2><button class="iconbtn" type="button" data-close="#sheet" aria-label="Close"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
       <div class="muted" style="font-size:13px">HR reviews and approves it. Track it under My requests.</div>
-      <div class="field" style="margin-top:16px"><span>Type of leave</span></div>
-      <div class="types" id="lTypes"></div>
+      <div class="field" style="margin-top:16px"><span id="lTypesLbl">Type of leave</span></div>
+      <div class="types" id="lTypes" role="radiogroup" aria-labelledby="lTypesLbl"></div>
       <div class="two">
         <label class="field"><span>From</span><input class="input" type="date" id="lFrom" required></label>
         <label class="field"><span>To</span><input class="input" type="date" id="lTo" required></label>
       </div>
-      <div class="seg" id="lHalf" hidden><button type="button" data-h="" class="on">Full day</button><button type="button" data-h="am">AM only</button><button type="button" data-h="pm">PM only</button></div>
+      <div class="seg" id="lHalf" role="group" aria-label="Part of day" hidden><button type="button" data-h="" class="on">Full day</button><button type="button" data-h="am">AM only</button><button type="button" data-h="pm">PM only</button></div>
       <label class="field"><span>Reason</span><textarea class="input" id="lReason" maxlength="500" placeholder="e.g. family trip, medical check-up" required></textarea></label>
-      <div class="sum" id="lSum"></div>
+      <div class="sum" id="lSum" role="status" aria-live="polite"></div>
       <div class="actions"><button class="btn" type="button" id="lCancel">Cancel</button><button class="btn dark" type="submit" id="lSend">Send request</button></div>
     </form>
     <div class="sentok" id="leaveDone" hidden>
@@ -731,14 +748,15 @@ function prepCalendar(x){
 // classes: weekly load (Week A / Week B like Odoo's two-week schedules) + date changes from HR / Registrar
 const ORD_ANCHOR = {k:"2026-01-05", ord:739621};          // Python date(2026,1,5).toordinal()
 function weekType(k){ const ord = ORD_ANCHOR.ord + Math.round((Date.parse(k+"T00:00:00Z") - Date.parse(ORD_ANCHOR.k+"T00:00:00Z"))/864e5); return Math.floor((ord - 1)/7) % 2; }
-let LEAVE_READY = false;                                 // leave is applied to classes only once D.leaveDays is built
+let LEAVE_READY = false;
+const inTerm = (b, k) => (!b.from || b.from <= k) && (!b.until || k <= b.until);   // semester dates (Odoo Calendar classes)                                 // leave is applied to classes only once D.leaveDays is built
 function classesOn(k, src = CAL){
   if (!src?.classload) return null;                       // office staff keep fixed hours
   const dow = new Date(k+"T00:00:00").getDay(), wt = weekType(k), hol = src === CAL && src.holidayMap?.get(k);
   // holiday: regular classes don't meet; only make-up / substitute classes set for that date do
-  const day = (hol ? [] : (src.classload[dow] || []).filter(b => b.week == null || +b.week === wt)).map(b => ({...b}));
+  const day = (hol ? [] : (src.classload[dow] || []).filter(b => (b.week == null || +b.week === wt) && inTerm(b, k))).map(b => ({...b}));
   for (const c of (src.changes || []).filter(c => c.date === k)){
-    if (c.kind === "makeup" || c.kind === "sub"){ day.push({start:c.start, end:c.end, subject:c.subject, section:c.section, room:c.room, tag:c.kind, note:c.note}); continue; }
+    if (c.kind === "makeup" || c.kind === "sub" || c.kind === "moved" || c.kind === "class"){ day.push({start:c.start, end:c.end, subject:c.subject, section:c.section, room:c.room, tag: c.kind === "class" ? undefined : c.kind, note:c.note}); continue; }
     // a cancellation or room change covers every class it overlaps (whole-day closures, typhoon days), or the class starting at that time
     const hits = day.filter(b => !b.flex && (c.end ? b.start < c.end && b.end > c.start : b.start === c.start));
     for (const b of hits){ if (c.kind === "cancel"){ b.cancelled = true; b.note = c.note; } else if (c.kind === "room"){ b.room = c.room; b.tag = "room"; b.note = c.note; } }
@@ -799,7 +817,9 @@ function classCheck(b, k, d){
   if (b.onLeave) return {state:"leave"};
   if (b.flex) return {state:"flex"};
   if (d?.noOut && k < D.today){ const open = d.punches.find(p => !p.out); if (open && hm2m(b.end) > minsOf(open.in)) return {state:"unk"}; }
-  const a0 = hm2m(b.start), z = hm2m(b.end), g = CANCEL_MIN(), iv = presence(d), a = a0;
+  const a = hm2m(b.start), z = hm2m(b.end), g = CANCEL_MIN();
+  // today an open punch means the teacher is on campus right now (and from now on, until they tap out)
+  const iv = presence(d).map(([x, y], i) => k === D.today && d && !d.punches[i].out ? [x, 24*60] : [x, y]);
   const lp = Math.min(a + g, (a + z) / 2), ep = Math.max(z - g, (a + z) / 2);   // check points; short classes meet in the middle
   const nowM = k < D.today ? 24*60 : k > D.today ? -1 : minsOf(iso(new Date(nowMs())));
   if (nowM < a) return {state:"next"};
@@ -812,11 +832,11 @@ function classCheck(b, k, d){
   }
   const left = Math.max(...inside.map(([, y]) => y));
   if (nowM >= ep && Math.min(left, z) < ep) return {state:"early", by: z - Math.min(left, z)};   // gone before the last 15 min (leaving exactly at 15 min is fine)
-  if (nowM < z && !onCampusAt(iv, nowM)) return left < ep ? {state:"early", by: z - left} : {state:"now"};
+  if (nowM < ep && !onCampusAt(iv, nowM)) return {state:"away", back: ep};   // timed out mid-class: cancelled unless back before the last 15 min
   return {state: nowM < z ? "now" : "done"};
 }
 const AUTO = ["late", "early", "absent", "due-x"];
-const NOT_COUNTED = ["next", "due", "leave", "unk", "cxl", "flex"];
+const NOT_COUNTED = ["next", "due", "away", "leave", "unk", "cxl", "flex"];
 function classState(b, k, d){ const s = classCheck(b, k, d).state; return s === "due-x" ? "absent" : s; }
 const holidayOn = k => CAL?.holidayMap?.get(k) || null;
 const isSchedDay = k => !!sched(k) && !holidayOn(k);
@@ -881,7 +901,7 @@ function derive(){
 function eachDay(a, b){ const was = LEAVE_READY; LEAVE_READY = false;
   try { const out = [], d = new Date(a+"T00:00:00"), end = new Date(b+"T00:00:00"); while (d <= end){ const k = ymd(d); if (isSchedDay(k)) out.push(k); d.setDate(d.getDate()+1); } return out; }
   finally { LEAVE_READY = was; } }
-function wouldWork(k){ const dow = new Date(k+"T00:00:00").getDay(); return CAL?.classload ? !!(CAL.classload[dow] || []).length : !!CAL?.schedule?.[dow]; }
+function wouldWork(k){ const dow = new Date(k+"T00:00:00").getDay(); return CAL?.classload ? (CAL.classload[dow] || []).some(b => inTerm(b, k)) : !!CAL?.schedule?.[dow]; }
 function dayStatus(k){
   const d = D.days.get(k), lv = D.leaveDays?.get(k), hol = holidayOn(k);
   if (d) return d.open && k === D.today ? "live" : d.noOut ? "noout" : d.late ? "late" : "ok";
@@ -972,17 +992,21 @@ function classTally(keys){   // classes held vs attended, up to now
   return {total, done, cxl, auto};
 }
 const ICO_OK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>', ICO_NO = '<svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>';
-const TAG = {makeup:["Make-up","chg"], sub:["Substitute","hol"], room:["Room change","pend"]};
+const TAG = {makeup:["Make-up","chg"], moved:["Moved","chg"], sub:["Substitute","chg"], room:["Room change","chg"]};
 function classRows(cls, k, d){
   return cls.map(b => {
     if (b.flex) return `<div class="cflex"><b>Flexible:</b> ${b.hours}h ${esc(b.subject || "")}, no fixed time-in</div>`;
     const chk = classCheck(b, k, d), st = chk.state === "due-x" ? "absent" : chk.state;
-    const tag = b.cancelled ? ["Cancelled","off"] : st === "late" ? [`Cancelled · ${chk.by}m late`, "bad"] : st === "early" ? [`Cancelled · left ${chk.by}m early`, "bad"]
+    const tag = b.cancelled ? ["Cancelled by school","off"] : st === "late" ? [`Cancelled · ${chk.by} min late`, "bad"] : st === "early" ? [`Cancelled · left ${chk.by} min early`, "bad"]
+      : st === "away" ? [`Back by ${m2t(Math.floor(chk.back))} or cancelled`, "pend"]
       : st === "absent" ? ["Cancelled · absent", "bad"] : st === "leave" ? ["On leave", "leave"] : st === "unk" ? ["No time-out · ask HR", "pend"] : st === "due" ? [`Tap in by ${m2t(hm2m(b.start) + CANCEL_MIN())}`, "pend"] : TAG[b.tag];
     const where = [b.section, b.room].filter(Boolean).map(esc).join(" · ");
-    return `<div class="crow ${st}${AUTO.includes(st) ? " auto" : ""}"><i class="ci">${st === "done" ? ICO_OK : AUTO.includes(st) ? ICO_NO : ""}</i>
+    const said = {done:"Held", now:"In progress", due:"Started, tap in now", away:"You are away", next:"Upcoming", late:"Cancelled, late", early:"Cancelled, left early", absent:"Cancelled, absent", cxl:"Cancelled by school", leave:"On leave", unk:"No time-out, HR decides"}[st] || "";
+    const d60 = new Date(D.today+"T00:00:00"); d60.setDate(d60.getDate() - 60);
+    const fix = AUTO.includes(st) && k >= ymd(d60) ? `<button class="linkbtn fixl" type="button" data-fix="${k}">Wrong? Request a correction</button>` : "";
+    return `<div class="crow ${st}${AUTO.includes(st) ? " auto" : ""}"><i class="ci">${st === "done" ? ICO_OK : AUTO.includes(st) ? ICO_NO : ""}<span class="sr-only">${said}</span></i>
       <span class="ct">${m2t(hm2m(b.start))}<small>–${m2t(hm2m(b.end))}</small></span>
-      <span class="cw"><b>${esc(b.subject || "Class")}</b><small>${where}${b.note ? ` · <em>${esc(b.note)}</em>` : ""}</small></span>
+      <span class="cw"><b>${esc(b.subject || "Class")}</b><small>${where}${b.note ? ` · <em>${esc(b.note)}</em>` : ""}</small>${fix}</span>
       ${tag ? `<span class="ctag"><span class="pill ${tag[1]}">${tag[0]}</span></span>` : "<span></span>"}</div>`;
   }).join("");
 }
@@ -994,14 +1018,15 @@ function renderClassesToday(sc, t){
   $("#hOffice").hidden = teacher && anyLive && !sc?.flex;
   $("#hTL").hidden = $("#hNext").hidden = !(teacher && anyLive && !sc?.flex);
   if (!has) return;
-  const live = liveClasses(cls), states = live.map(b => classState(b, D.today, t));
+  const live = liveClasses(cls), checks = live.map(b => classCheck(b, D.today, t)), states = checks.map(c => c.state === "due-x" ? "absent" : c.state);
   $("#clsList").innerHTML = classRows(cls, D.today, t);
   const doneN = states.filter(s => s === "done").length, autoN = states.filter(s => AUTO.includes(s)).length, schoolN = cls.filter(b => b.cancelled).length, lvN = cls.filter(b => b.onLeave).length;
   $("#clsCount").textContent = [live.length ? `${doneN} of ${live.length} done` : "", autoN ? `${autoN} auto-cancelled` : "", schoolN ? `${schoolN} cancelled by school` : "", lvN ? `${lvN} on leave` : ""].filter(Boolean).join(" · ");
   if (!live.length || sc?.flex) return;
   // next / current class line
-  const dueI = states.indexOf("due"), nowI = states.indexOf("now"), nextI = states.indexOf("next"), b = live[dueI >= 0 ? dueI : nowI >= 0 ? nowI : nextI];
-  $("#hNext").innerHTML = dueI >= 0 ? `Tap in by ${m2t(hm2m(b.start) + CANCEL_MIN())} <span>· ${esc(b.subject)} started ${m2t(hm2m(b.start))}; after that it's cancelled</span>`
+  const awayI = states.indexOf("away"), dueI = states.indexOf("due"), nowI = states.indexOf("now"), nextI = states.indexOf("next"), b = live[awayI >= 0 ? awayI : dueI >= 0 ? dueI : nowI >= 0 ? nowI : nextI];
+  $("#hNext").innerHTML = awayI >= 0 ? `Tap in by ${m2t(Math.floor(checks[awayI].back))} <span>· to keep ${esc(b.subject)}, ${esc(b.section || "")}; after that it's cancelled</span>`
+    : dueI >= 0 ? `Tap in by ${m2t(hm2m(b.start) + CANCEL_MIN())} <span>· ${esc(b.subject)} started ${m2t(hm2m(b.start))}; after that it's cancelled</span>`
     : nowI >= 0 ? `In class until ${m2t(hm2m(b.end))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
     : nextI >= 0 ? `Next class ${m2t(hm2m(b.start))} <span>· ${esc(b.subject)}, ${esc(b.section || "")} · ${esc(b.room || "")}${b.tag === "room" ? " (room changed)" : ""}</span>`
     : `Classes done for today <span>· ${doneN} of ${live.length} held${autoN ? `, ${autoN} auto-cancelled` : ""}</span>`;
@@ -1020,8 +1045,9 @@ function renderClassesToday(sc, t){
     hrs.push(`<span class="${edge}" style="left:${pc(m)}">${((Math.floor(m/60) + 11) % 12) + 1}${m % 60 ? ":" + pad(m % 60) : ""}${m < 720 ? "am" : "pm"}</span>`);
   }
   const showNow = nowM > lo && nowM < hi, nowLbl = m2t(nowM).replace(/\s?[AP]M$/i, "");
-  $("#hTL").innerHTML = `<div class="tlx" role="img" aria-label="Today's classes and your time on campus">
-      <div class="tlt">${ticks.join("")}${blocks}${showNow ? `<s class="tn" style="left:${pc(nowM)}"><em>Now ${nowLbl}</em></s>` : ""}</div>
+  const said = live.map((x, i) => `${m2t(hm2m(x.start))} ${x.subject} ${({done:"held", now:"in progress", due:"started", away:"you are away", next:"next", late:"cancelled", early:"cancelled", absent:"cancelled"})[states[i]] || ""}`).join("; ");
+  $("#hTL").innerHTML = `<div class="tlx" role="img" aria-label="${esc("Today's classes: " + said + (iv.length ? `. On campus since ${m2t(iv[0][0])}` : ""))}">
+      <div class="tlt">${ticks.join("")}${blocks}${showNow ? `<s class="tn" style="left:${pc(nowM)}"><em class="${pos(nowM) < 12 ? "l" : pos(nowM) > 88 ? "r" : ""}">Now ${nowLbl}</em></s>` : ""}</div>
       <div class="tpl">${pres}</div>
       <div class="tlh">${hrs.join("")}</div></div>
     <div class="tlk"><span><i></i>Class</span><span><i class="x"></i>Missed / cancelled</span><span><i class="g"></i>On campus</span></div>`;
@@ -1057,10 +1083,10 @@ function renderUpcoming(){
   for (const o of (D.holidays || [])) if (o.date > D.today && o.date <= limK) items.push({k:o.date, cls:"hol", t:esc(o.name), s: o.kind === "regular" ? "Regular holiday" : o.kind === "special" ? "Special non-working day" : "No work"});
   for (const r of (D.leave?.requests || [])) if ((r.state === "approved" || r.state === "pending") && r.to > D.today) items.push({k:r.from > D.today ? r.from : D.today, cls:"lv", t:esc(r.type), s:`${fmtRange(r.from, r.to)} · ${r.state === "approved" ? "approved" : "waiting for approval"}`});
   const lim2 = new Date(D.today+"T00:00:00"); lim2.setDate(lim2.getDate()+14); const lim2K = ymd(lim2);
-  for (const c of (D.changes || [])) if (c.date >= D.today && c.date <= lim2K && c.kind !== "room"){
+  for (const c of (D.changes || [])) if (c.date >= D.today && c.date <= lim2K && c.kind !== "room" && c.kind !== "class"){
     const base = (classesOn(c.date) || []).find(b => b.start === c.start) || c;
-    items.push({k:c.date, cls: c.kind === "cancel" ? "hol" : "lv", t: c.kind === "cancel" ? `Class cancelled · ${esc(base.subject || "")}` : c.kind === "makeup" ? `Make-up class · ${esc(c.subject)}` : `Substitute class · ${esc(c.subject)}`,
-      s: `${m2t(hm2m(c.start))}${base.end ? "–" + m2t(hm2m(base.end)) : ""} · ${esc(base.section || "")}${base.room ? " · " + esc(base.room) : ""}`}); }
+    items.push({k:c.date, cls: c.kind === "cancel" ? "bad" : "chg", t: c.kind === "cancel" ? `Class cancelled · ${esc(base.subject || "")}` : c.kind === "makeup" ? `Make-up class · ${esc(c.subject)}` : c.kind === "moved" ? `Class moved · ${esc(c.subject)}` : `Substitute class · ${esc(c.subject)}`,
+      s: `${m2t(hm2m(c.start))}${base.end ? "–" + m2t(hm2m(base.end)) : ""} · ${esc(base.section || "")}${base.room ? " · " + esc(base.room) : ""}${c.note ? " · " + esc(c.note) : ""}`}); }
   const {to} = payPeriod(); items.push({k:to, cls:"pay", t:"Pay period ends", s:"Cutoff for this period's attendance"});
   items.sort((a,b) => a.k.localeCompare(b.k));
   $("#upcoming").innerHTML = items.slice(0,4).map(i => { const d = new Date(i.k+"T00:00:00"), n = daysUntil(i.k);
@@ -1147,6 +1173,7 @@ function dayNote(k){   // schedule changes and class attendance for one day
   const n = [], cx = cls.filter(b => b.cancelled).length;
   if (cls.some(b => b.tag === "makeup")) n.push("Make-up class");
   if (cls.some(b => b.tag === "sub")) n.push("Substitute class");
+  if (cls.some(b => b.tag === "moved")) n.push("Class moved");
   if (cls.some(b => b.tag === "room")) n.push("Room changed");
   if (cx) n.push(`${cx} class${cx > 1 ? "es" : ""} cancelled`);
   if (d?.autoCxl) n.push(`${d.autoCxl} class${d.autoCxl > 1 ? "es" : ""} auto-cancelled`);
@@ -1168,10 +1195,10 @@ function renderHistory(){
   const keys = historyKeys();
   $("#hBody").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k), [ai, ao, pi, po] = amPm(d);
     const note = [st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "", esc(dayNote(k))].filter(Boolean).join(" · ");
-    return `<tr data-day="${k}" style="cursor:pointer"><td>${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"})}</td><td>${ai||"--"}</td><td>${ao||"--"}</td><td>${pi||"--"}</td><td class="${po === "?" ? "warn" : ""}">${po||"--"}</td><td class="num">${d && !d.noOut ? fmtHrs(liveHours(d)) : "--"}</td><td class="num ${d?.late ? "warn" : ""}">${d?.late ? d.lateBy + "m" : "--"}</td><td class="num ${d?.under ? "warn" : ""}">${d?.under ? fmtMin(d.under) : "--"}</td><td>${PILL[st]}${note ? ` <span class="muted" style="font-size:12px">${note}</span>` : ""}</td></tr>`; }).join("")
+    return `<tr data-day="${k}" style="cursor:pointer"><td><button class="linkbtn" type="button" data-day="${k}">${new Date(k+"T00:00:00").toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"})}</button></td><td>${ai||"--"}</td><td>${ao||"--"}</td><td>${pi||"--"}</td><td class="${po === "?" ? "warn" : ""}">${po||"--"}</td><td class="num">${d && !d.noOut ? fmtHrs(liveHours(d)) : "--"}</td><td class="num ${d?.late ? "warn" : ""}">${d?.late ? d.lateBy + "m" : "--"}</td><td class="num ${d?.under ? "warn" : ""}">${d?.under ? fmtMin(d.under) : "--"}</td><td>${PILL[st]}${note ? ` <span class="muted" style="font-size:12px">${note}</span>` : ""}</td></tr>`; }).join("")
     || `<tr><td colspan="9" class="empty">Nothing to show for this month</td></tr>`;
   $("#hList").innerHTML = keys.map(k => { const d = D.days.get(k), st = dayStatus(k), [ai, ao, pi, po] = amPm(d), dt = new Date(k+"T00:00:00");
-    const line = d ? `<b>${ai}</b> &rarr; <b>${po === "?" ? "no time-out" : po || "--"}</b>` : `<span class="muted">${st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "No time-in recorded"}</span>`;
+    const line = d ? `<b>${ai}</b> &rarr; <b>${po === "?" ? "no time-out" : po || ao || "--"}</b>` : `<span class="muted">${st === "hol" ? esc(holidayOn(k).name) : st === "leave" ? esc(D.leaveDays.get(k).type) : "No time-in recorded"}</span>`;
     const sub = [d && ao && pi ? `Break ${ao}–${pi}` : "", d?.late ? `${d.lateBy}m late` : "", d?.under ? `${fmtMin(d.under)} undertime` : "", dayNote(k)].filter(Boolean).join(" · ");
     return `<button class="day" data-day="${k}"><span class="date"><small>${dt.toLocaleDateString([], {weekday:"short"})}</small><b>${dt.getDate()}</b></span><span class="times">${line}${sub ? `<small>${sub}</small>` : ""}</span><span class="r"><b>${d && !d.noOut ? fmtHrs(liveHours(d)) : "&ndash;"}</b>${PILL[st]}</span></button>`; }).join("")
     || `<div class="empty">Nothing to show for this month</div>`;
@@ -1278,7 +1305,7 @@ function openLeave(){
   checkLeave();
 }
 function closeLeave(){ closeSheet("#sheet"); }
-function setHalf(v){ lHalf = v; document.querySelectorAll("#lHalf button").forEach(b => b.classList.toggle("on", b.dataset.h === v)); }
+function setHalf(v){ lHalf = v; document.querySelectorAll("#lHalf button").forEach(b => { b.classList.toggle("on", b.dataset.h === v); b.setAttribute("aria-pressed", b.dataset.h === v); }); }
 function leaveDraft(){
   const id = +($("#lTypes input:checked")?.value || 0), t = D.leave.types.find(x => x.id === id);
   const from = $("#lFrom").value, to = $("#lTo").value, single = from && from === to;
@@ -1308,7 +1335,7 @@ async function sendLeave(ev){
   ev.preventDefault();
   const err = checkLeave(); if (err) return;
   const f = leaveDraft();
-  if (f.reason.length < 3){ $("#lSum").classList.add("bad"); $("#lSum").textContent = "Please add a short reason."; $("#lReason").focus(); return; }
+  if (f.reason.length < 3) return formErr("#lSum", "#lReason", "Please add a short reason.");
   const btn = $("#lSend"); btn.disabled = true; btn.textContent = "Sending...";
   try {
     const body = {type_id: f.t.id, date_from: f.from, date_to: f.to, half: f.half || null, reason: f.reason};
@@ -1318,13 +1345,22 @@ async function sendLeave(ev){
       const data = await r.json(); if (!r.ok) throw new Error(data.error);
     }
     $("#doneText").textContent = `${f.t.name}, ${fmtRange(f.from, f.to)} (${f.days === .5 ? (f.half === "am" ? "morning" : "afternoon") : `${f.days} day${f.days === 1 ? "" : "s"}`}). HR will review it.`;
-    $("#leaveForm").hidden = true; $("#leaveDone").hidden = false;
+    $("#leaveForm").hidden = true; $("#leaveDone").hidden = false; $("#doneClose").focus();
     await load();
-  } catch (e){ $("#lSum").classList.add("bad"); $("#lSum").textContent = e.message || "Could not send. Please try again."; }
+  } catch (e){ formErr("#lSum", null, e.message || "Could not send. Please try again."); }
   finally { btn.disabled = false; btn.textContent = "Send request"; }
 }
-async function cancelLeave(id){
-  if (!confirm("Cancel this leave request?")) return;
+function formErr(box, field, msg){   // message read out by screen readers and linked to the field it is about
+  const b = $(box); b.classList.add("bad"); b.textContent = msg;
+  if (field){ const f = $(field); f.setAttribute("aria-invalid", "true"); f.setAttribute("aria-describedby", b.id); f.focus();
+    f.addEventListener("input", () => f.removeAttribute("aria-invalid"), {once: true}); }
+}
+async function cancelLeave(id, btn){
+  if (btn && !btn.dataset.armed){                       // second tap confirms; no browser pop-up
+    btn.dataset.armed = "1"; btn.textContent = "Tap again to cancel"; btn.classList.add("armed");
+    setTimeout(() => { if (btn.isConnected){ delete btn.dataset.armed; btn.textContent = "Cancel request"; btn.classList.remove("armed"); } }, 4000);
+    return;
+  }
   try {
     if (MODE === "demo") demoLeaveCancel(id);
     else { const r = await fetch("api/leave/cancel", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({id})}); const d = await r.json(); if (!r.ok) throw new Error(d.error); }
@@ -1374,13 +1410,13 @@ async function sendFix(ev){
   if (checkFix()) return;
   const kind = $("#fKinds input:checked").value;
   const body = {date:$("#fDate").value, kind, time_in: kind === "out" ? null : $("#fIn").value || null, time_out: kind === "in" ? null : $("#fOut").value || null, reason:$("#fReason").value.trim()};
-  if (body.reason.length < 3){ $("#fSum").classList.add("bad"); $("#fSum").textContent = "Please add a few words for HR."; $("#fReason").focus(); return; }
+  if (body.reason.length < 3) return formErr("#fSum", "#fReason", "Please add a few words for HR.");
   const btn = $("#fSend"); btn.disabled = true; btn.textContent = "Sending...";
   try {
     if (MODE === "demo"){ const key = "att-demo-fix-" + demoSession.get(); let l = []; try { l = JSON.parse(localStorage.getItem(key) || "[]"); } catch(_){} l.push({...body, sent: iso(new Date(nowMs()))}); localStorage.setItem(key, JSON.stringify(l)); }
     else { const r = await fetch("api/correction", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)}); const d = await r.json(); if (!r.ok) throw new Error(d.error); }
-    closeSheet("#fixSheet"); await load(); setView("leave");
-  } catch (e){ $("#fSum").classList.add("bad"); $("#fSum").textContent = e.message || "Could not send. Please try again."; }
+    closeSheet("#fixSheet"); await load(); setView("leave"); $("#newFix").focus();
+  } catch (e){ formErr("#fSum", null, e.message || "Could not send. Please try again."); }
   finally { btn.disabled = false; btn.textContent = "Send to HR"; }
 }
 
@@ -1389,7 +1425,7 @@ function openMe(){
   const e = D.employee, days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], todayDow = new Date(D.today+"T00:00:00").getDay();
   $("#miAv").textContent = $("#meAv").textContent; $("#meTitle").textContent = e.name; $("#miJob").textContent = [e.job, e.dept].filter(Boolean).join(" · ");
   const cells = [["Employee ID", e.badge || "Ask HR"], ["Employment", e.type || "--"], ["Department", e.dept || "--"], ["Department head", e.manager || "--"],
-                 ["Work email", e.email || "--"], ["Late after", isTeacher() ? `First class + ${D.grace_minutes} min` : `${D.grace_minutes} min grace`]];
+                 ["Work email", e.email || "--"], isTeacher() ? ["Late / cancelled", `Late after ${D.grace_minutes} min · class cancelled after ${CANCEL_MIN()} min`] : ["Late after", `${D.grace_minutes} min grace`]];
   $("#miInfo").innerHTML = cells.map(([a,b]) => `<div><small>${a}</small><span>${esc(b)}</span></div>`).join("");
   renderMySched(weekType(D.today));
   openSheet("#meSheet"); setTimeout(() => $("#meClose").focus(), 50);
@@ -1406,19 +1442,27 @@ function renderMySched(wk){
   }
   const L = D.classload, alt = Object.values(L).some(arr => arr.some(b => b.week != null));
   $("#miWeek").hidden = !alt;
-  document.querySelectorAll("#miWeek button").forEach(b => b.classList.toggle("on", +b.dataset.w === wk));
-  const load = dow => (L[dow] || []).filter(b => b.week == null || +b.week === wk);
+  document.querySelectorAll("#miWeek button").forEach(b => { b.classList.toggle("on", +b.dataset.w === wk); b.setAttribute("aria-pressed", +b.dataset.w === wk); });
+  // this term's load; between terms, the next one
+  const cur = Object.values(L).some(arr => arr.some(b => inTerm(b, D.today))) ? b => inTerm(b, D.today) : b => !b.until || b.until >= D.today;
+  const load = dow => (L[dow] || []).filter(b => (b.week == null || +b.week === wk) && cur(b));
+  const term = Object.values(L).flat().filter(b => b.until && cur(b)), fmtD = k => new Date(k+"T00:00:00").toLocaleDateString([], {month:"short", day:"numeric"});
+  const tFrom = term.map(b => b.from).filter(Boolean).sort()[0], tTo = term.map(b => b.until).sort().pop();
   const hours = [1,2,3,4,5,6,0].reduce((s, dow) => s + load(dow).reduce((t, b) => t + (b.flex ? b.hours : (hm2m(b.end) - hm2m(b.start))/60), 0), 0);
   $("#miRule").innerHTML = (e.basis === "parttime"
     ? "<b>Part-time:</b> only your class times count. Vacant periods are yours."
     : "<b>Full-time:</b> expected from your first class to your last, with one 1-hour break. Other time away counts as undertime.")
+    + ` Late after ${D.grace_minutes} min; a class is cancelled if you tap in more than ${CANCEL_MIN()} min after it starts or leave more than ${CANCEL_MIN()} min before it ends.`
+    + (tTo ? ` Term: <b>${tFrom ? fmtD(tFrom) + " – " : "until "}${fmtD(tTo)}</b>.` : "")
     + ` ${alt ? `Week ${wk ? "B" : "A"} load` : "Weekly load"}: <b>${Math.round(hours*10)/10}h</b>.${alt ? ` This week is <b>Week ${weekType(D.today) ? "B" : "A"}</b>; your Fridays and Saturdays alternate.` : ""}`;
   $("#miSched").innerHTML = days.map((n, i) => { const dow = (i+1) % 7, bl = load(dow);
     return `<tr class="${dow === todayDow && wk === weekType(D.today) ? "today" : ""}"><td style="vertical-align:top;padding-top:8px">${n.slice(0,3)}</td><td class="blk">${bl.length ? bl.map(b => b.flex ? `<span>Flexible ${b.hours}h <small>${esc(b.subject || "")}</small></span>` : `<span>${m2t(hm2m(b.start))}–${m2t(hm2m(b.end))} <small>${esc(b.subject)} · ${esc(b.section || "")} · ${esc(b.room || "")}</small></span>`).join("") : "No classes"}</td></tr>`; }).join("");
 }
 
 // ---------- PRINTABLE DTR (Daily Time Record)
-function printDtr(){
+function printDtr(){ buildDtr(); window.print(); }
+window.addEventListener("beforeprint", () => { if (D && $("#hMonth").value) buildDtr(); });
+function buildDtr(){
   const [y, mo] = $("#hMonth").value.split("-").map(Number), e = D.employee, rows = [];
   let tot = 0, late = 0, under = 0, abs = 0;
   for (const k of monthDays(y, mo-1)){
@@ -1435,13 +1479,14 @@ function printDtr(){
     <div class="tot"><b>Totals:</b> ${fmtHrs(tot)} worked · ${late} min late · ${under} min undertime · ${abs} day(s) with no record</div>
     <div class="cert">I certify on my honor that the above is a true and correct report of the hours of work performed, record of which was made daily at the time of arrival and departure.</div>
     <div class="sign"><div>${esc(e.name)}<br>Employee</div><div>${esc(e.manager || "")}<br>Verified by (Department head)</div></div>`;
-  window.print();
 }
 
 // ---------- sheets
 let sheetReturn = null;
 function openSheet(id){ const s = $(id); sheetReturn = document.activeElement; s.inert = false; s.classList.add("open"); document.body.classList.add("locked"); $("#appView").inert = true; }
 function closeSheet(id){ const s = $(id); if (!s.classList.contains("open")) return; s.classList.remove("open"); s.inert = true;
+  s.querySelectorAll("[aria-invalid]").forEach(f => { f.removeAttribute("aria-invalid"); f.removeAttribute("aria-describedby"); });
+  s.querySelectorAll(".sum.bad").forEach(b => b.classList.remove("bad"));
   if (!document.querySelector(".sheet.open")){ document.body.classList.remove("locked"); $("#appView").inert = false; if (sheetReturn && document.contains(sheetReturn)) sheetReturn.focus(); } }
 document.querySelectorAll(".sheet").forEach(s => s.inert = true);
 
@@ -1727,7 +1772,7 @@ $("#leaveForm").addEventListener("input", checkLeave);
 $("#lFrom").addEventListener("change", () => { if ($("#lTo").value < $("#lFrom").value) $("#lTo").value = $("#lFrom").value; checkLeave(); });
 $("#lHalf").addEventListener("click", e => { const b = e.target.closest("button"); if (b){ setHalf(b.dataset.h); checkLeave(); } });
 $("#reqs").addEventListener("click", e => {
-  const b = e.target.closest("[data-cancel]"); if (b) return cancelLeave(+b.dataset.cancel);
+  const b = e.target.closest("[data-cancel]"); if (b) return cancelLeave(+b.dataset.cancel, b);
   if (e.target.closest(".ldin")) return;                          // clicks inside the details don't close it
   const row = e.target.closest("[data-req]"); if (!row) return;
   const id = +row.dataset.req, open = !openReqs.has(id);
@@ -1753,6 +1798,7 @@ document.addEventListener("click", ev => {
   const g = ev.target.closest("[data-goto]"); if (g){ setView(g.dataset.goto); return scrollTo(0, 0); }
   const day = ev.target.closest("[data-day]");
   if (day && D){ const fromCal = !!day.closest("#cal"); selDay = day.dataset.day; const dt = new Date(selDay+"T00:00:00"); calMonth = new Date(dt.getFullYear(), dt.getMonth(), 1); renderCalendar(); setView("calendar");
+    $(`#cal [data-day="${selDay}"]`)?.focus({preventScroll: true});
     if (matchMedia("(max-width:960px)").matches) $("#detail").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"}); else if (!fromCal) scrollTo(0, 0); }
 });
 $("#prevM").onclick = () => { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1); selDay = null; renderCalendar(); };
@@ -1761,7 +1807,12 @@ $("#hMonth").addEventListener("input", renderHistory);
 $("#hFilter").addEventListener("input", renderHistory);
 $("#csv").onclick = () => D && exportCSV();
 setInterval(tickToday, 1000);
-setInterval(() => { if (D) load(); }, 60000);
+setInterval(async () => {
+  if (!D || document.querySelector(".sheet.open") || document.activeElement?.matches("input,select,textarea")) return;
+  const a = document.activeElement, key = a?.dataset?.day ? `[data-day="${a.dataset.day}"]` : a?.id ? "#" + a.id : null;
+  await load();
+  if (key && a !== document.body && !a.isConnected) document.querySelector(key)?.focus({preventScroll: true});
+}, 60000);
 try { const v = localStorage.getItem("my-att-view"); if (v && PAGES[v]) view = v; } catch(_){}
 init();
 </script>

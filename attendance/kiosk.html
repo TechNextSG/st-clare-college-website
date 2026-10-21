@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1D1416; --muted:#7D6F73; --line:#EBE2E3; --soft:#F8F5F5; --bg:#F1EDEE;
+  --ink:#1D1416; --muted:#665A5E; --line:#EBE2E3; --soft:#F8F5F5; --bg:#F1EDEE;
   --crimson:#A6192E; --red:#C8102E; --maroon:#5C0A17; --maroon-2:#3D0610; --gold:#E0AD1C;
   --ok:#17784A; --ok-2:#0F5A37; --bad:#B42318;
 }
@@ -31,6 +31,7 @@ button{font:inherit;cursor:pointer}
 .slide{position:absolute;inset:0;opacity:0;transform:rotateY(9deg) rotateX(2deg);transform-origin:30% 50%;transition:opacity 1.4s cubic-bezier(.2,.7,.2,1),transform 1.8s cubic-bezier(.2,.7,.2,1)}
 .slide.on{opacity:1;transform:none}
 .slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.1);animation:sway 14s ease-in-out infinite}
+.slide:not(.on) img{animation-play-state:paused}
 @keyframes sway{0%,100%{transform:scale(1.1) rotateY(-3deg) rotateX(1deg)}50%{transform:scale(1.1) rotateY(3deg) rotateX(-1deg)}}
 .scrim{position:absolute;inset:0;z-index:-2;background:
   linear-gradient(180deg,rgba(36,4,10,.78) 0%,rgba(61,6,16,.38) 26%,rgba(61,6,16,.42) 50%,rgba(36,4,10,.9) 76%,rgba(36,4,10,.97) 100%),
@@ -71,7 +72,7 @@ button{font:inherit;cursor:pointer}
 .idcard{--rx:0deg;--ry:0deg;--rz:0deg;--y:0px;--gx:30%;--gy:20%;--s:1;position:relative;width:min(340px,58vw);aspect-ratio:1.586;border-radius:18px;transform-style:preserve-3d;cursor:pointer;
   transform:translateY(var(--y)) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz)) scale(var(--s));will-change:transform;outline:none}
 .idcard .face{position:absolute;inset:0;border-radius:inherit;overflow:hidden;color:#fff;
-  background:radial-gradient(120% 90% at 0% 0%,#E0263F 0%,#C8102E 30%,#A6192E 58%,#6E0B1C 100%);
+  background:radial-gradient(120% 90% at 0% 0%,#C8102E 0%,#B5132B 30%,#A6192E 58%,#6E0B1C 100%);
   box-shadow:0 30px 60px -28px rgba(61,6,16,.75),0 12px 24px -14px rgba(61,6,16,.5),inset 0 0 0 1px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.35)}
 .idcard .guil{position:absolute;inset:0;width:100%;height:100%;opacity:.22}
 .idcard .band{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,rgba(36,4,10,.0),rgba(36,4,10,.45));border-top:1px solid rgba(240,196,96,.55)}
@@ -116,10 +117,10 @@ button{font:inherit;cursor:pointer}
 
 /* ---------- confirmation (white side only) */
 .tap-idle{display:flex;flex-direction:column;align-items:center}
-.result{width:min(540px,100%);display:flex;flex-direction:column;align-items:center;text-align:center;animation:rise .45s cubic-bezier(.2,.9,.25,1.1);--c:var(--ok)}
+.result{width:min(clamp(540px,36vw,760px),100%);display:flex;flex-direction:column;align-items:center;text-align:center;animation:rise .45s cubic-bezier(.2,.9,.25,1.1);--c:var(--ok)}
 @keyframes rise{from{transform:translateY(16px)}}
-.result.in{--c:var(--ok)}.result.late{--c:#B7850F}.result.out{--c:var(--crimson)}.result.repeat{--c:#6B5E62}.result.error{--c:var(--bad)}
-.status{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;background:var(--c);color:#fff;font:700 13px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;animation:drop .5s cubic-bezier(.2,.9,.25,1.3) both;box-shadow:0 10px 22px -12px var(--c)}
+.result.in{--c:var(--ok)}.result.late{--c:#8A6100}.result.out{--c:var(--crimson)}.result.repeat{--c:#6B5E62}.result.error{--c:var(--bad)}
+.status{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;background:var(--c);color:#fff;font:700 clamp(13px,.85vw,17px)/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;animation:drop .5s cubic-bezier(.2,.9,.25,1.3) both;box-shadow:0 10px 22px -12px var(--c)}
 @keyframes drop{from{transform:translateY(-18px) scale(.85)}}
 .status i{width:8px;height:8px;border-radius:50%;background:#fff;position:relative}
 .status i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#fff;animation:ping 1.4s .5s ease-out infinite}
@@ -170,18 +171,19 @@ button{font:inherit;cursor:pointer}
 .record div{padding:clamp(12px,2.2vh,18px) 20px;text-align:left;position:relative}
 .record div+div{border-left:1px solid var(--line)}
 .record div.now::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--c)}
-.record small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.record small{display:block;font-size:clamp(12px,.75vw,15px);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .record b{display:block;font:800 clamp(28px,3.2vw,40px)/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.02em;margin-top:4px}
 .record b span{font-size:.45em;margin-left:6px;letter-spacing:0}
-.record b.none{color:#D3C8CB}
-.record em{display:block;font-style:normal;font-size:13px;margin-top:4px;color:var(--muted)}
+.record b.none{color:#8F8386}
+.record em{display:block;font-style:normal;font-size:clamp(13px,.85vw,17px);margin-top:4px;color:var(--muted)}
 .record div.now em{color:var(--c);font-weight:600}
-.note{margin-top:14px;color:var(--muted);font-size:15px;max-width:460px}
-.qchip{position:absolute;top:16px;right:16px;z-index:6;background:#1D1416;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+.note{margin-top:14px;color:var(--muted);font-size:clamp(15px,1vw,19px);max-width:clamp(460px,30vw,640px)}
+.qchip{position:absolute;top:16px;left:16px;z-index:6;background:#1D1416;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
 .impact{margin-top:12px;width:100%;text-align:left;border-radius:16px;padding:12px 14px;background:#FDECEA;color:#7A1A12;font-size:14px}
 .impact b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
 .impact div{display:flex;gap:8px;align-items:baseline;padding:3px 0}
 .impact div span{font-weight:700;white-space:nowrap}
+.impact .more{opacity:.8;font-size:13px}
 .impact.hint{background:#FBF1D6;color:#5C4300}
 .countdown{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--line)}
 .countdown i{display:block;height:100%;width:100%;background:var(--c,var(--crimson));transform-origin:left;animation:count var(--dur,4s) linear forwards}
@@ -189,23 +191,25 @@ button{font:inherit;cursor:pointer}
 
 /* ---------- birthday */
 .result.bday{--c:#C8102E}
-.result.bday .status{background:linear-gradient(90deg,#C8102E,#E0AD1C);padding:10px 22px;font-size:14px}
+.result.bday .status{background:linear-gradient(90deg,#A6192E,#8A6100);padding:10px 22px;font-size:14px}
 .result.bday .ringdraw circle{stroke:url(#bdayGrad)}
 .result.bday .badge{background:linear-gradient(135deg,#E0AD1C,#C8102E)}
 .result.bday .who::before,.result.bday .who::after{border-color:#E0AD1C}
-.bdayline{font:700 clamp(15px,1.7vw,18px) "Plus Jakarta Sans",sans-serif;color:#B7850F;margin-top:8px;animation:up .55s .2s cubic-bezier(.2,.9,.25,1.1) both}
+.bdayline{font:700 clamp(15px,1.7vw,18px) "Plus Jakarta Sans",sans-serif;color:#8A6100;margin-top:8px;animation:up .55s .2s cubic-bezier(.2,.9,.25,1.1) both}
 .confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:4}
 .confetti i{position:absolute;top:-24px;left:var(--x);width:var(--w);height:calc(var(--w) * 1.6);background:var(--col);border-radius:2px;opacity:0;animation:fall var(--t) var(--dl) cubic-bezier(.25,.6,.45,1) forwards}
 .confetti i.r{border-radius:50%;height:var(--w)}
 @keyframes fall{0%{opacity:1;transform:translate3d(0,0,0) rotate(0)}85%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),105vh,0) rotate(var(--rot))}}
 
 /* ---------- demo cards (sample mode only) */
+.demo.low{top:auto;bottom:16px}
 .demo{position:fixed;right:16px;top:16px;z-index:5;background:#fff;border-radius:16px;box-shadow:0 18px 40px -18px rgba(29,20,22,.45);padding:12px;width:230px;font-size:13px}
 .demo b{display:block;margin-bottom:8px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 .demo button{display:flex;justify-content:space-between;width:100%;border:0;background:var(--soft);border-radius:10px;padding:8px 10px;margin-top:6px;text-align:left}
 .demo button:hover{background:var(--line)}
 .demo .times{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 10px}
-.demo .times button{width:auto;margin:0;padding:5px 8px;font-size:12px}
+.demo .times button{width:auto;margin:0;padding:5px 8px;font-size:12px;min-height:32px}
+.demo button{min-height:32px}.demo .x{min-width:32px}
 .demo .times button.on{background:var(--maroon);color:#fff}
 .demo button span{color:var(--muted);font-size:11px}
 .demo .x{position:absolute;right:8px;top:6px;border:0;background:none;width:auto;padding:4px;margin:0;color:var(--muted)}
@@ -221,8 +225,12 @@ button{font:inherit;cursor:pointer}
   .clock{font-size:clamp(64px,18vw,120px)}
   .recent{position:static;margin-top:28px}
   .demo{top:auto;bottom:16px;width:200px}
+  .tapside{overflow-y:auto;justify-content:safe center}
+  .idle:has(#result:not([hidden])) .brandside{display:none}
+  .demo.low{display:none}                                     /* sample panel back once the result is gone */   /* the whole confirmation on one portrait screen */
 }
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition:none!important}
+  .countdown i{animation-duration:var(--dur,4s)!important}}
 </style>
 </head>
 <body>
@@ -273,7 +281,7 @@ button{font:inherit;cursor:pointer}
         </div>
       </div>
     </div>
-    <div class="tap-title">Tap your ID card</div>
+    <h1 class="tap-title">Tap your ID card</h1>
     <div class="tap-sub">Hold your St. Clare ID near the reader until the screen shows your name.</div>
     <div class="try" id="try" hidden>Sample mode: <b>tap the card</b> to try it</div>
     <svg class="arrow" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
@@ -298,7 +306,7 @@ button{font:inherit;cursor:pointer}
 
 
 <aside class="demo" id="demo" hidden>
-  <button class="x" id="demoHide" title="Hide (press D to show again)">&times;</button>
+  <button class="x" id="demoHide" title="Hide (press D to show again)" aria-label="Hide sample controls">&times;</button>
   <b>Sample time</b>
   <div class="times" id="demoTimes"></div>
   <b>Sample cards</b>
@@ -309,7 +317,7 @@ button{font:inherit;cursor:pointer}
   <form id="setupForm">
     <strong>Kiosk setup</strong>
     <div style="color:var(--muted);font-size:14px;margin-top:6px">Enter the kiosk key from config.json. It is saved on this device only.</div>
-    <input id="setupKey" type="password" autocomplete="off" required>
+    <input id="setupKey" type="password" autocomplete="off" aria-label="Kiosk key" required>
     <button type="submit">Save</button>
   </form>
 </div>
@@ -366,7 +374,9 @@ function show(r){
   const lateText = m => `${m >= 60 ? fmtHrs(m/60) : m + " min"} late`;
   if (kind === "in"){
     if (r.late_minutes > 0) kind = "late";
-    status = r.again ? "Welcome back" : kind === "late" ? "Time in recorded · Late" : "Time in recorded";
+    const lost = (r.affected || []).filter(c => c.reason !== "early").length;
+    if (lost) kind = "late";   // a class was cancelled by this time-in: warn colour, not a green "welcome back"
+    status = lost ? `Time in recorded · ${lost === 1 ? "class" : lost + " classes"} cancelled` : r.again ? "Welcome back" : kind === "late" ? "Time in recorded · Late" : "Time in recorded";
     inCell = timeCell("Time in", r.time, r.again ? "Back from break" : r.late_minutes > 0 ? lateText(r.late_minutes) : "On time");
     outCell = timeCell("Time out", null, "Tap again when leaving");
     if (kind === "late") note = r.first_class ? `Your first class started ${fmtTime(new Date(`2000-01-01T${r.first_class}:00`))}. See the HR office if you had an approved reason.`
@@ -375,7 +385,8 @@ function show(r){
     status = "Time out recorded"; nowCell = "out";
     inCell = timeCell("Time in", r.first_in, "First time-in today");
     outCell = timeCell("Time out", r.time, r.worked_today ? `${fmtHrs(r.worked_today)} worked today` : "");
-    note = t.getHours() < 14 ? "Enjoy your break. Tap again when you're back." : "Have a safe trip home.";
+    const running = (r.affected || []).find(c => c.reason === "early");
+    note = running ? `Tap in again by ${fmtTime(new Date(`2000-01-01T${running.back_by}:00`))} to keep ${running.subject}.` : t.getHours() < 14 ? "Enjoy your break. Tap again when you're back." : "Have a safe trip home.";
   } else if (kind === "repeat"){
     status = "Already recorded"; nowCell = r.action === "out" ? "out" : "in";
     inCell = timeCell("Time in", r.action === "out" ? r.first_in : r.time, r.action === "out" ? "" : "Recorded");
@@ -410,16 +421,17 @@ function show(r){
   if (aff.length){
     imp.className = "impact";
     const onlyEarly = aff.every(c => c.reason === "early");
-    imp.innerHTML = `<b>${onlyEarly ? (aff.length === 1 ? "Class still running" : `${aff.length} classes still running`) : aff.length === 1 ? "1 class cancelled" : `${aff.length} classes cancelled`}</b>` + aff.map(c => `<div><span>${t12(c.start)}</span>${esc(c.subject)} · ${esc(c.section || "")} — ${
-      c.reason === "early" ? `cancelled unless you're back by ${t12(c.back_by)}` : c.reason === "absent" ? "missed" : `${c.by} min late (limit ${CANCEL_MIN} min)`}</div>`).join("");
+    imp.innerHTML = `<b>${onlyEarly ? (aff.length === 1 ? "Class still running" : `${aff.length} classes still running`) : aff.length === 1 ? "1 class cancelled" : `${aff.length} classes cancelled`}</b>` + aff.slice(0, 3).map(c => `<div><span>${t12(c.start)}</span>${esc(c.subject)} · ${esc(c.section || "")} — ${
+      c.reason === "early" ? `cancelled unless you're back by ${t12(c.back_by)}` : c.reason === "absent" ? "missed" : `${c.by} min late (limit ${CANCEL_MIN} min)`}</div>`).join("") + (aff.length > 3 ? `<div class="more">and ${aff.length - 3} more · see your dashboard</div>` : "");
   } else if (r.next_class && (kind === "out" || kind === "in" || kind === "late")){
     imp.className = "impact hint";
-    imp.innerHTML = `<b>Next class ${t12(r.next_class.start)}</b><div>${esc(r.next_class.subject)} · ${esc(r.next_class.section || "")}. ${kind === "out" ? `Tap in by <span>${t12(r.next_class.deadline)}</span> or it's cancelled.` : `Be in class by ${t12(r.next_class.deadline)}.`}</div>`;
+    const [nh, nm] = r.next_class.start.split(":").map(Number), mins = nh*60 + nm - (t.getHours()*60 + t.getMinutes());
+    imp.innerHTML = `<b>Next class ${t12(r.next_class.start)}</b><div>${esc(r.next_class.subject)} · ${esc(r.next_class.section || "")}${r.next_class.room ? " · " + esc(r.next_class.room) : ""}. ${kind === "out" ? `Tap in by <span>${t12(r.next_class.deadline)}</span> or it's cancelled.` : mins > 0 && mins < 180 ? `Starts in ${mins} min.` : "See you there."}</div>`;
   }
   imp.hidden = !(aff.length || (r.next_class && ["in","late","out"].includes(kind)));
-  $("#tapIdle").hidden = true; $("#recent").hidden = true; box.hidden = false;
+  $("#tapIdle").hidden = true; $("#recent").hidden = true; box.hidden = false; $("#demo").classList.add("low");   // sample panel off the name
   box.getAnimations({subtree:true}).forEach(a => { a.cancel(); a.play(); });            // replay every entrance on back-to-back taps
-  const dur = SHOW_MS[bday ? "bday" : kind];
+  const dur = Math.max(SHOW_MS[bday ? "bday" : kind], (r.affected || []).length ? 9000 : 0);   // give time to read a cancellation
   const cd = $("#countdown"); cd.hidden = false; cd.style.setProperty("--dur", dur + "ms");
   cd.style.setProperty("--c", getComputedStyle(box).getPropertyValue("--c"));
   const bar = cd.firstElementChild; bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = "";
@@ -447,7 +459,7 @@ function tune(){   // short cheerful arpeggio
     }
   } catch(_){}
 }
-function idle(){ $("#qchip").hidden = true; $("#confetti").innerHTML = ""; $("#result").hidden = true; $("#countdown").hidden = true; $("#tapIdle").hidden = false; $("#recent").hidden = false; }
+function idle(){ $("#demo").classList.remove("low"); $("#confetti").innerHTML = ""; $("#result").hidden = true; $("#countdown").hidden = true; $("#tapIdle").hidden = false; $("#recent").hidden = false; queueChip(); }
 $("#result").addEventListener("click", () => { clearTimeout(hideTimer); if (showQ.length){ shownAt = 0; pump(); } else idle(); });
 
 const recent = [];
@@ -522,17 +534,20 @@ function scan(badge){
 async function saveOne(badge){
   try {
     if (MODE === "demo") return demoScan(badge);
-    const r = await fetch("api/kiosk/scan", {method:"POST", headers:{"Content-Type":"application/json", "X-Kiosk-Key":KEY}, body:JSON.stringify({badge})});
+    const r = await fetch("api/kiosk/scan", {method:"POST", headers:{"Content-Type":"application/json", "X-Kiosk-Key":KEY}, body:JSON.stringify({badge}), signal: AbortSignal.timeout(12000)});
     if (r.status === 403){ askKey(); return {result:"error", message:"Kiosk not set up", detail:"Enter the kiosk key to start recording."}; }
     return await r.json();
   } catch (e){
-    return {result:"error", message:"Not saved, tap again", detail:"The kiosk couldn't reach the server, so this tap wasn't recorded. Please tap your card again, or tell the HR office if this keeps happening."};
+    return {result:"error", message:"Not saved, tap again", detail:"The kiosk couldn't reach the server, so this tap may not be recorded. Please tap your card again (if it was saved, the screen says Already recorded), or tell the HR office if this keeps happening."};
   }
 }
+let inflight = 0;                                    // a tap being saved right now (already out of saveQ)
 async function saveNext(){
   if (saving) return; saving = true;
   while (saveQ.length){
+    inflight++;
     const res = await saveOne(saveQ.shift());
+    inflight--;
     showQ.push(res); queueChip(); pump();
   }
   saving = false; queueChip();
@@ -546,9 +561,9 @@ function pump(){
   if (showQ.length) pumpT = setTimeout(pump, MIN_SHOW);   // keep the line moving
 }
 function queueChip(){
-  const n = showQ.length + saveQ.length, c = $("#qchip");
-  c.hidden = !n || $("#result").hidden;
-  c.textContent = n === 1 ? "1 more tap saved, showing next" : `${n} more taps saved, showing next`;
+  const n = showQ.length + saveQ.length + inflight, c = $("#qchip");
+  c.hidden = !n;
+  c.textContent = $("#result").hidden ? "Saving your tap..." : n === 1 ? "1 more tap in line" : `${n} more taps in line`;
 }
 document.addEventListener("keydown", e => {
   if (!$("#setup").hidden) return;
@@ -559,7 +574,9 @@ document.addEventListener("keydown", e => {
 
 function askKey(){ $("#setup").hidden = false; $("#setupKey").focus(); }
 $("#setupForm").addEventListener("submit", e => {
-  e.preventDefault(); KEY = $("#setupKey").value.trim();
+  e.preventDefault();
+  if (/^\d{8,}$/.test($("#setupKey").value.trim())){ $("#setupKey").value = ""; $("#setupKey").placeholder = "That was a card. Type the kiosk key."; return; }
+  KEY = $("#setupKey").value.trim();
   try { localStorage.setItem("kiosk-key", KEY); } catch(_){}
   $("#setup").hidden = true;
 });
@@ -624,11 +641,15 @@ setInterval(greetLine, 30000);
   });
 })();
 
+function shiftChip(){   // before the start time: when time-in starts; later: what a tap does now
+  const t = now(), [h, m] = CFG.work_start.split(":").map(Number), mins = t.getHours()*60 + t.getMinutes();   // same clock as the big clock
+  $("#shift").textContent = mins < h*60 + m ? `Time-in starts ${CFG.work_start_label}` : t.getHours() < 12 ? "Tap your ID to time in" : "Tap your ID to time in or out";
+}
 async function init(){
   try { const r = await fetch("api/config", {cache:"no-store"}); if (r.ok){ const c = await r.json(); MODE = c.mode === "odoo" ? "odoo" : "demo"; Object.assign(CFG, c); } } catch(_){}
   const [h, m] = CFG.work_start.split(":").map(Number), d = new Date(); d.setHours(h, m, 0, 0);
   CFG.work_start_label = fmtTime(d);
-  $("#shift").textContent = `Time-in starts ${CFG.work_start_label}`;
+  shiftChip(); setInterval(shiftChip, 60000);
   greetLine();
   if (MODE === "demo"){
     $("#demo").hidden = false; $("#try").hidden = false;
@@ -636,10 +657,10 @@ async function init(){
     $("#demoCards").addEventListener("click", e => { const b = e.target.closest("[data-badge]"); if (b) scan(b.dataset.badge); });
     $("#demoHide").onclick = () => $("#demo").hidden = true;
     const SAMPLE_TIMES = [["7:24 AM",7,24],["7:52 AM",7,52],["10:00 AM",10,0],["12:01 PM",12,1],["12:58 PM",12,58],["1:20 PM",13,20],["4:35 PM",16,35]];
-    const setTime = (h, m) => { const d = new Date(); d.setHours(h, m, 0, 0); OFFSET = d - Date.now(); tick();
+    const setTime = (h, m) => { const d = new Date(); d.setHours(h, m, 0, 0); OFFSET = d - Date.now(); tick(); greetLine();
       document.querySelectorAll("#demoTimes button").forEach(b => b.classList.toggle("on", +b.dataset.h === h && +b.dataset.m === m)); };
     $("#demoTimes").innerHTML = SAMPLE_TIMES.map(([l,h,m]) => `<button data-h="${h}" data-m="${m}">${l}</button>`).join("");
-    $("#demoTimes").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setTime(+b.dataset.h, +b.dataset.m); });
+    $("#demoTimes").addEventListener("click", e => { const b = e.target.closest("button"); if (b){ setTime(+b.dataset.h, +b.dataset.m); shiftChip(); } });
     setTime(7, 24); greetLine();
   } else {
     try { KEY = localStorage.getItem("kiosk-key") || ""; } catch(_){}
